@@ -1,0 +1,19 @@
+<div>
+    <div [appShowUserProfile]="{user_id: testimony.user_id, display_name: testimony.author_display_name, avatar_url: testimony.author_avatar_url}">
+        <div item-start>
+            <img class="avatar" [src]="testimony.author_avatar_url" alt="" />
+            <!-- <div class="avatar" [src]="testimony.author_avatar_url" alt="" (ionError)="toolsService.loadDefaultImage($event)"></div> -->
+
+        </div>
+        <section>
+            <h2>
+                {{testimony.author_display_name}}</h2>
+            <time>{{testimony.date}}</time>
+        </section>
+    </div>
+    <div [appShowTestimonyDetails]="testimony">
+        <p>
+            {{testimony.content}}
+        </p>
+    </div>
+</div>

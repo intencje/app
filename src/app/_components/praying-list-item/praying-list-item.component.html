@@ -1,0 +1,25 @@
+<div>
+    <div item-start>
+      <img [src]="praying.avatar_url">
+    </div>
+    <h2>
+      {{praying.displayName}}
+    </h2>
+
+
+  <ng-container *ngIf="currentUser && currentUser.user_id == intentionAuthor">
+      <span *ngIf="praying.thanked">Podziękowałeś(łaś) {{praying.thanked_date}}</span>
+
+      <button div small *ngIf="!praying.thanked">
+        <section class="button-inner">
+            <span>DZIĘKUJĘ</span>
+            <span class="counter"></span>
+          </section>
+          <!-- <section *ngIf="1==0">
+            <div name="crescent"></div>
+          </section> -->
+        </button>
+
+  </ng-container>
+
+</div>

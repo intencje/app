@@ -1,0 +1,206 @@
+<!doctype html>
+<html ⚡ lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+
+    <link rel="canonical" href="/article.html">
+    <link rel="shortcut icon" href="amp_favicon.png">
+
+    <title>{{title}}</title>
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+ :root {
+          --color-primary: #005AF0;
+          --space-1: .5rem;  /* 8px */
+          --space-4: 2rem;   /* 32px */
+        }
+
+        /* Styles for the flex layout based tabs */
+        amp-selector[role=tablist].tabs-with-flex {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        amp-selector[role=tablist].tabs-with-flex [role=tab] {
+            flex-grow: 1;
+            /* custom styling, feel free to change */
+            text-align: center;
+            padding: var(--space-1);
+        }
+        amp-selector[role=tablist].tabs-with-flex [role=tab][selected] {
+            outline: none;
+            /* custom styling, feel free to change */
+            border-bottom: 2px solid var(--color-primary);
+        }
+        amp-selector[role=tablist].tabs-with-flex [role=tabpanel] {
+            display: none;
+            width: 100%;
+            order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
+            /* custom styling, feel free to change */
+            padding: var(--space-4);
+        }
+        amp-selector[role=tablist].tabs-with-flex [role=tab][selected] + [role=tabpanel] {
+            display: block;
+        }
+
+        /* Styles for the selector based tabs */
+        amp-selector[role=tablist].tabs-with-selector {
+            display: flex;
+        }
+        amp-selector[role=tablist].tabs-with-selector [role=tab][selected] {
+            outline: none;
+            /* custom styling, feel free to change */
+            border-bottom: 2px solid var(--color-primary);
+        }
+        amp-selector[role=tablist].tabs-with-selector {
+            display: flex;
+        }
+        amp-selector[role=tablist].tabs-with-selector [role=tab] {
+          /* custom styling, feel free to change */
+          width: 100%;
+          text-align: center;
+          padding: var(--space-1);
+        }
+        amp-selector.tabpanels [role=tabpanel] {
+          display: none;
+          /* custom styling, feel free to change */
+          padding: var(--space-4);
+        }
+        amp-selector.tabpanels [role=tabpanel][selected] {
+          outline: none;
+          display: block;
+        }
+        .home-button {
+  margin-top: 8px;
+}
+.headerbar {
+  height: 50px;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.site-name {
+  margin: auto;
+}
+article {
+  margin-top: 50px;
+}
+      body {
+        width: auto;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background: #00afec;
+        color: white;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0;
+        padding: 0.5em;
+        background: white;
+        box-shadow: 0px 3px 5px grey;
+      }
+
+      p {
+        padding: 0.5em;
+        margin: 0.5em;
+      }
+
+.hamburger {
+  padding-left: 10px;
+}
+.sidebar {
+  padding: 10px;
+  margin: 0;
+}
+.sidebar > li {
+  list-style: none;
+  margin-bottom:10px;
+}
+.sidebar a {
+  text-decoration: none;
+}
+.close-sidebar {
+  font-size: 1.5em;
+  padding-left: 5px;
+}
+    </style>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+      <script async custom-element="amp-user-notification" src="https://cdn.ampproject.org/v0/amp-user-notification-0.1.js"></script>
+  <!-- `amp-user-notification` requires `amp-analytics` to be imported as well. -->
+  <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+      <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+
+
+
+    <script type="application/ld+json">
+    {
+     "@context": "http://schema.org",
+     "@type": "NewsArticle",
+     "mainEntityOfPage":{
+       "@type":"WebPage",
+       "@id":"https://example.com/my-article.html"
+     },
+     "headline": "My First AMP Article",
+     "image": {
+       "@type": "ImageObject",
+       "url": "https://example.com/article_thumbnail1.jpg",
+       "height": 800,
+       "width": 800
+     },
+     "datePublished": "2015-02-05T08:00:00+08:00",
+     "dateModified": "2015-02-05T09:20:00+08:00",
+     "author": {
+       "@type": "Person",
+       "name": "John Doe"
+     },
+     "publisher": {
+       "@type": "Organization",
+       "name": "⚡ AMP Times",
+       "logo": {
+         "@type": "ImageObject",
+         "url": "https://example.com/amptimes_logo.jpg",
+         "width": 600,
+         "height": 60
+       }
+     },
+     "description": "My first experience in an AMPlified world"
+    }
+    </script>
+  </head>
+
+<body>
+
+<header class="headerbar">
+    <div role="button" on="tap:sidebar.toggle" tabindex="0" class="hamburger">☰</div>
+ <div class="site-name">News Site</div>
+</header>
+<amp-sidebar id="sidebar" layout="nodisplay" side="left">
+  <div role="button" aria-label="close sidebar" on="tap:sidebar.toggle" tabindex="0" class="close-sidebar">✕</div>
+  <ul class="sidebar">
+    <li><a href="#">Example 1</a></li>
+    <li><a href="#">Example 2</a></li>
+    <li><a href="#">Example 3</a></li>
+  </ul>
+</amp-sidebar>
+<article>{{{body}}}
+
+
+</article>
+
+
+  <amp-user-notification id="my-notification" class="sample-notification" layout="nodisplay">
+    This is an amp-user-notification. It uses local storage to store the dismissed state.
+    <button on="tap:my-notification.dismiss">I accept</button>
+  </amp-user-notification>
+  </body>
+</html>

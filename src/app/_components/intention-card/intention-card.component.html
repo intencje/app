@@ -1,0 +1,113 @@
+
+
+
+  <div class="timeline-avatar">
+    <img
+      alt=""
+      src="//www.gravatar.com/avatar/e34c2bd1a1a8b456d0e13e33b049e599?s=50&amp;r=g&amp;d=mm"
+      srcset="//www.gravatar.com/avatar/e34c2bd1a1a8b456d0e13e33b049e599?s=50&amp;r=g&amp;d=mm 2x"
+      height="50"
+      width="50"
+    />
+  </div>
+<div class="timeline-item">
+  {{intention.date.seconds * 1000 }} / {{latest}}
+  <div class="timeline-body">
+    <div class="timeline-username">
+      {{intention.author}}
+      <time>
+        {{intention.date.seconds * 1000 |  date:'dd/MM/yyyy/ H:mm:ss'}}
+      </time>
+    </div>
+    <h2>
+      <a routerLink="/wpis/{{intention.slug}}" [state]="intention">{{intention.title}}</a>
+
+
+      <ng-container *ngIf="auth.user$ | async as user;">
+
+      <button [matMenuTriggerFor]="intentionMenu" mat-icon-button aria-label="Menu">
+        <mat-icon aria-label="Ikona symbolizująca tag">radio</mat-icon>
+      </button>
+
+      <mat-menu #intentionMenu="matMenu" xPosition="after" role="navigation">
+
+
+          <ng-container *ngIf="(user.uid !== intention.uid)">
+            <button mat-menu-item routerLink="/">Napisz wiadomość autorowi intencji</button>
+          </ng-container>
+
+          <ng-container *ngIf="(user.uid === intention.uid)">
+            <button mat-menu-item (click)="intentionAddCommentDialog()">Dodaj komentarz do intencji</button>
+            <button mat-menu-item (click)="intentionChangeStatusDialog()">Oznacz intencję jako spełniona</button>
+            <button mat-menu-item (click)="intentionDeleteDialog()">Usuń intencję</button>
+          </ng-container>
+
+        <button *appHasRole="['administrator']" (click)="intentionChangeStatusDialog()" mat-menu-item>🅰️ Oznacz jako spełniona</button>
+        <button *appHasRole="['administrator']" routerLink="/edytuj/{{intention.slug}}" mat-menu-item>🅰️ Edytuj</button>
+        <button *appHasRole="['administrator']" (click)="intentionDeleteDialog()" mat-menu-item>🅰️ Usuń</button>
+
+      </mat-menu>
+    </ng-container>
+
+
+    </h2>
+    <p>
+      <a routerLink="/wpis/{{intention.slug}}" [state]="intention">{{intention.content}}</a>
+    </p>
+
+    <br>Status: <strong style="color: red">{{intention.status}}</strong>
+    <br><span *ngIf="intention.commentsCount > 0">Komentarzy: <strong style="color: blue">{{intention.commentsCount}}</strong></span>
+
+    <p><mat-chip-list aria-label="Lista osób modlących się w intencji intention.title">
+      <mat-chip *ngFor="let tag of intention.tags"><mat-icon aria-label="Ikona symbolizująca tag">tags</mat-icon>{{tag}}</mat-chip>
+      </mat-chip-list>
+    </p>
+
+    <ng-container *ngIf="auth.user$ | async as user; else prayButtonForLoggedOut">
+      <button>Modle sie {{intention.prayingCount || 0}}</button>
+    </ng-container>
+    <ng-template #prayButtonForLoggedOut>
+      <button routerLink="/logowanie">Modle sie {{intention.prayingCount || 0}}</button>
+    </ng-template>
+
+
+
+  </div>
+</div>
+
+<section class="timeline-prayers">
+  <div>
+    <mat-chip-list  aria-label="Lista osób modlących się w intencji TYTUL INTENCJI" style="display: inline-block;">
+      <mat-chip *ngFor="let prayer of intention.prayingData">
+      <img alt="" src="//www.gravatar.com/avatar/915deab4212e74233aee7beba5cf27c7?s=20&amp;r=g&amp;d=mm" srcset="//www.gravatar.com/avatar/915deab4212e74233aee7beba5cf27c7?s=20&amp;r=g&amp;d=mm 2x" height="20" width="20" style="border-radius: 50%; margin: 0 5px 0 0"/>
+      {{prayer.displayName}}
+      <ng-container *ngIf="auth.user$ | async as user">
+      </ng-container>
+
+      </mat-chip>
+
+      <!-- <ng-container *ngIf="auth.user$ | async as user; else joinUs">
+      <span *ngIf="(user.uid === intention.uid) && !prayer.thanked" style="color: #ff00ff">">Podziekuj</span>
+    </ng-container>
+      <ng-template #joinUs>
+        <mat-chip style="background-color: #f3b61f;
+        background-color: #f3b61f;
+        text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);">
+        <a href="https://intencje.pl/rejestracja" style="text-decoration: none; color: #fff;" title="Zakładanie darmowego konta" class=""
+        >Dołącz do nas!</a
+        >
+        </mat-chip>
+
+      </ng-template> -->
+
+
+
+
+
+      </mat-chip-list>
+
+    </div>
+    </section>
+
+
+

@@ -1,0 +1,9 @@
+<div [appShowPatronProfile]="patron">
+  <div item-start>
+    <img class="avatar" [src]="patron.avatar" alt="" />
+    <!-- <div class="avatar" [src]="patron.avatar" alt="" (ionError)="toolsService.loadDefaultImage($event)"></div> -->
+  </div>
+  <h2>
+    {{patron.name}}
+  </h2>
+</div>
