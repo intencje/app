@@ -1,0 +1,285 @@
+:host {
+
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+
+
+  &:nth-child(even) > .timeline-item,
+  &:nth-child(odd) > .timeline-prayers div,
+  &.sent-by-me > .timeline-item {
+    @media only screen and (min-width: 768px) {
+      float: right;
+    }
+  }
+
+  &:nth-child(even) > .timeline-item:before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+  }
+
+  &:nth-child(even) > .timeline-item:after {
+    border-left-width: 0;
+    border-right-width: 14px;
+    left: -14px;
+    right: auto;
+  }
+  &:nth-child(even) .timeline-username,
+  &:nth-child(even) > .timeline-prayers div {
+    @media only screen and (min-width: 768px) {
+      left: -115%;
+      text-align: right;
+    }
+  }
+
+  position: relative;
+  display: block;
+  margin-bottom: 1px;
+
+  @media only screen and (min-width: 768px) {
+    margin-bottom: 20px;
+  }
+
+  /*
+    Klasa kontenera łączącego wszystkie elementy intencji z wyjątkiem avatara.
+*/
+  .timeline-item {
+    border-radius: 1px;
+    position: relative;
+    padding: 35px 20px 20px 20px;
+    background-color: #fff;
+
+    @media only screen and (min-width: 768px) {
+      //box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0,0,0,.12);
+      border-width: 1px;
+      border-style: solid;
+      border-color: #e0e0e0;
+      border-radius: 4px;
+
+      width: 40%;
+      float: left;
+      margin: 0;
+      padding: 22px 25px 20px 25px;
+    }
+
+    .timeline-body {
+      /*
+Padding górny tworzy przestrzeń do poukładnaia w niej avatara, linka do profilu i daty w wersji mobile
+*/
+      padding: 30px 0 0 0;
+
+      @media only screen and (min-width: 768px) {
+        padding: 0;
+      }
+    }
+    /*
+Ciemna strzałka od avatara do intencji.
+*/
+    &:before {
+      @media only screen and (min-width: 768px) {
+        position: absolute;
+        top: 17px;
+        right: -15px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-left: 15px solid #e0e0e0;
+        border-right: 0 solid #e0e0e0;
+        border-bottom: 15px solid transparent;
+        content: ' ';
+      }
+    }
+    /*
+Jasna strzałka od avatara do intencji.
+*/
+    &:after {
+      @media only screen and (min-width: 768px) {
+        position: absolute;
+        top: 18px;
+        right: -14px;
+        display: inline-block;
+        border-top: 14px solid transparent;
+        border-left: 14px solid #fff;
+        border-right: 0 solid #fff;
+        border-bottom: 14px solid transparent;
+        content: ' ';
+      }
+    }
+  }
+  /*
+Klasa kontenera prezentującego avatar. Jego kształt definiowany jest za pomocą
+zaokrąglonych granic
+*/
+  .timeline-avatar {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    position: absolute;
+    background-color: #c5c5c5;
+    z-index: 100;
+    border-radius: 50%;
+    top: 10px;
+    left: 30px;
+    margin-left: -20px;
+    border-style: solid;
+    border-color: #d4d4d4;
+    border-width: 1px 0 0 1px;
+
+    @media only screen and (min-width: 768px) {
+      top: 14px;
+      left: 50%;
+      margin-left: -20px;
+    }
+
+    img {
+      border-radius: 50%;
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  /*
+Tag time wykorzystywany jest do prezentacji czasum jaki upłynął
+od dodania intencji wraz z ikoną
+*/
+  time {
+    color: #777;
+    font-weight: 200;
+    text-transform: none;
+    display: block;
+    font-size: 12px;
+    margin: 0 0 10px 0;
+  }
+  /*
+Nazwa użytkownika wyświetlana nad intencją
+*/
+  .timeline-username {
+    position: absolute;
+    left: 60px;
+    top: 9px;
+
+    @media only screen and (min-width: 768px) {
+      top: inherit;
+      left: 115%;
+      width: 100%;
+      margin: -8px 0 0 0;
+      text-align: left;
+      padding: 0;
+    }
+  }
+  /*
+Tytuł intencji
+*/
+  h1,
+  h2 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    padding: 0;
+    border: none;
+    text-align: inherit;
+    color: #333;
+    font-weight: 700;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+
+    a {
+      color: #333;
+    }
+  }
+
+  /*
+Linia rozdzielająca intencje od drop-down'a i buttona
+*/
+  hr {
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+
+  /*
+Lista modlących się w danej intencji
+Używamy dodatjkowe DIVa w sekcji do pokazywania/ukrywania na mobile.
+*/
+
+  /* Zawsze pokazuj odlących się dla desktop */
+  .timeline-prayers.collapse {
+    @media only screen and (min-width: 768px) {
+      display: block;
+    }
+  }
+
+  .timeline-prayers div {
+    font-size: 14px;
+
+    /* Dla mobile */
+    @media only screen and (max-width: 768px) {
+      background-color: #fff;
+      padding: 15px;
+    }
+    /* Dla desktopa */
+    @media only screen and (min-width: 768px) {
+      width: 45%;
+      float: left;
+      margin-top: 50px;
+      padding: 30px 20px;
+    }
+
+    strong {
+      margin: 0 10px 0 0;
+    }
+    .prayer-link {
+      margin: 0 5px 5px 0;
+      background-color: #fff;
+      display: inline-block;
+      .prayer-link-profile {
+        display: inline-block;
+        margin: 0 5px 0 0;
+        line-height: 20px;
+      }
+      img {
+        float: left;
+        margin: 0 5px 0 0;
+      }
+    }
+    .join-us {
+      line-height: 20px;
+      display: inline-block;
+      margin-right: 5px;
+      padding: 0 5px;
+      font-family: Dosis;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: #f3b61f;
+      text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);
+      &:hover {
+        background-color: #f3b61f;
+      }
+    }
+    .thanks-link {
+      line-height: 20px;
+      float: right;
+      padding: 0 5px;
+      font-family: Dosis;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: #f3b61f;
+      text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);
+      &:hover {
+        background-color: #f3b61f;
+      }
+      /* Dla mobile */
+      @media only screen and (max-width: 768px) {
+        float: none;
+      }
+    }
+  }
+}

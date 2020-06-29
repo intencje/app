@@ -1,0 +1,48 @@
+<div>
+  <div>
+    <div no-padding>
+      <div [appShowArticleDetails]="article">
+        <!-- Widok postów z obrazkiem -->
+        <ng-container *ngIf="article.large_image">
+          <div col-8 class="excerpt">
+            <h2 *ngIf="article.title">{{article.title}}</h2>
+            <p *ngIf="article.excerpt">{{article.excerpt}}</p>
+          </div>
+          <div col-4 class="image" [style.background-image]="'url(' + article.large_image + ')' ">
+            <img src="{{article.large_image}}" (load)="this.loading = false" />
+            <div *ngIf="this.loading" name="crescent" class="static-loader"></div>
+          </div>
+        </ng-container>
+
+        <!-- Widok postów bez obrazka -->
+        <ng-container *ngIf="!article.large_image">
+          <div col-12>
+            <h2 *ngIf="article.title">{{article.title}}</h2>
+            <p *ngIf="article.excerpt">{{article.excerpt}}</p>
+          </div>
+        </ng-container>
+      </div>
+
+      <div>
+        <div col-12 text-right>
+          <h3 *ngIf="showProfileDetialsOnClick"
+            [appShowUserProfile]="{user_id: article.author_id, display_name: article.author_display_name, avatar_url: article.author_avatar_url}">
+            {{article.author_display_name}}
+          </h3>
+          <h3 *ngIf="!showProfileDetialsOnClick">
+            {{article.author_display_name}}
+          </h3>
+          <time *ngIf="article.reading_time || article.date">
+            <span *ngIf="article.reading_time">
+              {{article.reading_time}} min. czytania
+              <span class="dot"> . </span>
+            </span>
+            <span *ngIf="article.date">
+              {{article.date}}
+            </span>
+          </time>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

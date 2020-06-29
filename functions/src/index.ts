@@ -1,0 +1,1 @@
+exports.intentions = require('./intentions');
