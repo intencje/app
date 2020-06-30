@@ -1,6 +1,8 @@
+import { version } from '../../package.json';
+
 export const environment = {
-  production: false,
-  version: '',
+  production: true,
+  version: version,
   firebase: {
     apiKey: '',
     authDomain: '',
@@ -11,5 +13,5 @@ export const environment = {
     appId: '',
     measurementId: '',
   },
-  url: 'http://localhost:4200/',
+  url: '',
 };

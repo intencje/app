@@ -20,8 +20,3 @@ Thumbs.db
 
 # Optional eslint cache
 .eslintcache
-
-# ENVs
-/src/environments/environment.ts
-/src/environments/environment.staging.ts
-/src/environments/environment.production.ts
