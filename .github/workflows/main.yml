@@ -16,7 +16,7 @@ jobs:
       - name: Install app
         run: npm install
       - name: Build app
-        run: npx ng run intencje:app-shell:production
+        run: npx ng run intencje:app-shell:staging
       - name: Deploy to Firebase
         uses: pizzafox/firebase-action@1.0.7
         env:
