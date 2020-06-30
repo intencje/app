@@ -14,7 +14,7 @@ Source code of intencje.pl website and mobile/desktop apps based on Angular, Fir
 - **App-shell SSR** - Generate some static HTML to boost [first load performance](https://developers.google.com/web/fundamentals/architecture/app-shell)
 - **Push notifications** - For web, mobile and desktop
 - **Service Worker** - With use of @angular/pwa
-- **Material design** - Design guidance and code from @angular/material
+- **Material Design** - Design guidance and code from @angular/material
 
 
 ## Quickstart
