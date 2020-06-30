@@ -1,0 +1,43 @@
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from '../../_services/auth/auth.service';
+import { DbService } from '../../_services/db/db.service';
+import { Router } from '@angular/router';
+import { firestore } from 'firebase/app';
+import { map, switchMap, shareReplay } from 'rxjs/operators';
+import { Observable, combineLatest, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NotificationsService {
+  constructor(
+    private auth: AuthService,
+    private db: DbService
+    
+  ) {}
+
+  // Pobiera listę powiadomień zalogowanego uzytkownika
+  getNotifications() {
+    return this.auth.user$.pipe(
+        switchMap(user =>
+          this.db.collection$(`users/${user.uid}/notifications`, ref =>
+          ref
+            .orderBy('date', 'desc')
+            .limit(25)
+        )
+      ),
+    )
+  }
+
+  // Czyści do 0 licznik nieprzeczytanych powiadomień
+  async resetUnreadNotificationsCounter(){
+    const user = await this.auth.getUser()
+
+        this.db.update(`users/${user.uid}`, {unreadNotifications: 0})
+
+  }
+
+  // Usuwa z listy wszystkie powiadomienia
+  deleteAllNotifications(){}
+}

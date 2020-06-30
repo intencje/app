@@ -1,0 +1,40 @@
+name: CI
+on:
+  push:
+    branches:
+    - staging
+jobs:
+  firebase-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: '10.x'
+      - name: Install app
+        run: npm install
+      - name: Build app
+        run: npx ng run intencje:app-shell:staging
+      - name: Deploy to Firebase
+        uses: pizzafox/firebase-action@1.0.7
+        env:
+          PROJECT_ID: "intencje-staging"
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        with:
+          args: deploy --only hosting
+  # cypress-run:
+  #   needs: firebase-deploy
+  #   runs-on: ubuntu-16.04
+  #   steps:
+  #     - name: Checkout tests
+  #       uses: actions/checkout@v1
+  #     - name: Run Cypress
+  #       uses: cypress-io/github-action@v1
+  #       with:
+  #         browser: chrome
+  #         headless: true
+  #         wait-on: 'https://intencje-staging.web.app'
+  #         config: baseUrl=https://intencje-staging.web.app
+  #         env: stage=staging

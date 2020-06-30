@@ -1,0 +1,37 @@
+<ng-container *ngIf="intentionsList$ | async as intentions; else loading">
+  <!-- <div style="height: 250px; background-size: cover; background-position: -120px 0px; background-image: url(/assets/img/header.png);"></div> -->
+
+  <div class="timeline" style="position: relative;">
+    <div
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="nextBatch((intentions[intentions.length -1].date))">
+      <ng-container *ngFor="let intention of intentions; let i = index; trackBy: trackByIdx">
+        <app-intention-card
+          *ngIf="intention.date.seconds * 1000 < startDate"
+          [intention]="intention"
+        ></app-intention-card>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <ng-container *ngIf="this.noContent; else skeleton">
+    <app-no-content *ngIf="this.noContent" message="Brak intencji."></app-no-content>
+  </ng-container>
+</ng-template>
+
+<ng-template #skeleton>
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+  ŁADOWANIE <br />
+</ng-template>

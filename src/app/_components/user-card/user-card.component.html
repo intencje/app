@@ -1,0 +1,12 @@
+<div>
+  <div [appShowUserProfile]="{user_id: user.id, display_name: user.display_name, avatar_url: user.avatar_url}">
+    <div item-start>
+      <!-- <div class="avatar" [src]="user.avatar_url" alt="" (ionError)="toolsService.loadDefaultImage($event)"></div> -->
+      <img class="avatar" [src]="user.avatar_url" alt="" />
+    </div>
+    <section>
+      <h2>{{user.display_name}}</h2>
+      <time>Dołączył/a {{user.joined}}.</time>
+    </section>
+  </div>
+</div>

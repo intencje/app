@@ -1,0 +1,8 @@
+{
+  "appId": "pl.intencje",
+  "appName": "Intencje.pl",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/browser",
+  "cordova": {}
+}
