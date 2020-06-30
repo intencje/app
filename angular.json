@@ -114,7 +114,11 @@
           "configurations": {
             "production": {
               "browserTarget": "intencje:build:production"
+            },
+            "staging": {
+              "browserTarget": "intencje:build:staging"
             }
+
           }
         },
         "extract-i18n": {
@@ -155,7 +159,19 @@
               ],
               "sourceMap": false,
               "optimization": true
+            },
+            "staging": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
             }
+
           }
         },
         "serve-ssr": {
@@ -168,7 +184,12 @@
             "production": {
               "browserTarget": "intencje:build:production",
               "serverTarget": "intencje:server:production"
+            },
+            "staging": {
+              "browserTarget": "intencje:build:staging",
+              "serverTarget": "intencje:server:staging"
             }
+
           }
         },
         "prerender": {
@@ -195,6 +216,10 @@
             "production": {
               "browserTarget": "intencje:build:production",
               "serverTarget": "intencje:server:production"
+            },
+            "staging": {
+              "browserTarget": "intencje:build:staging",
+              "serverTarget": "intencje:server:staging"
             }
           }
         }

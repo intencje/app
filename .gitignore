@@ -5,9 +5,6 @@
 # Firebase cache
 .firebase
 
-# Firebase targets
-.firebaserc
-
 # Misc
 .DS_Store
 Thumbs.db
@@ -20,8 +17,3 @@ Thumbs.db
 
 # Optional eslint cache
 .eslintcache
-
-# ENVs
-/src/environments/environment.ts
-/src/environments/environment.staging.ts
-/src/environments/environment.production.ts
