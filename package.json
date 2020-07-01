@@ -4,7 +4,7 @@
   "author": "Sławomir Jakubowski",
   "homepage": "https://intencje.pl",
   "scripts": {
-    "compodoc": "npx compodoc -p tsconfig.app.json",
+    "compodoc": "npx compodoc -p tsconfig.json",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
