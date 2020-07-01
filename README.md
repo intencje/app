@@ -4,7 +4,7 @@
 
 Source code of intencje.pl website and mobile/desktop apps based on Angular, Firebase, and Capacitor.
 
-## Technical background
+## Tech stack
 
 - **Observable based** - By the power of Angular and RxJS
 - **Single code base** - For Web, PWA, Android, iOS, and desktop app (Mac / Linux / Windows)
@@ -15,6 +15,7 @@ Source code of intencje.pl website and mobile/desktop apps based on Angular, Fir
 - **Push notifications** - For web, mobile and desktop
 - **Service Worker** - With use of @angular/pwa
 - **Material Design** - Design guidance and code from @angular/material
+- **Cypress** - E2E tests
 
 
 ## Quickstart
