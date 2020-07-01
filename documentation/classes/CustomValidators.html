@@ -1,0 +1,630 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Intencje.pl documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Intencje.pl documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>CustomValidators</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/_models/custom-validators.model.ts</code>
+        </p>
+
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#cannotContainSwearwords">cannotContainSwearwords</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cannotContainSwearwords"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Static</span>
+                            cannotContainSwearwords
+                        </b>
+                        <a href="#cannotContainSwearwords"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cannotContainSwearwords(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="4"
+                            class="link-to-prism">src/app/_models/custom-validators.model.ts:4</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>control</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>ValidationErrors | null</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AbstractControl, ValidationErrors } from &quot;@angular/forms&quot;;
+
+export class CustomValidators {
+	static cannotContainSwearwords(control: AbstractControl): ValidationErrors | null {
+		let swearwords &#x3D; [&#x27;chuj&#x27;, &#x27;chuja&#x27;, &#x27;chujek&#x27;, &#x27;chuju&#x27;, &#x27;chujem&#x27;, &#x27;chujnia&#x27;,
+			&#x27;chujowy&#x27;, &#x27;chujowa&#x27;, &#x27;chujowe&#x27;, &#x27;cipa&#x27;, &#x27;cipę&#x27;, &#x27;cipe&#x27;, &#x27;cipą&#x27;,
+			&#x27;cipie&#x27;, &#x27;dojebać&#x27;, &#x27;dojebac&#x27;, &#x27;dojebie&#x27;, &#x27;dojebał&#x27;, &#x27;dojebal&#x27;,
+			&#x27;dojebała&#x27;, &#x27;dojebala&#x27;, &#x27;dojebałem&#x27;, &#x27;dojebalem&#x27;, &#x27;dojebałam&#x27;,
+			&#x27;dojebalam&#x27;, &#x27;dojebię&#x27;, &#x27;dojebie&#x27;, &#x27;dopieprzać&#x27;, &#x27;dopieprzac&#x27;,
+			&#x27;dopierdalać&#x27;, &#x27;dopierdalac&#x27;, &#x27;dopierdala&#x27;, &#x27;dopierdalał&#x27;,
+			&#x27;dopierdalal&#x27;, &#x27;dopierdalała&#x27;, &#x27;dopierdalala&#x27;, &#x27;dopierdoli&#x27;,
+			&#x27;dopierdolił&#x27;, &#x27;dopierdolil&#x27;, &#x27;dopierdolę&#x27;, &#x27;dopierdole&#x27;, &#x27;dopierdoli&#x27;,
+			&#x27;dopierdalający&#x27;, &#x27;dopierdalajacy&#x27;, &#x27;dopierdolić&#x27;, &#x27;dopierdolic&#x27;,
+			&#x27;dupa&#x27;, &#x27;dupie&#x27;, &#x27;dupą&#x27;, &#x27;dupcia&#x27;, &#x27;dupeczka&#x27;, &#x27;dupy&#x27;, &#x27;dupe&#x27;, &#x27;huj&#x27;,
+			&#x27;hujek&#x27;, &#x27;hujnia&#x27;, &#x27;huja&#x27;, &#x27;huje&#x27;, &#x27;hujem&#x27;, &#x27;huju&#x27;, &#x27;jebać&#x27;, &#x27;jebac&#x27;,
+			&#x27;jebał&#x27;, &#x27;jebal&#x27;, &#x27;jebie&#x27;, &#x27;jebią&#x27;, &#x27;jebia&#x27;, &#x27;jebak&#x27;, &#x27;jebaka&#x27;, &#x27;jebal&#x27;,
+			&#x27;jebał&#x27;, &#x27;jebany&#x27;, &#x27;jebane&#x27;, &#x27;jebanka&#x27;, &#x27;jebanko&#x27;, &#x27;jebankiem&#x27;,
+			&#x27;jebanymi&#x27;, &#x27;jebana&#x27;, &#x27;jebanym&#x27;, &#x27;jebanej&#x27;, &#x27;jebaną&#x27;, &#x27;jebana&#x27;,
+			&#x27;jebani&#x27;, &#x27;jebanych&#x27;, &#x27;jebanymi&#x27;, &#x27;jebcie&#x27;, &#x27;jebiący&#x27;, &#x27;jebiacy&#x27;,
+			&#x27;jebiąca&#x27;, &#x27;jebiaca&#x27;, &#x27;jebiącego&#x27;, &#x27;jebiacego&#x27;, &#x27;jebiącej&#x27;, &#x27;jebiacej&#x27;,
+			&#x27;jebia&#x27;, &#x27;jebią&#x27;, &#x27;jebie&#x27;, &#x27;jebię&#x27;, &#x27;jebliwy&#x27;, &#x27;jebnąć&#x27;, &#x27;jebnac&#x27;,
+			&#x27;jebnąc&#x27;, &#x27;jebnać&#x27;, &#x27;jebnął&#x27;, &#x27;jebnal&#x27;, &#x27;jebną&#x27;, &#x27;jebna&#x27;, &#x27;jebnęła&#x27;,
+			&#x27;jebnela&#x27;, &#x27;jebnie&#x27;, &#x27;jebnij&#x27;, &#x27;jebut&#x27;, &#x27;koorwa&#x27;, &#x27;kórwa&#x27;, &#x27;kurestwo&#x27;,
+			&#x27;kurew&#x27;, &#x27;kurewski&#x27;, &#x27;kurewska&#x27;, &#x27;kurewskiej&#x27;, &#x27;kurewską&#x27;, &#x27;kurewska&#x27;,
+			&#x27;kurewsko&#x27;, &#x27;kurewstwo&#x27;, &#x27;kurwa&#x27;, &#x27;kurwaa&#x27;, &#x27;kurwami&#x27;, &#x27;kurwą&#x27;, &#x27;kurwe&#x27;,
+			&#x27;kurwę&#x27;, &#x27;kurwie&#x27;, &#x27;kurwiska&#x27;, &#x27;kurwo&#x27;, &#x27;kurwy&#x27;, &#x27;kurwach&#x27;, &#x27;kurwami&#x27;,
+			&#x27;kurewski&#x27;, &#x27;kurwiarz&#x27;, &#x27;kurwiący&#x27;, &#x27;kurwica&#x27;, &#x27;kurwić&#x27;, &#x27;kurwic&#x27;,
+			&#x27;kurwidołek&#x27;, &#x27;kurwik&#x27;, &#x27;kurwiki&#x27;, &#x27;kurwiszcze&#x27;, &#x27;kurwiszon&#x27;,
+			&#x27;kurwiszona&#x27;, &#x27;kurwiszonem&#x27;, &#x27;kurwiszony&#x27;, &#x27;kutas&#x27;, &#x27;kutasa&#x27;, &#x27;kutasie&#x27;,
+			&#x27;kutasem&#x27;, &#x27;kutasy&#x27;, &#x27;kutasów&#x27;, &#x27;kutasow&#x27;, &#x27;kutasach&#x27;, &#x27;kutasami&#x27;,
+			&#x27;matkojebca&#x27;, &#x27;matkojebcy&#x27;, &#x27;matkojebcą&#x27;, &#x27;matkojebca&#x27;, &#x27;matkojebcami&#x27;,
+			&#x27;matkojebcach&#x27;, &#x27;nabarłożyć&#x27;, &#x27;najebać&#x27;, &#x27;najebac&#x27;, &#x27;najebał&#x27;,
+			&#x27;najebal&#x27;, &#x27;najebała&#x27;, &#x27;najebala&#x27;, &#x27;najebane&#x27;, &#x27;najebany&#x27;, &#x27;najebaną&#x27;,
+			&#x27;najebana&#x27;, &#x27;najebie&#x27;, &#x27;najebią&#x27;, &#x27;najebia&#x27;, &#x27;naopierdalać&#x27;,
+			&#x27;naopierdalac&#x27;, &#x27;naopierdalał&#x27;, &#x27;naopierdalal&#x27;, &#x27;naopierdalała&#x27;,
+			&#x27;naopierdalala&#x27;, &#x27;naopierdalała&#x27;, &#x27;napierdalać&#x27;, &#x27;napierdalac&#x27;,
+			&#x27;napierdalający&#x27;, &#x27;napierdalajacy&#x27;, &#x27;napierdolić&#x27;, &#x27;napierdolic&#x27;,
+			&#x27;nawpierdalać&#x27;, &#x27;nawpierdalac&#x27;, &#x27;nawpierdalał&#x27;, &#x27;nawpierdalal&#x27;,
+			&#x27;nawpierdalała&#x27;, &#x27;nawpierdalala&#x27;, &#x27;obsrywać&#x27;, &#x27;obsrywac&#x27;, &#x27;obsrywający&#x27;,
+			&#x27;obsrywajacy&#x27;, &#x27;odpieprzać&#x27;, &#x27;odpieprzac&#x27;, &#x27;odpieprzy&#x27;, &#x27;odpieprzył&#x27;,
+			&#x27;odpieprzyl&#x27;, &#x27;odpieprzyła&#x27;, &#x27;odpieprzyla&#x27;, &#x27;odpierdalać&#x27;,
+			&#x27;odpierdalac&#x27;, &#x27;odpierdol&#x27;, &#x27;odpierdolił&#x27;, &#x27;odpierdolil&#x27;,
+			&#x27;odpierdoliła&#x27;, &#x27;odpierdolila&#x27;, &#x27;odpierdoli&#x27;, &#x27;odpierdalający&#x27;,
+			&#x27;odpierdalajacy&#x27;, &#x27;odpierdalająca&#x27;, &#x27;odpierdalajaca&#x27;, &#x27;odpierdolić&#x27;,
+			&#x27;odpierdolic&#x27;, &#x27;odpierdoli&#x27;, &#x27;odpierdolił&#x27;, &#x27;opieprzający&#x27;,
+			&#x27;opierdalać&#x27;, &#x27;opierdalac&#x27;, &#x27;opierdala&#x27;, &#x27;opierdalający&#x27;,
+			&#x27;opierdalajacy&#x27;, &#x27;opierdol&#x27;, &#x27;opierdolić&#x27;, &#x27;opierdolic&#x27;, &#x27;opierdoli&#x27;,
+			&#x27;opierdolą&#x27;, &#x27;opierdola&#x27;, &#x27;piczka&#x27;, &#x27;pieprznięty&#x27;, &#x27;pieprzniety&#x27;,
+			&#x27;pieprzony&#x27;, &#x27;pierdel&#x27;, &#x27;pierdlu&#x27;, &#x27;pierdolą&#x27;, &#x27;pierdola&#x27;, &#x27;pierdolący&#x27;,
+			&#x27;pierdolacy&#x27;, &#x27;pierdoląca&#x27;, &#x27;pierdolaca&#x27;, &#x27;pierdol&#x27;, &#x27;pierdole&#x27;,
+			&#x27;pierdolenie&#x27;, &#x27;pierdoleniem&#x27;, &#x27;pierdoleniu&#x27;, &#x27;pierdolę&#x27;, &#x27;pierdolec&#x27;,
+			&#x27;pierdola&#x27;, &#x27;pierdolą&#x27;, &#x27;pierdolić&#x27;, &#x27;pierdolicie&#x27;, &#x27;pierdolic&#x27;,
+			&#x27;pierdolił&#x27;, &#x27;pierdolil&#x27;, &#x27;pierdoliła&#x27;, &#x27;pierdolila&#x27;, &#x27;pierdoli&#x27;,
+			&#x27;pierdolnięty&#x27;, &#x27;pierdolniety&#x27;, &#x27;pierdolisz&#x27;, &#x27;pierdolnąć&#x27;,
+			&#x27;pierdolnac&#x27;, &#x27;pierdolnął&#x27;, &#x27;pierdolnal&#x27;, &#x27;pierdolnęła&#x27;, &#x27;pierdolnela&#x27;,
+			&#x27;pierdolnie&#x27;, &#x27;pierdolnięty&#x27;, &#x27;pierdolnij&#x27;, &#x27;pierdolnik&#x27;, &#x27;pierdolona&#x27;,
+			&#x27;pierdolone&#x27;, &#x27;pierdolony&#x27;, &#x27;pierdołki&#x27;, &#x27;pierdzący&#x27;, &#x27;pierdzieć&#x27;,
+			&#x27;pierdziec&#x27;, &#x27;pizda&#x27;, &#x27;pizdą&#x27;, &#x27;pizde&#x27;, &#x27;pizdę&#x27;, &#x27;piździe&#x27;, &#x27;pizdzie&#x27;,
+			&#x27;pizdnąć&#x27;, &#x27;pizdnac&#x27;, &#x27;pizdu&#x27;, &#x27;podpierdalać&#x27;, &#x27;podpierdalac&#x27;,
+			&#x27;podpierdala&#x27;, &#x27;podpierdalający&#x27;, &#x27;podpierdalajacy&#x27;, &#x27;podpierdolić&#x27;,
+			&#x27;podpierdolic&#x27;, &#x27;podpierdoli&#x27;, &#x27;pojeb&#x27;, &#x27;pojeba&#x27;, &#x27;pojebami&#x27;,
+			&#x27;pojebani&#x27;, &#x27;pojebanego&#x27;, &#x27;pojebanemu&#x27;, &#x27;pojebani&#x27;, &#x27;pojebany&#x27;,
+			&#x27;pojebanych&#x27;, &#x27;pojebanym&#x27;, &#x27;pojebanymi&#x27;, &#x27;pojebem&#x27;, &#x27;pojebać&#x27;,
+			&#x27;pojebac&#x27;, &#x27;pojebalo&#x27;, &#x27;popierdala&#x27;, &#x27;popierdalac&#x27;, &#x27;popierdalać&#x27;,
+			&#x27;popierdolić&#x27;, &#x27;popierdolic&#x27;, &#x27;popierdoli&#x27;, &#x27;popierdolonego&#x27;,
+			&#x27;popierdolonemu&#x27;, &#x27;popierdolonym&#x27;, &#x27;popierdolone&#x27;, &#x27;popierdoleni&#x27;,
+			&#x27;popierdolony&#x27;, &#x27;porozpierdalać&#x27;, &#x27;porozpierdala&#x27;, &#x27;porozpierdalac&#x27;,
+			&#x27;poruchac&#x27;, &#x27;poruchać&#x27;, &#x27;przejebać&#x27;, &#x27;przejebane&#x27;, &#x27;przejebac&#x27;,
+			&#x27;przyjebali&#x27;, &#x27;przepierdalać&#x27;, &#x27;przepierdalac&#x27;, &#x27;przepierdala&#x27;,
+			&#x27;przepierdalający&#x27;, &#x27;przepierdalajacy&#x27;, &#x27;przepierdalająca&#x27;,
+			&#x27;przepierdalajaca&#x27;, &#x27;przepierdolić&#x27;, &#x27;przepierdolic&#x27;, &#x27;przyjebać&#x27;,
+			&#x27;przyjebac&#x27;, &#x27;przyjebie&#x27;, &#x27;przyjebała&#x27;, &#x27;przyjebala&#x27;, &#x27;przyjebał&#x27;,
+			&#x27;przyjebal&#x27;, &#x27;przypieprzać&#x27;, &#x27;przypieprzac&#x27;, &#x27;przypieprzający&#x27;,
+			&#x27;przypieprzajacy&#x27;, &#x27;przypieprzająca&#x27;, &#x27;przypieprzajaca&#x27;,
+			&#x27;przypierdalać&#x27;, &#x27;przypierdalac&#x27;, &#x27;przypierdala&#x27;, &#x27;przypierdoli&#x27;,
+			&#x27;przypierdalający&#x27;, &#x27;przypierdalajacy&#x27;, &#x27;przypierdolić&#x27;,
+			&#x27;przypierdolic&#x27;, &#x27;qrwa&#x27;, &#x27;rozjebać&#x27;, &#x27;rozjebac&#x27;, &#x27;rozjebie&#x27;,
+			&#x27;rozjebała&#x27;, &#x27;rozjebią&#x27;, &#x27;rozpierdalać&#x27;, &#x27;rozpierdalac&#x27;, &#x27;rozpierdala&#x27;,
+			&#x27;rozpierdolić&#x27;, &#x27;rozpierdolic&#x27;, &#x27;rozpierdole&#x27;, &#x27;rozpierdoli&#x27;,
+			&#x27;rozpierducha&#x27;, &#x27;skurwić&#x27;, &#x27;skurwiel&#x27;, &#x27;skurwiela&#x27;, &#x27;skurwielem&#x27;,
+			&#x27;skurwielu&#x27;, &#x27;skurwysyn&#x27;, &#x27;skurwysynów&#x27;, &#x27;skurwysynow&#x27;, &#x27;skurwysyna&#x27;,
+			&#x27;skurwysynem&#x27;, &#x27;skurwysynu&#x27;, &#x27;skurwysyny&#x27;, &#x27;skurwysyński&#x27;,
+			&#x27;skurwysynski&#x27;, &#x27;skurwysyństwo&#x27;, &#x27;skurwysynstwo&#x27;, &#x27;spieprzać&#x27;,
+			&#x27;spieprzac&#x27;, &#x27;spieprza&#x27;, &#x27;spieprzaj&#x27;, &#x27;spieprzajcie&#x27;, &#x27;spieprzają&#x27;,
+			&#x27;spieprzaja&#x27;, &#x27;spieprzający&#x27;, &#x27;spieprzajacy&#x27;, &#x27;spieprzająca&#x27;,
+			&#x27;spieprzajaca&#x27;, &#x27;spierdalać&#x27;, &#x27;spierdalac&#x27;, &#x27;spierdala&#x27;, &#x27;spierdalał&#x27;,
+			&#x27;spierdalała&#x27;, &#x27;spierdalal&#x27;, &#x27;spierdalalcie&#x27;, &#x27;spierdalala&#x27;,
+			&#x27;spierdalający&#x27;, &#x27;spierdalajacy&#x27;, &#x27;spierdolić&#x27;, &#x27;spierdolic&#x27;,
+			&#x27;spierdoli&#x27;, &#x27;spierdoliła&#x27;, &#x27;spierdoliło&#x27;, &#x27;spierdolą&#x27;, &#x27;spierdola&#x27;,
+			&#x27;srać&#x27;, &#x27;srac&#x27;, &#x27;srający&#x27;, &#x27;srajacy&#x27;, &#x27;srając&#x27;, &#x27;srajac&#x27;, &#x27;sraj&#x27;,
+			&#x27;sukinsyn&#x27;, &#x27;sukinsyny&#x27;, &#x27;sukinsynom&#x27;, &#x27;sukinsynowi&#x27;, &#x27;sukinsynów&#x27;,
+			&#x27;sukinsynow&#x27;, &#x27;śmierdziel&#x27;, &#x27;udupić&#x27;, &#x27;ujebać&#x27;, &#x27;ujebac&#x27;, &#x27;ujebał&#x27;,
+			&#x27;ujebal&#x27;, &#x27;ujebana&#x27;, &#x27;ujebany&#x27;, &#x27;ujebie&#x27;, &#x27;ujebała&#x27;, &#x27;ujebala&#x27;,
+			&#x27;upierdalać&#x27;, &#x27;upierdalac&#x27;, &#x27;upierdala&#x27;, &#x27;upierdoli&#x27;, &#x27;upierdolić&#x27;,
+			&#x27;upierdolic&#x27;, &#x27;upierdoli&#x27;, &#x27;upierdolą&#x27;, &#x27;upierdola&#x27;, &#x27;upierdoleni&#x27;,
+			&#x27;wjebać&#x27;, &#x27;wjebac&#x27;, &#x27;wjebie&#x27;, &#x27;wjebią&#x27;, &#x27;wjebia&#x27;, &#x27;wjebiemy&#x27;,
+			&#x27;wjebiecie&#x27;, &#x27;wkurwiać&#x27;, &#x27;wkurwiac&#x27;, &#x27;wkurwi&#x27;, &#x27;wkurwia&#x27;, &#x27;wkurwiał&#x27;,
+			&#x27;wkurwial&#x27;, &#x27;wkurwiający&#x27;, &#x27;wkurwiajacy&#x27;, &#x27;wkurwiająca&#x27;, &#x27;wkurwiajaca&#x27;,
+			&#x27;wkurwić&#x27;, &#x27;wkurwic&#x27;, &#x27;wkurwi&#x27;, &#x27;wkurwiacie&#x27;, &#x27;wkurwiają&#x27;, &#x27;wkurwiali&#x27;,
+			&#x27;wkurwią&#x27;, &#x27;wkurwia&#x27;, &#x27;wkurwimy&#x27;, &#x27;wkurwicie&#x27;, &#x27;wkurwiacie&#x27;, &#x27;wkurwić&#x27;,
+			&#x27;wkurwic&#x27;, &#x27;wkurwia&#x27;, &#x27;wpierdalać&#x27;, &#x27;wpierdalac&#x27;, &#x27;wpierdalający&#x27;,
+			&#x27;wpierdalajacy&#x27;, &#x27;wpierdol&#x27;, &#x27;wpierdolić&#x27;, &#x27;wpierdolic&#x27;, &#x27;wpizdu&#x27;,
+			&#x27;wyjebać&#x27;, &#x27;wyjebac&#x27;, &#x27;wyjebali&#x27;, &#x27;wyjebał&#x27;, &#x27;wyjebac&#x27;, &#x27;wyjebała&#x27;,
+			&#x27;wyjebały&#x27;, &#x27;wyjebie&#x27;, &#x27;wyjebią&#x27;, &#x27;wyjebia&#x27;, &#x27;wyjebiesz&#x27;, &#x27;wyjebie&#x27;,
+			&#x27;wyjebiecie&#x27;, &#x27;wyjebiemy&#x27;, &#x27;wypieprzać&#x27;, &#x27;wypieprzac&#x27;, &#x27;wypieprza&#x27;,
+			&#x27;wypieprzał&#x27;, &#x27;wypieprzal&#x27;, &#x27;wypieprzała&#x27;, &#x27;wypieprzala&#x27;, &#x27;wypieprzy&#x27;,
+			&#x27;wypieprzyła&#x27;, &#x27;wypieprzyla&#x27;, &#x27;wypieprzył&#x27;, &#x27;wypieprzyl&#x27;, &#x27;wypierdal&#x27;,
+			&#x27;wypierdalać&#x27;, &#x27;wypierdalac&#x27;, &#x27;wypierdala&#x27;, &#x27;wypierdalaj&#x27;,
+			&#x27;wypierdalał&#x27;, &#x27;wypierdalal&#x27;, &#x27;wypierdalała&#x27;, &#x27;wypierdalala&#x27;,
+			&#x27;wypierdalać&#x27;, &#x27;wypierdolić&#x27;, &#x27;wypierdolic&#x27;, &#x27;wypierdoli&#x27;,
+			&#x27;wypierdolimy&#x27;, &#x27;wypierdolicie&#x27;, &#x27;wypierdolą&#x27;, &#x27;wypierdola&#x27;,
+			&#x27;wypierdolili&#x27;, &#x27;wypierdolił&#x27;, &#x27;wypierdolil&#x27;, &#x27;wypierdoliła&#x27;,
+			&#x27;wypierdolila&#x27;, &#x27;zajebać&#x27;, &#x27;zajebac&#x27;, &#x27;zajebie&#x27;, &#x27;zajebią&#x27;, &#x27;zajebia&#x27;,
+			&#x27;zajebiał&#x27;, &#x27;zajebial&#x27;, &#x27;zajebała&#x27;, &#x27;zajebiala&#x27;, &#x27;zajebali&#x27;, &#x27;zajebana&#x27;,
+			&#x27;zajebani&#x27;, &#x27;zajebane&#x27;, &#x27;zajebany&#x27;, &#x27;zajebanych&#x27;, &#x27;zajebanym&#x27;,
+			&#x27;zajebanymi&#x27;, &#x27;zajebiste&#x27;, &#x27;zajebisty&#x27;, &#x27;zajebistych&#x27;, &#x27;zajebista&#x27;,
+			&#x27;zajebistym&#x27;, &#x27;zajebistymi&#x27;, &#x27;zajebiście&#x27;, &#x27;zajebiscie&#x27;, &#x27;zapieprzyć&#x27;,
+			&#x27;zapieprzyc&#x27;, &#x27;zapieprzy&#x27;, &#x27;zapieprzył&#x27;, &#x27;zapieprzyl&#x27;, &#x27;zapieprzyła&#x27;,
+			&#x27;zapieprzyla&#x27;, &#x27;zapieprzą&#x27;, &#x27;zapieprza&#x27;, &#x27;zapieprzy&#x27;, &#x27;zapieprzymy&#x27;,
+			&#x27;zapieprzycie&#x27;, &#x27;zapieprzysz&#x27;, &#x27;zapierdala&#x27;, &#x27;zapierdalać&#x27;,
+			&#x27;zapierdalac&#x27;, &#x27;zapierdalaja&#x27;, &#x27;zapierdalał&#x27;, &#x27;zapierdalaj&#x27;,
+			&#x27;zapierdalajcie&#x27;, &#x27;zapierdalała&#x27;, &#x27;zapierdalala&#x27;, &#x27;zapierdalali&#x27;,
+			&#x27;zapierdalający&#x27;, &#x27;zapierdalajacy&#x27;, &#x27;zapierdolić&#x27;, &#x27;zapierdolic&#x27;,
+			&#x27;zapierdoli&#x27;, &#x27;zapierdolił&#x27;, &#x27;zapierdolil&#x27;, &#x27;zapierdoliła&#x27;,
+			&#x27;zapierdolila&#x27;, &#x27;zapierdolą&#x27;, &#x27;zapierdola&#x27;, &#x27;zapierniczać&#x27;,
+			&#x27;zapierniczający&#x27;, &#x27;zasrać&#x27;, &#x27;zasranym&#x27;, &#x27;zasrywać&#x27;, &#x27;zasrywający&#x27;,
+			&#x27;zesrywać&#x27;, &#x27;zesrywający&#x27;, &#x27;zjebać&#x27;, &#x27;zjebac&#x27;, &#x27;zjebał&#x27;, &#x27;zjebal&#x27;,
+			&#x27;zjebała&#x27;, &#x27;zjebala&#x27;, &#x27;zjebana&#x27;, &#x27;zjebią&#x27;, &#x27;zjebali&#x27;, &#x27;zjeby&#x27;,
+
+			&#x27;CHUJ&#x27;, &#x27;CHUJA&#x27;, &#x27;CHUJEK&#x27;, &#x27;CHUJU&#x27;, &#x27;CHUJEM&#x27;, &#x27;CHUJNIA&#x27;,
+			&#x27;CHUJOWY&#x27;, &#x27;CHUJOWA&#x27;, &#x27;CHUJOWE&#x27;, &#x27;CIPA&#x27;, &#x27;CIPĘ&#x27;, &#x27;CIPE&#x27;, &#x27;CIPĄ&#x27;,
+			&#x27;CIPIE&#x27;, &#x27;DOJEBAĆ&#x27;, &#x27;DOJEBAC&#x27;, &#x27;DOJEBIE&#x27;, &#x27;DOJEBAŁ&#x27;, &#x27;DOJEBAL&#x27;,
+			&#x27;DOJEBAŁA&#x27;, &#x27;DOJEBALA&#x27;, &#x27;DOJEBAŁEM&#x27;, &#x27;DOJEBALEM&#x27;, &#x27;DOJEBAŁAM&#x27;,
+			&#x27;DOJEBALAM&#x27;, &#x27;DOJEBIĘ&#x27;, &#x27;DOJEBIE&#x27;, &#x27;DOPIEPRZAĆ&#x27;, &#x27;DOPIEPRZAC&#x27;,
+			&#x27;DOPIERDALAĆ&#x27;, &#x27;DOPIERDALAC&#x27;, &#x27;DOPIERDALA&#x27;, &#x27;DOPIERDALAŁ&#x27;,
+			&#x27;DOPIERDALAL&#x27;, &#x27;DOPIERDALAŁA&#x27;, &#x27;DOPIERDALALA&#x27;, &#x27;DOPIERDOLI&#x27;,
+			&#x27;DOPIERDOLIŁ&#x27;, &#x27;DOPIERDOLIL&#x27;, &#x27;DOPIERDOLĘ&#x27;, &#x27;DOPIERDOLE&#x27;, &#x27;DOPIERDOLI&#x27;,
+			&#x27;DOPIERDALAJĄCY&#x27;, &#x27;DOPIERDALAJACY&#x27;, &#x27;DOPIERDOLIĆ&#x27;, &#x27;DOPIERDOLIC&#x27;,
+			&#x27;DUPA&#x27;, &#x27;DUPIE&#x27;, &#x27;DUPĄ&#x27;, &#x27;DUPCIA&#x27;, &#x27;DUPECZKA&#x27;, &#x27;DUPY&#x27;, &#x27;DUPE&#x27;, &#x27;HUJ&#x27;,
+			&#x27;HUJEK&#x27;, &#x27;HUJNIA&#x27;, &#x27;HUJA&#x27;, &#x27;HUJE&#x27;, &#x27;HUJEM&#x27;, &#x27;HUJU&#x27;, &#x27;JEBAĆ&#x27;, &#x27;JEBAC&#x27;,
+			&#x27;JEBAŁ&#x27;, &#x27;JEBAL&#x27;, &#x27;JEBIE&#x27;, &#x27;JEBIĄ&#x27;, &#x27;JEBIA&#x27;, &#x27;JEBAK&#x27;, &#x27;JEBAKA&#x27;, &#x27;JEBAL&#x27;,
+			&#x27;JEBAŁ&#x27;, &#x27;JEBANY&#x27;, &#x27;JEBANE&#x27;, &#x27;JEBANKA&#x27;, &#x27;JEBANKO&#x27;, &#x27;JEBANKIEM&#x27;,
+			&#x27;JEBANYMI&#x27;, &#x27;JEBANA&#x27;, &#x27;JEBANYM&#x27;, &#x27;JEBANEJ&#x27;, &#x27;JEBANĄ&#x27;, &#x27;JEBANA&#x27;,
+			&#x27;JEBANI&#x27;, &#x27;JEBANYCH&#x27;, &#x27;JEBANYMI&#x27;, &#x27;JEBCIE&#x27;, &#x27;JEBIĄCY&#x27;, &#x27;JEBIACY&#x27;,
+			&#x27;JEBIĄCA&#x27;, &#x27;JEBIACA&#x27;, &#x27;JEBIĄCEGO&#x27;, &#x27;JEBIACEGO&#x27;, &#x27;JEBIĄCEJ&#x27;, &#x27;JEBIACEJ&#x27;,
+			&#x27;JEBIA&#x27;, &#x27;JEBIĄ&#x27;, &#x27;JEBIE&#x27;, &#x27;JEBIĘ&#x27;, &#x27;JEBLIWY&#x27;, &#x27;JEBNĄĆ&#x27;, &#x27;JEBNAC&#x27;,
+			&#x27;JEBNĄC&#x27;, &#x27;JEBNAĆ&#x27;, &#x27;JEBNĄŁ&#x27;, &#x27;JEBNAL&#x27;, &#x27;JEBNĄ&#x27;, &#x27;JEBNA&#x27;, &#x27;JEBNĘŁA&#x27;,
+			&#x27;JEBNELA&#x27;, &#x27;JEBNIE&#x27;, &#x27;JEBNIJ&#x27;, &#x27;JEBUT&#x27;, &#x27;KOORWA&#x27;, &#x27;KÓRWA&#x27;, &#x27;KURESTWO&#x27;,
+			&#x27;KUREW&#x27;, &#x27;KUREWSKI&#x27;, &#x27;KUREWSKA&#x27;, &#x27;KUREWSKIEJ&#x27;, &#x27;KUREWSKĄ&#x27;, &#x27;KUREWSKA&#x27;,
+			&#x27;KUREWSKO&#x27;, &#x27;KUREWSTWO&#x27;, &#x27;KURWA&#x27;, &#x27;KURWAA&#x27;, &#x27;KURWAMI&#x27;, &#x27;KURWĄ&#x27;, &#x27;KURWE&#x27;,
+			&#x27;KURWĘ&#x27;, &#x27;KURWIE&#x27;, &#x27;KURWISKA&#x27;, &#x27;KURWO&#x27;, &#x27;KURWY&#x27;, &#x27;KURWACH&#x27;, &#x27;KURWAMI&#x27;,
+			&#x27;KUREWSKI&#x27;, &#x27;KURWIARZ&#x27;, &#x27;KURWIĄCY&#x27;, &#x27;KURWICA&#x27;, &#x27;KURWIĆ&#x27;, &#x27;KURWIC&#x27;,
+			&#x27;KURWIDOŁEK&#x27;, &#x27;KURWIK&#x27;, &#x27;KURWIKI&#x27;, &#x27;KURWISZCZE&#x27;, &#x27;KURWISZON&#x27;,
+			&#x27;KURWISZONA&#x27;, &#x27;KURWISZONEM&#x27;, &#x27;KURWISZONY&#x27;, &#x27;KUTAS&#x27;, &#x27;KUTASA&#x27;, &#x27;KUTASIE&#x27;,
+			&#x27;KUTASEM&#x27;, &#x27;KUTASY&#x27;, &#x27;KUTASÓW&#x27;, &#x27;KUTASOW&#x27;, &#x27;KUTASACH&#x27;, &#x27;KUTASAMI&#x27;,
+			&#x27;MATKOJEBCA&#x27;, &#x27;MATKOJEBCY&#x27;, &#x27;MATKOJEBCĄ&#x27;, &#x27;MATKOJEBCA&#x27;, &#x27;MATKOJEBCAMI&#x27;,
+			&#x27;MATKOJEBCACH&#x27;, &#x27;NABARŁOŻYĆ&#x27;, &#x27;NAJEBAĆ&#x27;, &#x27;NAJEBAC&#x27;, &#x27;NAJEBAŁ&#x27;,
+			&#x27;NAJEBAL&#x27;, &#x27;NAJEBAŁA&#x27;, &#x27;NAJEBALA&#x27;, &#x27;NAJEBANE&#x27;, &#x27;NAJEBANY&#x27;, &#x27;NAJEBANĄ&#x27;,
+			&#x27;NAJEBANA&#x27;, &#x27;NAJEBIE&#x27;, &#x27;NAJEBIĄ&#x27;, &#x27;NAJEBIA&#x27;, &#x27;NAOPIERDALAĆ&#x27;,
+			&#x27;NAOPIERDALAC&#x27;, &#x27;NAOPIERDALAŁ&#x27;, &#x27;NAOPIERDALAL&#x27;, &#x27;NAOPIERDALAŁA&#x27;,
+			&#x27;NAOPIERDALALA&#x27;, &#x27;NAOPIERDALAŁA&#x27;, &#x27;NAPIERDALAĆ&#x27;, &#x27;NAPIERDALAC&#x27;,
+			&#x27;NAPIERDALAJĄCY&#x27;, &#x27;NAPIERDALAJACY&#x27;, &#x27;NAPIERDOLIĆ&#x27;, &#x27;NAPIERDOLIC&#x27;,
+			&#x27;NAWPIERDALAĆ&#x27;, &#x27;NAWPIERDALAC&#x27;, &#x27;NAWPIERDALAŁ&#x27;, &#x27;NAWPIERDALAL&#x27;,
+			&#x27;NAWPIERDALAŁA&#x27;, &#x27;NAWPIERDALALA&#x27;, &#x27;OBSRYWAĆ&#x27;, &#x27;OBSRYWAC&#x27;, &#x27;OBSRYWAJĄCY&#x27;,
+			&#x27;OBSRYWAJACY&#x27;, &#x27;ODPIEPRZAĆ&#x27;, &#x27;ODPIEPRZAC&#x27;, &#x27;ODPIEPRZY&#x27;, &#x27;ODPIEPRZYŁ&#x27;,
+			&#x27;ODPIEPRZYL&#x27;, &#x27;ODPIEPRZYŁA&#x27;, &#x27;ODPIEPRZYLA&#x27;, &#x27;ODPIERDALAĆ&#x27;,
+			&#x27;ODPIERDALAC&#x27;, &#x27;ODPIERDOL&#x27;, &#x27;ODPIERDOLIŁ&#x27;, &#x27;ODPIERDOLIL&#x27;,
+			&#x27;ODPIERDOLIŁA&#x27;, &#x27;ODPIERDOLILA&#x27;, &#x27;ODPIERDOLI&#x27;, &#x27;ODPIERDALAJĄCY&#x27;,
+			&#x27;ODPIERDALAJACY&#x27;, &#x27;ODPIERDALAJĄCA&#x27;, &#x27;ODPIERDALAJACA&#x27;, &#x27;ODPIERDOLIĆ&#x27;,
+			&#x27;ODPIERDOLIC&#x27;, &#x27;ODPIERDOLI&#x27;, &#x27;ODPIERDOLIŁ&#x27;, &#x27;OPIEPRZAJĄCY&#x27;,
+			&#x27;OPIERDALAĆ&#x27;, &#x27;OPIERDALAC&#x27;, &#x27;OPIERDALA&#x27;, &#x27;OPIERDALAJĄCY&#x27;,
+			&#x27;OPIERDALAJACY&#x27;, &#x27;OPIERDOL&#x27;, &#x27;OPIERDOLIĆ&#x27;, &#x27;OPIERDOLIC&#x27;, &#x27;OPIERDOLI&#x27;,
+			&#x27;OPIERDOLĄ&#x27;, &#x27;OPIERDOLA&#x27;, &#x27;PICZKA&#x27;, &#x27;PIEPRZNIĘTY&#x27;, &#x27;PIEPRZNIETY&#x27;,
+			&#x27;PIEPRZONY&#x27;, &#x27;PIERDEL&#x27;, &#x27;PIERDLU&#x27;, &#x27;PIERDOLĄ&#x27;, &#x27;PIERDOLA&#x27;, &#x27;PIERDOLĄCY&#x27;,
+			&#x27;PIERDOLACY&#x27;, &#x27;PIERDOLĄCA&#x27;, &#x27;PIERDOLACA&#x27;, &#x27;PIERDOL&#x27;, &#x27;PIERDOLE&#x27;,
+			&#x27;PIERDOLENIE&#x27;, &#x27;PIERDOLENIEM&#x27;, &#x27;PIERDOLENIU&#x27;, &#x27;PIERDOLĘ&#x27;, &#x27;PIERDOLEC&#x27;,
+			&#x27;PIERDOLA&#x27;, &#x27;PIERDOLĄ&#x27;, &#x27;PIERDOLIĆ&#x27;, &#x27;PIERDOLICIE&#x27;, &#x27;PIERDOLIC&#x27;,
+			&#x27;PIERDOLIŁ&#x27;, &#x27;PIERDOLIL&#x27;, &#x27;PIERDOLIŁA&#x27;, &#x27;PIERDOLILA&#x27;, &#x27;PIERDOLI&#x27;,
+			&#x27;PIERDOLNIĘTY&#x27;, &#x27;PIERDOLNIETY&#x27;, &#x27;PIERDOLISZ&#x27;, &#x27;PIERDOLNĄĆ&#x27;,
+			&#x27;PIERDOLNAC&#x27;, &#x27;PIERDOLNĄŁ&#x27;, &#x27;PIERDOLNAL&#x27;, &#x27;PIERDOLNĘŁA&#x27;, &#x27;PIERDOLNELA&#x27;,
+			&#x27;PIERDOLNIE&#x27;, &#x27;PIERDOLNIĘTY&#x27;, &#x27;PIERDOLNIJ&#x27;, &#x27;PIERDOLNIK&#x27;, &#x27;PIERDOLONA&#x27;,
+			&#x27;PIERDOLONE&#x27;, &#x27;PIERDOLONY&#x27;, &#x27;PIERDOŁKI&#x27;, &#x27;PIERDZĄCY&#x27;, &#x27;PIERDZIEĆ&#x27;,
+			&#x27;PIERDZIEC&#x27;, &#x27;PIZDA&#x27;, &#x27;PIZDĄ&#x27;, &#x27;PIZDE&#x27;, &#x27;PIZDĘ&#x27;, &#x27;PIŹDZIE&#x27;, &#x27;PIZDZIE&#x27;,
+			&#x27;PIZDNĄĆ&#x27;, &#x27;PIZDNAC&#x27;, &#x27;PIZDU&#x27;, &#x27;PODPIERDALAĆ&#x27;, &#x27;PODPIERDALAC&#x27;,
+			&#x27;PODPIERDALA&#x27;, &#x27;PODPIERDALAJĄCY&#x27;, &#x27;PODPIERDALAJACY&#x27;, &#x27;PODPIERDOLIĆ&#x27;,
+			&#x27;PODPIERDOLIC&#x27;, &#x27;PODPIERDOLI&#x27;, &#x27;POJEB&#x27;, &#x27;POJEBA&#x27;, &#x27;POJEBAMI&#x27;,
+			&#x27;POJEBANI&#x27;, &#x27;POJEBANEGO&#x27;, &#x27;POJEBANEMU&#x27;, &#x27;POJEBANI&#x27;, &#x27;POJEBANY&#x27;,
+			&#x27;POJEBANYCH&#x27;, &#x27;POJEBANYM&#x27;, &#x27;POJEBANYMI&#x27;, &#x27;POJEBEM&#x27;, &#x27;POJEBAĆ&#x27;,
+			&#x27;POJEBAC&#x27;, &#x27;POJEBALO&#x27;, &#x27;POPIERDALA&#x27;, &#x27;POPIERDALAC&#x27;, &#x27;POPIERDALAĆ&#x27;,
+			&#x27;POPIERDOLIĆ&#x27;, &#x27;POPIERDOLIC&#x27;, &#x27;POPIERDOLI&#x27;, &#x27;POPIERDOLONEGO&#x27;,
+			&#x27;POPIERDOLONEMU&#x27;, &#x27;POPIERDOLONYM&#x27;, &#x27;POPIERDOLONE&#x27;, &#x27;POPIERDOLENI&#x27;,
+			&#x27;POPIERDOLONY&#x27;, &#x27;POROZPIERDALAĆ&#x27;, &#x27;POROZPIERDALA&#x27;, &#x27;POROZPIERDALAC&#x27;,
+			&#x27;PORUCHAC&#x27;, &#x27;PORUCHAĆ&#x27;, &#x27;PRZEJEBAĆ&#x27;, &#x27;PRZEJEBANE&#x27;, &#x27;PRZEJEBAC&#x27;,
+			&#x27;PRZYJEBALI&#x27;, &#x27;PRZEPIERDALAĆ&#x27;, &#x27;PRZEPIERDALAC&#x27;, &#x27;PRZEPIERDALA&#x27;,
+			&#x27;PRZEPIERDALAJĄCY&#x27;, &#x27;PRZEPIERDALAJACY&#x27;, &#x27;PRZEPIERDALAJĄCA&#x27;,
+			&#x27;PRZEPIERDALAJACA&#x27;, &#x27;PRZEPIERDOLIĆ&#x27;, &#x27;PRZEPIERDOLIC&#x27;, &#x27;PRZYJEBAĆ&#x27;,
+			&#x27;PRZYJEBAC&#x27;, &#x27;PRZYJEBIE&#x27;, &#x27;PRZYJEBAŁA&#x27;, &#x27;PRZYJEBALA&#x27;, &#x27;PRZYJEBAŁ&#x27;,
+			&#x27;PRZYJEBAL&#x27;, &#x27;PRZYPIEPRZAĆ&#x27;, &#x27;PRZYPIEPRZAC&#x27;, &#x27;PRZYPIEPRZAJĄCY&#x27;,
+			&#x27;PRZYPIEPRZAJACY&#x27;, &#x27;PRZYPIEPRZAJĄCA&#x27;, &#x27;PRZYPIEPRZAJACA&#x27;,
+			&#x27;PRZYPIERDALAĆ&#x27;, &#x27;PRZYPIERDALAC&#x27;, &#x27;PRZYPIERDALA&#x27;, &#x27;PRZYPIERDOLI&#x27;,
+			&#x27;PRZYPIERDALAJĄCY&#x27;, &#x27;PRZYPIERDALAJACY&#x27;, &#x27;PRZYPIERDOLIĆ&#x27;,
+			&#x27;PRZYPIERDOLIC&#x27;, &#x27;QRWA&#x27;, &#x27;ROZJEBAĆ&#x27;, &#x27;ROZJEBAC&#x27;, &#x27;ROZJEBIE&#x27;,
+			&#x27;ROZJEBAŁA&#x27;, &#x27;ROZJEBIĄ&#x27;, &#x27;ROZPIERDALAĆ&#x27;, &#x27;ROZPIERDALAC&#x27;, &#x27;ROZPIERDALA&#x27;,
+			&#x27;ROZPIERDOLIĆ&#x27;, &#x27;ROZPIERDOLIC&#x27;, &#x27;ROZPIERDOLE&#x27;, &#x27;ROZPIERDOLI&#x27;,
+			&#x27;ROZPIERDUCHA&#x27;, &#x27;SKURWIĆ&#x27;, &#x27;SKURWIEL&#x27;, &#x27;SKURWIELA&#x27;, &#x27;SKURWIELEM&#x27;,
+			&#x27;SKURWIELU&#x27;, &#x27;SKURWYSYN&#x27;, &#x27;SKURWYSYNÓW&#x27;, &#x27;SKURWYSYNOW&#x27;, &#x27;SKURWYSYNA&#x27;,
+			&#x27;SKURWYSYNEM&#x27;, &#x27;SKURWYSYNU&#x27;, &#x27;SKURWYSYNY&#x27;, &#x27;SKURWYSYŃSKI&#x27;,
+			&#x27;SKURWYSYNSKI&#x27;, &#x27;SKURWYSYŃSTWO&#x27;, &#x27;SKURWYSYNSTWO&#x27;, &#x27;SPIEPRZAĆ&#x27;,
+			&#x27;SPIEPRZAC&#x27;, &#x27;SPIEPRZA&#x27;, &#x27;SPIEPRZAJ&#x27;, &#x27;SPIEPRZAJCIE&#x27;, &#x27;SPIEPRZAJĄ&#x27;,
+			&#x27;SPIEPRZAJA&#x27;, &#x27;SPIEPRZAJĄCY&#x27;, &#x27;SPIEPRZAJACY&#x27;, &#x27;SPIEPRZAJĄCA&#x27;,
+			&#x27;SPIEPRZAJACA&#x27;, &#x27;SPIERDALAĆ&#x27;, &#x27;SPIERDALAC&#x27;, &#x27;SPIERDALA&#x27;, &#x27;SPIERDALAŁ&#x27;,
+			&#x27;SPIERDALAŁA&#x27;, &#x27;SPIERDALAL&#x27;, &#x27;SPIERDALALCIE&#x27;, &#x27;SPIERDALALA&#x27;,
+			&#x27;SPIERDALAJĄCY&#x27;, &#x27;SPIERDALAJACY&#x27;, &#x27;SPIERDOLIĆ&#x27;, &#x27;SPIERDOLIC&#x27;,
+			&#x27;SPIERDOLI&#x27;, &#x27;SPIERDOLIŁA&#x27;, &#x27;SPIERDOLIŁO&#x27;, &#x27;SPIERDOLĄ&#x27;, &#x27;SPIERDOLA&#x27;,
+			&#x27;SRAĆ&#x27;, &#x27;SRAC&#x27;, &#x27;SRAJĄCY&#x27;, &#x27;SRAJACY&#x27;, &#x27;SRAJĄC&#x27;, &#x27;SRAJAC&#x27;, &#x27;SRAJ&#x27;,
+			&#x27;SUKINSYN&#x27;, &#x27;SUKINSYNY&#x27;, &#x27;SUKINSYNOM&#x27;, &#x27;SUKINSYNOWI&#x27;, &#x27;SUKINSYNÓW&#x27;,
+			&#x27;SUKINSYNOW&#x27;, &#x27;ŚMIERDZIEL&#x27;, &#x27;UDUPIĆ&#x27;, &#x27;UJEBAĆ&#x27;, &#x27;UJEBAC&#x27;, &#x27;UJEBAŁ&#x27;,
+			&#x27;UJEBAL&#x27;, &#x27;UJEBANA&#x27;, &#x27;UJEBANY&#x27;, &#x27;UJEBIE&#x27;, &#x27;UJEBAŁA&#x27;, &#x27;UJEBALA&#x27;,
+			&#x27;UPIERDALAĆ&#x27;, &#x27;UPIERDALAC&#x27;, &#x27;UPIERDALA&#x27;, &#x27;UPIERDOLI&#x27;, &#x27;UPIERDOLIĆ&#x27;,
+			&#x27;UPIERDOLIC&#x27;, &#x27;UPIERDOLI&#x27;, &#x27;UPIERDOLĄ&#x27;, &#x27;UPIERDOLA&#x27;, &#x27;UPIERDOLENI&#x27;,
+			&#x27;WJEBAĆ&#x27;, &#x27;WJEBAC&#x27;, &#x27;WJEBIE&#x27;, &#x27;WJEBIĄ&#x27;, &#x27;WJEBIA&#x27;, &#x27;WJEBIEMY&#x27;,
+			&#x27;WJEBIECIE&#x27;, &#x27;WKURWIAĆ&#x27;, &#x27;WKURWIAC&#x27;, &#x27;WKURWI&#x27;, &#x27;WKURWIA&#x27;, &#x27;WKURWIAŁ&#x27;,
+			&#x27;WKURWIAL&#x27;, &#x27;WKURWIAJĄCY&#x27;, &#x27;WKURWIAJACY&#x27;, &#x27;WKURWIAJĄCA&#x27;, &#x27;WKURWIAJACA&#x27;,
+			&#x27;WKURWIĆ&#x27;, &#x27;WKURWIC&#x27;, &#x27;WKURWI&#x27;, &#x27;WKURWIACIE&#x27;, &#x27;WKURWIAJĄ&#x27;, &#x27;WKURWIALI&#x27;,
+			&#x27;WKURWIĄ&#x27;, &#x27;WKURWIA&#x27;, &#x27;WKURWIMY&#x27;, &#x27;WKURWICIE&#x27;, &#x27;WKURWIACIE&#x27;, &#x27;WKURWIĆ&#x27;,
+			&#x27;WKURWIC&#x27;, &#x27;WKURWIA&#x27;, &#x27;WPIERDALAĆ&#x27;, &#x27;WPIERDALAC&#x27;, &#x27;WPIERDALAJĄCY&#x27;,
+			&#x27;WPIERDALAJACY&#x27;, &#x27;WPIERDOL&#x27;, &#x27;WPIERDOLIĆ&#x27;, &#x27;WPIERDOLIC&#x27;, &#x27;WPIZDU&#x27;,
+			&#x27;WYJEBAĆ&#x27;, &#x27;WYJEBAC&#x27;, &#x27;WYJEBALI&#x27;, &#x27;WYJEBAŁ&#x27;, &#x27;WYJEBAC&#x27;, &#x27;WYJEBAŁA&#x27;,
+			&#x27;WYJEBAŁY&#x27;, &#x27;WYJEBIE&#x27;, &#x27;WYJEBIĄ&#x27;, &#x27;WYJEBIA&#x27;, &#x27;WYJEBIESZ&#x27;, &#x27;WYJEBIE&#x27;,
+			&#x27;WYJEBIECIE&#x27;, &#x27;WYJEBIEMY&#x27;, &#x27;WYPIEPRZAĆ&#x27;, &#x27;WYPIEPRZAC&#x27;, &#x27;WYPIEPRZA&#x27;,
+			&#x27;WYPIEPRZAŁ&#x27;, &#x27;WYPIEPRZAL&#x27;, &#x27;WYPIEPRZAŁA&#x27;, &#x27;WYPIEPRZALA&#x27;, &#x27;WYPIEPRZY&#x27;,
+			&#x27;WYPIEPRZYŁA&#x27;, &#x27;WYPIEPRZYLA&#x27;, &#x27;WYPIEPRZYŁ&#x27;, &#x27;WYPIEPRZYL&#x27;, &#x27;WYPIERDAL&#x27;,
+			&#x27;WYPIERDALAĆ&#x27;, &#x27;WYPIERDALAC&#x27;, &#x27;WYPIERDALA&#x27;, &#x27;WYPIERDALAJ&#x27;,
+			&#x27;WYPIERDALAŁ&#x27;, &#x27;WYPIERDALAL&#x27;, &#x27;WYPIERDALAŁA&#x27;, &#x27;WYPIERDALALA&#x27;,
+			&#x27;WYPIERDALAĆ&#x27;, &#x27;WYPIERDOLIĆ&#x27;, &#x27;WYPIERDOLIC&#x27;, &#x27;WYPIERDOLI&#x27;,
+			&#x27;WYPIERDOLIMY&#x27;, &#x27;WYPIERDOLICIE&#x27;, &#x27;WYPIERDOLĄ&#x27;, &#x27;WYPIERDOLA&#x27;,
+			&#x27;WYPIERDOLILI&#x27;, &#x27;WYPIERDOLIŁ&#x27;, &#x27;WYPIERDOLIL&#x27;, &#x27;WYPIERDOLIŁA&#x27;,
+			&#x27;WYPIERDOLILA&#x27;, &#x27;ZAJEBAĆ&#x27;, &#x27;ZAJEBAC&#x27;, &#x27;ZAJEBIE&#x27;, &#x27;ZAJEBIĄ&#x27;, &#x27;ZAJEBIA&#x27;,
+			&#x27;ZAJEBIAŁ&#x27;, &#x27;ZAJEBIAL&#x27;, &#x27;ZAJEBAŁA&#x27;, &#x27;ZAJEBIALA&#x27;, &#x27;ZAJEBALI&#x27;, &#x27;ZAJEBANA&#x27;,
+			&#x27;ZAJEBANI&#x27;, &#x27;ZAJEBANE&#x27;, &#x27;ZAJEBANY&#x27;, &#x27;ZAJEBANYCH&#x27;, &#x27;ZAJEBANYM&#x27;,
+			&#x27;ZAJEBANYMI&#x27;, &#x27;ZAJEBISTE&#x27;, &#x27;ZAJEBISTY&#x27;, &#x27;ZAJEBISTYCH&#x27;, &#x27;ZAJEBISTA&#x27;,
+			&#x27;ZAJEBISTYM&#x27;, &#x27;ZAJEBISTYMI&#x27;, &#x27;ZAJEBIŚCIE&#x27;, &#x27;ZAJEBISCIE&#x27;, &#x27;ZAPIEPRZYĆ&#x27;,
+			&#x27;ZAPIEPRZYC&#x27;, &#x27;ZAPIEPRZY&#x27;, &#x27;ZAPIEPRZYŁ&#x27;, &#x27;ZAPIEPRZYL&#x27;, &#x27;ZAPIEPRZYŁA&#x27;,
+			&#x27;ZAPIEPRZYLA&#x27;, &#x27;ZAPIEPRZĄ&#x27;, &#x27;ZAPIEPRZA&#x27;, &#x27;ZAPIEPRZY&#x27;, &#x27;ZAPIEPRZYMY&#x27;,
+			&#x27;ZAPIEPRZYCIE&#x27;, &#x27;ZAPIEPRZYSZ&#x27;, &#x27;ZAPIERDALA&#x27;, &#x27;ZAPIERDALAĆ&#x27;,
+			&#x27;ZAPIERDALAC&#x27;, &#x27;ZAPIERDALAJA&#x27;, &#x27;ZAPIERDALAŁ&#x27;, &#x27;ZAPIERDALAJ&#x27;,
+			&#x27;ZAPIERDALAJCIE&#x27;, &#x27;ZAPIERDALAŁA&#x27;, &#x27;ZAPIERDALALA&#x27;, &#x27;ZAPIERDALALI&#x27;,
+			&#x27;ZAPIERDALAJĄCY&#x27;, &#x27;ZAPIERDALAJACY&#x27;, &#x27;ZAPIERDOLIĆ&#x27;, &#x27;ZAPIERDOLIC&#x27;,
+			&#x27;ZAPIERDOLI&#x27;, &#x27;ZAPIERDOLIŁ&#x27;, &#x27;ZAPIERDOLIL&#x27;, &#x27;ZAPIERDOLIŁA&#x27;,
+			&#x27;ZAPIERDOLILA&#x27;, &#x27;ZAPIERDOLĄ&#x27;, &#x27;ZAPIERDOLA&#x27;, &#x27;ZAPIERNICZAĆ&#x27;,
+			&#x27;ZAPIERNICZAJĄCY&#x27;, &#x27;ZASRAĆ&#x27;, &#x27;ZASRANYM&#x27;, &#x27;ZASRYWAĆ&#x27;, &#x27;ZASRYWAJĄCY&#x27;,
+			&#x27;ZESRYWAĆ&#x27;, &#x27;ZESRYWAJĄCY&#x27;, &#x27;ZJEBAĆ&#x27;, &#x27;ZJEBAC&#x27;, &#x27;ZJEBAŁ&#x27;, &#x27;ZJEBAL&#x27;,
+			&#x27;ZJEBAŁA&#x27;, &#x27;ZJEBALA&#x27;, &#x27;ZJEBANA&#x27;, &#x27;ZJEBIĄ&#x27;, &#x27;ZJEBALI&#x27;, &#x27;ZJEBY&#x27;,
+
+			&#x27;ChUj&#x27;, &#x27;ChUjA&#x27;, &#x27;cHuJeK&#x27;, &#x27;cHuJu&#x27;, &#x27;ChUjEm&#x27;, &#x27;ChUjNiA&#x27;,
+			&#x27;ChUjOwY&#x27;, &#x27;cHuJoWa&#x27;, &#x27;ChUjOwE&#x27;, &#x27;cIpA&#x27;, &#x27;cIpĘ&#x27;, &#x27;cIpE&#x27;, &#x27;cIpĄ&#x27;,
+			&#x27;CiPiE&#x27;, &#x27;dOjEbAć&#x27;, &#x27;DoJeBaC&#x27;, &#x27;dOjEbIe&#x27;, &#x27;DoJeBaŁ&#x27;, &#x27;dOjEbAl&#x27;,
+			&#x27;dOjEbAłA&#x27;, &#x27;dOjEbAlA&#x27;, &#x27;dOjEbAłEm&#x27;, &#x27;DoJeBaLeM&#x27;, &#x27;dOjEbAłAm&#x27;,
+			&#x27;dOjEbAlAm&#x27;, &#x27;DoJeBiĘ&#x27;, &#x27;dOjEbIe&#x27;, &#x27;DoPiEpRzAć&#x27;, &#x27;DoPiEpRzAc&#x27;,
+			&#x27;dOpIeRdAlAć&#x27;, &#x27;DoPiErDaLaC&#x27;, &#x27;dOpIeRdAlA&#x27;, &#x27;dOpIeRdAlAł&#x27;,
+			&#x27;dOpIeRdAlAl&#x27;, &#x27;DoPiErDaLaŁa&#x27;, &#x27;DoPiErDaLaLa&#x27;, &#x27;DoPiErDoLi&#x27;,
+			&#x27;dOpIeRdOlIł&#x27;, &#x27;DoPiErDoLiL&#x27;, &#x27;dOpIeRdOlĘ&#x27;, &#x27;dOpIeRdOlE&#x27;, &#x27;dOpIeRdOlI&#x27;,
+			&#x27;DoPiErDaLaJąCy&#x27;, &#x27;DoPiErDaLaJaCy&#x27;, &#x27;DoPiErDoLiĆ&#x27;, &#x27;dOpIeRdOlIc&#x27;,
+			&#x27;dUpA&#x27;, &#x27;dUpIe&#x27;, &#x27;DuPą&#x27;, &#x27;DuPcIa&#x27;, &#x27;DuPeCzKa&#x27;, &#x27;DuPy&#x27;, &#x27;DuPe&#x27;, &#x27;HuJ&#x27;,
+			&#x27;HuJeK&#x27;, &#x27;hUjNiA&#x27;, &#x27;hUjA&#x27;, &#x27;hUjE&#x27;, &#x27;hUjEm&#x27;, &#x27;HuJu&#x27;, &#x27;JeBaĆ&#x27;, &#x27;jEbAc&#x27;,
+			&#x27;jEbAł&#x27;, &#x27;JeBaL&#x27;, &#x27;jEbIe&#x27;, &#x27;JeBiĄ&#x27;, &#x27;jEbIa&#x27;, &#x27;JeBaK&#x27;, &#x27;jEbAkA&#x27;, &#x27;jEbAl&#x27;,
+			&#x27;jEbAł&#x27;, &#x27;JeBaNy&#x27;, &#x27;JeBaNe&#x27;, &#x27;JeBaNkA&#x27;, &#x27;jEbAnKo&#x27;, &#x27;JeBaNkIeM&#x27;,
+			&#x27;JeBaNyMi&#x27;, &#x27;JeBaNa&#x27;, &#x27;JeBaNyM&#x27;, &#x27;jEbAnEj&#x27;, &#x27;JeBaNą&#x27;, &#x27;JeBaNa&#x27;,
+			&#x27;jEbAnI&#x27;, &#x27;jEbAnYcH&#x27;, &#x27;jEbAnYmI&#x27;, &#x27;jEbCiE&#x27;, &#x27;jEbIąCy&#x27;, &#x27;JeBiAcY&#x27;,
+			&#x27;JeBiĄcA&#x27;, &#x27;jEbIaCa&#x27;, &#x27;JeBiĄcEgO&#x27;, &#x27;jEbIaCeGo&#x27;, &#x27;JeBiĄcEj&#x27;, &#x27;JeBiAcEj&#x27;,
+			&#x27;jEbIa&#x27;, &#x27;JeBiĄ&#x27;, &#x27;jEbIe&#x27;, &#x27;JeBiĘ&#x27;, &#x27;jEbLiWy&#x27;, &#x27;JeBnĄć&#x27;, &#x27;JeBnAc&#x27;,
+			&#x27;jEbNąC&#x27;, &#x27;jEbNaĆ&#x27;, &#x27;jEbNąŁ&#x27;, &#x27;jEbNaL&#x27;, &#x27;jEbNą&#x27;, &#x27;JeBnA&#x27;, &#x27;jEbNęŁa&#x27;,
+			&#x27;jEbNeLa&#x27;, &#x27;JeBnIe&#x27;, &#x27;JeBnIj&#x27;, &#x27;JeBuT&#x27;, &#x27;kOoRwA&#x27;, &#x27;kÓrWa&#x27;, &#x27;KuReStWo&#x27;,
+			&#x27;kUrEw&#x27;, &#x27;KuReWsKi&#x27;, &#x27;KuReWsKa&#x27;, &#x27;KuReWsKiEj&#x27;, &#x27;KuReWsKą&#x27;, &#x27;KuReWsKa&#x27;,
+			&#x27;kUrEwSkO&#x27;, &#x27;kUrEwStWo&#x27;, &#x27;KuRwA&#x27;, &#x27;kUrWaA&#x27;, &#x27;kUrWaMi&#x27;, &#x27;KuRwĄ&#x27;, &#x27;kUrWe&#x27;,
+			&#x27;kUrWę&#x27;, &#x27;KuRwIe&#x27;, &#x27;KuRwIsKa&#x27;, &#x27;KuRwO&#x27;, &#x27;kUrWy&#x27;, &#x27;KuRwAcH&#x27;, &#x27;kUrWaMi&#x27;,
+			&#x27;kUrEwSkI&#x27;, &#x27;kUrWiArZ&#x27;, &#x27;kUrWiĄcY&#x27;, &#x27;kUrWiCa&#x27;, &#x27;KuRwIć&#x27;, &#x27;KuRwIc&#x27;,
+			&#x27;kUrWiDoŁeK&#x27;, &#x27;kUrWiK&#x27;, &#x27;kUrWiKi&#x27;, &#x27;KuRwIsZcZe&#x27;, &#x27;KuRwIsZoN&#x27;,
+			&#x27;KuRwIsZoNa&#x27;, &#x27;KuRwIsZoNeM&#x27;, &#x27;kUrWiSzOnY&#x27;, &#x27;kUtAs&#x27;, &#x27;KuTaSa&#x27;, &#x27;KuTaSiE&#x27;,
+			&#x27;KuTaSeM&#x27;, &#x27;kUtAsY&#x27;, &#x27;kUtAsÓw&#x27;, &#x27;KuTaSoW&#x27;, &#x27;kUtAsAcH&#x27;, &#x27;kUtAsAmI&#x27;,
+			&#x27;MaTkOjEbCa&#x27;, &#x27;MaTkOjEbCy&#x27;, &#x27;MaTkOjEbCą&#x27;, &#x27;MaTkOjEbCa&#x27;, &#x27;MaTkOjEbCaMi&#x27;,
+			&#x27;mAtKoJeBcAcH&#x27;, &#x27;nAbArŁoŻyĆ&#x27;, &#x27;nAjEbAć&#x27;, &#x27;NaJeBaC&#x27;, &#x27;nAjEbAł&#x27;,
+			&#x27;nAjEbAl&#x27;, &#x27;NaJeBaŁa&#x27;, &#x27;NaJeBaLa&#x27;, &#x27;NaJeBaNe&#x27;, &#x27;NaJeBaNy&#x27;, &#x27;NaJeBaNą&#x27;,
+			&#x27;nAjEbAnA&#x27;, &#x27;nAjEbIe&#x27;, &#x27;NaJeBiĄ&#x27;, &#x27;nAjEbIa&#x27;, &#x27;NaOpIeRdAlAć&#x27;,
+			&#x27;nAoPiErDaLaC&#x27;, &#x27;nAoPiErDaLaŁ&#x27;, &#x27;nAoPiErDaLaL&#x27;, &#x27;nAoPiErDaLaŁa&#x27;,
+			&#x27;nAoPiErDaLaLa&#x27;, &#x27;NaOpIeRdAlAłA&#x27;, &#x27;nApIeRdAlAć&#x27;, &#x27;NaPiErDaLaC&#x27;,
+			&#x27;NaPiErDaLaJąCy&#x27;, &#x27;NaPiErDaLaJaCy&#x27;, &#x27;NaPiErDoLiĆ&#x27;, &#x27;nApIeRdOlIc&#x27;,
+			&#x27;nAwPiErDaLaĆ&#x27;, &#x27;nAwPiErDaLaC&#x27;, &#x27;nAwPiErDaLaŁ&#x27;, &#x27;nAwPiErDaLaL&#x27;,
+			&#x27;NaWpIeRdAlAłA&#x27;, &#x27;nAwPiErDaLaLa&#x27;, &#x27;ObSrYwAć&#x27;, &#x27;ObSrYwAc&#x27;, &#x27;ObSrYwAjĄcY&#x27;,
+			&#x27;ObSrYwAjAcY&#x27;, &#x27;oDpIePrZaĆ&#x27;, &#x27;oDpIePrZaC&#x27;, &#x27;oDpIePrZy&#x27;, &#x27;OdPiEpRzYł&#x27;,
+			&#x27;oDpIePrZyL&#x27;, &#x27;oDpIePrZyŁa&#x27;, &#x27;OdPiEpRzYlA&#x27;, &#x27;oDpIeRdAlAć&#x27;,
+			&#x27;oDpIeRdAlAc&#x27;, &#x27;OdPiErDoL&#x27;, &#x27;oDpIeRdOlIł&#x27;, &#x27;OdPiErDoLiL&#x27;,
+			&#x27;OdPiErDoLiŁa&#x27;, &#x27;OdPiErDoLiLa&#x27;, &#x27;OdPiErDoLi&#x27;, &#x27;OdPiErDaLaJąCy&#x27;,
+			&#x27;oDpIeRdAlAjAcY&#x27;, &#x27;oDpIeRdAlAjĄcA&#x27;, &#x27;oDpIeRdAlAjAcA&#x27;, &#x27;oDpIeRdOlIć&#x27;,
+			&#x27;oDpIeRdOlIc&#x27;, &#x27;OdPiErDoLi&#x27;, &#x27;OdPiErDoLiŁ&#x27;, &#x27;oPiEpRzAjĄcY&#x27;,
+			&#x27;OpIeRdAlAć&#x27;, &#x27;OpIeRdAlAc&#x27;, &#x27;OpIeRdAlA&#x27;, &#x27;oPiErDaLaJąCy&#x27;,
+			&#x27;oPiErDaLaJaCy&#x27;, &#x27;OpIeRdOl&#x27;, &#x27;OpIeRdOlIć&#x27;, &#x27;OpIeRdOlIc&#x27;, &#x27;OpIeRdOlI&#x27;,
+			&#x27;OpIeRdOlĄ&#x27;, &#x27;oPiErDoLa&#x27;, &#x27;PiCzKa&#x27;, &#x27;PiEpRzNiĘtY&#x27;, &#x27;pIePrZnIeTy&#x27;,
+			&#x27;pIePrZoNy&#x27;, &#x27;PiErDeL&#x27;, &#x27;pIeRdLu&#x27;, &#x27;PiErDoLą&#x27;, &#x27;PiErDoLa&#x27;, &#x27;PiErDoLąCy&#x27;,
+			&#x27;pIeRdOlAcY&#x27;, &#x27;pIeRdOlĄcA&#x27;, &#x27;pIeRdOlAcA&#x27;, &#x27;pIeRdOl&#x27;, &#x27;PiErDoLe&#x27;,
+			&#x27;pIeRdOlEnIe&#x27;, &#x27;PiErDoLeNiEm&#x27;, &#x27;PiErDoLeNiU&#x27;, &#x27;pIeRdOlĘ&#x27;, &#x27;pIeRdOlEc&#x27;,
+			&#x27;pIeRdOlA&#x27;, &#x27;pIeRdOlĄ&#x27;, &#x27;pIeRdOlIć&#x27;, &#x27;PiErDoLiCiE&#x27;, &#x27;pIeRdOlIc&#x27;,
+			&#x27;pIeRdOlIł&#x27;, &#x27;PiErDoLiL&#x27;, &#x27;pIeRdOlIłA&#x27;, &#x27;pIeRdOlIlA&#x27;, &#x27;pIeRdOlI&#x27;,
+			&#x27;PiErDoLnIęTy&#x27;, &#x27;PiErDoLnIeTy&#x27;, &#x27;PiErDoLiSz&#x27;, &#x27;PiErDoLnĄć&#x27;,
+			&#x27;pIeRdOlNaC&#x27;, &#x27;pIeRdOlNąŁ&#x27;, &#x27;pIeRdOlNaL&#x27;, &#x27;pIeRdOlNęŁa&#x27;, &#x27;PiErDoLnElA&#x27;,
+			&#x27;PiErDoLnIe&#x27;, &#x27;PiErDoLnIęTy&#x27;, &#x27;PiErDoLnIj&#x27;, &#x27;PiErDoLnIk&#x27;, &#x27;PiErDoLoNa&#x27;,
+			&#x27;pIeRdOlOnE&#x27;, &#x27;pIeRdOlOnY&#x27;, &#x27;pIeRdOłKi&#x27;, &#x27;PiErDzĄcY&#x27;, &#x27;pIeRdZiEć&#x27;,
+			&#x27;pIeRdZiEc&#x27;, &#x27;PiZdA&#x27;, &#x27;pIzDą&#x27;, &#x27;PiZdE&#x27;, &#x27;pIzDę&#x27;, &#x27;PiŹdZiE&#x27;, &#x27;pIzDzIe&#x27;,
+			&#x27;pIzDnĄć&#x27;, &#x27;PiZdNaC&#x27;, &#x27;pIzDu&#x27;, &#x27;PoDpIeRdAlAć&#x27;, &#x27;PoDpIeRdAlAc&#x27;,
+			&#x27;pOdPiErDaLa&#x27;, &#x27;PoDpIeRdAlAjĄcY&#x27;, &#x27;pOdPiErDaLaJaCy&#x27;, &#x27;PoDpIeRdOlIć&#x27;,
+			&#x27;pOdPiErDoLiC&#x27;, &#x27;pOdPiErDoLi&#x27;, &#x27;PoJeB&#x27;, &#x27;pOjEbA&#x27;, &#x27;pOjEbAmI&#x27;,
+			&#x27;PoJeBaNi&#x27;, &#x27;PoJeBaNeGo&#x27;, &#x27;PoJeBaNeMu&#x27;, &#x27;PoJeBaNi&#x27;, &#x27;PoJeBaNy&#x27;,
+			&#x27;pOjEbAnYcH&#x27;, &#x27;pOjEbAnYm&#x27;, &#x27;PoJeBaNyMi&#x27;, &#x27;PoJeBeM&#x27;, &#x27;pOjEbAć&#x27;,
+			&#x27;pOjEbAc&#x27;, &#x27;PoJeBaLo&#x27;, &#x27;PoPiErDaLa&#x27;, &#x27;PoPiErDaLaC&#x27;, &#x27;pOpIeRdAlAć&#x27;,
+			&#x27;pOpIeRdOlIć&#x27;, &#x27;PoPiErDoLiC&#x27;, &#x27;pOpIeRdOlI&#x27;, &#x27;pOpIeRdOlOnEgO&#x27;,
+			&#x27;PoPiErDoLoNeMu&#x27;, &#x27;PoPiErDoLoNyM&#x27;, &#x27;pOpIeRdOlOnE&#x27;, &#x27;pOpIeRdOlEnI&#x27;,
+			&#x27;PoPiErDoLoNy&#x27;, &#x27;PoRoZpIeRdAlAć&#x27;, &#x27;PoRoZpIeRdAlA&#x27;, &#x27;pOrOzPiErDaLaC&#x27;,
+			&#x27;PoRuChAc&#x27;, &#x27;PoRuChAć&#x27;, &#x27;PrZeJeBaĆ&#x27;, &#x27;pRzEjEbAnE&#x27;, &#x27;pRzEjEbAc&#x27;,
+			&#x27;pRzYjEbAlI&#x27;, &#x27;pRzEpIeRdAlAć&#x27;, &#x27;PrZePiErDaLaC&#x27;, &#x27;pRzEpIeRdAlA&#x27;,
+			&#x27;PrZePiErDaLaJąCy&#x27;, &#x27;PrZePiErDaLaJaCy&#x27;, &#x27;PrZePiErDaLaJąCa&#x27;,
+			&#x27;pRzEpIeRdAlAjAcA&#x27;, &#x27;pRzEpIeRdOlIć&#x27;, &#x27;PrZePiErDoLiC&#x27;, &#x27;pRzYjEbAć&#x27;,
+			&#x27;pRzYjEbAc&#x27;, &#x27;PrZyJeBiE&#x27;, &#x27;pRzYjEbAłA&#x27;, &#x27;pRzYjEbAlA&#x27;, &#x27;pRzYjEbAł&#x27;,
+			&#x27;pRzYjEbAl&#x27;, &#x27;PrZyPiEpRzAć&#x27;, &#x27;PrZyPiEpRzAc&#x27;, &#x27;PrZyPiEpRzAjĄcY&#x27;,
+			&#x27;PrZyPiEpRzAjAcY&#x27;, &#x27;pRzYpIePrZaJąCa&#x27;, &#x27;PrZyPiEpRzAjAcA&#x27;,
+			&#x27;PrZyPiErDaLaĆ&#x27;, &#x27;pRzYpIeRdAlAc&#x27;, &#x27;PrZyPiErDaLa&#x27;, &#x27;PrZyPiErDoLi&#x27;,
+			&#x27;pRzYpIeRdAlAjĄcY&#x27;, &#x27;pRzYpIeRdAlAjAcY&#x27;, &#x27;pRzYpIeRdOlIć&#x27;,
+			&#x27;pRzYpIeRdOlIc&#x27;, &#x27;QrWa&#x27;, &#x27;RoZjEbAć&#x27;, &#x27;RoZjEbAc&#x27;, &#x27;RoZjEbIe&#x27;,
+			&#x27;rOzJeBaŁa&#x27;, &#x27;RoZjEbIą&#x27;, &#x27;RoZpIeRdAlAć&#x27;, &#x27;RoZpIeRdAlAc&#x27;, &#x27;RoZpIeRdAlA&#x27;,
+			&#x27;RoZpIeRdOlIć&#x27;, &#x27;RoZpIeRdOlIc&#x27;, &#x27;RoZpIeRdOlE&#x27;, &#x27;rOzPiErDoLi&#x27;,
+			&#x27;rOzPiErDuChA&#x27;, &#x27;sKuRwIć&#x27;, &#x27;SkUrWiEl&#x27;, &#x27;SkUrWiElA&#x27;, &#x27;sKuRwIeLeM&#x27;,
+			&#x27;SkUrWiElU&#x27;, &#x27;sKuRwYsYn&#x27;, &#x27;SkUrWySyNóW&#x27;, &#x27;sKuRwYsYnOw&#x27;, &#x27;SkUrWySyNa&#x27;,
+			&#x27;sKuRwYsYnEm&#x27;, &#x27;SkUrWySyNu&#x27;, &#x27;SkUrWySyNy&#x27;, &#x27;SkUrWySyŃsKi&#x27;,
+			&#x27;sKuRwYsYnSkI&#x27;, &#x27;sKuRwYsYńStWo&#x27;, &#x27;SkUrWySyNsTwO&#x27;, &#x27;sPiEpRzAć&#x27;,
+			&#x27;sPiEpRzAc&#x27;, &#x27;SpIePrZa&#x27;, &#x27;SpIePrZaJ&#x27;, &#x27;sPiEpRzAjCiE&#x27;, &#x27;sPiEpRzAjĄ&#x27;,
+			&#x27;SpIePrZaJa&#x27;, &#x27;SpIePrZaJąCy&#x27;, &#x27;SpIePrZaJaCy&#x27;, &#x27;SpIePrZaJąCa&#x27;,
+			&#x27;sPiEpRzAjAcA&#x27;, &#x27;sPiErDaLaĆ&#x27;, &#x27;sPiErDaLaC&#x27;, &#x27;sPiErDaLa&#x27;, &#x27;SpIeRdAlAł&#x27;,
+			&#x27;sPiErDaLaŁa&#x27;, &#x27;SpIeRdAlAl&#x27;, &#x27;SpIeRdAlAlCiE&#x27;, &#x27;sPiErDaLaLa&#x27;,
+			&#x27;sPiErDaLaJąCy&#x27;, &#x27;SpIeRdAlAjAcY&#x27;, &#x27;sPiErDoLiĆ&#x27;, &#x27;sPiErDoLiC&#x27;,
+			&#x27;SpIeRdOlI&#x27;, &#x27;sPiErDoLiŁa&#x27;, &#x27;SpIeRdOlIłO&#x27;, &#x27;sPiErDoLą&#x27;, &#x27;SpIeRdOlA&#x27;,
+			&#x27;SrAć&#x27;, &#x27;SrAc&#x27;, &#x27;SrAjĄcY&#x27;, &#x27;sRaJaCy&#x27;, &#x27;SrAjĄc&#x27;, &#x27;SrAjAc&#x27;, &#x27;SrAj&#x27;,
+			&#x27;sUkInSyN&#x27;, &#x27;sUkInSyNy&#x27;, &#x27;SuKiNsYnOm&#x27;, &#x27;SuKiNsYnOwI&#x27;, &#x27;sUkInSyNóW&#x27;,
+			&#x27;SuKiNsYnOw&#x27;, &#x27;ŚmIeRdZiEl&#x27;, &#x27;UdUpIć&#x27;, &#x27;UjEbAć&#x27;, &#x27;UjEbAc&#x27;, &#x27;UjEbAł&#x27;,
+			&#x27;uJeBaL&#x27;, &#x27;uJeBaNa&#x27;, &#x27;UjEbAnY&#x27;, &#x27;uJeBiE&#x27;, &#x27;uJeBaŁa&#x27;, &#x27;UjEbAlA&#x27;,
+			&#x27;UpIeRdAlAć&#x27;, &#x27;UpIeRdAlAc&#x27;, &#x27;UpIeRdAlA&#x27;, &#x27;uPiErDoLi&#x27;, &#x27;UpIeRdOlIć&#x27;,
+			&#x27;uPiErDoLiC&#x27;, &#x27;uPiErDoLi&#x27;, &#x27;UpIeRdOlĄ&#x27;, &#x27;uPiErDoLa&#x27;, &#x27;UpIeRdOlEnI&#x27;,
+			&#x27;WjEbAć&#x27;, &#x27;WjEbAc&#x27;, &#x27;WjEbIe&#x27;, &#x27;WjEbIą&#x27;, &#x27;WjEbIa&#x27;, &#x27;WjEbIeMy&#x27;,
+			&#x27;wJeBiEcIe&#x27;, &#x27;WkUrWiAć&#x27;, &#x27;WkUrWiAc&#x27;, &#x27;WkUrWi&#x27;, &#x27;WkUrWiA&#x27;, &#x27;wKuRwIaŁ&#x27;,
+			&#x27;WkUrWiAl&#x27;, &#x27;WkUrWiAjĄcY&#x27;, &#x27;wKuRwIaJaCy&#x27;, &#x27;WkUrWiAjĄcA&#x27;, &#x27;wKuRwIaJaCa&#x27;,
+			&#x27;wKuRwIć&#x27;, &#x27;WkUrWiC&#x27;, &#x27;wKuRwI&#x27;, &#x27;wKuRwIaCiE&#x27;, &#x27;wKuRwIaJą&#x27;, &#x27;WkUrWiAlI&#x27;,
+			&#x27;WkUrWiĄ&#x27;, &#x27;wKuRwIa&#x27;, &#x27;WkUrWiMy&#x27;, &#x27;WkUrWiCiE&#x27;, &#x27;wKuRwIaCiE&#x27;, &#x27;wKuRwIć&#x27;,
+			&#x27;wKuRwIc&#x27;, &#x27;WkUrWiA&#x27;, &#x27;wPiErDaLaĆ&#x27;, &#x27;wPiErDaLaC&#x27;, &#x27;wPiErDaLaJąCy&#x27;,
+			&#x27;wPiErDaLaJaCy&#x27;, &#x27;WpIeRdOl&#x27;, &#x27;WpIeRdOlIć&#x27;, &#x27;WpIeRdOlIc&#x27;, &#x27;WpIzDu&#x27;,
+			&#x27;wYjEbAć&#x27;, &#x27;WyJeBaC&#x27;, &#x27;wYjEbAlI&#x27;, &#x27;wYjEbAł&#x27;, &#x27;WyJeBaC&#x27;, &#x27;wYjEbAłA&#x27;,
+			&#x27;WyJeBaŁy&#x27;, &#x27;WyJeBiE&#x27;, &#x27;wYjEbIą&#x27;, &#x27;WyJeBiA&#x27;, &#x27;wYjEbIeSz&#x27;, &#x27;WyJeBiE&#x27;,
+			&#x27;WyJeBiEcIe&#x27;, &#x27;WyJeBiEmY&#x27;, &#x27;wYpIePrZaĆ&#x27;, &#x27;wYpIePrZaC&#x27;, &#x27;wYpIePrZa&#x27;,
+			&#x27;wYpIePrZaŁ&#x27;, &#x27;wYpIePrZaL&#x27;, &#x27;wYpIePrZaŁa&#x27;, &#x27;WyPiEpRzAlA&#x27;, &#x27;wYpIePrZy&#x27;,
+			&#x27;wYpIePrZyŁa&#x27;, &#x27;WyPiEpRzYlA&#x27;, &#x27;wYpIePrZyŁ&#x27;, &#x27;wYpIePrZyL&#x27;, &#x27;wYpIeRdAl&#x27;,
+			&#x27;wYpIeRdAlAć&#x27;, &#x27;WyPiErDaLaC&#x27;, &#x27;wYpIeRdAlA&#x27;, &#x27;wYpIeRdAlAj&#x27;,
+			&#x27;wYpIeRdAlAł&#x27;, &#x27;WyPiErDaLaL&#x27;, &#x27;wYpIeRdAlAłA&#x27;, &#x27;wYpIeRdAlAlA&#x27;,
+			&#x27;WyPiErDaLaĆ&#x27;, &#x27;wYpIeRdOlIć&#x27;, &#x27;WyPiErDoLiC&#x27;, &#x27;wYpIeRdOlI&#x27;,
+			&#x27;WyPiErDoLiMy&#x27;, &#x27;WyPiErDoLiCiE&#x27;, &#x27;wYpIeRdOlĄ&#x27;, &#x27;wYpIeRdOlA&#x27;,
+			&#x27;WyPiErDoLiLi&#x27;, &#x27;WyPiErDoLiŁ&#x27;, &#x27;wYpIeRdOlIl&#x27;, &#x27;WyPiErDoLiŁa&#x27;,
+			&#x27;wYpIeRdOlIlA&#x27;, &#x27;zAjEbAć&#x27;, &#x27;ZaJeBaC&#x27;, &#x27;zAjEbIe&#x27;, &#x27;ZaJeBiĄ&#x27;, &#x27;zAjEbIa&#x27;,
+			&#x27;zAjEbIaŁ&#x27;, &#x27;zAjEbIaL&#x27;, &#x27;zAjEbAłA&#x27;, &#x27;zAjEbIaLa&#x27;, &#x27;ZaJeBaLi&#x27;, &#x27;ZaJeBaNa&#x27;,
+			&#x27;zAjEbAnI&#x27;, &#x27;zAjEbAnE&#x27;, &#x27;zAjEbAnY&#x27;, &#x27;zAjEbAnYcH&#x27;, &#x27;zAjEbAnYm&#x27;,
+			&#x27;zAjEbAnYmI&#x27;, &#x27;zAjEbIsTe&#x27;, &#x27;ZaJeBiStY&#x27;, &#x27;zAjEbIsTyCh&#x27;, &#x27;ZaJeBiStA&#x27;,
+			&#x27;ZaJeBiStYm&#x27;, &#x27;ZaJeBiStYmI&#x27;, &#x27;zAjEbIśCiE&#x27;, &#x27;zAjEbIsCiE&#x27;, &#x27;zApIePrZyĆ&#x27;,
+			&#x27;ZaPiEpRzYc&#x27;, &#x27;ZaPiEpRzY&#x27;, &#x27;zApIePrZyŁ&#x27;, &#x27;zApIePrZyL&#x27;, &#x27;zApIePrZyŁa&#x27;,
+			&#x27;zApIePrZyLa&#x27;, &#x27;ZaPiEpRzĄ&#x27;, &#x27;zApIePrZa&#x27;, &#x27;ZaPiEpRzY&#x27;, &#x27;zApIePrZyMy&#x27;,
+			&#x27;zApIePrZyCiE&#x27;, &#x27;zApIePrZySz&#x27;, &#x27;ZaPiErDaLa&#x27;, &#x27;ZaPiErDaLaĆ&#x27;,
+			&#x27;ZaPiErDaLaC&#x27;, &#x27;zApIeRdAlAjA&#x27;, &#x27;zApIeRdAlAł&#x27;, &#x27;ZaPiErDaLaJ&#x27;,
+			&#x27;ZaPiErDaLaJcIe&#x27;, &#x27;ZaPiErDaLaŁa&#x27;, &#x27;ZaPiErDaLaLa&#x27;, &#x27;ZaPiErDaLaLi&#x27;,
+			&#x27;zApIeRdAlAjĄcY&#x27;, &#x27;zApIeRdAlAjAcY&#x27;, &#x27;zApIeRdOlIć&#x27;, &#x27;ZaPiErDoLiC&#x27;,
+			&#x27;ZaPiErDoLi&#x27;, &#x27;ZaPiErDoLiŁ&#x27;, &#x27;zApIeRdOlIl&#x27;, &#x27;ZaPiErDoLiŁa&#x27;,
+			&#x27;zApIeRdOlIlA&#x27;, &#x27;zApIeRdOlĄ&#x27;, &#x27;zApIeRdOlA&#x27;, &#x27;zApIeRnIcZaĆ&#x27;,
+			&#x27;ZaPiErNiCzAjĄcY&#x27;, &#x27;zAsRaĆ&#x27;, &#x27;zAsRaNyM&#x27;, &#x27;zAsRyWaĆ&#x27;, &#x27;zAsRyWaJąCy&#x27;,
+			&#x27;zEsRyWaĆ&#x27;, &#x27;zEsRyWaJąCy&#x27;, &#x27;ZjEbAć&#x27;, &#x27;ZjEbAc&#x27;, &#x27;ZjEbAł&#x27;, &#x27;ZjEbAl&#x27;,
+			&#x27;zJeBaŁa&#x27;, &#x27;ZjEbAlA&#x27;, &#x27;zJeBaNa&#x27;, &#x27;ZjEbIą&#x27;, &#x27;ZjEbAlI&#x27;, &#x27;zJeBy&#x27;];
+
+		if (swearwords.some(swearword &#x3D;&gt; control.value.includes(swearword)))
+			return { cannotContainSwearwords: true }
+	}
+}</code></pre>
+    </div>
+</div>
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'CustomValidators.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
