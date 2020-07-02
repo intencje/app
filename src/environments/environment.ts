@@ -13,5 +13,5 @@ export const environment = {
     appId: '1:618358290264:web:082b7706d6f9922e93172d',
     measurementId: 'G-KZ3RST0QP0',
   },
-  url: 'http://localhost:4200',
+  url: 'https://ide.int.intencje.pl:8100/',
 };
