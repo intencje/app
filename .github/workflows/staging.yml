@@ -16,11 +16,11 @@ jobs:
       - name: Install app
         run: npm install
       - name: Build app
-        run: npx ng run intencje:app-shell:production
+        run: npx ng run intencje:app-shell:staging
       - name: Deploy to Firebase
         uses: pizzafox/firebase-action@1.0.7
         env:
-          PROJECT_ID: "intencje-production"
+          PROJECT_ID: "intencje-staging"
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
           args: deploy --only hosting
