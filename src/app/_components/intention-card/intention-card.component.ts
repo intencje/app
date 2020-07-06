@@ -34,7 +34,7 @@ export class IntentionCardComponent {
   ) {}
 
   /*
-   * Uruchamia popup z przyciskiem pozwalającym na usunięcie intencji.
+   * Launches a popup with a button to delete the intention.
    */
   intentionDeleteDialog(): void {
     const dialogRef = this.dialog.open(IntentionDeleteDialog, {
@@ -57,7 +57,7 @@ export class IntentionCardComponent {
   }
 
   /*
-   * Uruchamia popup z przyciskiem pozwalającym na zmianę statusu intencji na "Wysłuchana".
+   * Launches a popup with a button to change the status of the intention to "Fulfilled".
    */
   intentionSetFulfilledDialog(): void {
     const dialogRef = this.dialog.open(IntentionSetFulfilledDialog, {
@@ -84,7 +84,7 @@ export class IntentionCardComponent {
   }
 
   /*
-   * Uruchamia popup z przyciskiem pozwalającym na zmianę statusu intencji na "Wysłuchana".
+   * Launches a popup with a button to change the status of the intention to "Stale".
    */
   intentionSetStaleDialog(): void {
     const dialogRef = this.dialog.open(IntentionSetStaleDialog, {
@@ -107,7 +107,7 @@ export class IntentionCardComponent {
   }
 
   /*
-   * Uruchamia popup z możliwością dodania komentarza do intencji.
+   * Launches a popup with the possibility of adding a comment to the intention.
    */
   intentionAddCommentDialog(): void {
     this.dialog.open(IntentionAddCommentDialog, {
