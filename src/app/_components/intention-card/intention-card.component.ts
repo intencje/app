@@ -34,18 +34,18 @@ export class IntentionCardComponent {
   ) {}
 
   /*
-   * Uruchamia popup z przyciskiem pozwalającym na usunięcie intencji.
+   * Launches a popup with a button to delete the intention.
    */
   intentionDeleteDialog(): void {
     const dialogRef = this.dialog.open(IntentionDeleteDialog, {
-      data: { title: this.intention.title },
+      data: { title: this.intention.title, id: this.intention.id },
     });
     dialogRef
       .afterClosed()
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((title) => {
+      .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'trashed' }).then(() => {
-          if (title == this.intention.title) {
+          if (id == this.intention.id) {
             this.intentionsPage.generateTimeline();
             this.snackbar.open('Intencja została usunięta', 'OK', {
               verticalPosition: 'top',
@@ -57,18 +57,18 @@ export class IntentionCardComponent {
   }
 
   /*
-   * Uruchamia popup z przyciskiem pozwalającym na zmianę statusu intencji na "Wysłuchana".
+   * Launches a popup with a button to change the status of the intention to "Fulfilled".
    */
-  intentionChangeStatusDialog(): void {
-    const dialogRef = this.dialog.open(IntentionChangeStatusDialog, {
-      data: { title: this.intention.title },
+  intentionSetFulfilledDialog(): void {
+    const dialogRef = this.dialog.open(IntentionSetFulfilledDialog, {
+      data: { title: this.intention.title, id: this.intention.id },
     });
     dialogRef
       .afterClosed()
       .pipe(takeUntil(this.unsubscribe))
-      .subscribe((title) => {
+      .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'fulfilled' }).then(() => {
-          if (title == this.intention.title) {
+          if (id == this.intention.id) {
             this.intentionsPage.generateTimeline();
             const snack = this.snackbar.open('Chwała Panu!', 'PODZIEL SIĘ ŚWIADECTWEM', {
               verticalPosition: 'top',
@@ -84,7 +84,30 @@ export class IntentionCardComponent {
   }
 
   /*
-   * Uruchamia popup z możliwością dodania komentarza do intencji.
+   * Launches a popup with a button to change the status of the intention to "Stale".
+   */
+  intentionSetStaleDialog(): void {
+    const dialogRef = this.dialog.open(IntentionSetStaleDialog, {
+      data: { title: this.intention.title, id: this.intention.id },
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((id) => {
+        this.db.update(`intentions/${this.intention.id}`, { status: 'stale' }).then(() => {
+          if (id == this.intention.id) {
+            this.intentionsPage.generateTimeline();
+            this.snackbar.open('Intencja oznaczona jako nieaktualna', 'OK', {
+              verticalPosition: 'top',
+              duration: 5000,
+            });
+          }
+        });
+      });
+  }
+
+  /*
+   * Launches a popup with the possibility of adding a comment to the intention.
    */
   intentionAddCommentDialog(): void {
     this.dialog.open(IntentionAddCommentDialog, {
@@ -104,10 +127,19 @@ export class IntentionDeleteDialog {
 }
 
 @Component({
-  selector: 'intention-change-status-dialog',
-  templateUrl: 'intention-change-status.dialog.html',
+  selector: 'intention-set-fulfilled.dialog',
+  templateUrl: 'intention-set-fulfilled.dialog.html',
 })
-export class IntentionChangeStatusDialog {
+export class IntentionSetFulfilledDialog {
+  unsubscribe = new Subject();
+  constructor(@Inject(MAT_DIALOG_DATA) public data) {}
+}
+
+@Component({
+  selector: 'intention-set-stale.dialog',
+  templateUrl: 'intention-set-stale.dialog.html',
+})
+export class IntentionSetStaleDialog {
   unsubscribe = new Subject();
   constructor(@Inject(MAT_DIALOG_DATA) public data) {}
 }

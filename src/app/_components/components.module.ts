@@ -8,7 +8,8 @@ import {
   IntentionAddCommentDialog,
   IntentionCardComponent,
   IntentionDeleteDialog,
-  IntentionChangeStatusDialog,
+  IntentionSetFulfilledDialog,
+  IntentionSetStaleDialog,
 } from './intention-card/intention-card.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { PatronListItemComponent } from './patron-list-item/patron-list-item.component';
@@ -57,7 +58,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ChangeAvatarComponent,
     IntentionDeleteDialog,
     IntentionAddCommentDialog,
-    IntentionChangeStatusDialog,
+    IntentionSetFulfilledDialog,
+    IntentionSetStaleDialog,
   ],
   imports: [
     CommonModule,
@@ -112,6 +114,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTooltipModule,
     MatExpansionModule,
   ],
-  entryComponents: [IntentionDeleteDialog, IntentionAddCommentDialog, IntentionChangeStatusDialog],
+  entryComponents: [
+    IntentionDeleteDialog,
+    IntentionAddCommentDialog,
+    IntentionSetFulfilledDialog,
+    IntentionSetStaleDialog,
+  ],
 })
 export class ComponentsModule {}
