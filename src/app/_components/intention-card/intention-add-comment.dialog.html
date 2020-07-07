@@ -3,9 +3,6 @@
 <br>
 <form id="addIntentionCommentForm" [formGroup]="addIntentionCommentForm" (ngSubmit)="addIntentionComment(addIntentionCommentForm.value, data.id)">
   <div mat-dialog-content>
-    <button matTooltip="Przejdź do ustawień profilu" *ngIf="auth.user$ | async as user" routerLink="/uzytkownicy/1" mat-icon-button aria-label="Link do ustawień Twojego profilu">
-      <img alt="user.displayName" [src]="user.photoURL ? user.photoURL : '/assets/icons/avatar.png'" height="40" width="40" />
-    </button>
     <mat-form-field>
         <mat-label id="commentLabel">Treść komentarza (minimum 20 liter)</mat-label>
         <textarea #comment minlength="20" maxlength="500" matInput formControlName="comment" id="comment" name="comment" cols="30" rows="10" aria-labelledby="commentLabel"  placeholder=""></textarea>

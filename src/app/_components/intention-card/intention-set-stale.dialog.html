@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Oznacz intencję jako nieaktualna</h1>
+<div mat-dialog-content>
+  <p>
+    Jeśli oznaczysz intencję „{{data.title}}” jako nieaktualna:
+  </p>
+    <ol>
+      <li>nie będzie pokazywana innym użytkownikom,</li>
+      <li>będzie widoczna na liście "Moje intencje",</li>
+      <li>nie będzie można kliknąć pod nią przycisku "Modlę się".</li>
+    </ol>
+
+  <p>Tej operacji <strong>nie można cofnąć</strong>. Jesteś pewien/a?</p>
+</div>
+<mat-dialog-actions align="end">
+  <button aria-label="Przycisk zatwierdzający oznaczenie intencji jako nieaktualna" [mat-dialog-close]="data.id" matTooltipClass="tooltip-alert" matTooltip="Tej operacji nie można cofnąć!" mat-button>NIEAKTUALNA</button>
+  <button aria-label="Przycisk zamykający okno" mat-button mat-dialog-close cdkFocusInitial>ANULUJ</button>
+</mat-dialog-actions>
