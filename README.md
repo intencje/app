@@ -23,6 +23,8 @@ Source code of intencje.pl website and mobile/desktop apps based on Angular, Fir
 ### Production (PWA enabled)
 #### https://intencje-production.web.app
 
+# Documentation
+### https://intencje.github.io/app/
 # Quickstart
 
 ## Prerequisites

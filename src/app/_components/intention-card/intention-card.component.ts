@@ -1,7 +1,7 @@
 import { Component, Input, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth/auth.service';
-import { User, Intention, Role, Comment } from 'src/app/_models/firebase.model';
+import { User, Intention, Comment, PrayingData } from 'src/app/_models/firebase.model';
 import { DbService } from '../../_services/db/db.service';
 import { ToolsService } from 'src/app/_services/tools/tools.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -115,6 +115,37 @@ export class IntentionCardComponent {
       data: { title: this.intention.title, id: this.intention.id },
     });
   }
+
+  /*
+   * Saves information about praying for a given intention in a database. Triggered by "I pray" button
+   */
+  async iPrayForThis(user: User, intentionId: string): Promise<void> {
+    const prayingData: PrayingData = {
+      displayName: user.displayName,
+      avatarUrl: user.avatarURL,
+      uid: user.uid,
+      date: new Date(),
+    };
+
+    const batch = this.db.batch;
+    const increment = this.db.increment;
+    const intention = this.db.docRef(`intentions/${intentionId}`);
+    batch.update(intention, { praying: this.db.arrayUnion(prayingData.uid) });
+    batch.update(intention, { prayingData: this.db.arrayUnion(prayingData) });
+    batch.update(intention, { prayingCount: increment });
+    batch
+      .commit()
+      .then(() => {
+        this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {
+          verticalPosition: 'top',
+          duration: 5000,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        // TODO: Bugtracker
+      });
+  }
 }
 
 @Component({
@@ -193,7 +224,6 @@ export class IntentionAddCommentDialog {
       });
     }
   }
-
   ngOnDestroy(): void {
     this.unsubscribe.next();
   }

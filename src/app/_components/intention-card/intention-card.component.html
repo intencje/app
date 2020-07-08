@@ -68,7 +68,8 @@
     </p>
 
     <ng-container *ngIf="auth.user$ | async as user; else prayButtonForLoggedOut">
-      <button>Modle sie {{ intention.prayingCount || 0 }}</button>
+      <strong *ngIf="intention?.praying.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.prayingCount || 0 }}</strong>
+      <ng-template #prayButtonForLoggedIn><button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.prayingCount || 0 }}</button></ng-template>
     </ng-container>
     <ng-template #prayButtonForLoggedOut>
       <button routerLink="/logowanie">Modle sie {{ intention.prayingCount || 0 }}</button>
