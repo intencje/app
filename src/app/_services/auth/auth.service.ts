@@ -88,7 +88,7 @@ export class AuthService implements CanActivate {
       uid: user.uid,
       email: user.email,
       displayName: 'Anonim',
-      photoURL: '',
+      avatarURL: '',
       emailVerified: user.emailVerified,
       parish: '',
       roles: [],
