@@ -1,4 +1,5 @@
 import { DocumentData } from '@firebase/firestore-types';
+
 // Use cases:
 // status?: 'draft' | 'queued';
 
@@ -22,7 +23,7 @@ export interface User {
   email: string;
   emailVerified: boolean;
   displayName?: string;
-  photoURL?: string;
+  avatarURL?: string;
   roles?: Array<string>;
   settings?: Notifications;
   /** @description Ilość nieprzeczytanych powiadomień o wiadomościach */
@@ -76,7 +77,7 @@ export interface NotificationsOptions {
 export interface TestiomnyThanking {
   date: string;
   displayName: string;
-  photoUrl: string;
+  avatarUrl: string;
   thanked: boolean;
   uid: string;
 }
@@ -98,34 +99,26 @@ export interface Testimony {
 export interface Intention {
   id?: string;
   uid: string;
-  status: 'draft' | 'trashed' | 'fulfilled';
+  status: 'draft' | 'trashed' | 'fulfilled' | 'stale' | 'published';
   author: string;
   date: DocumentData;
   title: string;
   content: string;
   parish: string;
   commentsCount: number;
-  praying: [];
-  prayingData: [];
+  // Separated UID's of prayers to easily generate "Intentions that I pray for" page with Firebase array-contains
+  praying?: [string];
+  prayingData?: [PrayingData];
+  prayingCount?: number;
   tags: [];
   slug?: string;
-  prayingCount?: string;
 }
 
-// export interface Intention {
-//   uid: string;
-//   author: string;
-//   praying: Praying
-//   date: number;
-//   title: string;
-//   content: string;
-// }
-
-export interface Praying {
-  date: string;
+export interface PrayingData {
+  date: DocumentData;
   displayName: string;
-  photoUrl: string;
-  thanked: boolean;
+  avatarUrl: string;
+  thanked?: boolean;
   uid: string;
 }
 
