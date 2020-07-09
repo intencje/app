@@ -89,15 +89,14 @@ export class IntentionCreatePage implements OnInit {
         tags: [],
       };
 
-      // this.db
-      //   .update('intentions', intention)
-      //   .then((docRef) => {
-      //     // Kolekcje możemy dodać tylko wtedy znamy ID dokumentu
-      //     this.db.update(`intentions/${docRef.id}/geoIP`, this.geoIP);
-      //   })
-      //   .catch(() => {
-      //     // TODO: Bugtracker
-      //   });
+      this.db.update('intentions', intention);
+      // .then((docRef) => {
+      //   // Kolekcje możemy dodać tylko wtedy znamy ID dokum  entu
+      //   this.db.update(`intentions/${docRef.id}/geoIP`, this.geoIP);
+      // })
+      // .catch(() => {
+      //   // TODO: Bugtracker
+      // });
 
       // Z uwagi na możliwość dodawania intencji w trybie offline powiadomienie o dodaniu intencji pokazujemy
       // kiedy formularz jest wypelniony prawidlowo - bez czekania na callback z backendu

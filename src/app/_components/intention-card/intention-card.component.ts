@@ -11,6 +11,7 @@ import { IntentionsPage } from 'src/app/intentions/intentions.page';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-intention-card',
@@ -31,6 +32,7 @@ export class IntentionCardComponent {
     public dialog: MatDialog,
     public intentionsPage: IntentionsPage,
     private snackbar: MatSnackBar,
+    private afs: AngularFirestore,
   ) {}
 
   /*
@@ -127,7 +129,7 @@ export class IntentionCardComponent {
       date: new Date(),
     };
 
-    const batch = this.db.batch;
+    const batch = this.afs.firestore.batch();
     const increment = this.db.increment;
     const intention = this.db.docRef(`intentions/${intentionId}`);
     batch.update(intention, { praying: this.db.arrayUnion(prayingData.uid) });
@@ -141,8 +143,7 @@ export class IntentionCardComponent {
           duration: 5000,
         });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         // TODO: Bugtracker
       });
   }
