@@ -100,26 +100,22 @@ export interface Intention {
   id?: string;
   uid: string;
   status: 'draft' | 'trashed' | 'fulfilled' | 'stale' | 'published';
-  author: string;
+  authorDisplayName: string;
   date: DocumentData;
   title: string;
   content: string;
   parish: string;
-  commentsCount: number;
-  // Separated UID's of prayers to easily generate "Intentions that I pray for" page with Firebase array-contains
-  praying?: [string];
+  commentsCount?: number;
+  praying: string[]; // Separated UID's of prayers to easily generate "Intentions that I pray for" page with Firebase array-contains
   prayingData?: [PrayingData];
-  prayingCount?: number;
-  tags: [];
+  tags?: string[];
   slug?: string;
 }
 
 export interface PrayingData {
   date: DocumentData;
   displayName: string;
-  avatarUrl: string;
-  thanked?: boolean;
-  uid: string;
+  thanked: boolean;
 }
 
 export interface Comment {

@@ -79,14 +79,12 @@ export class IntentionCreatePage implements OnInit {
       const intention: Intention = {
         uid: user.uid,
         status: 'draft',
-        author: user.displayName,
+        authorDisplayName: user.displayName,
         content: payload.content,
         date: new Date(),
         title: payload.title,
         parish: user.parish,
-        commentsCount: 0,
-        prayingCount: 0,
-        tags: [],
+        praying: [],
       };
 
       this.db.update('intentions', intention);
