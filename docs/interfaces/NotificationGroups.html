@@ -1,0 +1,388 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Intencje.pl documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Intencje.pl documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>NotificationGroups</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/_models/firebase.model.ts</code>
+        </p>
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#center">center</a>
+                                </li>
+                                <li>
+                                        <a href="#email">email</a>
+                                </li>
+                                <li>
+                                        <a href="#push">push</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="center"></a>
+                                        <span class="name"><b>center</b><a href="#center"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>center:         <code><a href="../interfaces/NotificationsOptions.html" target="_self" >NotificationsOptions</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/NotificationsOptions.html" target="_self" >NotificationsOptions</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="email"></a>
+                                        <span class="name"><b>email</b><a href="#email"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>email:         <code><a href="../interfaces/NotificationsOptions.html" target="_self" >NotificationsOptions</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/NotificationsOptions.html" target="_self" >NotificationsOptions</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="push"></a>
+                                        <span class="name"><b>push</b><a href="#push"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>push:         <code><a href="../interfaces/NotificationsOptions.html" target="_self" >NotificationsOptions</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/NotificationsOptions.html" target="_self" >NotificationsOptions</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DocumentData } from &#x27;@firebase/firestore-types&#x27;;
+// Use cases:
+// status?: &#x27;draft&#x27; | &#x27;queued&#x27;;
+
+export enum Role {
+  Administrator &#x3D; &#x27;administrator&#x27;,
+  // * sudo
+  Editor &#x3D; &#x27;editor&#x27;,
+  // * dodawanie artykulow
+  // * edycja artykułów
+  Moderator &#x3D; &#x27;moderator&#x27;,
+  // * wrzucanie intencji na kolejke
+  // * moderacja modlitw
+  // * moderacja patronow
+}
+
+export interface Tags {
+  name?: string;
+}
+export interface User {
+  uid: string;
+  email: string;
+  emailVerified: boolean;
+  displayName?: string;
+  photoURL?: string;
+  roles?: Array&lt;string&gt;;
+  settings?: Notifications;
+  /** @description Ilość nieprzeczytanych powiadomień o wiadomościach */
+  unreadMessages?: number;
+  /** @description Ilość nieprzeczytanych powiadomień ogółem */
+  unreadNotifications?: number;
+  parish?: string;
+}
+
+export interface Notifications {
+  notifications: NotificationGroups;
+}
+
+export interface NotificationGroups {
+  center: NotificationsOptions;
+  email: NotificationsOptions;
+  push: NotificationsOptions;
+}
+
+export interface NotificationsOptions {
+  /** @description Poinformuj o publikacji dodanego przez użytkownika komentarza. */
+  commentPublished: boolean;
+  /** @description Poinformuj o oznaczeniu intencji, za którą się modli się użytkownik statusem &quot;Spełniona&quot; */
+  intentionFulfilled: boolean;
+  /** @description Poinformuj o o publikacji intencji dodanej przez użytkownika */
+  intentionPublished: boolean;
+  /** @description Poinformuj użytkownika o nowym artukule */
+  newArticle: boolean;
+  /** @description Poinformuj użytkownika o nowym poście na blogu */
+  newBlogPost: boolean;
+  /** @description Poinformuj użytkownika o nowym komentarzu, który pojawił się pod intencją, za którą się modli */
+  newComment: boolean;
+  /** @description Poinformuj użytkownika o nowej intencji, która oznaczona została obserwowanym przez niego tagiem */
+  newIntentionFromObservedTag: boolean;
+  /** @description Poinformuj użytkownika o nowej wiadomości */
+  newMessage: boolean;
+  /** @description Poinformuj użytkownika o nowej osobie z jego parafii */
+  newParishioner: boolean;
+  /** @description Poinformuj użytkownika o nowej sylwetce patrona */
+  newPatron: boolean;
+  /** @description Poinformuj użytkownika o nowej modlitwie w jego intencji */
+  newPrayer: boolean;
+  /** @description Poinformuj użytkownika o nowym świadectwie */
+  newTestimony: boolean;
+  /** @description Poinformuj użytkownika o podziękowaniu za jego modlitwę */
+  thanksForPrayer: boolean;
+  /** @description Poinformuj użytkownika o podziękowaniu za jego świadectwo */
+  thanksForTestimony: boolean;
+}
+
+export interface TestiomnyThanking {
+  date: string;
+  displayName: string;
+  photoUrl: string;
+  thanked: boolean;
+  uid: string;
+}
+
+export enum Status {
+  draft &#x3D; &#x27;draft&#x27;,
+  queued &#x3D; &#x27;queued&#x27;,
+  published &#x3D; &#x27;published&#x27;,
+  fulfilled &#x3D; &#x27;fulfilled&#x27;,
+}
+
+export interface Testimony {
+  date: string;
+  author: string;
+  content: string;
+  uid: string;
+}
+
+export interface Intention {
+  id?: string;
+  uid: string;
+  status: &#x27;draft&#x27; | &#x27;trashed&#x27; | &#x27;fulfilled&#x27;;
+  author: string;
+  date: DocumentData;
+  title: string;
+  content: string;
+  parish: string;
+  commentsCount: number;
+  praying: [];
+  prayingData: [];
+  tags: [];
+  slug?: string;
+  prayingCount?: string;
+}
+
+// export interface Intention {
+//   uid: string;
+//   author: string;
+//   praying: Praying
+//   date: number;
+//   title: string;
+//   content: string;
+// }
+
+export interface Praying {
+  date: string;
+  displayName: string;
+  photoUrl: string;
+  thanked: boolean;
+  uid: string;
+}
+
+export interface Comment {
+  status: &#x27;draft&#x27; | &#x27;rejected&#x27; | &#x27;published&#x27;;
+  date: DocumentData;
+  content: string;
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'NotificationGroups.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Dodaj komentarz</h1>
+<div mat-dialog-content>Dodaj komentarz do intencji „{{data.title}}”</div>
+<br>
+<form id="addIntentionCommentForm" [formGroup]="addIntentionCommentForm" (ngSubmit)="addIntentionComment(addIntentionCommentForm.value, data.id)">
+  <div mat-dialog-content>
+    <mat-form-field>
+        <mat-label id="commentLabel">Treść komentarza (minimum 20 liter)</mat-label>
+        <textarea #comment minlength="20" maxlength="500" matInput formControlName="comment" id="comment" name="comment" cols="30" rows="10" aria-labelledby="commentLabel"  placeholder=""></textarea>
+        <mat-hint align="end">{{comment.value.length}} / {{comment.maxLength}}</mat-hint>
+        <mat-error *ngIf="form.comment.invalid && form.comment.errors.required" role="alertdialog">Wpisz treść komentarza</mat-error>
+        <mat-error *ngIf="form.comment.invalid && form.comment.errors.minlength" role="alertdialog">Treść komentarza musi mieć minimum 20 liter</mat-error>
+        <mat-error *ngIf="form.comment.invalid && form.comment.errors.maxlength" role="alertdialog">Treść komentarza może mieć maksymalnie 500 liter</mat-error>
+        <mat-error *ngIf="form.comment.invalid && form.comment.errors.cannotContainSwearwords" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+      </mat-form-field>
+  </div>
+  <mat-dialog-actions align="end">
+    <button type="submit"  mat-dialog-close [disabled]="!addIntentionCommentForm.valid" matTooltip="Dodaj komentarz do swojej intencji" mat-button>DODAJ</button>
+    <button mat-button mat-dialog-close cdkFocusInitial>ANULUJ</button>
+  </mat-dialog-actions>
+</form>

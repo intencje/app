@@ -1,0 +1,7 @@
+<h1 mat-dialog-title>Usuń intencję</h1>
+<div mat-dialog-content>Czy jesteś pewien/na, że chcesz usunąć intencję „{{data.title}}”?<br/>
+Tej operacji <strong>NIE MOŻNA COFNĄĆ.</strong>.</div>
+<mat-dialog-actions align="end">
+  <button aria-label="Przycisk zatwierdzający usunięcie intencji" [mat-dialog-close]="data.id" matTooltipClass="tooltip-alert" matTooltip="Tej operacji nie można cofnąć!" mat-button>USUŃ</button>
+  <button aria-label="Przycisk zamykający okno" mat-button mat-dialog-close cdkFocusInitial>ANULUJ</button>
+</mat-dialog-actions>

@@ -1,0 +1,229 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "intencje": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/browser",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/manifest.webmanifest"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "ci": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "progress": false
+            }
+
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "intencje:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "intencje:build:production"
+            },
+            "staging": {
+              "browserTarget": "intencje:build:staging"
+            }
+
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "intencje:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "externalDependencies": [
+              "@firebase/firestore"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            },
+            "staging": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
+            }
+
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "intencje:build",
+            "serverTarget": "intencje:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "intencje:build:production",
+              "serverTarget": "intencje:server:production"
+            },
+            "staging": {
+              "browserTarget": "intencje:build:staging",
+              "serverTarget": "intencje:server:staging"
+            }
+
+          }
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "browserTarget": "intencje:build:production",
+            "serverTarget": "intencje:server:production",
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "browserTarget": "intencje:build",
+            "serverTarget": "intencje:server",
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "intencje:build:production",
+              "serverTarget": "intencje:server:production"
+            },
+            "staging": {
+              "browserTarget": "intencje:build:staging",
+              "serverTarget": "intencje:server:staging"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "intencje"
+}

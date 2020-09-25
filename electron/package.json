@@ -1,0 +1,23 @@
+{
+  "name": "Intencje",
+  "version": "1.0.0",
+  "description": "Platforma Duchowej Łączności",
+  "main": "index.js",
+  "scripts": {
+    "electron:start": "electron ./"
+  },
+  "dependencies": {
+    "@capacitor/electron": "^2.2.1",
+    "electron-is-dev": "^1.2.0"
+  },
+  "devDependencies": {
+    "electron": "^9.1.0",
+    "npm-check-updates": "^7.0.1"
+  },
+  "keywords": [
+    "capacitor",
+    "electron"
+  ],
+  "author": "",
+  "license": "ISC"
+}

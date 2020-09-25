@@ -1,0 +1,22 @@
+{
+  "targets": {
+    "intencje-staging": {
+      "hosting": {
+        "app": [
+          "intencje-staging"
+        ]
+      }
+    },
+    "intencje-production": {
+      "hosting": {
+        "app": [
+          "intencje-production"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "staging": "intencje-staging",
+    "production": "intencje-production"
+  }
+}

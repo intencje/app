@@ -1,0 +1,35 @@
+<section *ngIf="emailSent">
+  <ng-lottie *ngIf="!this.showMessage" [options]="options" (complete)="animationComplete()"></ng-lottie>
+  <div *ngIf="this.showMessage">
+    <p>
+      Odbierz mejla cosmy go wyslali na adres:</p>
+        <h1>{{this.email}}</h1>
+      <p>Sprawdz czy nie ma literowek
+      Mejl nie doszel? -> przestaw EmailSent na false
+    </p>
+  </div>
+
+</section>
+<section *ngIf="!emailSent">
+  <form id="loginRegisterForm" class="form" [formGroup]="loginRegisterForm" (ngSubmit)="loginRegister()">
+    <mat-form-field>
+      <mat-label id="emailLabel">Wpisz tutaj swój adres email</mat-label>
+      <input matInput #email formControlName="email" id="email" type="email" aria-labelledby="emailLabel" autocomplete="off" />
+      <mat-error *ngIf="form.email.invalid && form.email.errors.required" role="alertdialog">Wpisz tytuł intencji</mat-error>
+      <mat-error *ngIf="form.email.invalid && form.email.errors.pattern" role="alertdialog">Wprowadź poprawny adres email</mat-error>
+      <mat-error *ngIf="form.email.invalid && form.email.errors.cannotContainSwearwords" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+    </mat-form-field>
+    <p>Na podany przez Ciebie adres email wyślemy link. Kliknij w niego aby się zalogować lub założyć konto, jeśli robisz to po raz pierwszy</p>
+    <small>
+      Potrzebujemy Twojego adresu email aby założyć Tobie nowe konto lub aktywować już istniejące w naszym systemie.
+      Klikając przycisk ZALOGUJ wyrażasz zgodę na przetwarzanie Twoich danych osobowych w celu założenia i obsługi
+      Twojego konta użytkownika. Oświadczasz, że zapoznałeś/łaś się z zapisami <a routerLink="/regulamin">regulaminu</a> i akceptujesz jego zapisy.
+    </small>
+    <div>
+      <button mat-button type="submit">
+        <div *ngIf="loading">Ładowanie</div> <!--  TODO: loader -->
+        <span>Zaloguj</span>
+      </button>
+    </div>
+  </form>
+</section>

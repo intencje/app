@@ -1,0 +1,32 @@
+<div data-test="main-tabs">
+  <!-- TOOD zamien na komponent -->
+  <div>
+    <div>
+      <div class="ion-text-center">
+        <div routerLink="/" name="home-outline"></div>
+      </div>
+      <div class="ion-text-center">
+        <div routerLink="/czytania-na-dzis" name="book-outline"></div>
+      </div>
+
+      <div class="ion-text-center">
+        <div class="cta" routerLink="/dodaj" name="add-outline"></div>
+      </div>
+
+      <div class="ion-text-center">
+        <div name="notifications-outline" routerLink="/powiadomienia"></div>
+
+        <ng-container *ngIf="auth.user$ | async as user">
+          <div color="danger" *ngIf="user.unreadNotifications > 0">{{ user.unreadNotifications }}</div>
+        </ng-container>
+      </div>
+      <div class="ion-text-center">
+        <div routerLink="/wiadomosci" name="chatbox-ellipses-outline"></div>
+
+        <ng-container *ngIf="auth.user$ | async as user">
+          <div color="danger" *ngIf="user.unreadMessages > 0">{{ user.unreadMessages }}</div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

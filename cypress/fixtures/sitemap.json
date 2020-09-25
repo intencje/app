@@ -1,0 +1,142 @@
+{
+  "intentions": {
+    "_home": "/",
+    "_details": "/{slug}",
+    "_edit/details": "/edytuj/{slug}",
+    "create": "/dodaj",
+    "edit": "/edytuj",
+    "my": "/moje",
+    "i-pray-for": "/za-ktore-sie-modle",
+    "from-my-parish": "/z-mojej-parafii",
+    "fulfilled": "/spelnione"
+  },
+
+  "parishes": {
+    "_home": "/parafie",
+    "_details": "/parafie/{slug}",
+    "_edit/details": "/parafie/edytuj/{slug}",
+    "create": "/parafie/dodaj",
+    "edit": "/parafie/edytuj"
+  },
+
+  "articles": {
+    "_home": "/artykuly",
+    "_details": "/artykuly/{slug}",
+    "_edit/details": "/artykuly/edytuj/{slug}",
+    "create": "/artykuly/dodaj",
+    "edit": "/artykuly/edytuj"
+  },
+
+  "patrons": {
+    "_home": "/patroni",
+    "_details": "/patroni/{slug}",
+    "_edit/details": "/patroni/edytuj/{slug}",
+    "create": "/patroni/dodaj",
+    "edit": "/patroni/edytuj"
+  },
+
+  "testimonies": {
+    "_home": "/swiadectwa",
+    "_details": "/swiadectwa/{slug}",
+    "_edit/details": "/swiadectwa/edytuj/{slug}",
+    "create": "/swiadectwa/dodaj",
+    "edit": "/swiadectwa/edytuj"
+  },
+
+  "tags": {
+    "_home": "/tagi",
+    "_details": "/tagi/{slug}",
+    "_edit/details": "/tagi/edytuj/{slug}",
+    "create": "/tagi/dodaj",
+    "edit": "/tagi/edytuj"
+  },
+
+  "blog": {
+    "_home": "/blog",
+    "_details": "/blog/{slug}",
+    "_edit/details": "/blog/edytuj/{slug}",
+    "create": "/blog/dodaj",
+    "edit": "/blog/edytuj"
+  },
+
+  "help": {
+    "_home": "/pomoc",
+    "_details": "/pomoc/{slug}",
+    "_edit/details": "/pomoc/edytuj/{slug}",
+    "create": "/pomoc/dodaj",
+    "edit": "/pomoc/edytuj"
+  },
+
+  "prayers": {
+    "_home": "/modlitwy",
+    "_details": "/modlitwy/{slug}",
+    "_edit/details": "/modlitwy/edytuj/e{slug}",
+    "create": "/modlitwy/dodaj",
+    "edit": "/modlitwy/edytuj",
+    "acts": "/modlitwy/akty",
+    "basic": "/modlitwy/podstawowe",
+    "litanies": "/modlitwy/litanie",
+    "novena": "/modlitwy/nowenny",
+    "thematic": "/modlitwy/tematyczne"
+  },
+
+  "settings": {
+    "_home": "/ustawienia",
+    "email-notifications": "/ustawienia/powiadomienia-email",
+    "push-notifications": "/ustawienia/powiadomienia-push",
+    "reminders": "/ustawienia/przypomnienia"
+  },
+
+  "users": {
+    "_home": "/uzytkownicy",
+    "_details": "/uzytkownicy/{slug}",
+    "_edit/details": "/uzytkownicy/edytuj/{slug}"
+  },
+
+  "messages": {
+    "_home": "/wiadomosci",
+    "_thread": "/wiadomosci/{thread}"
+  },
+
+  "contact": {
+    "_home": "/kontakt"
+  },
+
+  "tos": {
+    "_home": "/regulamin"
+  },
+
+  "aboutTheProject": {
+    "_home": "/o-projekcie"
+  },
+
+  "login": {
+   "_home": "/logowanie"
+  },
+
+  "mission": {
+   "_home": "/misja"
+  },
+
+  "features": {
+   "_home": "/funkcjonalnosci"
+  },
+
+  "notifications": {
+   "_home": "/powiadomienia"
+  },
+
+  "readings": {
+   "_home": "/czytania-na-dzis"
+  },
+
+  "blessednessOfGod": {
+   "_home": "/szczesc-boze"
+  },
+
+  "notFound": {
+    "_home  ": "/not-found"
+  }
+}
+
+

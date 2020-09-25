@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Oznacz intencję jako spełniona</h1>
+<div mat-dialog-content>
+  <p>
+    Jeśli oznaczysz intencję „{{data.title}}” jako spełniona:
+  </p>
+    <ol>
+      <li>będzie widoczna na liście intencji "Spełnione",</li>
+      <li>wyślemy powiadomienie do wszystkich osób modlących się w tej intencji,</li>
+      <li>nie będzie można kliknąć pod nią przycisku "Modlę się".</li>
+    </ol>
+
+  <p>Tej operacji <strong>nie można cofnąć</strong>. Jesteś pewien/a?</p>
+
+</div>
+<mat-dialog-actions align="end">
+  <button aria-label="Przycisk zatwierdzający oznaczenie intencji jako spełniona" [mat-dialog-close]="data.id" matTooltipClass="tooltip-alert" matTooltip="Tej operacji nie można cofnąć!" mat-button>SPEŁNIONA</button>
+  <button aria-label="Przycisk zamykający okno" mat-button mat-dialog-close cdkFocusInitial>ANULUJ</button>
+</mat-dialog-actions>
