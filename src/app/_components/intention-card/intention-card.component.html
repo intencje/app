@@ -25,7 +25,7 @@
 
         <mat-menu #intentionMenu="matMenu" xPosition="after" role="navigation">
           <ng-container *ngIf="user.uid !== intention.uid">
-            <button mat-menu-item routerLink="/">Napisz wiadomość autorowi intencji</button>
+            <button mat-menu-item routerLink="/">Rozpocznij rozmowę z autorem intencji</button>
           </ng-container>
 
           <ng-container *ngIf="user.uid === intention.uid">
