@@ -79,25 +79,22 @@ export class IntentionCreatePage implements OnInit {
       const intention: Intention = {
         uid: user.uid,
         status: 'draft',
-        author: user.displayName,
+        authorDisplayName: user.displayName,
         content: payload.content,
         date: new Date(),
         title: payload.title,
         parish: user.parish,
-        commentsCount: 0,
-        prayingCount: 0,
-        tags: [],
+        praying: [],
       };
 
-      // this.db
-      //   .update('intentions', intention)
-      //   .then((docRef) => {
-      //     // Kolekcje możemy dodać tylko wtedy znamy ID dokumentu
-      //     this.db.update(`intentions/${docRef.id}/geoIP`, this.geoIP);
-      //   })
-      //   .catch(() => {
-      //     // TODO: Bugtracker
-      //   });
+      this.db.update('intentions', intention);
+      // .then((docRef) => {
+      //   // Kolekcje możemy dodać tylko wtedy znamy ID dokum  entu
+      //   this.db.update(`intentions/${docRef.id}/geoIP`, this.geoIP);
+      // })
+      // .catch(() => {
+      //   // TODO: Bugtracker
+      // });
 
       // Z uwagi na możliwość dodawania intencji w trybie offline powiadomienie o dodaniu intencji pokazujemy
       // kiedy formularz jest wypelniony prawidlowo - bez czekania na callback z backendu

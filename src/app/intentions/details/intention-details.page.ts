@@ -80,21 +80,25 @@ export class IntentionDetailsPage implements OnInit {
     this.comments$ = this.db.collection$(`intentions/${intentionId}/comments`, (ref) =>
       ref.where('status', '==', 'published'),
     );
-
-    console.log('sss');
   }
+  /**
+   * Loads data for each tab of intention details. By checking typeof in each case data is loaded only once per click.
+   * @param tab Index of a selected tab
+   * @param tags Intention tags
+   * @param date Intention date
+   */
   loadTabData(tab: { index: number }, tags: Tags, date: Date): void {
     switch (tab.index) {
       case 1:
-        if (typeof this.prayers$ === 'undefined')
+        if (typeof this.prayers$ === 'undefined' && tags)
           this.prayers$ = this.db.collection$('prayers', (ref) => ref.where('tags', 'array-contains-any', tags));
         break;
       case 2:
-        if (typeof this.patrons$ === 'undefined')
+        if (typeof this.patrons$ === 'undefined' && tags)
           this.patrons$ = this.db.collection$('patrons', (ref) => ref.where('tags', 'array-contains-any', tags));
         break;
       case 3:
-        if (typeof this.intentions$ === 'undefined')
+        if (typeof this.intentions$ === 'undefined' && tags && date)
           this.intentions$ = this.db.collection$('intentions', (ref) =>
             ref
               .where('tags', 'array-contains-any', tags)

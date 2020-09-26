@@ -10,7 +10,7 @@
 <div class="timeline-item">
   <div class="timeline-body">
     <div class="timeline-username">
-      {{ intention.author }}
+      {{ intention.authorDisplayName }}
       <time>
         {{ intention.date.seconds * 1000 | date: 'dd/MM/yyyy/ H:mm:ss' }}
       </time>
@@ -25,7 +25,7 @@
 
         <mat-menu #intentionMenu="matMenu" xPosition="after" role="navigation">
           <ng-container *ngIf="user.uid !== intention.uid">
-            <button mat-menu-item routerLink="/">Napisz wiadomość autorowi intencji</button>
+            <button mat-menu-item routerLink="/">Rozpocznij rozmowę z autorem intencji</button>
           </ng-container>
 
           <ng-container *ngIf="user.uid === intention.uid">
@@ -68,11 +68,11 @@
     </p>
 
     <ng-container *ngIf="auth.user$ | async as user; else prayButtonForLoggedOut">
-      <strong *ngIf="intention?.praying.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.prayingCount || 0 }}</strong>
-      <ng-template #prayButtonForLoggedIn><button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.prayingCount || 0 }}</button></ng-template>
+      <strong *ngIf="intention.praying?.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.praying?.length || 0 }}</strong>
+      <ng-template #prayButtonForLoggedIn><button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button></ng-template>
     </ng-container>
     <ng-template #prayButtonForLoggedOut>
-      <button routerLink="/logowanie">Modle sie {{ intention.prayingCount || 0 }}</button>
+      <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
     </ng-template>
   </div>
 </div>
@@ -80,7 +80,7 @@
 <section class="timeline-prayers">
   <div>
     <mat-chip-list aria-label="Lista osób modlących się w intencji TYTUL INTENCJI" style="display: inline-block;">
-      <mat-chip *ngFor="let prayer of intention.prayingData">
+      <mat-chip *ngFor="let prayer of intention.prayingData | keyvalue">
         <img
           alt=""
           src="//www.gravatar.com/avatar/915deab4212e74233aee7beba5cf27c7?s=20&amp;r=g&amp;d=mm"
@@ -89,23 +89,23 @@
           width="20"
           style="border-radius: 50%; margin: 0 5px 0 0;"
         />
-        {{ prayer.displayName }}
-        <ng-container *ngIf="auth.user$ | async as user"> </ng-container>
-      </mat-chip>
+        {{ prayer.value.displayName }}
+        <ng-container *ngIf="auth.user$ | async as user">
+          <a *ngIf="prayer.value.thanked == false && intention.uid == user.uid" (click)="thankYouForPraying(prayer.key, intention.id)" style="color: #ff00ff">&nbsp;PODZIEKUJ</a>
+        </ng-container>
+          </mat-chip>
 
-      <!-- <ng-container *ngIf="auth.user$ | async as user; else joinUs">
-      <span *ngIf="(user.uid === intention.uid) && !prayer.thanked" style="color: #ff00ff">">Podziekuj</span>
-    </ng-container>
-      <ng-template #joinUs>
-        <mat-chip style="background-color: #f3b61f;
-        background-color: #f3b61f;
-        text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);">
-        <a href="https://intencje.pl/rejestracja" style="text-decoration: none; color: #fff;" title="Zakładanie darmowego konta" class=""
-        >Dołącz do nas!</a
-        >
-        </mat-chip>
 
-      </ng-template> -->
+            <!-- <mat-chip *ngIf="auth.user$" style="background-color: #f3b61f;
+            background-color: #f3b61f;
+            text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);">
+            <a href="https://intencje.pl/rejestracja" style="text-decoration: none; color: #fff;" title="Zakładanie darmowego konta" class=""
+            >Dołącz do nas!</a
+            >
+            </mat-chip> -->
+
+
+
     </mat-chip-list>
   </div>
 </section>
