@@ -11,6 +11,7 @@ import { IntentionsPage } from 'src/app/intentions/intentions.page';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-intention-card',
@@ -22,6 +23,7 @@ export class IntentionCardComponent {
   @Input() latest: any;
   @Input() showProfileDetialsOnClick = true;
   private unsubscribe = new Subject();
+  objectKeys = Object.keys;
 
   constructor(
     private router: Router,
@@ -31,6 +33,7 @@ export class IntentionCardComponent {
     public dialog: MatDialog,
     public intentionsPage: IntentionsPage,
     private snackbar: MatSnackBar,
+    private afs: AngularFirestore,
   ) {}
 
   /*
@@ -122,17 +125,15 @@ export class IntentionCardComponent {
   async iPrayForThis(user: User, intentionId: string): Promise<void> {
     const prayingData: PrayingData = {
       displayName: user.displayName,
-      avatarUrl: user.avatarURL,
-      uid: user.uid,
       date: new Date(),
+      thanked: false,
     };
 
-    const batch = this.db.batch;
-    const increment = this.db.increment;
+    const batch = this.afs.firestore.batch();
     const intention = this.db.docRef(`intentions/${intentionId}`);
-    batch.update(intention, { praying: this.db.arrayUnion(prayingData.uid) });
-    batch.update(intention, { prayingData: this.db.arrayUnion(prayingData) });
-    batch.update(intention, { prayingCount: increment });
+    batch.update(intention, { praying: this.db.arrayUnion(user.uid) });
+    batch.update(intention, { [`prayingData.${user.uid}`]: prayingData });
+
     batch
       .commit()
       .then(() => {
@@ -141,9 +142,26 @@ export class IntentionCardComponent {
           duration: 5000,
         });
       })
-      .catch((error) => {
-        console.log(error);
-        // TODO: Bugtracker
+      .catch((err) => {
+        console.log(err); // Bugtracker
+      });
+  }
+
+  /*
+   * Saves information about about thanks for the prayer for a given intention in a database. Triggered by "Thank" button.
+   */
+  async thankYouForPraying(prayerID, intentionId): Promise<void> {
+    await this.afs
+      .doc(`intentions/${intentionId}`)
+      .update({ [`prayingData.${prayerID}.thanked`]: true })
+      .then(() => {
+        this.snackbar.open('Podziękowanie przesłane', 'OK', {
+          verticalPosition: 'top',
+          duration: 5000,
+        });
+      })
+      .catch((err) => {
+        console.log(err); // Bugtracker
       });
   }
 }
