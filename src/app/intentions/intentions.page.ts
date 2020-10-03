@@ -11,6 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DbService } from '../_services/db/db.service';
 import { Plugins } from '@capacitor/core';
 
+// Capacitor
+const { Toast } = Plugins;
+
 @Component({
   selector: 'app-intentions',
   templateUrl: 'intentions.page.html',
