@@ -42,6 +42,7 @@
     "@capacitor/ios": "^2.4.2",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
+    "@ionic/pwa-elements": "^3.0.1",
     "@nguniversal/express-engine": "^10.1.0",
     "@ngx-loading-bar/core": "^5.1.0",
     "@ngx-loading-bar/router": "^5.1.0",
