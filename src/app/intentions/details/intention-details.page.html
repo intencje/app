@@ -7,126 +7,12 @@
   </div> -->
 
   <!-- <header *ngIf="!screenService.isMobile" style="border-bottom: solid 1px rgba(0, 0, 0, 0.12)"><h1>{{route.snapshot.data['title'] + intention.title}}</h1>  </header> -->
-  <mat-card class="mat-elevation-z0">
-    <mat-card-header>
-      <img
-        mat-card-avatar
-        matListAvatar
-        [src]="intention.author_avatar_url ? intention.author_avatar_url : 'assets/icons/avatar.png'"
-        alt="{{intention.author}}"
-      />
 
-      <mat-card-title> {{intention.author}} </mat-card-title>
+        <app-intention-card
+          [intention]="intention" type="extended"
+        ></app-intention-card>
 
-      <mat-card-subtitle>{{intention.date.seconds * 1000}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{intention.content}}</p>
 
-      <mat-accordion *ngIf="intention.commentsCount > 0">
-        <mat-expansion-panel (opened)="getIntentionComments(intention.id)" class="mat-elevation-z0">
-          <mat-expansion-panel-header>
-            <mat-panel-title>Pokaż komentarze autora intencji</mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <section *ngIf="(comments$ | async) as comments; else commentsLoading">
-            <p *ngFor="let comment of comments">{{comment.content}}</p>
-          </section>
-
-          <ng-template #commentsLoading>
-            <ngx-skeleton-loader count="1"></ngx-skeleton-loader>
-          </ng-template>
-        </mat-expansion-panel>
-      </mat-accordion>
-
-      <mat-chip-list>
-        <mat-chip *ngFor="let tag of intention.tags">#{{tag}}</mat-chip>
-      </mat-chip-list>
-
-      <mat-card-actions align="right">
-        <button mat-button style="color: #f3b61f; font-family: Dosis; letter-spacing: 1px; font-weight: 500">
-          MODLĘ SIĘ
-        </button>
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-          <mat-icon svgIcon="more" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card-content>
-
-    <mat-tab-group (selectedTabChange)="loadTabData($event, intention.tags, intention.date)">
-      <mat-tab label="Modlą się">
-        <ng-container *ngIf="intention.prayingData as prayingData; else noPraying">
-          <mat-list *ngIf="prayingData">
-            <mat-list-item matRipple *ngFor="let user of prayingData | keyvalue">
-              <a mat-list-item>
-                <img
-                  matListAvatar
-                  src="https://intencje.pl/wp-content/uploads/avatars/2601/5e4674038269f-bpthumb.jpg"
-                  alt="{{user.displayName}}"
-                />
-                <h3 matLine>{{user.value.displayName}}</h3>
-              </a>
-            </mat-list-item>
-          </mat-list>
-        </ng-container>
-
-        <ng-template #noPraying>
-          <app-no-content message="W tej intencji nikt się jeszcze nie modli"></app-no-content>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Modlitwy">
-        <ng-container *ngIf="(prayers$  | async) as prayers; else noPrayers">
-          <mat-list>
-            <mat-list-item matRipple *ngFor="let prayer of prayers">
-              <a mat-list-item>
-                <img
-                  matListAvatar
-                  src="https://intencje.pl/wp-content/uploads/avatars/1293/5e5e7ef443848-bpthumb.jpg"
-                  alt="{{prayer.title}}"
-                />
-                <h3 matLine>{{prayer.title}}</h3>
-              </a>
-            </mat-list-item>
-          </mat-list>
-        </ng-container>
-        <ng-template #noPrayers>
-          <app-no-content message="Brak powiązanych" link="/modlitwy" anchor="modlitw"></app-no-content>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Patroni">
-        <ng-container *ngIf="(patrons$  | async) as patrons; else noPatrons">
-          <mat-list>
-            <mat-list-item matRipple *ngFor="let patron of patrons">
-              <a mat-list-item>
-                <img
-                  matListAvatar
-                  src="https://intencje.pl/wp-content/uploads/avatars/910/5c486cf90d71e-bpthumb.png"
-                  alt="{{patron.name}}"
-                />
-                <h3 matLine>{{patron.name}}</h3>
-              </a>
-            </mat-list-item>
-          </mat-list>
-        </ng-container>
-        <ng-template #noPatrons>
-          <app-no-content message="Brak powiązanych" link="/patroni" anchor="patronów"></app-no-content>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Podobne">
-        <ng-container *ngIf="(intentions$  | async) as intentions; else noReleated">
-          <div *ngFor="let intention of intentions">{{intention.title}}</div>
-        </ng-container>
-
-        <ng-template #noReleated>
-          <app-no-content message="Brak podobnych" link="/" anchor="intencji"></app-no-content>
-        </ng-template>
-      </mat-tab>
-
-      <ng-template #tabLoading>
-        <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
-      </ng-template>
-    </mat-tab-group>
-  </mat-card>
 </ng-container>
 <ng-template #loading>
   <ngx-skeleton-loader count="5"></ngx-skeleton-loader>

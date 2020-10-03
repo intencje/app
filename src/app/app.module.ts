@@ -38,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -87,7 +88,8 @@ const shouldUseEmulator = () => false;
     MatSlideToggleModule,
     MatChipsModule,
     MatBadgeModule,
-    MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [
     UserTrackingService,
