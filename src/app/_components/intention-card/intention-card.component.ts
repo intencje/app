@@ -1,7 +1,7 @@
 import { Component, Input, Inject, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth/auth.service';
-import { User, Intention, Comment, PrayingData, Tags } from 'src/app/_models/firebase.model';
+import { User, Intention, Comment, Tags, PrayingData } from 'src/app/_models/firebase.model';
 import { DbService } from '../../_services/db/db.service';
 import { ToolsService } from 'src/app/_services/tools/tools.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -93,6 +93,12 @@ export class IntentionCardComponent {
       });
   }
 
+  /**
+   * Operating the "I pray" button
+   * @param user Logged in user that is praying
+   * @param intentionId ID of the intention that user is praying for
+   */
+
   async iPrayForThis(user: User, intentionId: string): Promise<void> {
     const prayingData: PrayingData = {
       displayName: user.displayName,
@@ -109,12 +115,14 @@ export class IntentionCardComponent {
       .commit()
       .then(() => {
         this.thankYouButtonClicked = true;
+
+        this.intention.prayingData = this.intention.prayingData || ({} as PrayingData);
         Object.assign(this.intention.prayingData, {
           temporaryKey: {
-            thanked: false,
-            displayName: 'Anonim',
+            prayingData,
           },
         });
+
         this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {
           verticalPosition: 'top',
           duration: 5000,
