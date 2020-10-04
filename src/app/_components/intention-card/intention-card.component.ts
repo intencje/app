@@ -1,16 +1,16 @@
-import { Component, Input, Inject, NgZone } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth/auth.service';
-import { User, Intention, Comment, Tags, PrayingData } from 'src/app/_models/firebase.model';
+import { User, Intention, Comment, Tags, PrayingData, Prayers, Patrons } from 'src/app/_models/firebase.model';
 import { DbService } from '../../_services/db/db.service';
 import { ToolsService } from 'src/app/_services/tools/tools.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import { CustomValidators } from '../../_models/custom-validators.model';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-intention-card',
@@ -19,14 +19,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class IntentionCardComponent {
   @Input() intention: Intention;
-  @Input() latest: any;
   @Input() showProfileDetialsOnClick = true;
   @Input() type: string;
   private unsubscribe = new Subject();
   public intentions$: Observable<Intention[]>;
-  public prayers$: Observable<any>;
-  public patrons$: Observable<any>;
-  public comments$: Observable<any>;
+  public prayers$: Observable<Prayers[]>;
+  public patrons$: Observable<Patrons[]>;
+  public comments$: Observable<Comment[]>;
   public tags = [];
   thankYouButtonClicked = false;
 
@@ -115,13 +114,16 @@ export class IntentionCardComponent {
       .commit()
       .then(() => {
         this.thankYouButtonClicked = true;
-
-        this.intention.prayingData = this.intention.prayingData || ({} as PrayingData);
-        Object.assign(this.intention.prayingData, {
-          temporaryKey: {
-            prayingData,
-          },
-        });
+        // TODO tylko jesli zrodlem danych jest router
+        if (typeof this.intention.prayingData != 'undefined') {
+          Object.assign(this.intention.prayingData, {
+            temporaryKey: {
+              prayingData,
+            },
+          });
+        } else {
+          this.intention.prayingData = [prayingData];
+        }
 
         this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {
           verticalPosition: 'top',
@@ -170,7 +172,7 @@ export class IntentionCardComponent {
   /*
    * Saves information about about thanks for the prayer for a given intention in a database. Triggered by "Thank" button.
    */
-  async thankYouForPraying(prayerID, intentionId): Promise<void> {
+  async thankYouForPraying(prayerID: string, intentionId: string): Promise<void> {
     await this.afs
       .doc(`intentions/${intentionId}`)
       .update({ [`prayingData.${prayerID}.thanked`]: true })
@@ -191,7 +193,7 @@ export class IntentionCardComponent {
    * @param tags Intention tags
    * @param date Intention date
    */
-  loadTabData(tab: { index: number }, tags: Tags, date: Date): void {
+  loadTabData(tab: { index: number }, tags: Tags, date: DocumentData): void {
     switch (tab.index) {
       case 1:
         if (typeof this.prayers$ === 'undefined' && tags)
@@ -229,7 +231,10 @@ export class IntentionCardComponent {
 })
 export class IntentionDeleteDialog {
   unsubscribe = new Subject();
-  constructor(public dialogRef: MatDialogRef<IntentionDeleteDialog>, @Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(
+    public dialogRef: MatDialogRef<IntentionDeleteDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string; title: string },
+  ) {}
 }
 
 @Component({
@@ -238,7 +243,7 @@ export class IntentionDeleteDialog {
 })
 export class IntentionSetFulfilledDialog {
   unsubscribe = new Subject();
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string; title: string }) {}
 }
 
 @Component({
@@ -247,7 +252,7 @@ export class IntentionSetFulfilledDialog {
 })
 export class IntentionSetStaleDialog {
   unsubscribe = new Subject();
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string; title: string }) {}
 }
 
 @Component({
@@ -279,7 +284,7 @@ export class IntentionAddCommentDialog {
       ],
     });
   }
-  get form() {
+  get form(): { [key: string]: AbstractControl } {
     return this.addIntentionCommentForm.controls;
   }
 

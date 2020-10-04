@@ -80,6 +80,7 @@ export class IntentionCreatePage implements OnInit {
         uid: user.uid,
         status: 'draft',
         authorDisplayName: user.displayName,
+        authorAvatarURL: 'assets/icons/avatar.png',
         content: payload.content,
         date: new Date(),
         title: payload.title,

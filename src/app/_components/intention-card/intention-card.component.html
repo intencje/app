@@ -6,11 +6,11 @@
       <img
         mat-card-avatar
         matListAvatar
-        [src]="intention.author_avatar_url ? intention.author_avatar_url : 'assets/icons/avatar.png'"
-        alt="{{intention.author}}"
+        [src]="intention.authorAvatarURL"
+        alt="{{intention.authorDisplayName}}"
       />
 
-      <mat-card-title> {{intention.author}} </mat-card-title>
+      <mat-card-title> {{intention.authorDisplayName}} </mat-card-title>
 
       <mat-card-subtitle>{{intention.date.seconds * 1000}}</mat-card-subtitle>
     </mat-card-header>
@@ -51,12 +51,12 @@
             <ng-template #prayButtonForLoggedIn>
               <button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button>
             </ng-template>
-            <ng-template #prayButtonForLoggedOut>
-              <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
-            </ng-template>
           </ng-container>
         </ng-template>
 
+        <ng-template #prayButtonForLoggedOut>
+          <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
+        </ng-template>
 
         <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
           <mat-icon svgIcon="more" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
@@ -244,18 +244,6 @@
               <a *ngIf="prayer.value.thanked == false && intention.uid == user.uid" (click)="thankYouForPraying(prayer.key, intention.id)" style="color: #ff00ff">&nbsp;PODZIEKUJ</a>
             </ng-container>
               </mat-chip>
-
-
-                <!-- <mat-chip *ngIf="auth.user$" style="background-color: #f3b61f;
-                background-color: #f3b61f;
-                text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);">
-                <a href="https://intencje.pl/rejestracja" style="text-decoration: none; color: #fff;" title="Zakładanie darmowego konta" class=""
-                >Dołącz do nas!</a
-                >
-                </mat-chip> -->
-
-
-
         </mat-chip-list>
       </div>
     </section>
