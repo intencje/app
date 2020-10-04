@@ -1,111 +1,263 @@
-<div class="timeline-avatar">
-  <img
-    alt=""
-    src="https://www.gravatar.com/avatar/e34c2bd1a1a8b456d0e13e33b049e599?s=50&amp;r=g&amp;d=mm"
-    srcset="https://www.gravatar.com/avatar/e34c2bd1a1a8b456d0e13e33b049e599?s=50&amp;r=g&amp;d=mm 2x"
-    height="50"
-    width="50"
-  />
-</div>
-<div class="timeline-item">
-  <div class="timeline-body">
-    <div class="timeline-username">
-      {{ intention.authorDisplayName }}
-      <time>
-        {{ intention.date.seconds * 1000 | date: 'dd/MM/yyyy/ H:mm:ss' }}
-      </time>
-    </div>
-    <h2>
-      <a routerLink="/wpis/{{ intention.slug }}" [state]="intention">{{ intention.title }}</a>
 
-      <ng-container *ngIf="auth.user$ | async as user">
-        <button [matMenuTriggerFor]="intentionMenu" mat-icon-button aria-label="Menu">
-          ...
-        </button>
+<ng-container *ngIf="type === 'extended'">
 
-        <mat-menu #intentionMenu="matMenu" xPosition="after" role="navigation">
-          <ng-container *ngIf="user.uid !== intention.uid">
-            <button mat-menu-item routerLink="/">Rozpocznij rozmowę z autorem intencji</button>
-          </ng-container>
+  <mat-card class="mat-elevation-z0">
+    <mat-card-header>
+      <img
+        mat-card-avatar
+        matListAvatar
+        [src]="intention.author_avatar_url ? intention.author_avatar_url : 'assets/icons/avatar.png'"
+        alt="{{intention.author}}"
+      />
 
-          <ng-container *ngIf="user.uid === intention.uid">
-            <button mat-menu-item (click)="intentionAddCommentDialog()">Dodaj komentarz do intencji</button>
-            <button mat-menu-item (click)="intentionSetFulfilledDialog()">Oznacz intencję jako spełniona</button>
-            <button mat-menu-item (click)="intentionSetStaleDialog()">Oznacz intencję jako nieaktualną</button>
-            <button mat-menu-item (click)="intentionDeleteDialog()">Usuń intencję</button>
-          </ng-container>
+      <mat-card-title> {{intention.author}} </mat-card-title>
 
-          <button *appHasRole="['administrator']" (click)="intentionSetFulfilledDialog()" mat-menu-item>
-            🅰️ Oznacz jako spełniona
-          </button>
-          <button *appHasRole="['administrator']" (click)="intentionSetStaleDialog()" mat-menu-item>
-            🅰️ Oznacz jako nieaktualna
-          </button>
-          <button *appHasRole="['administrator']" routerLink="/edytuj/{{ intention.slug }}" mat-menu-item>
-            🅰️ Edytuj
-          </button>
-          <button *appHasRole="['administrator']" (click)="intentionDeleteDialog()" mat-menu-item>
-            🅰️ Usuń
-          </button>
-        </mat-menu>
-      </ng-container>
-    </h2>
-    <p>
-      <a routerLink="/wpis/{{ intention.slug }}" [state]="intention">{{ intention.content }}</a>
-    </p>
+      <mat-card-subtitle>{{intention.date.seconds * 1000}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{intention.content}}</p>
 
-    <br />Status: <strong style="color: red;">{{ intention.status }}</strong> <br /><span
-      *ngIf="intention.commentsCount > 0"
-      >Komentarzy: <strong style="color: blue;">{{ intention.commentsCount }}</strong></span
-    >
+      <mat-accordion *ngIf="intention.commentsCount > 0">
+        <mat-expansion-panel (opened)="getIntentionComments(intention.id)" class="mat-elevation-z0">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Pokaż komentarze autora intencji</mat-panel-title>
+          </mat-expansion-panel-header>
 
-    <p>
-      <mat-chip-list aria-label="Lista osób modlących się w intencji intention.title">
-        <mat-chip *ngFor="let tag of intention.tags"
-          ><mat-icon aria-label="Ikona symbolizująca tag">tags</mat-icon>{{ tag }}</mat-chip
-        >
+          <section *ngIf="(comments$ | async) as comments; else commentsLoading">
+            <p *ngFor="let comment of comments">{{comment.content}}</p>
+          </section>
+
+          <ng-template #commentsLoading>
+            <ngx-skeleton-loader count="1"></ngx-skeleton-loader>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-chip-list>
+        <mat-chip *ngFor="let tag of intention.tags">#{{tag}}</mat-chip>
       </mat-chip-list>
-    </p>
 
-    <ng-container *ngIf="auth.user$ | async as user; else prayButtonForLoggedOut">
-      <strong *ngIf="intention.praying?.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.praying?.length || 0 }}</strong>
-      <ng-template #prayButtonForLoggedIn><button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button></ng-template>
-    </ng-container>
-    <ng-template #prayButtonForLoggedOut>
-      <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
-    </ng-template>
-  </div>
-</div>
+      <mat-card-actions align="right">
 
-<section class="timeline-prayers">
-  <div>
-    <mat-chip-list aria-label="Lista osób modlących się w intencji TYTUL INTENCJI" style="display: inline-block;">
-      <mat-chip *ngFor="let prayer of intention.prayingData | keyvalue">
-        <img
-          alt=""
-          src="//www.gravatar.com/avatar/915deab4212e74233aee7beba5cf27c7?s=20&amp;r=g&amp;d=mm"
-          srcset="//www.gravatar.com/avatar/915deab4212e74233aee7beba5cf27c7?s=20&amp;r=g&amp;d=mm 2x"
-          height="20"
-          width="20"
-          style="border-radius: 50%; margin: 0 5px 0 0;"
-        />
-        {{ prayer.value.displayName }}
-        <ng-container *ngIf="auth.user$ | async as user">
-          <a *ngIf="prayer.value.thanked == false && intention.uid == user.uid" (click)="thankYouForPraying(prayer.key, intention.id)" style="color: #ff00ff">&nbsp;PODZIEKUJ</a>
+
+
+        <ng-container *ngIf="thankYouButtonClicked; else prayButton">
+          MODLISZ SIĘ W TEJ INTENCJI
         </ng-container>
-          </mat-chip>
+
+        <ng-template #prayButton>
+          <ng-container *ngIf="!thankYouButtonClicked && auth.user$ | async as user; else prayButtonForLoggedOut">
+            <strong *ngIf="intention.praying?.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.praying?.length || 0 }}</strong>
+            <ng-template #prayButtonForLoggedIn>
+              <button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button>
+            </ng-template>
+            <ng-template #prayButtonForLoggedOut>
+              <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
+            </ng-template>
+          </ng-container>
+        </ng-template>
 
 
-            <!-- <mat-chip *ngIf="auth.user$" style="background-color: #f3b61f;
-            background-color: #f3b61f;
-            text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);">
-            <a href="https://intencje.pl/rejestracja" style="text-decoration: none; color: #fff;" title="Zakładanie darmowego konta" class=""
-            >Dołącz do nas!</a
+        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+          <mat-icon svgIcon="more" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card-content>
+
+    <mat-tab-group (selectedTabChange)="loadTabData($event, intention.tags, intention.date)">
+      <mat-tab label="Modlą się">
+        <ng-container *ngIf="intention.prayingData as prayingData; else noPraying">
+          <mat-list *ngIf="prayingData">
+            <mat-list-item matRipple *ngFor="let prayer of prayingData | keyvalue">
+              <a mat-list-item>
+                <img
+                  matListAvatar
+                  src="https://intencje.pl/wp-content/uploads/avatars/2601/5e4674038269f-bpthumb.jpg"
+                  alt="{{prayer.displayName}}"
+                />
+                <h3 matLine>{{prayer.value.displayName}}</h3>
+                <ng-container *ngIf="auth.user$ | async as user">
+                  <button *ngIf="prayer.value.thanked === false && intention.uid === user.uid" (click)="thankYouForPraying(prayer.key, intention.id)">PODZIEKUJ</button>
+                </ng-container>
+
+              </a>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+
+        <ng-template #noPraying>
+          <app-no-content message="W tej intencji nikt się jeszcze nie modli"></app-no-content>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Modlitwy">
+        <ng-container *ngIf="(prayers$  | async) as prayers; else noPrayers">
+          <mat-list>
+            <mat-list-item matRipple *ngFor="let prayer of prayers">
+              <a mat-list-item>
+                <img
+                  matListAvatar
+                  src="https://intencje.pl/wp-content/uploads/avatars/1293/5e5e7ef443848-bpthumb.jpg"
+                  alt="{{prayer.title}}"
+                />
+                <h3 matLine>{{prayer.title}}</h3>
+              </a>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        <ng-template #noPrayers>
+          <app-no-content message="Brak powiązanych" link="/modlitwy" anchor="modlitw"></app-no-content>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Patroni">
+        <ng-container *ngIf="(patrons$  | async) as patrons; else noPatrons">
+          <mat-list>
+            <mat-list-item matRipple *ngFor="let patron of patrons">
+              <a mat-list-item>
+                <img
+                  matListAvatar
+                  src="https://intencje.pl/wp-content/uploads/avatars/910/5c486cf90d71e-bpthumb.png"
+                  alt="{{patron.name}}"
+                />
+                <h3 matLine>{{patron.name}}</h3>
+              </a>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        <ng-template #noPatrons>
+          <app-no-content message="Brak powiązanych" link="/patroni" anchor="patronów"></app-no-content>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Podobne">
+        <ng-container *ngIf="(intentions$  | async) as intentions; else noReleated">
+          <div *ngFor="let intention of intentions">{{intention.title}}</div>
+        </ng-container>
+
+        <ng-template #noReleated>
+          <app-no-content message="Brak podobnych" link="/" anchor="intencji"></app-no-content>
+        </ng-template>
+      </mat-tab>
+
+      <ng-template #tabLoading>
+        <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
+      </ng-template>
+    </mat-tab-group>
+  </mat-card>
+
+</ng-container>
+
+
+
+  <ng-container *ngIf="type === 'timeline'">
+    <div class="timeline-avatar">
+      <img
+        alt=""
+        src="https://www.gravatar.com/avatar/e34c2bd1a1a8b456d0e13e33b049e599?s=50&amp;r=g&amp;d=mm"
+        srcset="https://www.gravatar.com/avatar/e34c2bd1a1a8b456d0e13e33b049e599?s=50&amp;r=g&amp;d=mm 2x"
+        height="50"
+        width="50"
+      />
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-body">
+        <div class="timeline-username">
+          {{ intention.authorDisplayName }}
+          <time>
+            {{ intention.date.seconds * 1000 | date: 'dd/MM/yyyy/ H:mm:ss' }}
+          </time>
+        </div>
+        <h2>
+          <a routerLink="/wpis/{{ intention.slug }}" [state]="intention">{{ intention.title }}</a>
+
+          <ng-container *ngIf="auth.user$ | async as user">
+            <button [matMenuTriggerFor]="intentionMenu" mat-icon-button aria-label="Menu">
+              ...
+            </button>
+
+            <mat-menu #intentionMenu="matMenu" xPosition="after" role="navigation">
+              <ng-container *ngIf="user.uid !== intention.uid">
+                <button mat-menu-item routerLink="/">Rozpocznij rozmowę z autorem intencji</button>
+              </ng-container>
+
+              <ng-container *ngIf="user.uid === intention.uid">
+                <button mat-menu-item (click)="intentionAddCommentDialog()">Dodaj komentarz do intencji</button>
+                <button mat-menu-item (click)="intentionSetFulfilledDialog()">Oznacz intencję jako spełniona</button>
+                <button mat-menu-item (click)="intentionSetStaleDialog()">Oznacz intencję jako nieaktualną</button>
+                <button mat-menu-item (click)="intentionDeleteDialog()">Usuń intencję</button>
+              </ng-container>
+
+              <button *appHasRole="['administrator']" (click)="intentionSetFulfilledDialog()" mat-menu-item>
+                🅰️ Oznacz jako spełniona
+              </button>
+              <button *appHasRole="['administrator']" (click)="intentionSetStaleDialog()" mat-menu-item>
+                🅰️ Oznacz jako nieaktualna
+              </button>
+              <button *appHasRole="['administrator']" routerLink="/edytuj/{{ intention.slug }}" mat-menu-item>
+                🅰️ Edytuj
+              </button>
+              <button *appHasRole="['administrator']" (click)="intentionDeleteDialog()" mat-menu-item>
+                🅰️ Usuń
+              </button>
+            </mat-menu>
+          </ng-container>
+        </h2>
+        <p>
+          <a routerLink="/wpis/{{ intention.slug }}" [state]="intention">{{ intention.content }}</a>
+        </p>
+
+        <br />Status: <strong style="color: red;">{{ intention.status }}</strong> <br /><span
+          *ngIf="intention.commentsCount > 0"
+          >Komentarzy: <strong style="color: blue;">{{ intention.commentsCount }}</strong></span
+        >
+
+        <p>
+          <mat-chip-list aria-label="Lista osób modlących się w intencji intention.title">
+            <mat-chip *ngFor="let tag of intention.tags"
+              ><mat-icon aria-label="Ikona symbolizująca tag">tags</mat-icon>{{ tag }}</mat-chip
             >
-            </mat-chip> -->
+          </mat-chip-list>
+        </p>
+
+        <ng-container *ngIf="auth.user$ | async as user; else prayButtonForLoggedOut">
+          <strong *ngIf="intention.praying?.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.praying?.length || 0 }}</strong>
+          <ng-template #prayButtonForLoggedIn><button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button></ng-template>
+        </ng-container>
+        <ng-template #prayButtonForLoggedOut>
+          <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
+        </ng-template>
+      </div>
+    </div>
+
+    <section class="timeline-prayers">
+      <div>
+        <mat-chip-list aria-label="Lista osób modlących się w intencji TYTUL INTENCJI" style="display: inline-block;">
+          <mat-chip *ngFor="let prayer of intention.prayingData | keyvalue">
+            <img
+              alt=""
+              src="//www.gravatar.com/avatar/915deab4212e74233aee7beba5cf27c7?s=20&amp;r=g&amp;d=mm"
+              srcset="//www.gravatar.com/avatar/915deab4212e74233aee7beba5cf27c7?s=20&amp;r=g&amp;d=mm 2x"
+              height="20"
+              width="20"
+              style="border-radius: 50%; margin: 0 5px 0 0;"
+            />
+            {{ prayer.value.displayName }}
+            <ng-container *ngIf="auth.user$ | async as user">
+              <a *ngIf="prayer.value.thanked == false && intention.uid == user.uid" (click)="thankYouForPraying(prayer.key, intention.id)" style="color: #ff00ff">&nbsp;PODZIEKUJ</a>
+            </ng-container>
+              </mat-chip>
+
+
+                <!-- <mat-chip *ngIf="auth.user$" style="background-color: #f3b61f;
+                background-color: #f3b61f;
+                text-shadow: 0 0 1px rgba(51, 51, 51, 0.37);">
+                <a href="https://intencje.pl/rejestracja" style="text-decoration: none; color: #fff;" title="Zakładanie darmowego konta" class=""
+                >Dołącz do nas!</a
+                >
+                </mat-chip> -->
 
 
 
-    </mat-chip-list>
-  </div>
-</section>
+        </mat-chip-list>
+      </div>
+    </section>
+
+  </ng-container>

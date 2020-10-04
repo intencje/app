@@ -9,10 +9,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ScreenService } from '../_services/screen/screen.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DbService } from '../_services/db/db.service';
-import { Plugins } from '@capacitor/core';
-
-// Capacitor
-const { Toast } = Plugins;
 
 @Component({
   selector: 'app-intentions',
@@ -185,12 +181,5 @@ export class IntentionsPage implements OnInit {
     this.unsubscribe.next();
     this.seoService.removeJSONLD();
     this.snack?.dismiss();
-  }
-
-  async show() {
-    console.log('q');
-    await Toast.show({
-      text: 'Hello!',
-    });
   }
 }

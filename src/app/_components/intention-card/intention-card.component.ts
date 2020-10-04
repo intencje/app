@@ -1,14 +1,13 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth/auth.service';
-import { User, Intention, Comment, PrayingData } from 'src/app/_models/firebase.model';
+import { User, Intention, Comment, Tags, PrayingData } from 'src/app/_models/firebase.model';
 import { DbService } from '../../_services/db/db.service';
 import { ToolsService } from 'src/app/_services/tools/tools.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CustomValidators } from '../../_models/custom-validators.model';
-import { IntentionsPage } from 'src/app/intentions/intentions.page';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -22,7 +21,15 @@ export class IntentionCardComponent {
   @Input() intention: Intention;
   @Input() latest: any;
   @Input() showProfileDetialsOnClick = true;
+  @Input() type: string;
   private unsubscribe = new Subject();
+  public intentions$: Observable<Intention[]>;
+  public prayers$: Observable<any>;
+  public patrons$: Observable<any>;
+  public comments$: Observable<any>;
+  public tags = [];
+  thankYouButtonClicked = false;
+
   objectKeys = Object.keys;
 
   constructor(
@@ -31,7 +38,6 @@ export class IntentionCardComponent {
     private db: DbService,
     private tools: ToolsService,
     public dialog: MatDialog,
-    public intentionsPage: IntentionsPage,
     private snackbar: MatSnackBar,
     private afs: AngularFirestore,
   ) {}
@@ -39,6 +45,7 @@ export class IntentionCardComponent {
   /*
    * Launches a popup with a button to delete the intention.
    */
+
   intentionDeleteDialog(): void {
     const dialogRef = this.dialog.open(IntentionDeleteDialog, {
       data: { title: this.intention.title, id: this.intention.id },
@@ -49,7 +56,7 @@ export class IntentionCardComponent {
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'trashed' }).then(() => {
           if (id == this.intention.id) {
-            this.intentionsPage.generateTimeline();
+            // TODO redirect after delete
             this.snackbar.open('Intencja została usunięta', 'OK', {
               verticalPosition: 'top',
               duration: 5000,
@@ -72,7 +79,7 @@ export class IntentionCardComponent {
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'fulfilled' }).then(() => {
           if (id == this.intention.id) {
-            this.intentionsPage.generateTimeline();
+            // TODO redirect after delete
             const snack = this.snackbar.open('Chwała Panu!', 'PODZIEL SIĘ ŚWIADECTWEM', {
               verticalPosition: 'top',
               duration: 10000,
@@ -83,6 +90,46 @@ export class IntentionCardComponent {
             });
           }
         });
+      });
+  }
+
+  /**
+   * Operating the "I pray" button
+   * @param user Logged in user that is praying
+   * @param intentionId ID of the intention that user is praying for
+   */
+
+  async iPrayForThis(user: User, intentionId: string): Promise<void> {
+    const prayingData: PrayingData = {
+      displayName: user.displayName,
+      date: new Date(),
+      thanked: false,
+    };
+
+    const batch = this.afs.firestore.batch();
+    const intention = this.db.docRef(`intentions/${intentionId}`);
+    batch.update(intention, { praying: this.db.arrayUnion(user.uid) });
+    batch.update(intention, { [`prayingData.${user.uid}`]: prayingData });
+
+    batch
+      .commit()
+      .then(() => {
+        this.thankYouButtonClicked = true;
+
+        this.intention.prayingData = this.intention.prayingData || ({} as PrayingData);
+        Object.assign(this.intention.prayingData, {
+          temporaryKey: {
+            prayingData,
+          },
+        });
+
+        this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {
+          verticalPosition: 'top',
+          duration: 5000,
+        });
+      })
+      .catch((err) => {
+        console.log(err); // Bugtracker
       });
   }
 
@@ -99,7 +146,7 @@ export class IntentionCardComponent {
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'stale' }).then(() => {
           if (id == this.intention.id) {
-            this.intentionsPage.generateTimeline();
+            // TODO redirect after delete
             this.snackbar.open('Intencja oznaczona jako nieaktualna', 'OK', {
               verticalPosition: 'top',
               duration: 5000,
@@ -120,33 +167,6 @@ export class IntentionCardComponent {
   }
 
   /*
-   * Saves information about praying for a given intention in a database. Triggered by "I pray" button
-   */
-  async iPrayForThis(user: User, intentionId: string): Promise<void> {
-    const prayingData: PrayingData = {
-      displayName: user.displayName,
-      date: new Date(),
-      thanked: false,
-    };
-
-    const batch = this.afs.firestore.batch();
-    const intention = this.db.docRef(`intentions/${intentionId}`);
-    batch.update(intention, { praying: this.db.arrayUnion(user.uid) });
-    batch.update(intention, { [`prayingData.${user.uid}`]: prayingData });
-
-    batch
-      .commit()
-      .then(() => {
-        this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {
-          verticalPosition: 'top',
-          duration: 5000,
-        });
-      })
-      .catch((err) => {
-        console.log(err); // Bugtracker
-      });
-  }
-
   /*
    * Saves information about about thanks for the prayer for a given intention in a database. Triggered by "Thank" button.
    */
@@ -163,6 +183,43 @@ export class IntentionCardComponent {
       .catch((err) => {
         console.log(err); // Bugtracker
       });
+  }
+
+  /**
+   * Loads data for each tab of intention details. By checking typeof in each case data is loaded only once per click.
+   * @param tab Index of a selected tab
+   * @param tags Intention tags
+   * @param date Intention date
+   */
+  loadTabData(tab: { index: number }, tags: Tags, date: Date): void {
+    switch (tab.index) {
+      case 1:
+        if (typeof this.prayers$ === 'undefined' && tags)
+          this.prayers$ = this.db.collection$('prayers', (ref) => ref.where('tags', 'array-contains-any', tags));
+        break;
+      case 2:
+        if (typeof this.patrons$ === 'undefined' && tags)
+          this.patrons$ = this.db.collection$('patrons', (ref) => ref.where('tags', 'array-contains-any', tags));
+
+        break;
+      case 3:
+        if (typeof this.intentions$ === 'undefined' && tags && date)
+          this.intentions$ = this.db.collection$('intentions', (ref) =>
+            ref
+              .where('tags', 'array-contains-any', tags)
+              // W Firebase nie ma możliwości negacji w zapytaniu. Negacja potrzebna jest do wykluczenia
+              // obecnej intencji z listy podobnych. Idziemy na kompromis i wyświetlamy te intencje,
+              // które zostały dodane wcześniej.
+              .where('date', '<', date),
+          );
+        break;
+    }
+  }
+
+  getIntentionComments(intentionId: string): void {
+    this.comments$ = this.db.collection$(`intentions/${intentionId}/comments`, (ref) =>
+      ref.where('status', '==', 'published'),
+    );
   }
 }
 

@@ -33,6 +33,7 @@ export class IntentionDetailsPage implements OnInit {
   navigation: any;
   slug: string;
   private unsubscribe = new Subject();
+  dataSource: string;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Record<string, unknown>,
@@ -57,23 +58,23 @@ export class IntentionDetailsPage implements OnInit {
    * pobierane są z bazy wraz z konwersja z tablicy obiektów na pojedyńczy obiekt.
    */
   getIntention(): void {
-    this.intention$ = this.route.paramMap.pipe(
-      takeUntil(this.unsubscribe),
-      switchMap(() => {
-        if (typeof this.navigation !== 'undefined' && typeof this.navigation.extras.state == 'object') {
-          return of(this.navigation.extras.state);
-        } else {
-          const details = this.db.collection$('intentions', (ref) => ref.where('slug', '==', this.slug).limit(1));
-          return details.pipe(
-            // Szukanie po kolekcji zwraca tablicę obiektów. Nam potrzebny jest obiekt
-            map((data) => {
-              data[0] ? (this.intention$ = of(data[0])) : this.router.navigate(['404'], { skipLocationChange: true });
-              // TODO: Return real 404
-            }),
-          );
-        }
-      }),
-    );
+    if (typeof this.navigation !== 'undefined' && typeof this.navigation.extras.state == 'object') {
+      this.intention$ = of(this.navigation.extras.state);
+    } else {
+      this.intention$ = this.db
+        .collection$('intentions', (ref) => ref.where('slug', '==', this.slug).limit(1))
+        .pipe(
+          // Szukanie po kolekcji zwraca tablicę obiektów. Nam potrzebny jest obiekt
+          map((data) => {
+            if (data[0]) {
+              return data[0];
+            } else {
+              this.router.navigate(['404'], { skipLocationChange: true });
+            }
+          }),
+        );
+      this.dataSource = 'db';
+    }
   }
 
   getIntentionComments(intentionId: string): void {

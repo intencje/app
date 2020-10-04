@@ -107,7 +107,7 @@ export interface Intention {
   parish: string;
   commentsCount?: number;
   praying: string[]; // Separated UID's of prayers to easily generate "Intentions that I pray for" page with Firebase array-contains
-  prayingData?: [PrayingData];
+  prayingData?: PrayingData;
   tags?: string[];
   slug?: string;
 }
