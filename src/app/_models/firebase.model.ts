@@ -16,7 +16,7 @@ export enum Role {
 }
 
 export interface Tags {
-  name?: string;
+  name: string;
 }
 export interface User {
   uid: string;
@@ -101,14 +101,15 @@ export interface Intention {
   uid: string;
   status: 'draft' | 'trashed' | 'fulfilled' | 'stale' | 'published';
   authorDisplayName: string;
+  authorAvatarURL: string;
   date: DocumentData;
   title: string;
   content: string;
   parish: string;
   commentsCount?: number;
   praying: string[]; // Separated UID's of prayers to easily generate "Intentions that I pray for" page with Firebase array-contains
-  prayingData?: PrayingData;
-  tags?: string[];
+  prayingData?: [PrayingData];
+  tags?: Tags;
   slug?: string;
 }
 
@@ -122,4 +123,12 @@ export interface Comment {
   status: 'draft' | 'rejected' | 'published';
   date: DocumentData;
   content: string;
+}
+
+export interface Prayers {
+  title: string;
+}
+
+export interface Patrons {
+  name: string;
 }
