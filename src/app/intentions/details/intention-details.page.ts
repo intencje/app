@@ -60,6 +60,7 @@ export class IntentionDetailsPage implements OnInit {
   getIntention(): void {
     if (typeof this.navigation !== 'undefined' && typeof this.navigation.extras.state == 'object') {
       this.intention$ = of(this.navigation.extras.state);
+      this.dataSource = 'router';
     } else {
       this.intention$ = this.db
         .collection$('intentions', (ref) => ref.where('slug', '==', this.slug).limit(1))
