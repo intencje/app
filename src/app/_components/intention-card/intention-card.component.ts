@@ -21,6 +21,7 @@ export class IntentionCardComponent {
   @Input() intention: Intention;
   @Input() showProfileDetialsOnClick = true;
   @Input() type: string;
+  @Input() dataSource: string;
   private unsubscribe = new Subject();
   public intentions$: Observable<Intention[]>;
   public prayers$: Observable<Prayers[]>;
@@ -78,7 +79,7 @@ export class IntentionCardComponent {
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'fulfilled' }).then(() => {
           if (id == this.intention.id) {
-            // TODO redirect after delete
+            // TODO IN-138
             const snack = this.snackbar.open('Chwała Panu!', 'PODZIEL SIĘ ŚWIADECTWEM', {
               verticalPosition: 'top',
               duration: 10000,
@@ -114,15 +115,16 @@ export class IntentionCardComponent {
       .commit()
       .then(() => {
         this.thankYouButtonClicked = true;
-        // TODO tylko jesli zrodlem danych jest router
-        if (typeof this.intention.prayingData != 'undefined') {
-          Object.assign(this.intention.prayingData, {
-            temporaryKey: {
-              prayingData,
-            },
-          });
-        } else {
-          this.intention.prayingData = [prayingData];
+        if (this.dataSource === 'router') {
+          if (typeof this.intention.prayingData != 'undefined') {
+            Object.assign(this.intention.prayingData, {
+              temporaryKey: {
+                prayingData,
+              },
+            });
+          } else {
+            this.intention.prayingData = [prayingData];
+          }
         }
 
         this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {

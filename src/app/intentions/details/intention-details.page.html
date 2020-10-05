@@ -2,14 +2,12 @@
   *ngIf="(intention$ | async) as intention; else loading"
   [appAddSeoStuff]="{type: 'intention', data:intention}"
 >
-  <!-- <div>
+  <div>
     <app-intentions-header [title]="route.snapshot.data['title'] + intention.title"></app-intentions-header>
-  </div> -->
-
-  <!-- <header *ngIf="!screenService.isMobile" style="border-bottom: solid 1px rgba(0, 0, 0, 0.12)"><h1>{{route.snapshot.data['title'] + intention.title}}</h1>  </header> -->
+  </div>
 
         <app-intention-card
-          [intention]="intention" type="extended"
+          [intention]="intention" type="extended" [dataSource]="this.dataSource"
         ></app-intention-card>
 
 
