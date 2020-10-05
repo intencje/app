@@ -24,17 +24,17 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
           args: deploy --only hosting
-  # cypress-run:
-  #   needs: firebase-deploy
-  #   runs-on: ubuntu-16.04
-  #   steps:
-  #     - name: Checkout tests
-  #       uses: actions/checkout@v1
-  #     - name: Run Cypress
-  #       uses: cypress-io/github-action@v1
-  #       with:
-  #         browser: chrome
-  #         headless: true
-  #         wait-on: 'https://intencje-staging.web.app'
-  #         config: baseUrl=https://intencje-staging.web.app
-  #         env: stage=staging
+  cypress-run:
+    needs: firebase-deploy
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout tests
+        uses: actions/checkout@v1
+      - name: Run Cypress
+        uses: cypress-io/github-action@v1
+        with:
+          browser: chrome
+          headless: true
+          wait-on: 'https://intencje-staging.web.app'
+          config: baseUrl=https://intencje-staging.web.app
+          env: stage=staging
