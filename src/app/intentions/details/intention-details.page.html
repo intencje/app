@@ -5,12 +5,7 @@
   <div>
     <app-intentions-header [title]="route.snapshot.data['title'] + intention.title"></app-intentions-header>
   </div>
-
-        <app-intention-card
-          [intention]="intention" type="extended" [dataSource]="this.dataSource"
-        ></app-intention-card>
-
-
+  <app-intention-card [intention]="intention" type="extended" [dataSource]="this.dataSource"></app-intention-card>
 </ng-container>
 <ng-template #loading>
   <ngx-skeleton-loader count="5"></ngx-skeleton-loader>

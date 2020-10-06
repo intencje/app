@@ -28,7 +28,8 @@ export class IntentionCardComponent {
   public patrons$: Observable<Patrons[]>;
   public comments$: Observable<Comment[]>;
   public tags = [];
-  thankYouButtonClicked = false;
+  recordOfThanks = [];
+  iPrayForThisButtonClicked = false;
 
   objectKeys = Object.keys;
 
@@ -114,7 +115,7 @@ export class IntentionCardComponent {
     batch
       .commit()
       .then(() => {
-        this.thankYouButtonClicked = true;
+        this.iPrayForThisButtonClicked = true;
         if (this.dataSource === 'router') {
           if (typeof this.intention.prayingData != 'undefined') {
             Object.assign(this.intention.prayingData, {
@@ -170,22 +171,41 @@ export class IntentionCardComponent {
     });
   }
 
-  /*
-  /*
+  /**
    * Saves information about about thanks for the prayer for a given intention in a database. Triggered by "Thank" button.
+   * @param  {string} prayerID
+   * @param  {string} intentionId
+   * @returns Promise
    */
+
+  //    <ng-container *ngIf="intention.can_pray && this.prayersProvider.isPraying.indexOf(intention.id) == -1" text-center>
+  //    <button ion-button small (click)="this.prayersProvider.setPrayer(intention.id)">
+  //      <section class="button-inner" *ngIf="this.prayersProvider.showSpinner.indexOf(intention.id) == -1">
+  //        <span>MODLĘ SIĘ</span>
+  //        <span class="counter">{{intention.prayers}}</span>
+  //      </section>
+  //      <section *ngIf="this.prayersProvider.showSpinner.indexOf(intention.id) > -1">
+  //        <ion-spinner name="crescent"></ion-spinner>
+  //      </section>
+  //    </button>
+  //  </ng-container>
+
   async thankYouForPraying(prayerID: string, intentionId: string): Promise<void> {
     await this.afs
       .doc(`intentions/${intentionId}`)
       .update({ [`prayingData.${prayerID}.thanked`]: true })
       .then(() => {
+        this.recordOfThanks.push(prayerID);
         this.snackbar.open('Podziękowanie przesłane', 'OK', {
           verticalPosition: 'top',
           duration: 5000,
         });
       })
       .catch((err) => {
-        console.log(err); // Bugtracker
+        console.log(err); // TODO Bugtracker\
+      })
+      .finally(() => {
+        console.log(this.recordOfThanks);
       });
   }
 

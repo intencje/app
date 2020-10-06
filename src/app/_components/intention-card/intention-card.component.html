@@ -41,12 +41,12 @@
 
 
 
-        <ng-container *ngIf="thankYouButtonClicked; else prayButton">
+        <ng-container *ngIf="iPrayForThisButtonClicked; else prayButton">
           MODLISZ SIĘ W TEJ INTENCJI
         </ng-container>
 
         <ng-template #prayButton>
-          <ng-container *ngIf="!thankYouButtonClicked && auth.user$ | async as user; else prayButtonForLoggedOut">
+          <ng-container *ngIf="!iPrayForThisButtonClicked && auth.user$ | async as user; else prayButtonForLoggedOut">
             <strong *ngIf="intention.praying?.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.praying?.length || 0 }}</strong>
             <ng-template #prayButtonForLoggedIn>
               <button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button>
@@ -76,8 +76,9 @@
                   alt="{{prayer.displayName}}"
                 />
                 <h3 matLine>{{prayer.value.displayName}}</h3>
+
                 <ng-container *ngIf="auth.user$ | async as user">
-                  <button *ngIf="prayer.value.thanked === false && intention.uid === user.uid" (click)="thankYouForPraying(prayer.key, intention.id)">PODZIEKUJ</button>
+                  <button *ngIf="recordOfThanks.indexOf(prayer.key) == -1 && prayer.value.thanked === false && intention.uid === user.uid" (click)="thankYouForPraying(prayer.key, intention.id)">PODZIEKUJ</button>
                 </ng-container>
 
               </a>
