@@ -41,12 +41,12 @@
 
 
 
-        <ng-container *ngIf="thankYouButtonClicked; else prayButton">
+        <ng-container *ngIf="iPrayForThisButtonClicked; else prayButton">
           MODLISZ SIĘ W TEJ INTENCJI
         </ng-container>
 
         <ng-template #prayButton>
-          <ng-container *ngIf="!thankYouButtonClicked && auth.user$ | async as user; else prayButtonForLoggedOut">
+          <ng-container *ngIf="!iPrayForThisButtonClicked && auth.user$ | async as user; else prayButtonForLoggedOut">
             <strong *ngIf="intention.praying?.includes(user.uid); else prayButtonForLoggedIn">Modlisz się w tej intencji {{ intention.praying?.length || 0 }}</strong>
             <ng-template #prayButtonForLoggedIn>
               <button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button>
@@ -58,16 +58,30 @@
           <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
         </ng-template>
 
-        <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
-          <mat-icon svgIcon="more" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
+        <button [matMenuTriggerFor]="intentionMenu" mat-icon-button aria-label="Menu">
+          ...
         </button>
-      </mat-card-actions>
+  </mat-card-actions>
     </mat-card-content>
 
     <mat-tab-group (selectedTabChange)="loadTabData($event, intention.tags, intention.date)">
       <mat-tab label="Modlą się">
         <ng-container *ngIf="intention.prayingData as prayingData; else noPraying">
-          <mat-list *ngIf="prayingData">
+          <div class="wrappero">
+
+            <mat-card *ngFor="let prayer of prayingData | keyvalue" class="example-card"  >
+              <img mat-card-image src="https://intencje.pl/wp-content/uploads/avatars/2601/5e4674038269f-bpthumb.jpg" alt="Photo of a Shiba Inu">
+{{prayer.value.displayName}}
+<ng-container *ngIf="auth.user$ | async as user">
+  <button *ngIf="recordOfThanks.indexOf(prayer.key) == -1 && prayer.value.thanked === false && intention.uid === user.uid" (click)="thankYouForPraying(prayer.key, intention.id)">PODZIEKUJ</button>
+</ng-container>
+
+            </mat-card>
+
+
+          </div>
+
+          <!-- <mat-list *ngIf="prayingData">
             <mat-list-item matRipple *ngFor="let prayer of prayingData | keyvalue">
               <a mat-list-item>
                 <img
@@ -76,13 +90,14 @@
                   alt="{{prayer.displayName}}"
                 />
                 <h3 matLine>{{prayer.value.displayName}}</h3>
+
                 <ng-container *ngIf="auth.user$ | async as user">
-                  <button *ngIf="prayer.value.thanked === false && intention.uid === user.uid" (click)="thankYouForPraying(prayer.key, intention.id)">PODZIEKUJ</button>
+                  <button *ngIf="recordOfThanks.indexOf(prayer.key) == -1 && prayer.value.thanked === false && intention.uid === user.uid" (click)="thankYouForPraying(prayer.key, intention.id)">PODZIEKUJ</button>
                 </ng-container>
 
               </a>
             </mat-list-item>
-          </mat-list>
+          </mat-list> -->
         </ng-container>
 
         <ng-template #noPraying>
@@ -168,37 +183,10 @@
         <h2>
           <a routerLink="/wpis/{{ intention.slug }}" [state]="intention">{{ intention.title }}</a>
 
-          <ng-container *ngIf="auth.user$ | async as user">
             <button [matMenuTriggerFor]="intentionMenu" mat-icon-button aria-label="Menu">
               ...
             </button>
 
-            <mat-menu #intentionMenu="matMenu" xPosition="after" role="navigation">
-              <ng-container *ngIf="user.uid !== intention.uid">
-                <button mat-menu-item routerLink="/">Rozpocznij rozmowę z autorem intencji</button>
-              </ng-container>
-
-              <ng-container *ngIf="user.uid === intention.uid">
-                <button mat-menu-item (click)="intentionAddCommentDialog()">Dodaj komentarz do intencji</button>
-                <button mat-menu-item (click)="intentionSetFulfilledDialog()">Oznacz intencję jako spełniona</button>
-                <button mat-menu-item (click)="intentionSetStaleDialog()">Oznacz intencję jako nieaktualną</button>
-                <button mat-menu-item (click)="intentionDeleteDialog()">Usuń intencję</button>
-              </ng-container>
-
-              <button *appHasRole="['administrator']" (click)="intentionSetFulfilledDialog()" mat-menu-item>
-                🅰️ Oznacz jako spełniona
-              </button>
-              <button *appHasRole="['administrator']" (click)="intentionSetStaleDialog()" mat-menu-item>
-                🅰️ Oznacz jako nieaktualna
-              </button>
-              <button *appHasRole="['administrator']" routerLink="/edytuj/{{ intention.slug }}" mat-menu-item>
-                🅰️ Edytuj
-              </button>
-              <button *appHasRole="['administrator']" (click)="intentionDeleteDialog()" mat-menu-item>
-                🅰️ Usuń
-              </button>
-            </mat-menu>
-          </ng-container>
         </h2>
         <p>
           <a routerLink="/wpis/{{ intention.slug }}" [state]="intention">{{ intention.content }}</a>
@@ -249,3 +237,33 @@
     </section>
 
   </ng-container>
+
+
+  <mat-menu #intentionMenu="matMenu" xPosition="after" role="navigation">
+    <ng-container *ngIf="auth.user$ | async as user">
+    <ng-container *ngIf="user.uid !== intention.uid">
+      <button mat-menu-item routerLink="/">Rozpocznij rozmowę z autorem intencji</button>
+    </ng-container>
+
+    <ng-container *ngIf="user.uid === intention.uid">
+      <button mat-menu-item (click)="intentionAddCommentDialog()">Dodaj komentarz do intencji</button>
+      <button mat-menu-item (click)="intentionSetFulfilledDialog()">Oznacz intencję jako spełniona</button>
+      <button mat-menu-item (click)="intentionSetStaleDialog()">Oznacz intencję jako nieaktualną</button>
+      <button mat-menu-item (click)="intentionDeleteDialog()">Usuń intencję</button>
+    </ng-container>
+
+    <button *appHasRole="['administrator']" (click)="intentionSetFulfilledDialog()" mat-menu-item>
+      🅰️ Oznacz jako spełniona
+    </button>
+    <button *appHasRole="['administrator']" (click)="intentionSetStaleDialog()" mat-menu-item>
+      🅰️ Oznacz jako nieaktualna
+    </button>
+    <button *appHasRole="['administrator']" routerLink="/edytuj/{{ intention.slug }}" mat-menu-item>
+      🅰️ Edytuj
+    </button>
+    <button *appHasRole="['administrator']" (click)="intentionDeleteDialog()" mat-menu-item>
+      🅰️ Usuń
+    </button>
+
+</ng-container>
+</mat-menu>

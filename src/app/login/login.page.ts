@@ -75,7 +75,6 @@ export class LoginPage implements OnInit {
         //takeUntil(this.unsubscribe),
       )
       .subscribe();
-
   }
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -141,7 +140,7 @@ export class LoginPage implements OnInit {
               message = 'Wystąpił błąd. Spróbuj ponownie za chwilę';
               break;
           }
-          this.tools.presentToast(message);
+          this.tools.presentToast({ message: message });
           this.loading = false;
         });
     }
@@ -187,7 +186,7 @@ export class LoginPage implements OnInit {
           message = 'Wystąpił błąd. Spróbuj ponownie za chwilę';
           break;
       }
-      this.tools.presentToast(message);
+      this.tools.presentToast({ message: message });
     }
     //this.logging.dismiss();
   }

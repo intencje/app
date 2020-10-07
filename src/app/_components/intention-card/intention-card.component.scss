@@ -282,4 +282,23 @@ Używamy dodatjkowe DIVa w sekcji do pokazywania/ukrywania na mobile.
       }
     }
   }
+
+  .wrappero {
+    width:100%;
+    display:flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    mat-card {
+      width:80px; margin: 7px; flex: 0 0 auto;
+    }
+  }
 }
