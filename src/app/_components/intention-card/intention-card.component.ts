@@ -9,7 +9,6 @@ import { Validators, FormBuilder, FormGroup, AbstractControl } from '@angular/fo
 import { CustomValidators } from '../../_models/custom-validators.model';
 import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 
 @Component({
@@ -39,7 +38,6 @@ export class IntentionCardComponent {
     private db: DbService,
     private tools: ToolsService,
     public dialog: MatDialog,
-    private snackbar: MatSnackBar,
     private afs: AngularFirestore,
   ) {}
 
@@ -56,12 +54,9 @@ export class IntentionCardComponent {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'trashed' }).then(() => {
-          if (id == this.intention.id) {
-            // TODO redirect after delete
-            this.snackbar.open('Intencja została usunięta', 'OK', {
-              verticalPosition: 'top',
-              duration: 5000,
-            });
+          if (id === this.intention.id) {
+            this.tools.reloadAfterAction();
+            this.tools.presentToast({ message: 'Intencja została usunięta' });
           }
         });
       });
@@ -79,15 +74,13 @@ export class IntentionCardComponent {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'fulfilled' }).then(() => {
-          if (id == this.intention.id) {
-            // TODO IN-138
-            const snack = this.snackbar.open('Chwała Panu!', 'PODZIEL SIĘ ŚWIADECTWEM', {
-              verticalPosition: 'top',
-              duration: 10000,
-            });
-
-            snack.onAction().subscribe(() => {
-              this.router.navigateByUrl('/swiadectwa/dodaj');
+          if (id === this.intention.id) {
+            this.tools.reloadAfterAction('/spelnione');
+            this.tools.presentToast({
+              message: 'Chwała Panu!',
+              ctaText: 'PODZIEL SIĘ ŚWIADECTWEM',
+              ctaURL: '/swiadectwa/dodaj',
+              duration: 20000,
             });
           }
         });
@@ -127,11 +120,7 @@ export class IntentionCardComponent {
             this.intention.prayingData = [prayingData];
           }
         }
-
-        this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {
-          verticalPosition: 'top',
-          duration: 5000,
-        });
+        this.tools.presentToast({ message: 'Autor/ka intencji poinformowany/a' });
       })
       .catch((err) => {
         console.log(err); // Bugtracker
@@ -150,12 +139,9 @@ export class IntentionCardComponent {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'stale' }).then(() => {
-          if (id == this.intention.id) {
-            // TODO redirect after delete
-            this.snackbar.open('Intencja oznaczona jako nieaktualna', 'OK', {
-              verticalPosition: 'top',
-              duration: 5000,
-            });
+          if (id === this.intention.id) {
+            this.tools.reloadAfterAction('/moje');
+            this.tools.presentToast({ message: 'Intencja oznaczona jako nieaktualna' });
           }
         });
       });
@@ -196,10 +182,8 @@ export class IntentionCardComponent {
       .update({ [`prayingData.${prayerID}.thanked`]: true })
       .then(() => {
         this.recordOfThanks.push(prayerID);
-        this.snackbar.open('Podziękowanie przesłane', 'OK', {
-          verticalPosition: 'top',
-          duration: 5000,
-        });
+
+        this.tools.presentToast({ message: 'Podziękowanie przesłane' });
       })
       .catch((err) => {
         console.log(err); // TODO Bugtracker\
@@ -291,7 +275,7 @@ export class IntentionAddCommentDialog {
     public formBuilder: FormBuilder,
     public auth: AuthService,
     private db: DbService,
-    private snackbar: MatSnackBar,
+    private tools: ToolsService,
     @Inject(MAT_DIALOG_DATA) public data,
   ) {
     this.addIntentionCommentForm = formBuilder.group({
@@ -319,10 +303,7 @@ export class IntentionAddCommentDialog {
 
     if (this.addIntentionCommentForm.valid) {
       this.db.update(`intentions/${intentionId}/comments`, comment).then(() => {
-        this.snackbar.open('Komentarz przekazany do moderacji', 'OK', {
-          verticalPosition: 'top',
-          duration: 5000,
-        });
+        this.tools.presentToast({ message: 'Komenatrz przekazany do moderacji' });
       });
     }
   }
