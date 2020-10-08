@@ -60,21 +60,12 @@ export class DbService {
     const segments = path.split('/').filter((v) => v);
     if (segments.length % 2) {
       // Odd is always a collection
-      try {
-        return await this.afs.collection(path).add(data);
-      } catch (err) {
-        console.log(err); //TODO Bug tracker
-      }
+      return await this.afs.collection(path).add(data);
     } else {
       // Even is always document
-      try {
-        await this.afs.doc(path).set(data, { merge: true });
-      } catch (err1) {
-        console.log(err1); // TODO Bug tracker
-      }
+      await this.afs.doc(path).set(data, { merge: true });
     }
   }
-
   /**
    * @param  {string} path path to document
    *

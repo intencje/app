@@ -10,11 +10,11 @@
 
     <span class="fill-remaining-space"></span>
 
-    <form>
+    <!-- <form>
       <mat-form-field>
         <input style="font-size: 10px !important;" type="text" matInput placeholder="Szukaj w serwisie">
       </mat-form-field>
-    </form>
+    </form> -->
 
       <button *ngIf="auth.user$ | async as user else guest" routerLink="/uzytkownicy/1" mat-icon-button aria-label="Link do Twojego profilu" title="{{user.displayName}}">
         <img alt="user.displayName" [src]="user.avatarURL ? user.avatarURL : '/assets/icons/avatar.png'" height="40" width="40" style="border-radius: 50%"/>
@@ -157,12 +157,16 @@
 
 
     <ng-container *ngIf="isBrowser && auth.user$ | async as user else loggedout">
-      <button routerLink="/powiadomienia" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">Powiadomienia
+      <button routerLink="/powiadomienia" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
 
         <ng-container *ngIf="auth.user$ | async as user">
           <mat-icon *ngIf="user.unreadNotifications > 0" matBadge="{{user.unreadNotifications}}" matBadgeColor="warn">notifications</mat-icon>
           <mat-icon *ngIf="user.unreadNotifications == 0">notifications</mat-icon>
       </ng-container>
+      <span style="    font-size: 10px;
+      float: left;
+      margin: -20px 0 0 3px;
+      font-weight: 400;">Powiadomienia</span>
 
       </button>
       <button routerLink="/wiadomosci" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">

@@ -1,5 +1,4 @@
-<br/>
-<mat-chip-list aria-label="Wybierz listę intencji">
+<mat-chip-list class="topNavigation" role="navigation" aria-label="Filtruj listę intencji">
   <mat-chip routerLink="/" selected>Wszystkie</mat-chip>
   <mat-chip routerLink="/ulubione">Ulubione</mat-chip>
   <mat-chip routerLink="/moje">Moje</mat-chip>
@@ -7,7 +6,6 @@
   <mat-chip routerLink="/z-mojej-parafii">Z mojej parafii</mat-chip>
   <mat-chip routerLink="/spelnione">Spełnione</mat-chip>
 </mat-chip-list>
-<br><br>
 
 <ng-container *ngIf="intentionsList$ | async as intentions; else loading">
   <!-- <div style="height: 250px; background-size: cover; background-position: -120px 0px; background-image: url(/assets/img/header.png);"></div> -->
