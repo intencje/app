@@ -48,6 +48,8 @@
     "@nguniversal/express-engine": "^10.1.0",
     "@ngx-loading-bar/core": "^5.1.0",
     "@ngx-loading-bar/router": "^5.1.0",
+    "@sentry/angular": "^5.25.0",
+    "@sentry/tracing": "^5.25.0",
     "Intencje": "file:electron",
     "express": "^4.17.1",
     "firebase": "^7.21.1",

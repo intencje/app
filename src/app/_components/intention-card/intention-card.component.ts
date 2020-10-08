@@ -184,12 +184,6 @@ export class IntentionCardComponent {
         this.recordOfThanks.push(prayerID);
 
         this.tools.presentToast({ message: 'Podziękowanie przesłane' });
-      })
-      .catch((err) => {
-        console.log(err); // TODO Bugtracker\
-      })
-      .finally(() => {
-        console.log(this.recordOfThanks);
       });
   }
 
