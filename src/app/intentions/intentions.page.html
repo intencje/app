@@ -1,6 +1,14 @@
+<mat-chip-list class="topNavigation" role="navigation" aria-label="Filtruj listę intencji">
+  <mat-chip routerLink="/" selected>Wszystkie</mat-chip>
+  <mat-chip routerLink="/ulubione">Ulubione</mat-chip>
+  <mat-chip routerLink="/moje">Moje</mat-chip>
+  <mat-chip routerLink="/za-ktore-sie-modle">Za które się modlę</mat-chip>
+  <mat-chip routerLink="/z-mojej-parafii">Z mojej parafii</mat-chip>
+  <mat-chip routerLink="/spelnione">Spełnione</mat-chip>
+</mat-chip-list>
+
 <ng-container *ngIf="intentionsList$ | async as intentions; else loading">
   <!-- <div style="height: 250px; background-size: cover; background-position: -120px 0px; background-image: url(/assets/img/header.png);"></div> -->
-
   <div class="timeline" style="position: relative;">
     <div
       infiniteScroll
@@ -8,7 +16,7 @@
       [infiniteScrollThrottle]="50"
       (scrolled)="nextBatch((intentions[intentions.length -1].date))">
       <ng-container *ngFor="let intention of intentions; let i = index; trackBy: trackByIdx">
-        <app-intention-card
+        <app-intention-card type="timeline"
           *ngIf="intention.date.seconds * 1000 < startDate"
           [intention]="intention"
         ></app-intention-card>

@@ -17,3 +17,6 @@ Thumbs.db
 
 # Optional eslint cache
 .eslintcache
+
+# Cypress
+/cypress/screenshots

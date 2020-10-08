@@ -8,13 +8,7 @@ import { SeoService } from '../_services/seo/seo.service';
   styleUrls: ['./prayers.page.scss'],
 })
 export class PrayersPage implements OnInit {
+  constructor(public readonly route: ActivatedRoute, private readonly seoService: SeoService) {}
 
-  constructor(
-    public readonly route: ActivatedRoute,
-    private readonly seoService: SeoService,
-  ) { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

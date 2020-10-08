@@ -1,12 +1,10 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ScreenService } from './_services/screen/screen.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute, ResolveStart, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './_services/auth/auth.service';
-import { filter, map } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -15,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title: any;
+  title: string;
   public isBrowser = isPlatformBrowser(this.platformId);
   constructor(
     private swUpdate: SwUpdate,
@@ -26,7 +24,7 @@ export class AppComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public auth: AuthService,
 
-    @Inject(PLATFORM_ID) private platformId: Record<string, unknown>,
+    @Inject(PLATFORM_ID) private platformId,
   ) {}
 
   ngOnInit(): void {

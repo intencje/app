@@ -1,8 +1,45 @@
 {
+
   "appId": "pl.intencje",
-  "appName": "Intencje.pl",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
+  "appName": "Platforma Duchowej Łączności",
   "webDir": "dist/browser",
-  "cordova": {}
+  "npmClient": "npm",
+  "bundledWebRuntime": false,
+
+  "hideLogs": true,
+
+  "server": {
+    "url": "https://ide.int.intencje.pl:8100",
+    "hostname": "app",
+    "iosScheme": "ionic",
+    "androidScheme": "http",
+    "allowNavigation": [
+      "example.org",
+      "*.example.org",
+      "192.0.2.1"
+    ]
+  },
+  "overrideUserAgent": "my custom user agent",
+  "appendUserAgent": "string to append",
+  "backgroundColor": "#ffffffff",
+  "android": {
+    "overrideUserAgent": "my custom user agent for Android",
+    "appendUserAgent": "string to append for Android",
+    "backgroundColor": "#ffffffff",
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true,
+    "hideLogs": true
+  },
+  "ios": {
+    "overrideUserAgent": "my custom user agent for iOS",
+    "appendUserAgent": "string to append for iOS",
+    "backgroundColor": "#ffffffff",
+    "contentInset": "always",
+    "cordovaSwiftVersion": "4.2",
+    "minVersion": "11.3",
+    "cordovaLinkerFlags": ["-ObjC"],
+    "allowsLinkPreview": false,
+    "hideLogs": true
+  }
 }

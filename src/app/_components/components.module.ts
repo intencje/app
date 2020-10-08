@@ -37,6 +37,12 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { MatRippleModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -79,6 +85,17 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ReactiveFormsModule,
     MatTooltipModule,
     MatExpansionModule,
+    MatTabsModule,
+    FormsModule,
+    NgxSkeletonLoaderModule,
+    MatRippleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatListModule,
   ],
   exports: [
     IntentionsHeaderComponent,
@@ -110,9 +127,19 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatDialogModule,
     MatInputModule,
     FormsModule,
+    NgxSkeletonLoaderModule,
     ReactiveFormsModule,
     MatTooltipModule,
     MatExpansionModule,
+    MatTabsModule,
+    MatRippleModule,
+    MatChipsModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatListModule,
   ],
   entryComponents: [
     IntentionDeleteDialog,

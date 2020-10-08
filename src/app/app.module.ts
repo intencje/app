@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, isDevMode, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -38,7 +38,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router } from '@angular/router';
+import * as Sentry from '@sentry/angular';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -87,9 +90,27 @@ const shouldUseEmulator = () => false;
     MatSlideToggleModule,
     MatChipsModule,
     MatBadgeModule,
-    MatMenuModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [
+    {
+      provide: ErrorHandler,
+      useValue: Sentry.createErrorHandler({
+        showDialog: true,
+      }),
+    },
+    {
+      provide: Sentry.TraceService,
+      deps: [Router],
+    },
+    {
+      provide: APP_INITIALIZER,
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      useFactory: () => () => {},
+      deps: [Sentry.TraceService],
+      multi: true,
+    },
     UserTrackingService,
     ScreenTrackingService,
     // { provide: ANALYTICS_DEBUG_MODE, useFactory: () => isDevMode() },

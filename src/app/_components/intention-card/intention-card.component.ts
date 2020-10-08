@@ -1,17 +1,15 @@
 import { Component, Input, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth/auth.service';
-import { User, Intention, Comment, PrayingData } from 'src/app/_models/firebase.model';
+import { User, Intention, Comment, Tags, PrayingData, Prayers, Patrons } from 'src/app/_models/firebase.model';
 import { DbService } from '../../_services/db/db.service';
 import { ToolsService } from 'src/app/_services/tools/tools.service';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import { CustomValidators } from '../../_models/custom-validators.model';
-import { IntentionsPage } from 'src/app/intentions/intentions.page';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-intention-card',
@@ -20,9 +18,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class IntentionCardComponent {
   @Input() intention: Intention;
-  @Input() latest: any;
   @Input() showProfileDetialsOnClick = true;
+  @Input() type: string;
+  @Input() dataSource: string;
   private unsubscribe = new Subject();
+  public intentions$: Observable<Intention[]>;
+  public prayers$: Observable<Prayers[]>;
+  public patrons$: Observable<Patrons[]>;
+  public comments$: Observable<Comment[]>;
+  public tags = [];
+  recordOfThanks = [];
+  iPrayForThisButtonClicked = false;
+
   objectKeys = Object.keys;
 
   constructor(
@@ -31,14 +38,13 @@ export class IntentionCardComponent {
     private db: DbService,
     private tools: ToolsService,
     public dialog: MatDialog,
-    public intentionsPage: IntentionsPage,
-    private snackbar: MatSnackBar,
     private afs: AngularFirestore,
   ) {}
 
   /*
    * Launches a popup with a button to delete the intention.
    */
+
   intentionDeleteDialog(): void {
     const dialogRef = this.dialog.open(IntentionDeleteDialog, {
       data: { title: this.intention.title, id: this.intention.id },
@@ -48,12 +54,9 @@ export class IntentionCardComponent {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'trashed' }).then(() => {
-          if (id == this.intention.id) {
-            this.intentionsPage.generateTimeline();
-            this.snackbar.open('Intencja została usunięta', 'OK', {
-              verticalPosition: 'top',
-              duration: 5000,
-            });
+          if (id === this.intention.id) {
+            this.tools.reloadAfterAction();
+            this.tools.presentToast({ message: 'Intencja została usunięta' });
           }
         });
       });
@@ -71,57 +74,25 @@ export class IntentionCardComponent {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe((id) => {
         this.db.update(`intentions/${this.intention.id}`, { status: 'fulfilled' }).then(() => {
-          if (id == this.intention.id) {
-            this.intentionsPage.generateTimeline();
-            const snack = this.snackbar.open('Chwała Panu!', 'PODZIEL SIĘ ŚWIADECTWEM', {
-              verticalPosition: 'top',
-              duration: 10000,
-            });
-
-            snack.onAction().subscribe(() => {
-              this.router.navigateByUrl('/swiadectwa/dodaj');
+          if (id === this.intention.id) {
+            this.tools.reloadAfterAction('/spelnione');
+            this.tools.presentToast({
+              message: 'Chwała Panu!',
+              ctaText: 'PODZIEL SIĘ ŚWIADECTWEM',
+              ctaURL: '/swiadectwa/dodaj',
+              duration: 20000,
             });
           }
         });
       });
   }
 
-  /*
-   * Launches a popup with a button to change the status of the intention to "Stale".
+  /**
+   * Operating the "I pray" button
+   * @param user Logged in user that is praying
+   * @param intentionId ID of the intention that user is praying for
    */
-  intentionSetStaleDialog(): void {
-    const dialogRef = this.dialog.open(IntentionSetStaleDialog, {
-      data: { title: this.intention.title, id: this.intention.id },
-    });
-    dialogRef
-      .afterClosed()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe((id) => {
-        this.db.update(`intentions/${this.intention.id}`, { status: 'stale' }).then(() => {
-          if (id == this.intention.id) {
-            this.intentionsPage.generateTimeline();
-            this.snackbar.open('Intencja oznaczona jako nieaktualna', 'OK', {
-              verticalPosition: 'top',
-              duration: 5000,
-            });
-          }
-        });
-      });
-  }
 
-  /*
-   * Launches a popup with the possibility of adding a comment to the intention.
-   */
-  intentionAddCommentDialog(): void {
-    this.dialog.open(IntentionAddCommentDialog, {
-      width: '450px',
-      data: { title: this.intention.title, id: this.intention.id },
-    });
-  }
-
-  /*
-   * Saves information about praying for a given intention in a database. Triggered by "I pray" button
-   */
   async iPrayForThis(user: User, intentionId: string): Promise<void> {
     const prayingData: PrayingData = {
       displayName: user.displayName,
@@ -137,10 +108,19 @@ export class IntentionCardComponent {
     batch
       .commit()
       .then(() => {
-        this.snackbar.open('Autor/ka intencji poinformowany/a', 'OK', {
-          verticalPosition: 'top',
-          duration: 5000,
-        });
+        this.iPrayForThisButtonClicked = true;
+        if (this.dataSource === 'router') {
+          if (typeof this.intention.prayingData != 'undefined') {
+            Object.assign(this.intention.prayingData, {
+              temporaryKey: {
+                prayingData,
+              },
+            });
+          } else {
+            this.intention.prayingData = [prayingData];
+          }
+        }
+        this.tools.presentToast({ message: 'Autor/ka intencji poinformowany/a' });
       })
       .catch((err) => {
         console.log(err); // Bugtracker
@@ -148,21 +128,100 @@ export class IntentionCardComponent {
   }
 
   /*
-   * Saves information about about thanks for the prayer for a given intention in a database. Triggered by "Thank" button.
+   * Launches a popup with a button to change the status of the intention to "Stale".
    */
-  async thankYouForPraying(prayerID, intentionId): Promise<void> {
+  intentionSetStaleDialog(): void {
+    const dialogRef = this.dialog.open(IntentionSetStaleDialog, {
+      data: { title: this.intention.title, id: this.intention.id },
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((id) => {
+        this.db.update(`intentions/${this.intention.id}`, { status: 'stale' }).then(() => {
+          if (id === this.intention.id) {
+            this.tools.reloadAfterAction('/moje');
+            this.tools.presentToast({ message: 'Intencja oznaczona jako nieaktualna' });
+          }
+        });
+      });
+  }
+
+  /*
+   * Launches a popup with the possibility of adding a comment to the intention.
+   */
+  intentionAddCommentDialog(): void {
+    this.dialog.open(IntentionAddCommentDialog, {
+      width: '450px',
+      data: { title: this.intention.title, id: this.intention.id },
+    });
+  }
+
+  /**
+   * Saves information about about thanks for the prayer for a given intention in a database. Triggered by "Thank" button.
+   * @param  {string} prayerID
+   * @param  {string} intentionId
+   * @returns Promise
+   */
+
+  //    <ng-container *ngIf="intention.can_pray && this.prayersProvider.isPraying.indexOf(intention.id) == -1" text-center>
+  //    <button ion-button small (click)="this.prayersProvider.setPrayer(intention.id)">
+  //      <section class="button-inner" *ngIf="this.prayersProvider.showSpinner.indexOf(intention.id) == -1">
+  //        <span>MODLĘ SIĘ</span>
+  //        <span class="counter">{{intention.prayers}}</span>
+  //      </section>
+  //      <section *ngIf="this.prayersProvider.showSpinner.indexOf(intention.id) > -1">
+  //        <ion-spinner name="crescent"></ion-spinner>
+  //      </section>
+  //    </button>
+  //  </ng-container>
+
+  async thankYouForPraying(prayerID: string, intentionId: string): Promise<void> {
     await this.afs
       .doc(`intentions/${intentionId}`)
       .update({ [`prayingData.${prayerID}.thanked`]: true })
       .then(() => {
-        this.snackbar.open('Podziękowanie przesłane', 'OK', {
-          verticalPosition: 'top',
-          duration: 5000,
-        });
-      })
-      .catch((err) => {
-        console.log(err); // Bugtracker
+        this.recordOfThanks.push(prayerID);
+
+        this.tools.presentToast({ message: 'Podziękowanie przesłane' });
       });
+  }
+
+  /**
+   * Loads data for each tab of intention details. By checking typeof in each case data is loaded only once per click.
+   * @param tab Index of a selected tab
+   * @param tags Intention tags
+   * @param date Intention date
+   */
+  loadTabData(tab: { index: number }, tags: Tags, date: DocumentData): void {
+    switch (tab.index) {
+      case 1:
+        if (typeof this.prayers$ === 'undefined' && tags)
+          this.prayers$ = this.db.collection$('prayers', (ref) => ref.where('tags', 'array-contains-any', tags));
+        break;
+      case 2:
+        if (typeof this.patrons$ === 'undefined' && tags)
+          this.patrons$ = this.db.collection$('patrons', (ref) => ref.where('tags', 'array-contains-any', tags));
+
+        break;
+      case 3:
+        if (typeof this.intentions$ === 'undefined' && tags && date)
+          this.intentions$ = this.db.collection$('intentions', (ref) =>
+            ref
+              .where('tags', 'array-contains-any', tags)
+              // W Firebase nie ma możliwości negacji w zapytaniu. Negacja potrzebna jest do wykluczenia
+              // obecnej intencji z listy podobnych. Idziemy na kompromis i wyświetlamy te intencje,
+              // które zostały dodane wcześniej.
+              .where('date', '<', date),
+          );
+        break;
+    }
+  }
+
+  getIntentionComments(intentionId: string): void {
+    this.comments$ = this.db.collection$(`intentions/${intentionId}/comments`, (ref) =>
+      ref.where('status', '==', 'published'),
+    );
   }
 }
 
@@ -172,7 +231,10 @@ export class IntentionCardComponent {
 })
 export class IntentionDeleteDialog {
   unsubscribe = new Subject();
-  constructor(public dialogRef: MatDialogRef<IntentionDeleteDialog>, @Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(
+    public dialogRef: MatDialogRef<IntentionDeleteDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: { id: string; title: string },
+  ) {}
 }
 
 @Component({
@@ -181,7 +243,7 @@ export class IntentionDeleteDialog {
 })
 export class IntentionSetFulfilledDialog {
   unsubscribe = new Subject();
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string; title: string }) {}
 }
 
 @Component({
@@ -190,7 +252,7 @@ export class IntentionSetFulfilledDialog {
 })
 export class IntentionSetStaleDialog {
   unsubscribe = new Subject();
-  constructor(@Inject(MAT_DIALOG_DATA) public data) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string; title: string }) {}
 }
 
 @Component({
@@ -207,7 +269,7 @@ export class IntentionAddCommentDialog {
     public formBuilder: FormBuilder,
     public auth: AuthService,
     private db: DbService,
-    private snackbar: MatSnackBar,
+    private tools: ToolsService,
     @Inject(MAT_DIALOG_DATA) public data,
   ) {
     this.addIntentionCommentForm = formBuilder.group({
@@ -222,7 +284,7 @@ export class IntentionAddCommentDialog {
       ],
     });
   }
-  get form() {
+  get form(): { [key: string]: AbstractControl } {
     return this.addIntentionCommentForm.controls;
   }
 
@@ -235,10 +297,7 @@ export class IntentionAddCommentDialog {
 
     if (this.addIntentionCommentForm.valid) {
       this.db.update(`intentions/${intentionId}/comments`, comment).then(() => {
-        this.snackbar.open('Komentarz przekazany do moderacji', 'OK', {
-          verticalPosition: 'top',
-          duration: 5000,
-        });
+        this.tools.presentToast({ message: 'Komenatrz przekazany do moderacji' });
       });
     }
   }

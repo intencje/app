@@ -19,7 +19,9 @@
     "electron:devel": "ng build --prod --base-href=./ && npx cap copy && npx cap open electron",
     "electron:mac": "electron-packager ./electron Intencje --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
     "electron:win": "electron-packager ./electron Intencje --overwrite --asar=true --platform=win32 --arch=ia32 --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Platforma Duchowej Łączności'",
-    "electron:linux": "electron-packager ./electron Intencje --overwrite --asar=true --platform=linux --arch=x64 --prune=true --out=release-builds"
+    "electron:linux": "electron-packager ./electron Intencje --overwrite --asar=true --platform=linux --arch=x64 --prune=true --out=release-builds",
+    "cypress": "$(npm bin)/cypress run",
+    "cypress:open": "$(npm bin)/cypress open"
   },
   "private": true,
   "dependencies": {
@@ -42,9 +44,12 @@
     "@capacitor/ios": "^2.4.2",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
+    "@ionic/pwa-elements": "^3.0.1",
     "@nguniversal/express-engine": "^10.1.0",
     "@ngx-loading-bar/core": "^5.1.0",
     "@ngx-loading-bar/router": "^5.1.0",
+    "@sentry/angular": "^5.25.0",
+    "@sentry/tracing": "^5.25.0",
     "Intencje": "file:electron",
     "express": "^4.17.1",
     "firebase": "^7.21.1",
@@ -75,6 +80,7 @@
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
     "codelyzer": "^6.0.0",
+    "cypress": "^5.3.0",
     "electron-packager": "^15.1.0",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",

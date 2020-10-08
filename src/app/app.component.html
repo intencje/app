@@ -6,17 +6,15 @@
       <mat-icon aria-label="Logo serwisu Intencje.pl" title="Intencje.pl">logo</mat-icon>
      <!-- TODO: when the menu is closed display additional ico with menu on it ^ -->
     </button>
-    <h1 role="link" [matMenuTriggerFor]="breadcrumbsMenu">{{ title ? title : 'Ładowanie...' }} <span class="expansion-indicator"></span></h1>
-
-    <mat-menu #breadcrumbsMenu="matMenu" xPosition="before" role="navigation">
-      <button mat-menu-item routerLink="/moje">Moje</button>
-      <button mat-menu-item routerLink="/za-ktore-sie-modle">Za które się modlę</button>
-      <button mat-menu-item routerLink="/z-mojej-parafii">Z mojej parafii</button>
-      <button mat-menu-item routerLink="/spelnione">Spełnione</button>
-      <button mat-menu-item routerLink="/">Wszystkie</button>
-    </mat-menu>
+    <h1 role="link">{{ title ? title : 'Ładowanie...' }}</h1>
 
     <span class="fill-remaining-space"></span>
+
+    <!-- <form>
+      <mat-form-field>
+        <input style="font-size: 10px !important;" type="text" matInput placeholder="Szukaj w serwisie">
+      </mat-form-field>
+    </form> -->
 
       <button *ngIf="auth.user$ | async as user else guest" routerLink="/uzytkownicy/1" mat-icon-button aria-label="Link do Twojego profilu" title="{{user.displayName}}">
         <img alt="user.displayName" [src]="user.avatarURL ? user.avatarURL : '/assets/icons/avatar.png'" height="40" width="40" style="border-radius: 50%"/>
@@ -58,10 +56,10 @@
           <mat-icon aria-label="Ikona symbolizująca listę parafii">parishes</mat-icon>
           Parafie
         </a>
-        <a mat-list-item routerLink="/artykuly" routerLinkActive="active" aria-label="Link do listy artykułów" title="Artykuły">
+        <!-- <a mat-list-item routerLink="/artykuly" routerLinkActive="active" aria-label="Link do listy artykułów" title="Artykuły">
           <mat-icon aria-label="Ikona symbolizująca listę artykułów">articles</mat-icon>
           Artykuły
-        </a>
+        </a> -->
         <a mat-list-item routerLink="/patroni" routerLinkActive="active" aria-label="Link do listy patronów" title="Patroni">
           <mat-icon aria-label="Ikona symbolizująca listę patronów">patrons-day</mat-icon>
           Patroni
@@ -139,9 +137,18 @@
   <mat-toolbar class="footer" role="navigation" aria-label="Stopka">
     <button routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
       <mat-icon aria-label="Ikona symbolizująca stronę główną">home</mat-icon>
+      <span style="    font-size: 10px;
+      float: left;
+      margin: -20px 0 0 3px;
+      font-weight: 400;">Intencje</span>
     </button>
     <button routerLink="/modlitwy" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
       <mat-icon aria-label="Example thumbs up SVG icon">prayers</mat-icon>
+      <span style="    font-size: 10px;
+      float: left;
+      margin: -20px 0 0 3px;
+      font-weight: 400;">Modlitwy</span>
+
     </button>
     <button routerLink="/dodaj" routerLinkActive="active" mat-fab aria-label="Example icon button with a heart icon">
       <mat-icon aria-label="Example thumbs up SVG icon">add</mat-icon>
@@ -156,6 +163,10 @@
           <mat-icon *ngIf="user.unreadNotifications > 0" matBadge="{{user.unreadNotifications}}" matBadgeColor="warn">notifications</mat-icon>
           <mat-icon *ngIf="user.unreadNotifications == 0">notifications</mat-icon>
       </ng-container>
+      <span style="    font-size: 10px;
+      float: left;
+      margin: -20px 0 0 3px;
+      font-weight: 400;">Powiadomienia</span>
 
       </button>
       <button routerLink="/wiadomosci" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
@@ -163,6 +174,11 @@
           <mat-icon *ngIf="user.unreadMessages > 0" matBadge="{{user.unreadMessages}}" matBadgeColor="warn">messages</mat-icon>
           <mat-icon *ngIf="user.unreadMessages == 0">messages</mat-icon>
       </ng-container>
+      <span style="    font-size: 10px;
+      float: left;
+      margin: -20px 0 0 3px;
+      font-weight: 400;">Wiadomości</span>
+
       </button>
 
       </ng-container>

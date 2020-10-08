@@ -1,64 +1,62 @@
-import { Injectable } from '@angular/core';
-import { User } from '../../_models/firebase.model';
-import { from, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ToolsService {
-  constructor() {} //private storage: Storage,
+export class ToolsService implements OnDestroy {
+  private unsubscribe = new Subject();
+  constructor(private router: Router, private snackbar: MatSnackBar) {}
 
-  async presentToast(message: string, duration?: number) {
-    // const toast = await this.toastCtrl.create({
-    //   message,
-    //   duration: duration ? duration : 15000,
-    //   position: 'top',
-    //   buttons: [
-    //     // {
-    //     //
-    //     //   text: 'POMOC',
-    //     //   handler: () => {
-    //     //   }
-    //     // },
-    //     {
-    //       text: 'OK',
-    //       role: 'cancel',
-    //     },
-    //   ],
-    // });
-    // toast.present();
+  /**
+   * Reloads page after removin some elements
+   * @param  {string} destination Name of target page
+   * @returns void
+   */
+  reloadAfterAction(destination?: string): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([destination ? destination : '/']);
   }
 
-  //   /**
-  // 	 * W przypadku braku połączenia z Internetem wyświetla lokalny obrazek w zależności od wybranego typu.
-  // 	 * @param event - przekazywany przez ionError z div
-  // 	 */
-  //   loadDefaultImage(event) {
-  //     event.target.src = '/assets/icon/avatar.png';
-  //   }
+  /**
+   * Display Angular Material snackbar
+   * @param  {{message:string;horizontalPosition?:MatSnackBarHorizontalPosition;verticalPosition?:MatSnackBarVerticalPosition;duration?:number;ctaText?:string;}} params
+   * @returns Promise
+   */
+  async presentToast(params: {
+    message: string;
+    horizontalPosition?: MatSnackBarHorizontalPosition;
+    verticalPosition?: MatSnackBarVerticalPosition;
+    duration?: number;
+    ctaText?: string;
+    ctaURL?: string;
+  }): Promise<void> {
+    const horizontalPosition = params.hasOwnProperty('horizontalPosition') ? params.horizontalPosition : 'right';
+    const verticalPosition = params.hasOwnProperty('vertical') ? params.verticalPosition : 'top';
+    const duration = params.hasOwnProperty('duration') ? params.duration : 5000;
+    const ctaText = params.hasOwnProperty('ctaText') ? params.ctaText : 'OK';
 
-  //   // genruj observable z promise
-  //   get(key: string): Observable<any> {
-  //     return from(this.storage.get(key));
-  //   }
+    const snack = this.snackbar.open(params.message, ctaText, {
+      verticalPosition: verticalPosition,
+      horizontalPosition: horizontalPosition,
+      duration: duration,
+    });
 
-  //   // Wyciagaj string z promise'a
+    if (params.hasOwnProperty('ctaURL')) {
+      snack
+        .onAction()
+        .pipe(takeUntil(this.unsubscribe))
+        .subscribe(() => {
+          this.router.navigateByUrl(params.ctaURL);
+        });
+    }
+  }
 
-  // //     public getStorageKey(key) {
-  // //     let d: string;
-  // //     this.storage.ready().then(() => {
-  // //     this.storage.get(key).then(val => {
-  // //       //console.log(val);
-  // //       d = val;
-  // //       console.log(d);
-
-  // //     })
-  // //     .catch((error) => {
-  // //       console.error(error);
-  // //       });
-  // //     });
-  // // //    console.log(d);
-
-  // //     return d ? d : null;
-  // //   }
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+  }
 }

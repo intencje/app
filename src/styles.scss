@@ -367,3 +367,33 @@ a {
 .tooltip-alert {
   background: #b71c1c;
 }
+
+mat-sidenav {
+border: none !important;
+}
+
+.mat-drawer-container {
+  background: none}
+
+.topNavigation {
+
+  .mat-chip-list-wrapper {
+    margin: 0 0 30px 0;
+    width:100%;
+    display:flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    will-change: scroll-position;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    mat-chip {
+      flex: 0 0 auto !important;
+    }
+  }
+}
