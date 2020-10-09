@@ -8,13 +8,11 @@ import { SeoService } from '../_services/seo/seo.service';
   styleUrls: ['./help.page.scss'],
 })
 export class HelpPage implements OnInit {
+  constructor(public readonly route: ActivatedRoute, private readonly seoService: SeoService) {}
 
-  constructor(
-    public readonly route: ActivatedRoute,
-    private readonly seoService: SeoService,
-  ) { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  dupa() {
+    console.log('gwssg');
   }
-
 }
