@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, isDevMode, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { NgModule, isDevMode, APP_INITIALIZER, ErrorHandler, Injectable } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -48,9 +48,16 @@ export function playerFactory() {
 }
 
 const shouldUseEmulator = () => false;
+
+@Injectable()
+export class HammerCustomConfig extends HammerGestureConfig {
+  overrides = { press: { enable: true }, rotate: { enable: false } } as any;
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    HammerModule,
     HttpClientModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
@@ -110,6 +117,10 @@ const shouldUseEmulator = () => false;
       useFactory: () => () => {},
       deps: [Sentry.TraceService],
       multi: true,
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: HammerCustomConfig,
     },
     UserTrackingService,
     ScreenTrackingService,
