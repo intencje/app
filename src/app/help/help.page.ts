@@ -12,7 +12,7 @@ export class HelpPage implements OnInit {
 
   ngOnInit() {}
 
-  dupa() {
-    console.log('gwssg');
+  gestureTest(e) {
+    console.log(e);
   }
 }

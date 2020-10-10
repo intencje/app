@@ -1,5 +1,5 @@
-import { BrowserModule, HammerGestureConfig, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { NgModule, isDevMode, APP_INITIALIZER, ErrorHandler, Injectable } from '@angular/core';
+import { BrowserModule, HammerModule, HAMMER_GESTURE_CONFIG, HAMMER_LOADER } from '@angular/platform-browser';
+import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -42,6 +42,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import * as Sentry from '@sentry/angular';
+import { AppHammerConfig } from './app-hammer-config';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -49,15 +50,9 @@ export function playerFactory() {
 
 const shouldUseEmulator = () => false;
 
-@Injectable()
-export class HammerCustomConfig extends HammerGestureConfig {
-  overrides = { press: { enable: true }, rotate: { enable: false } } as any;
-}
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    HammerModule,
     HttpClientModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
@@ -74,6 +69,7 @@ export class HammerCustomConfig extends HammerGestureConfig {
     AngularFirePerformanceModule,
     AngularFireAuthGuardModule,
     FormsModule,
+    HammerModule,
     LottieModule.forRoot({
       player: playerFactory,
       useCache: true,
@@ -102,6 +98,16 @@ export class HammerCustomConfig extends HammerGestureConfig {
   ],
   providers: [
     {
+      provide: HAMMER_LOADER,
+      useValue: async () => {
+        return import('hammerjs/hammer');
+      },
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: AppHammerConfig,
+    },
+    {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({
         showDialog: true,
@@ -117,10 +123,6 @@ export class HammerCustomConfig extends HammerGestureConfig {
       useFactory: () => () => {},
       deps: [Sentry.TraceService],
       multi: true,
-    },
-    {
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: HammerCustomConfig,
     },
     UserTrackingService,
     ScreenTrackingService,
