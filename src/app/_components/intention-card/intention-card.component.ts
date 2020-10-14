@@ -235,6 +235,9 @@ export class IntentionDeleteDialog {
     public dialogRef: MatDialogRef<IntentionDeleteDialog>,
     @Inject(MAT_DIALOG_DATA) public data: { id: string; title: string },
   ) {}
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+  }
 }
 
 @Component({
@@ -244,6 +247,9 @@ export class IntentionDeleteDialog {
 export class IntentionSetFulfilledDialog {
   unsubscribe = new Subject();
   constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string; title: string }) {}
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+  }
 }
 
 @Component({
@@ -253,6 +259,9 @@ export class IntentionSetFulfilledDialog {
 export class IntentionSetStaleDialog {
   unsubscribe = new Subject();
   constructor(@Inject(MAT_DIALOG_DATA) public data: { id: string; title: string }) {}
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+  }
 }
 
 @Component({
