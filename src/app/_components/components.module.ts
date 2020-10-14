@@ -23,7 +23,7 @@ import { RouterModule } from '@angular/router';
 import { SeoStuffComponent } from './seo-stuff/seo-stuff.component';
 import { PrayingListItemComponent } from './praying-list-item/praying-list-item.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { ChangeAvatarComponent } from './change-avatar/change-avatar.component';
+import { ChangeAvatarComponent, CropperDialog } from './change-avatar/change-avatar.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -66,6 +66,7 @@ import { MatListModule } from '@angular/material/list';
     IntentionAddCommentDialog,
     IntentionSetFulfilledDialog,
     IntentionSetStaleDialog,
+    CropperDialog,
   ],
   imports: [
     CommonModule,
@@ -146,6 +147,7 @@ import { MatListModule } from '@angular/material/list';
     IntentionAddCommentDialog,
     IntentionSetFulfilledDialog,
     IntentionSetStaleDialog,
+    CropperDialog,
   ],
 })
 export class ComponentsModule {}

@@ -2,7 +2,18 @@
   input[type=file] {
     display:none;
   }
+  image-cropper {
+    padding: 0;
+    max-height: 80vh;
+    max-width: 80vh;
+  }
+
+  --cropper-outline-color: rgba(0,0,0,0.5);
+  --cropper-overlay-color: rgba(255,255,255)
 }
+
+
+
 
 
 

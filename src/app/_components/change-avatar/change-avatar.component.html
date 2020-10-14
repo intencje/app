@@ -1,44 +1,6 @@
-<div>
-  <div>
-    <div slot="start">
-      <div (click)="closeModal()">
-        <div slot="icon-only" name="close"></div>
-      </div>
-    </div>
-    <div *ngIf="imgLoaded" slot="end">
-      <div (click)="closeModal()">
-        GOTOWE
-      </div>
-    </div>
-    <div data-test="page-title">Zmień avatar</div>
-  </div>
-</div>
-<div>
-  <div *ngIf="!fileChanged" (click)="file.click()" size="small">Wybierz zdjęcie</div>
-  <div *ngIf="fileChanged">
-    <div>
-      <div size="3">
-        <div>
-          <img alt="" [src]="croppedImage ? croppedImage : '/assets/icons/avatar.png'" />
-        </div>
-      </div>
-      <div size="9">
+<button mat-button (click)="fileInput.click()">Wybierz zdjęcie</button>
+<button *ngIf="this.croppedImage" mat-button (click)="this.croppedImage=''">Usuń zdjęcie</button>
 
-        <image-cropper
-          roundCropper="true"
-          [imageChangedEvent]="imageChangedEvent"
-          [resizeToWidth]="256"
-          (imageCropped)="imageCropped($event)"
-          (imageLoaded)="imageLoaded()"
-          (cropperReady)="cropperReady()"
-          (loadImageFailed)="loadImageFailed()"
-        ></image-cropper>
-      </div>
-    </div>
-  </div>
-  <input #file type="file" accept=".png,.jpg,.jpeg" (change)="fileChangeEvent($event)" />
-</div>
-<div *ngIf="imgLoaded" class="ion-text-right ion-padding">
-  <div (click)="file.click()" size="small">Wybierz inne zdjęcie</div>
-  <div (click)="file.click()" size="small">Gotowe</div>
-</div>
+<input #fileInput type="file" accept=".png,.jpg,.jpeg" (change)="showCropperDialog($event)" />
+
+<img width=156 alt="" [src]="croppedImage ? croppedImage : '/assets/icons/avatar.png'" />

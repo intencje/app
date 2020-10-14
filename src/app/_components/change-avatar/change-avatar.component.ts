@@ -1,12 +1,12 @@
-import { Component, Input, ElementRef, ViewChild } from '@angular/core';
-import { ToolsService } from '../../_services/tools/tools.service';
-import { Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { Component, Input, ElementRef, ViewChild, Inject } from '@angular/core';
+import { from, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import 'hammerjs';
 //import 'firebase/storage';
-//import 'hammerjs';
 
 @Component({
   selector: 'app-change-avatar',
@@ -14,12 +14,31 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
   styleUrls: ['./change-avatar.component.scss'],
 })
 export class ChangeAvatarComponent {
-  @ViewChild('file') file: ElementRef;
+  @ViewChild('fileInput') fileInput: any;
+  unsubscribe = new Subject();
+  croppedImage = '';
+  constructor(public dialog: MatDialog) {}
 
+  showCropperDialog(event) {
+    const dialogRef = this.dialog.open(CropperDialog, {
+      data: { event: event },
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe))
+      .subscribe((data) => {
+        data ? (this.croppedImage = data) : null;
+        this.fileInput.nativeElement.value = '';
+      });
+  }
+}
+@Component({
+  selector: 'cropper.dialog',
+  templateUrl: './cropper.dialog.html',
+  styleUrls: ['./change-avatar.component.scss'],
+})
+export class CropperDialog {
   imgLoaded = false;
-  loading: any;
-  // Upload task
-  task: AngularFireUploadTask;
 
   // Firestore data
   result$: Observable<any>;
@@ -27,25 +46,18 @@ export class ChangeAvatarComponent {
 
   imageChangedEvent: any = '';
   croppedImage: string;
-  fileChanged = false;
 
+  unsubscribe = new Subject();
   constructor(
-    private toolsService: ToolsService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private storage: AngularFireStorage,
     private afs: AngularFirestore,
-  ) {}
-
-  async closeModal() {
-    //await this.modalController.dismiss(this.croppedImage);
+    public dialog: MatDialog,
+  ) {
+    this.imageChangedEvent = data.event;
   }
 
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-    this.fileChanged = true;
-    console.log('plik zmieniony');
-  }
   imageCropped(event: ImageCroppedEvent) {
-    console.log('zdjecie przyciete');
     this.croppedImage = event.base64;
     //this.startUpload(this.croppedImage);
   }
@@ -60,39 +72,7 @@ export class ChangeAvatarComponent {
     console.log('ladowanie sie nie udalo');
   }
 
-  /**
-   * Uruchamia loader informujący użytkownika o toczącym się procesie logowania
-   */
-  async showLoading(): Promise<void> {
-    // this.loading = await this.loadingController.create({
-    //   message: 'Logowanie...',
-    // });
-    // await this.loading.present();
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
   }
-
-  startUpload(file: string) {
-    // Show loader
-    //this.showLoading();
-
-    // const timestamp = new Date().getTime().toString();
-    const docId = this.afs.createId();
-
-    const path = `${docId}`;
-
-    // Make a reference to the future location of the firestore document
-    const photoRef = this.afs.collection('photos').doc(docId);
-
-    this.result$ = photoRef.valueChanges().pipe(
-      filter(data => !!data),
-      tap(() => this.loading.dismiss()),
-    );
-
-    // The main task
-    this.image = file;
-    this.task = this.storage.ref(path).putString(this.image, 'data_url');
-  }
-
-  // ionViewWillEnter() {
-  //   this.file.nativeElement.click();
-  // }
 }
