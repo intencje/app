@@ -1,6 +1,0 @@
-<button mat-button (click)="fileInput.click()">Wybierz zdjęcie</button>
-<button *ngIf="this.croppedImage" mat-button (click)="this.croppedImage=''">Usuń zdjęcie</button>
-
-<input #fileInput type="file" accept=".png,.jpg,.jpeg" (change)="showCropperDialog($event)" />
-
-<img width=156 alt="" [src]="croppedImage ? croppedImage : '/assets/icons/avatar.png'" />

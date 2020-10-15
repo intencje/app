@@ -9,11 +9,11 @@ import 'hammerjs';
 //import 'firebase/storage';
 
 @Component({
-  selector: 'app-change-avatar',
-  templateUrl: './change-avatar.component.html',
-  styleUrls: ['./change-avatar.component.scss'],
+  selector: 'app-set-image',
+  templateUrl: './set-image.component.html',
+  styleUrls: ['./set-image.component.scss'],
 })
-export class ChangeAvatarComponent {
+export class SetImageComponent {
   @ViewChild('fileInput') fileInput: any;
   unsubscribe = new Subject();
   croppedImage = '';
@@ -35,7 +35,7 @@ export class ChangeAvatarComponent {
 @Component({
   selector: 'cropper.dialog',
   templateUrl: './cropper.dialog.html',
-  styleUrls: ['./change-avatar.component.scss'],
+  styleUrls: ['./set-image.component.scss'],
 })
 export class CropperDialog {
   imgLoaded = false;
