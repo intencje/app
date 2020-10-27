@@ -2,23 +2,23 @@
   <form *ngIf="!confirmed" id="addIntentionForm" class="form" [formGroup]="addIntentionForm" (ngSubmit)="addIntention(addIntentionForm.value)">
     <mat-form-field>
       <mat-label id="titleLabel">Tytuł intencji</mat-label>
-      <input #title minlength="5" maxlength="40" matInput formControlName="title" id="title" type="text" aria-labelledby="titleLabel" placeholder="Na przykład: 'Za zdrowie Mamy'"/>
+      <input #title minlength="5" maxlength="40" matInput formControlName="title" id="title" type="text" aria-labelledby="titleLabel" placeholder="Na przykład: 'Za zdrowie Mamy'" required/>
       <mat-hint align="end">{{title.value.length}} / {{title.maxLength}}</mat-hint>
-      <mat-error *ngIf="form.title.invalid && form.title.errors.required" role="alertdialog">Wpisz tytuł intencji</mat-error>
-      <mat-error *ngIf="form.title.invalid && form.title.errors.minlength" role="alertdialog">Tytuł intencji musi mieć minimum 5 liter</mat-error>
-      <mat-error *ngIf="form.title.invalid && form.title.errors.maxlength" role="alertdialog">Tytuł intencji może mieć maksymalnie 40 liter</mat-error>
-      <mat-error *ngIf="form.title.invalid && form.title.errors.cannotContainSwearwords" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+      <mat-error *ngIf="form.title.hasError('required')" role="alertdialog">Wpisz tytuł intencji</mat-error>
+      <mat-error *ngIf="form.title.hasError('minlength')" role="alertdialog">Tytuł intencji musi mieć minimum 5 liter</mat-error>
+      <mat-error *ngIf="form.title.hasError('maxlength')" role="alertdialog">Tytuł intencji może mieć maksymalnie 40 liter</mat-error>
+      <mat-error *ngIf="form.title.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
     </mat-form-field>
 
 
     <mat-form-field>
       <mat-label id="contentLabel">Treść intencji</mat-label>
-      <textarea #content minlength="20" maxlength="500" matInput formControlName="content" id="content" name="content" cols="30" rows="10" aria-labelledby="titleLabel"></textarea>
+      <textarea #content minlength="20" maxlength="500" matInput formControlName="content" id="content" name="content" cols="30" rows="10" aria-labelledby="titleLabel" required></textarea>
       <mat-hint align="end">{{content.value.length}} / {{content.maxLength}}</mat-hint>
-      <mat-error *ngIf="form.content.invalid && form.content.errors.required" role="alertdialog">Wpisz treść intencji</mat-error>
-      <mat-error *ngIf="form.content.invalid && form.content.errors.minlength" role="alertdialog">Treść intencji musi mieć minimum 10 liter</mat-error>
-      <mat-error *ngIf="form.content.invalid && form.content.errors.maxlength" role="alertdialog">Treść intencji może mieć maksymalnie 500 liter</mat-error>
-      <mat-error *ngIf="form.content.invalid && form.content.errors.cannotContainSwearwords" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+      <mat-error *ngIf="form.content.hasError('required')" role="alertdialog">Wpisz treść intencji</mat-error>
+      <mat-error *ngIf="form.content.hasError('minlength')" role="alertdialog">Treść intencji musi mieć minimum 20 liter</mat-error>
+      <mat-error *ngIf="form.content.hasError('maxlength')" role="alertdialog">Treść intencji może mieć maksymalnie 500 liter</mat-error>
+      <mat-error *ngIf="form.content.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
     </mat-form-field>
 
     <button mat-button type="submit">Dodaj intencję</button>

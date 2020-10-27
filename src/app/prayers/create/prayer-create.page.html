@@ -1,7 +1,53 @@
-<div>
-  <app-prayers-header [title]="route.snapshot.data['title']"></app-prayers-header>
-</div>
 
-<div>
+  <form *ngIf="!confirmed" id="addPrayerForm" [formGroup]="addPrayerForm" (ngSubmit)="addPrayer(addPrayerForm.value)">
+    <mat-form-field>
+      <mat-label id="titleLabel">Tytuł modlitwy</mat-label>
+      <input #title minlength="5" maxlength="40" matInput formControlName="title" id="title" type="text" aria-labelledby="titleLabel" placeholder="Na przykład: 'Za zdrowie Mamy'" required/>
+      <mat-hint align="end">{{title.value.length}} / {{title.maxLength}}</mat-hint>
+      <mat-error *ngIf="form.title.hasError('required')" role="alertdialog">Wpisz tytuł modlitwy</mat-error>
+      <mat-error *ngIf="form.title.hasError('minlength')" role="alertdialog">Tytuł modlitwy musi mieć minimum 5 liter</mat-error>
+      <mat-error *ngIf="form.title.hasError('maxlength')" role="alertdialog">Tytuł modlitwy może mieć maksymalnie 40 liter</mat-error>
+      <mat-error *ngIf="form.title.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+    </mat-form-field>
 
-</div>
+    <mat-form-field>
+      <mat-label id="contentLabel">Treść modlitwy</mat-label>
+      <textarea #content minlength="20" maxlength="1000" matInput formControlName="content" id="content" name="content" cols="30" rows="20" aria-labelledby="titleLabel" required></textarea>
+      <mat-hint align="end">{{content.value.length}} / {{content.maxLength}}</mat-hint>
+      <mat-error *ngIf="form.content.hasError('required')" role="alertdialog">Wpisz treść modlitwy</mat-error>
+      <mat-error *ngIf="form.content.hasError('minlength')" role="alertdialog">Treść modlitwy musi mieć minimum 20 liter</mat-error>
+      <mat-error *ngIf="form.content.hasError('maxlength')" role="alertdialog">Treść modlitwy może mieć maksymalnie 1000 liter</mat-error>
+      <mat-error *ngIf="form.content.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+    </mat-form-field>
+
+    <app-set-image [params]="{ title: 'zdjęcie poglądowe' }" ></app-set-image>
+
+    <mat-form-field>
+      <mat-label>Kategorie</mat-label>
+      <mat-select formControlName="categories" multiple required>
+        <mat-select-trigger>
+          {{ form.categories.value }}
+        </mat-select-trigger>
+        <mat-option *ngFor="let prayerCategory of prayerCategoriesList" [value]="prayerCategory">{{prayerCategory}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.categories.hasError('required')" role="alertdialog">Wybierz przynajmniej jedną kategorię</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tagi</mat-label>
+      <mat-select formControlName="tags" multiple required>
+        <mat-select-trigger>
+          {{ form.tags.value }}
+        </mat-select-trigger>
+        <mat-option *ngFor="let tag of tags" [value]="tag">{{tag}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.tags.hasError('required')" role="alertdialog">Wybierz przynajmniej jeden tag</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit">Dodaj modlitwę</button>
+  </form>
+
+  <section *ngIf="confirmed">
+    Modlitwa przekazana do moderacji
+    <ng-lottie [options]="options"></ng-lottie>
+  </section>

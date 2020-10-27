@@ -43,6 +43,8 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     FlexLayoutModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
@@ -97,6 +100,7 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatChipsModule,
     MatListModule,
+    MatSelectModule,
   ],
   exports: [
     IntentionsHeaderComponent,
@@ -124,6 +128,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     FlexLayoutModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
@@ -141,6 +146,7 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatChipsModule,
     MatListModule,
+    MatSelectModule,
   ],
   entryComponents: [
     IntentionDeleteDialog,

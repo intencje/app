@@ -1,13 +1,13 @@
 <h2 mat-dialog-title>Przytnij zdjecię</h2>
 <mat-dialog-content class="mat-typography">
   <image-cropper
-  roundCropper="true"
+  [roundCropper]="data.params.type === 'round' ? true : false"
   [imageChangedEvent]="imageChangedEvent"
-  [aspectRatio]="1 / 1"
+  [aspectRatio]="data.params.aspectRatio ? data.params.aspectRatio : 1 / 1"
   format="jpeg"
-  imageQuality="85"
-  [resizeToWidth]="512"
-  [resizeToHeight]="512"
+  [imageQuality]="data.params.imageQuality ? data.params.imageQuality : 85"
+  [resizeToWidth]="data.params.resizeToWidth ? data.params.resizeToWidth : 512"
+  [resizeToHeight]="data.params.resizeToHeight ? data.params.resizeToHeight : 512"
   alignImage="center"
   (imageCropped)="imageCropped($event)"
   (imageLoaded)="imageLoaded()"

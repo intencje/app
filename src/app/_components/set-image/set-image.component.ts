@@ -14,6 +14,14 @@ import 'hammerjs';
   styleUrls: ['./set-image.component.scss'],
 })
 export class SetImageComponent {
+  @Input() params: {
+    title: string;
+    type?: 'round' | 'square';
+    resizeToWidth?: number;
+    resizeToHeight?: number;
+    imageQuality?: number;
+    aspectRatio?: number;
+  };
   @ViewChild('fileInput') fileInput: any;
   unsubscribe = new Subject();
   croppedImage = '';
@@ -21,7 +29,7 @@ export class SetImageComponent {
 
   showCropperDialog(event) {
     const dialogRef = this.dialog.open(CropperDialog, {
-      data: { event: event },
+      data: { event: event, params: this.params },
     });
     dialogRef
       .afterClosed()
