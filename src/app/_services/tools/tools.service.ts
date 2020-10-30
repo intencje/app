@@ -56,6 +56,15 @@ export class ToolsService implements OnDestroy {
     }
   }
 
+  /**
+   * Checks if file that user wants to upload is valid image file
+   * @param  {File} file
+   */
+  validateFile(file: File): boolean {
+    const imageFileTypes = ['image/png', 'image/jpeg', 'image/png'];
+    return imageFileTypes.includes(file.type);
+  }
+
   ngOnDestroy(): void {
     this.unsubscribe.next();
   }

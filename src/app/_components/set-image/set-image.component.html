@@ -1,4 +1,5 @@
+
 <img (click)="fileInput.click()" [ngStyle]="{'border-radius': (params.type==='round') ? '50%' : '0'}" alt="" [src]="croppedImage ? croppedImage : '/assets/icons/avatar.png'"/>
 <button mat-button (click)="fileInput.click()">{{!!croppedImage ? 'Zmień '+params.title : 'Dodaj '+params.title }}</button>
-<button id="remove" *ngIf="this.croppedImage" mat-button (click)="this.croppedImage=''">Usuń zdjęcie</button>
-<input #fileInput type="file" accept=".png,.jpg,.jpeg" (change)="showCropperDialog($event)" />
+<button id="remove" *ngIf="this.croppedImage" mat-button (click)="deleteImage()">Usuń zdjęcie</button>
+<input #fileInput type="file" accept=".png,.jpg,.jpeg" (change)="showCropperDialog($event)" aria-hidden="true" />

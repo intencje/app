@@ -7,8 +7,8 @@
 
   Powiedz nam coś więcej o sobie
 
-  Imię:
-  <app-set-image></app-set-image>
+
+  <app-set-image *ngIf="auth.user$ | async as user" [params]="{ title: 'zdjęcie profilowe', savePath: 'users/' + user.uid + '/avatar', type: 'round'}"></app-set-image>
 
 
 

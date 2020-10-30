@@ -4,6 +4,11 @@
   flex-direction: column;
   justify-content: center;
 
+  mat-progress-bar {
+    width: 150px;
+    margin: 0 auto;
+  }
+
   img {
     align-self: center;
     width: 150px;

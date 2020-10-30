@@ -10,14 +10,12 @@
   [resizeToHeight]="data.params.resizeToHeight ? data.params.resizeToHeight : 512"
   alignImage="center"
   (imageCropped)="imageCropped($event)"
-  (imageLoaded)="imageLoaded()"
-  (cropperReady)="cropperReady()"
   (loadImageFailed)="loadImageFailed()"
 ></image-cropper>
 
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Anuluj</button>
-  <button mat-button [mat-dialog-close]="this.croppedImage" cdkFocusInitial>Gotowe</button>
+  <button mat-button mat-dialog-close (click)="deleteImage()">Anuluj</button>
+  <button mat-button [mat-dialog-close]="this.croppedImage" (click)="image.uploadImage(this.croppedImage, data.params.savePath)" cdkFocusInitial>Gotowe</button>
 </mat-dialog-actions>

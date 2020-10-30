@@ -20,7 +20,7 @@
       <mat-error *ngIf="form.content.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
     </mat-form-field>
 
-    <app-set-image [params]="{ title: 'zdjęcie poglądowe' }" ></app-set-image>
+    <app-set-image *ngIf="auth.user$ | async as user" [params]="{ title: 'zdjęcie poglądowe', savePath: 'prayers/' + this.now }"></app-set-image>
 
     <mat-form-field>
       <mat-label>Kategorie</mat-label>

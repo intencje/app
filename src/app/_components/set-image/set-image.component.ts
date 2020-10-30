@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import 'hammerjs';
-//import 'firebase/storage';
+import { ImageService } from '../../_services/image/image.service';
 
 @Component({
   selector: 'app-set-image',
@@ -16,18 +16,24 @@ import 'hammerjs';
 export class SetImageComponent {
   @Input() params: {
     title: string;
+    savePath: string;
     type?: 'round' | 'square';
     resizeToWidth?: number;
     resizeToHeight?: number;
     imageQuality?: number;
     aspectRatio?: number;
   };
+
   @ViewChild('fileInput') fileInput: any;
+
+  uploadProgress$: Observable<number>;
+  submitted = false;
   unsubscribe = new Subject();
   croppedImage = '';
-  constructor(public dialog: MatDialog) {}
 
-  showCropperDialog(event) {
+  constructor(public dialog: MatDialog, public image: ImageService) {}
+
+  showCropperDialog(event): void {
     const dialogRef = this.dialog.open(CropperDialog, {
       data: { event: event, params: this.params },
     });
@@ -39,6 +45,10 @@ export class SetImageComponent {
         this.fileInput.nativeElement.value = '';
       });
   }
+  deleteImage(): void {
+    this.croppedImage = '';
+    this.image.deleteImage();
+  }
 }
 @Component({
   selector: 'cropper.dialog',
@@ -46,12 +56,6 @@ export class SetImageComponent {
   styleUrls: ['./set-image.component.scss'],
 })
 export class CropperDialog {
-  imgLoaded = false;
-
-  // Firestore data
-  result$: Observable<any>;
-  image: string;
-
   imageChangedEvent: any = '';
   croppedImage: string;
 
@@ -61,23 +65,22 @@ export class CropperDialog {
     private storage: AngularFireStorage,
     private afs: AngularFirestore,
     public dialog: MatDialog,
+    public image: ImageService,
   ) {
     this.imageChangedEvent = data.event;
   }
 
-  imageCropped(event: ImageCroppedEvent) {
+  imageCropped(event: ImageCroppedEvent): void {
     this.croppedImage = event.base64;
-    //this.startUpload(this.croppedImage);
+    this.image.changeImage(this.croppedImage);
   }
-  imageLoaded() {
-    this.imgLoaded = true;
-    console.log('zdjecie zaladowane');
-  }
-  cropperReady() {
-    console.log('przycinak gotowy');
-  }
-  loadImageFailed() {
+  loadImageFailed(): void {
     console.log('ladowanie sie nie udalo');
+  }
+  deleteImage(): void {
+    // TODO: Wyświetlaj toast w przypadku problemu z uploadem grafiki
+    this.croppedImage = '';
+    this.image.deleteImage();
   }
 
   ngOnDestroy(): void {
