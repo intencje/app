@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Validators, FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
 import { CustomValidators } from '../../_models/custom-validators.model';
 import { DbService } from '../../_services/db/db.service';
 import { Intention, Prayer, User } from '../../_models/firebase.model';
@@ -9,8 +9,14 @@ import { AuthService } from '../../_services/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/_services/seo/seo.service';
 import { ImageService } from 'src/app/_services/image/image.service';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
+import { ReplaySubject, Subject } from 'rxjs';
+import { MatSelect } from '@angular/material/select';
+import { takeUntil } from 'rxjs/operators';
+
+export interface Tag {
+  id: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-prayer-create',
@@ -18,23 +24,35 @@ import { AnimationOptions } from 'ngx-lottie';
   styleUrls: ['./prayer-create.page.scss'],
 })
 export class PrayerCreatePage implements OnInit {
+  // TODO: do modeli
   prayerCategoriesList: string[] = ['Podstawowe', 'Tematyczne', 'Litanie', 'Nowenny', 'Akty'];
-  tags: string[] = ['Podstawowe', 'Tematyczne', 'Litanie', 'Nowenny', 'Akty'];
 
-  options: AnimationOptions = {
-    loop: true,
-    path: '/assets/animations/intention-created.json',
-  };
-  animationCreated() {}
+  /** control for the MatSelect filter keyword multi-selection */
+  public tagSelector: FormControl = new FormControl();
+
+  /** list of tags filtered by search keyword */
+  public filteredTags: ReplaySubject<Tag[]> = new ReplaySubject<Tag[]>(1);
+
+  @ViewChild('tags', { static: true }) tags: MatSelect;
+
+  /** Subject that emits when the component has been destroyed. */
+  protected _onDestroy = new Subject<void>();
+
+  editable: false;
+
+  prayerID = '';
 
   loading = false;
   submitted = false;
   confirmed = false;
   croppedImage;
   downloadUrl;
+  tags$: Tag[];
   now = new Date().getTime();
 
-  public addPrayerForm: FormGroup;
+  public addPrayerTitleDescriptionForm: FormGroup;
+  public addPrayerCategoryTagsForm: FormGroup;
+
   private geoIP: Record<string, any>;
   constructor(
     public readonly route: ActivatedRoute,
@@ -44,9 +62,10 @@ export class PrayerCreatePage implements OnInit {
     public http: HttpClient,
     private tools: ToolsService,
     public auth: AuthService,
-    private image: ImageService,
+    public image: ImageService,
+    private cdr: ChangeDetectorRef,
   ) {
-    this.addPrayerForm = formBuilder.group({
+    this.addPrayerTitleDescriptionForm = formBuilder.group({
       title: [
         '',
         [
@@ -65,31 +84,68 @@ export class PrayerCreatePage implements OnInit {
           CustomValidators.cannotContainSwearwords,
         ],
       ],
+    });
+
+    this.addPrayerCategoryTagsForm = formBuilder.group({
       categories: ['', [Validators.required]],
       tags: ['', [Validators.required]],
     });
   }
 
   async ngOnInit(): Promise<void> {
-    const { uid } = await this.auth.getUser();
     this.http.get<any>('https://geoip.int.intencje.pl').subscribe((res) => {
       this.geoIP = res;
     });
   }
 
+  protected filterBanksMulti() {
+    if (!this.tags$) {
+      return;
+    }
+    // get the search keyword
+    let search = this.tagSelector.value;
+    if (!search) {
+      this.filteredTags.next(this.tags$.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter tags
+    this.filteredTags.next(this.tags$.filter((tag) => tag.name.toLowerCase().indexOf(search) > -1));
+  }
+
   ngOnDestroy(): void {
     this.image.deleteImage();
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
-  get form() {
-    return this.addPrayerForm.controls;
+  click(e: Record<string, unknown>): void {
+    switch (e.selectedIndex) {
+      case 1:
+        this.addPrayerTitleDescription(this.addPrayerTitleDescriptionForm.value);
+        this.db.collection$('tags').subscribe((tags) => {
+          this.tags$ = tags;
+          // load the initial tag list
+          this.filteredTags.next(this.tags$.slice());
+
+          // listen for search field value changes
+          this.tagSelector.valueChanges.pipe(takeUntil(this._onDestroy)).subscribe(() => {
+            this.filterBanksMulti();
+          });
+        });
+
+        break;
+      case 2:
+        this.addPrayerCategoryTags(this.addPrayerCategoryTagsForm.value);
+        break;
+      case 3:
+        this.image.downloadURL ? this.addPrayerCoverPhoto() : false;
+        break;
+    }
   }
-
-  async addPrayer(payload: { title: string; content: string }): Promise<any> {
-    this.loading = true;
-    this.image.currentImage.subscribe((image) => (this.croppedImage = image));
-
-    if (this.addPrayerForm.valid) {
+  async addPrayerTitleDescription(payload: { title: string; content: string }): Promise<any> {
+    if (this.addPrayerTitleDescriptionForm.valid) {
       const user: User = await this.auth.getUser();
       const prayer: Prayer = {
         uid: user.uid,
@@ -97,22 +153,26 @@ export class PrayerCreatePage implements OnInit {
         title: payload.title,
         content: payload.content,
         date: new Date(),
-        coverImage: this.image.downloadURL,
       };
 
-      this.db.update('prayers', prayer);
-      // .then((docRef) => {
-      //   // Kolekcje możemy dodać tylko wtedy znamy ID dokum  entu
-      //   this.db.update(`intentions/${docRef.id}/geoIP`, this.geoIP);
-      // })
-      // .catch(() => {
-      //   // TODO: Bugtracker
-      // });
-
-      // Z uwagi na możliwość dodawania modlitw w trybie offline powiadomienie o dodaniu intencji pokazujemy
-      // kiedy formularz jest wypelniony prawidlowo - bez czekania na callback z backendu
-      this.confirmed = true;
+      this.db.update('prayers', prayer).then((docRef) => {
+        // We can add cover photo when we know the ID of created prayer
+        this.prayerID = docRef.id;
+      });
     }
-    this.loading = false;
+  }
+
+  async addPrayerCategoryTags(payload): Promise<any> {
+    if (this.addPrayerCategoryTagsForm.valid) {
+      const prayer: Prayer = {
+        tags: payload.tags.map((tag) => tag.id),
+        categories: payload.categories.map((category) => category.toLowerCase()),
+      };
+      this.db.update(`prayers/${this.prayerID}`, prayer);
+    }
+  }
+
+  addPrayerCoverPhoto(): void {
+    this.db.update(`prayers/${this.prayerID}`, { coverImage: this.image.downloadURL });
   }
 }

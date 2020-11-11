@@ -45,6 +45,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatChipsModule,
     MatListModule,
     MatSelectModule,
+    MatStepperModule,
+    NgxMatSelectSearchModule,
   ],
   exports: [
     IntentionsHeaderComponent,
@@ -147,6 +151,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatChipsModule,
     MatListModule,
     MatSelectModule,
+    MatStepperModule,
+    NgxMatSelectSearchModule,
   ],
   entryComponents: [
     IntentionDeleteDialog,

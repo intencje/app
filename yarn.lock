@@ -9800,6 +9800,13 @@ ngx-lottie@^6.4.0:
   dependencies:
     tslib "^2.0.0"
 
+ngx-mat-select-search@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/ngx-mat-select-search/-/ngx-mat-select-search-3.1.2.tgz#c16ff17c1f4c407ba50868dc9d996fc8b98cc775"
+  integrity sha512-F+w6lvoSq9zPlLwjbjdC9J9BVnnv2094Nuc3WS/7cWCHuPi+HPcRMKljhg4ZxLM1RV26Ri7lmvCMsctmdnmDCA==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-skeleton-loader@^2.4.4:
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/ngx-skeleton-loader/-/ngx-skeleton-loader-2.4.4.tgz#39d714b57c236fcd52e51012d54c63824c8c0e15"
