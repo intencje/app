@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { firestore } from 'firebase/app';
+import firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +11,9 @@ export class DbService {
   constructor(private afs: AngularFirestore) {}
 
   batch = this.afs.firestore.batch();
-  increment = firestore.FieldValue.increment(1);
-  arrayRemove = firestore.FieldValue.arrayRemove;
-  arrayUnion = firestore.FieldValue.arrayUnion;
+  increment = firebase.firestore.FieldValue.increment(1);
+  arrayRemove = firebase.firestore.FieldValue.arrayRemove;
+  arrayUnion = firebase.firestore.FieldValue.arrayUnion;
 
   docRef(path: string): DocumentReference {
     return this.afs.firestore.doc(path);
