@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ChangeAvatarComponent } from './../../_components/change-avatar/change-avatar.component';
+import { SetImageComponent } from './../../_components/set-image/set-image.component';
 
 @Component({
   selector: 'app-user-details',
@@ -16,11 +16,9 @@ export class UserDetailsPage implements OnInit {
     //   component: ChangeAvatarComponent,
     //   swipeToClose: true,
     // });
-
     // modal.onDidDismiss().then(base64 => {
     //   this.croppedImage = base64.data;
     // });
-
     // return await modal.present();
   }
 

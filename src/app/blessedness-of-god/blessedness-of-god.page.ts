@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../_services/auth/auth.service';
 
 @Component({
   selector: 'app-blessedness-of-god',
@@ -7,5 +8,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./blessedness-of-god.page.scss'],
 })
 export class BlessednessOfGodPage {
-  constructor(public readonly route: ActivatedRoute) {}
+  constructor(public readonly route: ActivatedRoute, public auth: AuthService) {}
 }

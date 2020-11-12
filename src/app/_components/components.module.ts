@@ -23,7 +23,7 @@ import { RouterModule } from '@angular/router';
 import { SeoStuffComponent } from './seo-stuff/seo-stuff.component';
 import { PrayingListItemComponent } from './praying-list-item/praying-list-item.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { ChangeAvatarComponent, CropperDialog } from './change-avatar/change-avatar.component';
+import { SetImageComponent, CropperDialog } from './set-image/set-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,6 +43,10 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,7 @@ import { MatListModule } from '@angular/material/list';
     SeoStuffComponent,
     PrayingListItemComponent,
     TabsComponent,
-    ChangeAvatarComponent,
+    SetImageComponent,
     IntentionDeleteDialog,
     IntentionAddCommentDialog,
     IntentionSetFulfilledDialog,
@@ -79,6 +83,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     FlexLayoutModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
@@ -97,6 +102,9 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatChipsModule,
     MatListModule,
+    MatSelectModule,
+    MatStepperModule,
+    NgxMatSelectSearchModule,
   ],
   exports: [
     IntentionsHeaderComponent,
@@ -116,7 +124,7 @@ import { MatListModule } from '@angular/material/list';
     TabsComponent,
     CommonModule,
     DirectivesModule,
-    ChangeAvatarComponent,
+    SetImageComponent,
     ImageCropperModule,
     MatChipsModule,
     MatIconModule,
@@ -124,6 +132,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     FlexLayoutModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
@@ -141,6 +150,9 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatChipsModule,
     MatListModule,
+    MatSelectModule,
+    MatStepperModule,
+    NgxMatSelectSearchModule,
   ],
   entryComponents: [
     IntentionDeleteDialog,

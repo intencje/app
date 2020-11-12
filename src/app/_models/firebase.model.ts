@@ -18,6 +18,11 @@ export enum Role {
 export interface Tags {
   name: string;
 }
+
+export interface Categories {
+  name: string;
+}
+
 export interface User {
   uid: string;
   email: string;
@@ -111,6 +116,18 @@ export interface Intention {
   prayingData?: [PrayingData];
   tags?: Tags;
   slug?: string;
+}
+
+export interface Prayer {
+  id?: string;
+  uid?: string;
+  status?: 'draft' | 'trashed' | 'published';
+  date?: DocumentData;
+  title?: string;
+  content?: string;
+  tags?: string[]; // TODO: podłączyć model Tags
+  categories?: string[]; // TODO: podłączyć model categories
+  coverImage?: string;
 }
 
 export interface PrayingData {
