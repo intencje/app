@@ -396,4 +396,27 @@ border: none !important;
       flex: 0 0 auto !important;
     }
   }
+
+  /* mat-editor should be applied to the container of contenteditable (<mat-form-field>)*/
+  .mat-editor .mat-form-field-wrapper,
+  .mat-editor .mat-form-field-infix {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .mat-editor .mat-form-field-flex {
+    align-items: center;
+  }
+
+  /* https://github.com/angular/material2/issues/13322 */
+  .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button,
+  .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button {
+    display: inline-block !important;
+  }
+
+  .mat-editor .ck-content {
+    border: none !important;
+    box-shadow: none !important;
+  }
+
 }
