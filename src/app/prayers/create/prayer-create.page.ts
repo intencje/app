@@ -13,6 +13,9 @@ import { ReplaySubject, Subject } from 'rxjs';
 import { MatSelect } from '@angular/material/select';
 import { takeUntil } from 'rxjs/operators';
 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
+
 export interface Tag {
   id: string;
   name: string;
@@ -24,6 +27,28 @@ export interface Tag {
   styleUrls: ['./prayer-create.page.scss'],
 })
 export class PrayerCreatePage implements OnInit {
+  value = 'TinyMCE Material';
+  value2 = 'TinyMCE Material';
+
+  public Editor = ClassicEditor;
+  //public Balon = BalloonEditor;
+  html = `fff`;
+  contento = new FormControl();
+
+  config: any = {
+    height: 250,
+    theme: 'modern',
+    // powerpaste advcode toc tinymcespellchecker a11ychecker mediaembed linkchecker help
+    plugins:
+      'print preview fullpage searchreplace autolink directionality visualblocks visualchars media template codesample charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern',
+    toolbar:
+      'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+    image_advtab: false,
+    templates: [
+      { title: 'Test template 1', content: 'Test 1' },
+      { title: 'Test template 2', content: 'Test 2' },
+    ],
+  };
   // TODO: do modeli
   prayerCategoriesList: string[] = ['Podstawowe', 'Tematyczne', 'Litanie', 'Nowenny', 'Akty'];
 
