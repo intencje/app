@@ -1,0 +1,53 @@
+:host {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  mat-progress-bar {
+    width: 150px;
+    margin: 0 auto;
+  }
+
+  img {
+    align-self: center;
+    width: 150px;
+    margin: 0 0 10px 0;
+    border: 1px solid whitesmoke;
+    cursor: pointer;
+  }
+
+  button {
+    align-self: center;
+    font-weight: 400;
+    line-height: 2;
+  }
+
+  #add {
+  }
+
+  #remove {
+    margin: 5px 0 0 0;
+    font-size: 80%;
+  }
+
+
+  input[type=file] {
+    display:none;
+  }
+  image-cropper {
+    padding: 0;
+    max-height: 80vh;
+    max-width: 80vh;
+  }
+
+  --cropper-outline-color: rgba(0,0,0,0.5);
+  --cropper-overlay-color: rgba(255,255,255)
+}
+
+
+
+
+
+
+

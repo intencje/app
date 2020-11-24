@@ -7,35 +7,35 @@ import { Role } from '../_models/firebase.model';
 const routes: Routes = [
   {
     path: '',
-    component: TestimoniesPage
+    component: TestimoniesPage,
   },
   {
     path: 'dodaj',
-    loadChildren: () => import('./create/testimony-create.module').then( m => m.TestimonyCreatePageModule),
+    loadChildren: () => import('./create/testimony-create.module').then((m) => m.TestimonyCreatePageModule),
     data: {
       title: 'Świadectwa / Dodaj',
-      description: 'TESTIMONY_ADD_PAGE.DESCRIPTION'
+      description: 'TESTIMONY_ADD_PAGE.DESCRIPTION',
     },
-    canActivate: [AuthService]
+    canActivate: [AuthService],
   },
   {
     path: 'edytuj',
-    loadChildren: () => import('./edit/testimonies-edit.module').then( m => m.TestimoniesEditPageModule),
+    loadChildren: () => import('./edit/testimonies-edit.module').then((m) => m.TestimoniesEditPageModule),
     data: {
       title: 'Świadectwa / Edytuj',
       description: ' ',
-      roles: [Role.Administrator]
+      roles: [Role.Administrator],
     },
-    canActivate: [AuthService]
+    canActivate: [AuthService],
   },
   {
     path: ':testimony_slug',
-    loadChildren: () => import('./details/testimony-details.module').then( m => m.TestimonyDetailsPageModule),
+    loadChildren: () => import('./details/testimony-details.module').then((m) => m.TestimonyDetailsPageModule),
     data: {
-      title: 'Świadectwa / ',
-      description: ' '
-    }
-  }
+      title: 'Ładowanie...',
+      description: ' ',
+    },
+  },
 ];
 
 @NgModule({

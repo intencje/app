@@ -24,6 +24,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" },
               "src/favicon.ico",
               "src/assets",
               "src/manifest.webmanifest"
@@ -44,7 +45,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -74,7 +74,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
@@ -145,7 +144,7 @@
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "externalDependencies": [
-              "@firebase/firestore"
+              "@firebase/app"
             ]
           },
           "configurations": {

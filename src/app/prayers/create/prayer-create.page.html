@@ -1,7 +1,71 @@
-<div>
-  <app-prayers-header [title]="route.snapshot.data['title']"></app-prayers-header>
-</div>
+<!-- TODO: jezyk polski -->
+<mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="click($event)">
+  <mat-step [editable]="false" [stepControl]="addPrayerTitleDescriptionForm" label="Tytuł i treść">
+    <form id="addPrayerTitleDescriptionForm" [formGroup]="addPrayerTitleDescriptionForm">
+      <mat-form-field>
+        <mat-label id="titleLabel">Tytuł modlitwy</mat-label>
+        <input #title minlength="5" maxlength="40" matInput formControlName="title" id="title" type="text" aria-labelledby="titleLabel" placeholder="Na przykład: 'Ojcze Nasz'" required/>
+        <mat-hint align="end">{{title.value.length}} / {{title.maxLength}}</mat-hint>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.title.hasError('required')" role="alertdialog">Wpisz tytuł modlitwy</mat-error>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.title.hasError('minlength')" role="alertdialog">Tytuł modlitwy musi mieć minimum 5 liter</mat-error>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.title.hasError('maxlength')" role="alertdialog">Tytuł modlitwy może mieć maksymalnie 40 liter</mat-error>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.title.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+      </mat-form-field>
+      <mat-form-field >
+          <editor #content formControlName="content"
+            [init]="{ paste_as_text: true, block_formats: 'Paragraf=p;Nagłówek 2=h2;Nagłówek 3=h3;Nagłówek 4=h4;Nagłówek 5=h5; Cytat=blockquote', plugins: 'emoticons, lists, paste', language: 'pl_PL', browser_spellcheck: true, selector: 'textarea', height: '45vh', toolbar_mode: 'sliding', toolbar_sticky: true, menubar: false, inline: false, placeholder: 'Treść modlitwy *'}"
+            toolbar="undo redo | bold italic underline | formatselect | bullist numlist | alignleft aligncenter alignright alignjustify | emoticons"
+            tinyMatFormControl
+            required
+          >
+          </editor>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.content.hasError('required')" role="alertdialog">Wpisz treść modlitwy</mat-error>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.content.hasError('minlength')" role="alertdialog">Treść modlitwy musi mieć minimum 100 liter</mat-error>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.content.hasError('maxlength')" role="alertdialog">Treść modlitwy może mieć maksymalnie 10000 liter</mat-error>
+        <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.content.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
+      </mat-form-field>
+      <button (click)="addPrayerTitleDescription(addPrayerTitleDescriptionForm.value)" mat-button matStepperNext>Następny krok</button>
+    </form>
+  </mat-step>
 
-<div>
+  <mat-step *appHasRole="['moderator']" [editable]="false" [stepControl]="addPrayerCategoryTagsForm" label="Kategorie i tagi">
+    <form id="addPrayerCategoryTagsForm" [formGroup]="addPrayerCategoryTagsForm">
+      <mat-form-field>
+        <mat-select formControlName="tags" placeholder="Tagi" multiple #tags required>
+          <mat-option>
+            <ngx-mat-select-search noEntriesFoundLabel="Nie znaleziono pasujących tagów" [formControl]="tagSelector" placeholderLabel="Znajdź tag..." ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{tag.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="addPrayerCategoryTagsForm.controls.tags.hasError('required')" role="alertdialog">Wybierz przynajmniej jeden tag</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Kategorie</mat-label>
+        <mat-select formControlName="categories" required>
+          <mat-select-trigger>
+            {{ addPrayerCategoryTagsForm.controls.categories.value }}
+          </mat-select-trigger>
+          <mat-option *ngFor="let prayerCategory of prayerCategoriesList" [value]="prayerCategory">{{prayerCategory}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="addPrayerCategoryTagsForm.controls.categories.hasError('required')" role="alertdialog">Wybierz przynajmniej jendą kategorię</mat-error>
+      </mat-form-field>
+      <button mat-button matStepperNext (click)="addPrayerCategoryTags(addPrayerCategoryTagsForm.value)" mat-button matStepperNext>Następny krok</button>
+    </form>
+  </mat-step>
 
-</div>
+  <mat-step *appHasRole="['moderator']" [editable]="false" label="Okładka" [completed]="image.downloadURL">
+    <app-set-image [params]="{ title: 'okładkę', savePath: 'prayers/' + this.prayerID + '/cover' }"></app-set-image>
+    <button mat-button matStepperNext [disabled]="!image.downloadURL" (click)="addPrayerCoverPhoto()" mat-button matStepperNext>Następny krok</button>
+  </mat-step>
+
+  <mat-step *appHasRole="['moderator']" [editable]="false" label="Nagłówek" [completed]="image.downloadURL">
+    <app-set-image [params]="{ title: 'zdjęcie poglądowe nagłówka', savePath: 'prayers/' + this.prayerID + '/header', aspectRatio: 3 / 1, resizeToWidth: 3840, resizeToHeight: 2160 }"></app-set-image>
+    <button mat-button matStepperNext [disabled]="!image.downloadURL" (click)="addPrayerHeaderPhoto()" mat-button matStepperNext>Następny krok</button>
+  </mat-step>
+
+  <mat-step [editable]="false" label="Okładka">
+    <p>Gotowe. <a href="/modlitwy/dodaj">Dodaj następną modlitwę</a></p>
+  </mat-step>
+</mat-horizontal-stepper>

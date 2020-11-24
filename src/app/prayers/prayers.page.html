@@ -1,119 +1,43 @@
-<br/>
-<mat-chip-list class="topNavigation" role="navigation" aria-label="Filtruj listę modlitw">
+<!-- <mat-chip-list class="topNavigation" role="navigation" aria-label="Filtruj listę modlitw">
   <mat-chip selected>Wszystkie</mat-chip>
   <mat-chip routerLink="/patroni">Ulubione</mat-chip>
-  <mat-chip>Podstawowe</mat-chip>
-  <mat-chip>Tematyczne</mat-chip>
-  <mat-chip>Litanie</mat-chip>
-  <mat-chip>Nowenny</mat-chip>
-  <mat-chip>Akty</mat-chip>
+  <mat-chip routerLinkActive="selected" routerLink="/modlitwy/podstawowe">Podstawowe</mat-chip>
+  <mat-chip routerLinkActive="selected" routerLink="/modlitwy/tematyczne">Tematyczne</mat-chip>
+  <mat-chip routerLinkActive="selected" routerLink="/modlitwy/litanie">Litanie</mat-chip>
+  <mat-chip routerLinkActive="selected" routerLink="/modlitwy/noewnny">Nowenny</mat-chip>
+  <mat-chip routerLink="/modlitwy/akty">Akty</mat-chip>
+  <mat-chip routerLink="/modlitwy/dodaj">Dodaj modlitwę</mat-chip>
 </mat-chip-list>
-<br><br>
+ -->
+
+<ng-container *ngIf="prayersList$ | async as prayers; else loading">
+
+    <div fxLayout="row wrap" fxLayoutGap="16px grid"
+      infiniteScroll
+      [infiniteScrollDistance]="2"
+      [infiniteScrollThrottle]="50"
+      (scrolled)="nextBatch((prayers[prayers.length -1].date))">
 
 
+      <div fxFlex.xs="50" fxFlex.sm="30" fxFlex.md="20" fxFlex.ls="20" fxFlex.xl="20" fxFlex="20" *ngFor="let prayer of prayers; let i = index; trackBy: trackByIdx">
+        <app-prayer-card type="timeline"
+          *ngIf="prayer.date.seconds * 1000 < startDate"
+          [prayer]="prayer"
+        ></app-prayer-card>
+      </div>
+    </div>
 
-<div fxLayout="row wrap"  fxLayoutAlign="center start">
 
-  <mat-card class="example-card" style="width:150px; margin: 7px;"  >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+</ng-container>
 
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
+<ng-template #loading>
+  <ng-container *ngIf="this.noContent; else skeleton">
+    <app-no-content *ngIf="this.noContent" message="Brak modlitw."></app-no-content>
+  </ng-container>
+</ng-template>
 
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+<ng-template #skeleton>
+  <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+</ng-template>
 
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
 
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card" style="width:150px; margin: 7px;" >
-    <mat-card-header>
-      <mat-card-title>Ojcze nasz</mat-card-title>
-      <mat-card-subtitle>Podstawowe</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-
-    <mat-card-actions>
-      <button mat-card-avatar mat-icon-button><mat-icon aria-label="Example thumbs up SVG icon">star</mat-icon></button>    </mat-card-actions>
-  </mat-card>
-
-</div>

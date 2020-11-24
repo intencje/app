@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, isDevMode, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { BrowserModule, HammerModule, HAMMER_GESTURE_CONFIG, HAMMER_LOADER } from '@angular/platform-browser';
+import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -42,12 +42,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import * as Sentry from '@sentry/angular';
+import { AppHammerConfig } from './app-hammer-config';
 
 export function playerFactory() {
   return import('lottie-web');
 }
 
 const shouldUseEmulator = () => false;
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -67,6 +69,7 @@ const shouldUseEmulator = () => false;
     AngularFirePerformanceModule,
     AngularFireAuthGuardModule,
     FormsModule,
+    HammerModule,
     LottieModule.forRoot({
       player: playerFactory,
       useCache: true,
@@ -94,6 +97,16 @@ const shouldUseEmulator = () => false;
     MatFormFieldModule,
   ],
   providers: [
+    {
+      provide: HAMMER_LOADER,
+      useValue: async () => {
+        return import('hammerjs/hammer');
+      },
+    },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: AppHammerConfig,
+    },
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({

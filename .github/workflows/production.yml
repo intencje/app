@@ -20,7 +20,7 @@ jobs:
       - name: Deploy to Firebase
         uses: pizzafox/firebase-action@1.0.7
         env:
-          PROJECT_ID: "intencje-production"
+          PROJECT_ID: "intencje-app"
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         with:
           args: deploy --only hosting
@@ -43,6 +43,6 @@ jobs:
         with:
           browser: chrome
           headless: true
-          wait-on: 'https://intencje-production.web.app'
-          config: baseUrl=https://intencje-production.web.app
+          wait-on: 'https://app.intencje.pl'
+          config: baseUrl=https://app.intencje.pl
           env: stage=production

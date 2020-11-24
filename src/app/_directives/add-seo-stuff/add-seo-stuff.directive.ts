@@ -6,11 +6,7 @@ import { environment } from '../../../environments/environment';
   selector: '[appAddSeoStuff]',
 })
 /**
- * Gdybyśmy korzystali z surowego Angulara moglibysmy korzystac z eventow
- * odpalanych przy każdym odpaleniu i zamknięciu strony zarówno z jej poziomu jak i poziomu serwisu.
- * Z Ionic'iem nie jest tak łatwo z uwagi na animacje stron symulujące działanie natywnej apki.
- * Chociaż Ionic przychodzi z dodatkowymi life cycle events nie można z nich korzystać z poziomu ng serwisu.
- * Innym problemem jest to, że chcemy korzystać z dobrodziejst AsyncPipe i automatycznym unsubscribe stąd
+ * Chcemy korzystać z dobrodziejst AsyncPipe i automatycznym unsubscribe stąd
  * pomysł, aby dynamiczne dane do SEO pozyskiwać z poziomu wygenerowanego HTML poprzez dyrektywę
  * a statyczne SEO dane przechowywać w routerze.
  */
@@ -85,8 +81,10 @@ export class AddSeoStuffDirective implements OnInit {
             articleBody: this.seo.data.content,
           },
         ]);
-
         break;
+      case 'prayer':
+        this.seoService.updateTitleTag(this.seo.data.title);
+      default:
     }
   }
 }

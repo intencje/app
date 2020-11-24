@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './_services/auth/auth.service';
 import { isPlatformBrowser } from '@angular/common';
+import { SeoService } from './_services/seo/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -23,9 +24,12 @@ export class AppComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     public auth: AuthService,
+    private seoService: SeoService,
 
     @Inject(PLATFORM_ID) private platformId,
-  ) {}
+  ) {
+    this.seoService.startRouteListener();
+  }
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {

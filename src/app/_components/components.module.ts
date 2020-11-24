@@ -11,6 +11,9 @@ import {
   IntentionSetFulfilledDialog,
   IntentionSetStaleDialog,
 } from './intention-card/intention-card.component';
+
+import { PrayerCardComponent } from './prayer-card/prayer-card.component';
+
 import { UserCardComponent } from './user-card/user-card.component';
 import { PatronListItemComponent } from './patron-list-item/patron-list-item.component';
 import { PrayerListItemComponent } from './prayer-list-item/prayer-list-item.component';
@@ -23,7 +26,7 @@ import { RouterModule } from '@angular/router';
 import { SeoStuffComponent } from './seo-stuff/seo-stuff.component';
 import { PrayingListItemComponent } from './praying-list-item/praying-list-item.component';
 import { TabsComponent } from './tabs/tabs.component';
-import { ChangeAvatarComponent } from './change-avatar/change-avatar.component';
+import { SetImageComponent, CropperDialog } from './set-image/set-image.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,6 +46,10 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -53,19 +60,22 @@ import { MatListModule } from '@angular/material/list';
     UserCardComponent,
     PatronListItemComponent,
     PrayerListItemComponent,
-    IntentionCardComponent,
     TestimonyCardComponent,
+    IntentionCardComponent,
+    PrayerCardComponent,
+    PrayerCardComponent,
     TagListItemComponent,
     ArticleCardComponent,
     LoadNewestItemsComponent,
     SeoStuffComponent,
     PrayingListItemComponent,
     TabsComponent,
-    ChangeAvatarComponent,
+    SetImageComponent,
     IntentionDeleteDialog,
     IntentionAddCommentDialog,
     IntentionSetFulfilledDialog,
     IntentionSetStaleDialog,
+    CropperDialog,
   ],
   imports: [
     CommonModule,
@@ -78,6 +88,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     FlexLayoutModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
@@ -96,6 +107,9 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatChipsModule,
     MatListModule,
+    MatSelectModule,
+    MatStepperModule,
+    NgxMatSelectSearchModule,
   ],
   exports: [
     IntentionsHeaderComponent,
@@ -106,6 +120,7 @@ import { MatListModule } from '@angular/material/list';
     PatronListItemComponent,
     PrayerListItemComponent,
     IntentionCardComponent,
+    PrayerCardComponent,
     TestimonyCardComponent,
     TagListItemComponent,
     ArticleCardComponent,
@@ -115,7 +130,7 @@ import { MatListModule } from '@angular/material/list';
     TabsComponent,
     CommonModule,
     DirectivesModule,
-    ChangeAvatarComponent,
+    SetImageComponent,
     ImageCropperModule,
     MatChipsModule,
     MatIconModule,
@@ -123,6 +138,7 @@ import { MatListModule } from '@angular/material/list';
     MatCardModule,
     FlexLayoutModule,
     MatSnackBarModule,
+    MatAutocompleteModule,
     MatMenuModule,
     MatDialogModule,
     MatInputModule,
@@ -140,12 +156,16 @@ import { MatListModule } from '@angular/material/list';
     MatButtonModule,
     MatChipsModule,
     MatListModule,
+    MatSelectModule,
+    MatStepperModule,
+    NgxMatSelectSearchModule,
   ],
   entryComponents: [
     IntentionDeleteDialog,
     IntentionAddCommentDialog,
     IntentionSetFulfilledDialog,
     IntentionSetStaleDialog,
+    CropperDialog,
   ],
 })
 export class ComponentsModule {}

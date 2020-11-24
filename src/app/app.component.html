@@ -1,12 +1,12 @@
-<ngx-loading-bar role="progressbar" height="1px" [includeSpinner]="false"></ngx-loading-bar>
+<ngx-loading-bar role="progressbar" height="2px" [includeSpinner]="false"></ngx-loading-bar>
 
 <div class="container" [class.is-mobile]="screenService.isMobile">
   <mat-toolbar class="header">
-    <button (click)="leftNav.toggle()" routerLink="/" mat-icon-button aria-label="Menu">
+    <button (click)="leftNav.toggle()" mat-icon-button aria-label="Menu">
       <mat-icon aria-label="Logo serwisu Intencje.pl" title="Intencje.pl">logo</mat-icon>
-     <!-- TODO: when the menu is closed display additional ico with menu on it ^ -->
+      <!-- TODO: when the menu is closed display additional ico with menu on it ^ -->
     </button>
-    <h1 role="link">{{ title ? title : 'Ładowanie...' }}</h1>
+    <h2 role="link">{{ title ? title : 'Ładowanie...' }}</h2>
 
     <span class="fill-remaining-space"></span>
 
@@ -16,193 +16,253 @@
       </mat-form-field>
     </form> -->
 
-      <button *ngIf="auth.user$ | async as user else guest" routerLink="/uzytkownicy/1" mat-icon-button aria-label="Link do Twojego profilu" title="{{user.displayName}}">
-        <img alt="user.displayName" [src]="user.avatarURL ? user.avatarURL : '/assets/icons/avatar.png'" height="40" width="40" style="border-radius: 50%"/>
-      </button>
+    <!-- <button
+      *ngIf="auth.user$ | async as user; else guest"
+      routerLink="/uzytkownicy/1"
+      mat-icon-button
+      aria-label="Link do Twojego profilu"
+      title="{{ user.displayName }}"
+    >
+      <img
+        alt="user.displayName"
+        [src]="user.avatarURL ? user.avatarURL : '/assets/icons/avatar.png'"
+        height="40"
+        width="40"
+        style="border-radius: 50%"
+      />
+    </button> -->
 
     <ng-template #guest>
-      <button routerLink="/logowanie" mat-icon-button aria-label="Link do formularza logowania i rejestracji" title="Logowanie / Rejestracja">
+      <button
+        routerLink="/logowanie"
+        mat-icon-button
+        aria-label="Link do formularza logowania i rejestracji"
+        title="Logowanie / Rejestracja"
+      >
         <mat-icon aria-label="Ikona symbolizująca rejestrację lub logowanie do serwisu">login</mat-icon>
       </button>
     </ng-template>
-
-
-
-
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav #leftNav
+    <mat-sidenav
+      #leftNav
       [mode]="screenService.isMobile ? 'over' : 'side'"
       [fixedInViewport]="true"
       fixedTopGap="56"
       [opened]="!screenService.isMobile && screenService.isBrowser"
-      [style.width.px]="screenService.isMobile ? 'inherit' : 200">
-
-      <mat-nav-list (click)="screenService.isMobile ? leftNav.toggle() : false" [style.padding-top.px]="screenService.isMobile ? 0 : 30" [style.padding-bottom.px]="screenService.isMobile ? 50 : 0" role="navigation" aria-label="Podstawowe funkcjonalności">
-        <a mat-list-item routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" aria-label="Link do strony głównej - listy intencji" title="Intencje">
+      [style.width.px]="screenService.isMobile ? 'inherit' : 200"
+    >
+      <mat-nav-list
+        [style.padding-top.px]="screenService.isMobile ? 0 : 30"
+        [style.padding-bottom.px]="screenService.isMobile ? 50 : 0"
+        role="navigation"
+        aria-label="Podstawowe funkcjonalności"
+      >
+        <a
+          mat-list-item
+          href="https://intencje.pl/"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+          aria-label="Link do strony głównej - listy intencji"
+          title="Intencje"
+        >
           <mat-icon aria-label="Ikona symbolizująca stronę główną">home</mat-icon>
-            Intencje
+          Intencje
         </a>
-        <a mat-list-item routerLink="/modlitwy" routerLinkActive="active" aria-label="Link do modlitewnika" title="Modlitewnik">
+        <a
+          mat-list-item
+          routerLink="/modlitwy"
+          routerLinkActive="active"
+          aria-label="Link do modlitewnika"
+          title="Modlitewnik"
+        >
           <mat-icon aria-label="Ikona symbolizująca modlitewnik">prayers</mat-icon>
           Modlitwy
         </a>
-        <a mat-list-item routerLink="/czytania-na-dzis" routerLinkActive="active" aria-label="Link do dzisiejszych czytań z Pisma Świętego" title="Czytania">
+        <!-- <a
+          mat-list-item
+          routerLink="/czytania-na-dzis"
+          routerLinkActive="active"
+          aria-label="Link do dzisiejszych czytań z Pisma Świętego"
+          title="Czytania"
+        >
           <mat-icon aria-label="Ikona symbolizująca Pismo Święte">readings</mat-icon>
           Czytania
-        </a>
-        <a mat-list-item routerLink="/parafie" routerLinkActive="active" aria-label="Link do listy parafii" title="Parafie">
+        </a> -->
+        <!-- <a
+          mat-list-item
+          routerLink="/parafie"
+          routerLinkActive="active"
+          aria-label="Link do listy parafii"
+          title="Parafie"
+        >
           <mat-icon aria-label="Ikona symbolizująca listę parafii">parishes</mat-icon>
           Parafie
-        </a>
+        </a> -->
         <!-- <a mat-list-item routerLink="/artykuly" routerLinkActive="active" aria-label="Link do listy artykułów" title="Artykuły">
           <mat-icon aria-label="Ikona symbolizująca listę artykułów">articles</mat-icon>
           Artykuły
         </a> -->
-        <a mat-list-item routerLink="/patroni" routerLinkActive="active" aria-label="Link do listy patronów" title="Patroni">
+        <!-- <a
+          mat-list-item
+          routerLink="/patroni"
+          routerLinkActive="active"
+          aria-label="Link do listy patronów"
+          title="Patroni"
+        >
           <mat-icon aria-label="Ikona symbolizująca listę patronów">patrons-day</mat-icon>
           Patroni
-        </a>
-        <a mat-list-item routerLink="/uzytkownicy" routerLinkActive="active" aria-label="Link do listy użytkowników" title="Użytkownicy">
-          <mat-icon aria-label="Ikona symbolizująca listę użytkowników">users</mat-icon>
-          Użytkownicy
-        </a>
-        <a mat-list-item routerLink="/swiadectwa" routerLinkActive="active" aria-label="Link do listy świadectw" title="Świadectwa">
+        </a> -->
+        <!-- <a
+          mat-list-item
+          routerLink="/swiadectwa"
+          routerLinkActive="active"
+          aria-label="Link do listy świadectw"
+          title="Świadectwa"
+        >
           <mat-icon aria-label="Ikona symbolizująca listę świadectw">testimonies</mat-icon>
           Świadectwa
-        </a>
+        </a> -->
         <!-- <a mat-list-item routerLink="/radio" routerLinkActive="active" aria-label="Link do działu pozwalającego słuchać radia" title="Radio">
           <mat-icon aria-label="Ikona symbolizująca radio">radio</mat-icon>
           Radio
         </a> -->
-        <a mat-list-item routerLink="/tagi" routerLinkActive="active" aria-label="Link do listy tagów" title="Tagi">
+        <!-- <a mat-list-item routerLink="/tagi" routerLinkActive="active" aria-label="Link do listy tagów" title="Tagi">
           <mat-icon aria-label="Ikona symbolizująca listę tagów">tags</mat-icon>
           Tagi
-        </a>
+        </a> -->
       </mat-nav-list>
-
     </mat-sidenav>
-    <mat-sidenav class="" #snav1
+    <!-- <mat-sidenav
+      class=""
+      #snav1
       [mode]="screenService.isMobile ? 'over' : 'side'"
-      [fixedInViewport]="true "
+      [fixedInViewport]="true"
       fixedTopGap="56"
       position="end"
       [opened]="!screenService.isMobile && screenService.isBrowser"
-      [style.width.px]="screenService.isMobile ? 'inherit' : 200">
+      [style.width.px]="screenService.isMobile ? 'inherit' : 200"
+    >
+      <img style="margin-top: 20px; width: 100px; border-radius: 50%" src="./assets/icons/avatar.png" />
 
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip style="min-height: 20px; color: #fff; background-color: #af9c69; font-family: 'Dosis', sans-serif"
+          >PATRON DNIA</mat-chip
+        >
+      </mat-chip-list>
+      <br />
 
-<img style="margin-top: 20px; width: 100px; border-radius: 50% ;" src="./assets/icons/avatar.png" />
+      <h1>Św. Józef</h1>
+      <mat-chip-list aria-label="Fish selection" style="margin: 0 0 20px 0">
+        <mat-chip>#praca</mat-chip>
+        <mat-chip>#umierajacy</mat-chip>
+      </mat-chip-list>
 
-<mat-chip-list aria-label="Fish selection">
-  <mat-chip style="min-height: 20px;
-  color: #fff;
-  background-color: #af9c69;
-  font-family: 'Dosis', sans-serif;
-">PATRON DNIA</mat-chip>
-</mat-chip-list>
-<br>
+      <p style="padding: 15px; text-align: center">
+        <a routerLink="/misja">Misja</a> • <a routerLink="/funkcjonalnosci">Funkcjonalności</a> •
+        <a routerLink="/blog">Blog</a> • <a routerLink="/pomoc">Pobierz</a> • <a routerLink="/pomoc">Media o nas</a> •
+        <a routerLink="/regulamin">Regulamin</a> • <a routerLink="/o-projekcie">O projekcie</a> •
+        <a routerLink="/kontakt">Kontakt</a>
+      </p>
 
-<h1>Św. Józef</h1>
-<mat-chip-list aria-label="Fish selection" style="margin: 0 0 20px 0">
-  <mat-chip>#praca</mat-chip>
-  <mat-chip>#umierajacy</mat-chip>
-</mat-chip-list>
-
-<p style="padding: 15px; text-align:center">
-  <a routerLink="/misja">Misja</a> •
-  <a routerLink="/funkcjonalnosci">Funkcjonalności</a> •
-  <a routerLink="/blog">Blog</a> •
-  <a routerLink="/pomoc">Pobierz</a> •
-  <a routerLink="/pomoc">Media o nas</a> •
-  <a routerLink="/regulamin">Regulamin</a> •
-  <a routerLink="/o-projekcie">O projekcie</a> •
-  <a routerLink="/kontakt">Kontakt</a>
-
-</p>
-
-<a class="hidden-xs" style="position: absolute; left: 5px; bottom: 5px" href="https://play.google.com/store/apps/details?id=pl.intencje&amp;utm_source=headerdesktop&amp;utm_campaign=pl.intencje"><img alt="pobierz z Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/pl_badge_web_generic.png" width="100"></a>
-<a class="hidden-xs" style="position: absolute; left: 160px; bottom:15px" href="https://itunes.apple.com/pl/app/intencje/id1346574507?mt=8"><img alt="Pobierz z App Store" src="https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg" width="90"></a>
-
-
-
-</mat-sidenav>
+      <a
+        class="hidden-xs"
+        style="position: absolute; left: 5px; bottom: 5px"
+        href="https://play.google.com/store/apps/details?id=pl.intencje&amp;utm_source=headerdesktop&amp;utm_campaign=pl.intencje"
+        ><img
+          alt="pobierz z Google Play"
+          src="https://play.google.com/intl/en_us/badges/images/generic/pl_badge_web_generic.png"
+          width="100"
+      /></a>
+      <a
+        class="hidden-xs"
+        style="position: absolute; left: 160px; bottom: 15px"
+        href="https://itunes.apple.com/pl/app/intencje/id1346574507?mt=8"
+        ><img
+          alt="Pobierz z App Store"
+          src="https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg"
+          width="90"
+      /></a>
+    </mat-sidenav> -->
 
     <mat-sidenav-content role="main">
       <router-outlet></router-outlet>
-
     </mat-sidenav-content>
   </mat-sidenav-container>
 
   <mat-toolbar class="footer" role="navigation" aria-label="Stopka">
-    <button routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
+    <a
+      href="https://intencje.pl/"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active"
+      mat-icon-button
+      aria-label="Odnośnik prowadzący do strony głównej"
+    >
       <mat-icon aria-label="Ikona symbolizująca stronę główną">home</mat-icon>
-      <span style="    font-size: 10px;
-      float: left;
-      margin: -20px 0 0 3px;
-      font-weight: 400;">Intencje</span>
-    </button>
-    <button routerLink="/modlitwy" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
-      <mat-icon aria-label="Example thumbs up SVG icon">prayers</mat-icon>
-      <span style="    font-size: 10px;
-      float: left;
-      margin: -20px 0 0 3px;
-      font-weight: 400;">Modlitwy</span>
+  </a>
 
-    </button>
-    <button routerLink="/dodaj" routerLinkActive="active" mat-fab aria-label="Example icon button with a heart icon">
-      <mat-icon aria-label="Example thumbs up SVG icon">add</mat-icon>
-    </button>
+    <a href="https://intencje.pl/dodaj" routerLinkActive="active" mat-fab aria-label="Odnośnik prowadzący do formularza dodawania intencji">
+      <mat-icon aria-label="Ikona symbolizująca dodawanie intencji">add</mat-icon>
+    </a>
 
-
-
-    <ng-container *ngIf="isBrowser && auth.user$ | async as user else loggedout">
-      <button routerLink="/powiadomienia" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
-
+    <button
+    routerLink="/modlitwy"
+    routerLinkActive="active"
+    mat-icon-button
+    aria-label="Odnośnik prowadzący do modlitewnika"
+  >
+    <mat-icon aria-label="Ikona symbolizująca modlitewnik">prayers</mat-icon>
+  </button>
+    <!-- <ng-container *ngIf="isBrowser && auth.user$ | async as user; else loggedout">
+      <button
+        routerLink="/powiadomienia"
+        routerLinkActive="active"
+        mat-icon-button
+        aria-label="Example icon button with a heart icon"
+      >
         <ng-container *ngIf="auth.user$ | async as user">
-          <mat-icon *ngIf="user.unreadNotifications > 0" matBadge="{{user.unreadNotifications}}" matBadgeColor="warn">notifications</mat-icon>
+          <mat-icon *ngIf="user.unreadNotifications > 0" matBadge="{{ user.unreadNotifications }}" matBadgeColor="warn"
+            >notifications</mat-icon
+          >
           <mat-icon *ngIf="user.unreadNotifications == 0">notifications</mat-icon>
-      </ng-container>
-      <span style="    font-size: 10px;
-      float: left;
-      margin: -20px 0 0 3px;
-      font-weight: 400;">Powiadomienia</span>
+        </ng-container>
 
       </button>
-      <button routerLink="/wiadomosci" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
+      <button
+        routerLink="/wiadomosci"
+        routerLinkActive="active"
+        mat-icon-button
+        aria-label="Example icon button with a heart icon"
+      >
         <ng-container *ngIf="auth.user$ | async as user">
-          <mat-icon *ngIf="user.unreadMessages > 0" matBadge="{{user.unreadMessages}}" matBadgeColor="warn">messages</mat-icon>
+          <mat-icon *ngIf="user.unreadMessages > 0" matBadge="{{ user.unreadMessages }}" matBadgeColor="warn"
+            >messages</mat-icon
+          >
           <mat-icon *ngIf="user.unreadMessages == 0">messages</mat-icon>
-      </ng-container>
-      <span style="    font-size: 10px;
-      float: left;
-      margin: -20px 0 0 3px;
-      font-weight: 400;">Wiadomości</span>
-
+        </ng-container>
       </button>
-
-      </ng-container>
+    </ng-container>
 
     <ng-template #loggedout>
-      <button routerLink="/powiadomienia" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
-
+      <button
+        routerLink="/powiadomienia"
+        routerLinkActive="active"
+        mat-icon-button
+        aria-label="Example icon button with a heart icon"
+      >
         <mat-icon aria-label="Example thumbs up SVG icon">notifications</mat-icon>
-
-
       </button>
-      <button routerLink="/wiadomosci" routerLinkActive="active" mat-icon-button aria-label="Example icon button with a heart icon">
+      <button
+        routerLink="/wiadomosci"
+        routerLinkActive="active"
+        mat-icon-button
+        aria-label="Example icon button with a heart icon"
+      >
         <mat-icon aria-label="Example thumbs up SVG icon">messages</mat-icon>
       </button>
+    </ng-template> -->
 
-    </ng-template>
-
-
-
-
-
-
-
-<span (click)="snav1.toggle()" class="mat-expansion-indicator1"></span>
-
+    <!-- <span (click)="snav1.toggle()" class="mat-expansion-indicator1"></span> -->
   </mat-toolbar>
 </div>
