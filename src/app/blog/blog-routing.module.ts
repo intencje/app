@@ -6,11 +6,11 @@ import { BlogPage } from './blog.page';
 const routes: Routes = [
   {
     path: '',
-    component: BlogPage
+    component: BlogPage,
   },
   {
     path: 'dodaj',
-    loadChildren: () => import('./create/blog-create.module').then( m => m.BlogCreatePageModule),
+    loadChildren: () => import('./create/blog-create.module').then((m) => m.BlogCreatePageModule),
     data: {
       title: 'Blog / Dodaj',
       description: ' ',
@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'edytuj',
-    loadChildren: () => import('./edit/blog-edit.module').then( m => m.BlogEditPageModule),
+    loadChildren: () => import('./edit/blog-edit.module').then((m) => m.BlogEditPageModule),
     data: {
       title: 'Blog / Edytuj',
       description: ' ',
@@ -30,13 +30,12 @@ const routes: Routes = [
   },
   {
     path: ':blog_slug',
-    loadChildren: () => import('./details/blog-details.module').then( m => m.BlogDetailsPageModule),
+    loadChildren: () => import('./details/blog-details.module').then((m) => m.BlogDetailsPageModule),
     data: {
-      title: 'Blog / ',
+      title: 'Ładowanie...',
       description: ' ',
     },
-
-  }
+  },
 ];
 
 @NgModule({

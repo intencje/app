@@ -190,8 +190,8 @@ export class PrayerCreatePage implements OnInit {
   async addPrayerCategoryTags(payload): Promise<any> {
     if (this.addPrayerCategoryTagsForm.valid) {
       const prayer: Prayer = {
-        tags: payload.tags.map((tag) => tag.id),
-        categories: payload.categories.map((category) => category.toLowerCase()),
+        tags: payload.tags.map((tag) => tag.name),
+        category: payload.categories.toLowerCase(),
       };
       this.db.update(`prayers/${this.prayerID}`, prayer);
     }
@@ -199,5 +199,9 @@ export class PrayerCreatePage implements OnInit {
 
   addPrayerCoverPhoto(): void {
     this.db.update(`prayers/${this.prayerID}`, { coverImage: this.image.downloadURL });
+  }
+
+  addPrayerHeaderPhoto(): void {
+    this.db.update(`prayers/${this.prayerID}`, { headerImage: this.image.downloadURL });
   }
 }

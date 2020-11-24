@@ -6,18 +6,18 @@ import { TestimoniesEditPage } from './testimonies-edit.page';
 const routes: Routes = [
   {
     path: '',
-    component: TestimoniesEditPage
+    component: TestimoniesEditPage,
   },
   {
     path: ':testimony_slug',
-    loadChildren: () => import('./details/testimony-edit-details.module').then( m => m.TestimonyEditDetailsPageModule),
+    loadChildren: () => import('./details/testimony-edit-details.module').then((m) => m.TestimonyEditDetailsPageModule),
     data: {
       title: 'Świadectwo / Edytuj',
       description: ' ',
       //roles: [Role.Administrator]
     },
     //canActivate: [AuthService]
-  }
+  },
 ];
 
 @NgModule({

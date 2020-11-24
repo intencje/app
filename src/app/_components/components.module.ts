@@ -11,6 +11,9 @@ import {
   IntentionSetFulfilledDialog,
   IntentionSetStaleDialog,
 } from './intention-card/intention-card.component';
+
+import { PrayerCardComponent } from './prayer-card/prayer-card.component';
+
 import { UserCardComponent } from './user-card/user-card.component';
 import { PatronListItemComponent } from './patron-list-item/patron-list-item.component';
 import { PrayerListItemComponent } from './prayer-list-item/prayer-list-item.component';
@@ -57,8 +60,10 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     UserCardComponent,
     PatronListItemComponent,
     PrayerListItemComponent,
-    IntentionCardComponent,
     TestimonyCardComponent,
+    IntentionCardComponent,
+    PrayerCardComponent,
+    PrayerCardComponent,
     TagListItemComponent,
     ArticleCardComponent,
     LoadNewestItemsComponent,
@@ -115,6 +120,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     PatronListItemComponent,
     PrayerListItemComponent,
     IntentionCardComponent,
+    PrayerCardComponent,
     TestimonyCardComponent,
     TagListItemComponent,
     ArticleCardComponent,

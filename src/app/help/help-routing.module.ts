@@ -6,11 +6,11 @@ import { HelpPage } from './help.page';
 const routes: Routes = [
   {
     path: '',
-    component: HelpPage
+    component: HelpPage,
   },
   {
     path: 'dodaj',
-    loadChildren: () => import('./create/help-create.module').then( m => m.HelpCreatePageModule),
+    loadChildren: () => import('./create/help-create.module').then((m) => m.HelpCreatePageModule),
     data: {
       title: 'Pomoc / Dodaj',
       description: ' ',
@@ -20,24 +20,22 @@ const routes: Routes = [
   },
   {
     path: 'edytuj',
-    loadChildren: () => import('./edit/help-edit.module').then( m => m.EditPageModule),
+    loadChildren: () => import('./edit/help-edit.module').then((m) => m.EditPageModule),
     data: {
       title: 'Pomoc / Edytuj',
       description: ' ',
       //roles: [Role.Administrator]
     },
     //canActivate: [AuthService]
-
   },
   {
     path: ':help_slug',
-    loadChildren: () => import('./details/help-details.module').then( m => m.HelpDetailsPageModule),
+    loadChildren: () => import('./details/help-details.module').then((m) => m.HelpDetailsPageModule),
     data: {
-      title: 'Pomoc /',
-      description: ' '
+      title: 'Ładowanie...',
+      description: ' ',
     },
-
-  }
+  },
 ];
 
 @NgModule({

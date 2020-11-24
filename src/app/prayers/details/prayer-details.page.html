@@ -1,7 +1,10 @@
-<div>
-  <app-prayers-header [title]="route.snapshot.data['title']"></app-prayers-header>
-</div>
+<ng-container
+  *ngIf="(prayer$ | async) as prayer; else loading"
+  [appAddSeoStuff]="{type: 'prayer', data:prayer}"
+>
 
-<div>
-
-</div>
+  <app-prayer-card [prayer]="prayer" type="extended" [dataSource]="this.dataSource"></app-prayer-card>
+</ng-container>
+<ng-template #loading>
+  <ngx-skeleton-loader count="5"></ngx-skeleton-loader>
+</ng-template>

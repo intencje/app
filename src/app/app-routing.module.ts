@@ -91,7 +91,7 @@ const routes: Routes = [
     data: {
       title: 'Modlitwy / Wszystkie',
       description:
-        'Modlitewnik zawierający akty, litanie, nowenny, modlitwy tematyczne wraz z powiązanymi z nimi prośbami o modlitwę.',
+        'Modlitewnik zawierający akty, litanie, nowenny, modlitwy tematyczne wraz z powiązanymi z nimi prośbami o modlitwę i patronami.',
     },
   },
   {
@@ -266,7 +266,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./intentions/details/intention-details.module').then((m) => m.IntentionDetailsPageModule),
     data: {
-      title: 'Intencje / ',
+      title: 'Ładowanie ...',
       description: ' ',
     },
   },
@@ -279,10 +279,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled',
-    scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'legacy'
-}),
+      initialNavigation: 'enabled',
+      scrollPositionRestoration: 'enabled',
+      relativeLinkResolution: 'legacy',
+    }),
   ],
   exports: [RouterModule],
 })

@@ -4,11 +4,11 @@ import functions = require('firebase-functions');
 import slug = require('slug');
 
 /**
- * Generuje slug dla każdej nowoutworzonej intencji bazując na jej znormalizowanym tytule i ID, jakie otrzymała od Firebase'a
+ * Generuje slug dla każdej nowoutworzonej modlitwy bazując na jej znormalizowanym tytule i ID, jakie otrzymała od Firebase'a
  */
 exports.slugGenerator = functions
   .region('europe-west1')
-  .firestore.document('/intentions/{intentionId}')
+  .firestore.document('/prayers/{prayerId}')
   .onCreate(async (snapshot) => {
     const id = snapshot.id;
     const data = snapshot.data();

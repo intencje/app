@@ -126,8 +126,10 @@ export interface Prayer {
   title?: string;
   content?: string;
   tags?: string[]; // TODO: podłączyć model Tags
-  categories?: string[]; // TODO: podłączyć model categories
+  slug?: string;
+  category?: string;
   coverImage?: string;
+  headerImage?: string;
 }
 
 export interface PrayingData {
