@@ -1,16 +1,4 @@
-<!-- https://www.tiny.cloud/docs/integrations/angular/#tinymceangularintegrationquickstartguide
-+ -->
-<!-- https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/angular.html
-+ https://github.com/wynfred/mat-contenteditable -->
-
-<!-- <editor [init]="{
-  base_url: '/tinymce',
-  suffix: '.min'
-}"></editor> -->
-
 <!-- TODO: jezyk polski -->
-
-
 <mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="click($event)">
   <mat-step [editable]="false" [stepControl]="addPrayerTitleDescriptionForm" label="Tytuł i treść">
     <form id="addPrayerTitleDescriptionForm" [formGroup]="addPrayerTitleDescriptionForm">
@@ -24,30 +12,13 @@
         <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.title.hasError('cannotContainSwearwords')" role="alertdialog">Nie używaj słów powszechnie uznanych za wulgarne</mat-error>
       </mat-form-field>
       <mat-form-field >
-        <!-- <mat-label id="contentLabel">Treść modlitwy</mat-label> -->
-
-
-
-
-        <!-- <textarea #content minlength="20" maxlength="1000" matInput formControlName="content" id="content" name="content" cols="30" rows="20" aria-labelledby="titleLabel" required></textarea> -->
-          <editor
-          #content
-
-          formControlName="content"
-
-
+          <editor #content formControlName="content"
             [init]="{ paste_as_text: true, block_formats: 'Paragraf=p;Nagłówek 2=h2;Nagłówek 3=h3;Nagłówek 4=h4;Nagłówek 5=h5; Cytat=blockquote', plugins: 'emoticons, lists, paste', language: 'pl_PL', browser_spellcheck: true, selector: 'textarea', height: '45vh', toolbar_mode: 'sliding', toolbar_sticky: true, menubar: false, inline: false, placeholder: 'Treść modlitwy *'}"
             toolbar="undo redo | bold italic underline | formatselect | bullist numlist | alignleft aligncenter alignright alignjustify | emoticons"
-
             tinyMatFormControl
             required
           >
           </editor>
-          <!-- <mat-error *ngIf="model.errors && model.errors['required']">Please enter a value</mat-error> -->
-
-
-
-        <!-- <mat-hint align="end">{{content.value.length}} / {{content.maxLength}}</mat-hint> -->
         <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.content.hasError('required')" role="alertdialog">Wpisz treść modlitwy</mat-error>
         <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.content.hasError('minlength')" role="alertdialog">Treść modlitwy musi mieć minimum 100 liter</mat-error>
         <mat-error *ngIf="addPrayerTitleDescriptionForm.controls.content.hasError('maxlength')" role="alertdialog">Treść modlitwy może mieć maksymalnie 10000 liter</mat-error>
@@ -72,7 +43,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Kategorie</mat-label>
-        <mat-select formControlName="categories" multiple required>
+        <mat-select formControlName="categories" required>
           <mat-select-trigger>
             {{ addPrayerCategoryTagsForm.controls.categories.value }}
           </mat-select-trigger>
@@ -85,8 +56,13 @@
   </mat-step>
 
   <mat-step *appHasRole="['moderator']" [editable]="false" label="Okładka" [completed]="image.downloadURL">
-    <app-set-image [params]="{ title: 'zdjęcie poglądowe', savePath: 'prayers/' + this.prayerID + '/cover' }"></app-set-image>
+    <app-set-image [params]="{ title: 'okładkę', savePath: 'prayers/' + this.prayerID + '/cover' }"></app-set-image>
     <button mat-button matStepperNext [disabled]="!image.downloadURL" (click)="addPrayerCoverPhoto()" mat-button matStepperNext>Następny krok</button>
+  </mat-step>
+
+  <mat-step *appHasRole="['moderator']" [editable]="false" label="Nagłówek" [completed]="image.downloadURL">
+    <app-set-image [params]="{ title: 'zdjęcie poglądowe nagłówka', savePath: 'prayers/' + this.prayerID + '/header', aspectRatio: 3 / 1, resizeToWidth: 3840, resizeToHeight: 2160 }"></app-set-image>
+    <button mat-button matStepperNext [disabled]="!image.downloadURL" (click)="addPrayerHeaderPhoto()" mat-button matStepperNext>Następny krok</button>
   </mat-step>
 
   <mat-step [editable]="false" label="Okładka">

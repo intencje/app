@@ -6,11 +6,11 @@ import { PatronsPage } from './patrons.page';
 const routes: Routes = [
   {
     path: '',
-    component: PatronsPage
+    component: PatronsPage,
   },
   {
     path: 'dodaj',
-    loadChildren: () => import('./create/patron-create.module').then( m => m.PatronCreatePageModule),
+    loadChildren: () => import('./create/patron-create.module').then((m) => m.PatronCreatePageModule),
     data: {
       title: 'Patroni / Dodaj',
       description: ' ',
@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'edytuj',
-    loadChildren: () => import('./edit/patrons-edit.module').then( m => m.PatronsEditPageModule),
+    loadChildren: () => import('./edit/patrons-edit.module').then((m) => m.PatronsEditPageModule),
     data: {
       title: 'Patroni / Edytuj',
       description: ' ',
@@ -30,11 +30,11 @@ const routes: Routes = [
   },
   {
     path: ':patron_slug',
-    loadChildren: () => import('./details/patron-details.module').then( m => m.PatronDetailsPageModule),
+    loadChildren: () => import('./details/patron-details.module').then((m) => m.PatronDetailsPageModule),
     data: {
-      title: 'Patroni /',
+      title: 'Ładowanie...',
       description: ' ',
-    }
+    },
   },
 ];
 

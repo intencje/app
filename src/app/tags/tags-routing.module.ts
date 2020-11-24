@@ -6,11 +6,11 @@ import { TagsPage } from './tags.page';
 const routes: Routes = [
   {
     path: '',
-    component: TagsPage
+    component: TagsPage,
   },
   {
     path: 'edytuj',
-    loadChildren: () => import('./edit/tags-edit.module').then( m => m.TagsEditPageModule),
+    loadChildren: () => import('./edit/tags-edit.module').then((m) => m.TagsEditPageModule),
     data: {
       title: 'Tagi / Edytuj',
       description: ' ',
@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'dodaj',
-    loadChildren: () => import('./create/tag-create.module').then( m => m.TagCreatePageModule),
+    loadChildren: () => import('./create/tag-create.module').then((m) => m.TagCreatePageModule),
     data: {
       title: 'Tagi / Dodaj',
       description: ' ',
@@ -30,13 +30,12 @@ const routes: Routes = [
   },
   {
     path: ':tag_slug',
-    loadChildren: () => import('./details/tag-details.module').then( m => m.TagDetailsPageModule),
+    loadChildren: () => import('./details/tag-details.module').then((m) => m.TagDetailsPageModule),
     data: {
-      title: 'Tag / ',
-      description: ' '
-    }
+      title: 'Ładowanie',
+      description: ' ',
+    },
   },
-
 ];
 
 @NgModule({

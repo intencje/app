@@ -7,35 +7,35 @@ import { Role } from '../_models/firebase.model';
 const routes: Routes = [
   {
     path: '',
-    component: ParishesPage
+    component: ParishesPage,
   },
   {
     path: 'dodaj',
-    loadChildren: () => import('./create/parish-create.module').then( m => m.ParishCreatePageModule),
+    loadChildren: () => import('./create/parish-create.module').then((m) => m.ParishCreatePageModule),
     data: {
       title: 'Parafie / Dodaj',
-      description: 'Formularz umożliwiający dodawanie parafii do listy parafii Intencje.pl'
+      description: 'Formularz umożliwiający dodawanie parafii do listy parafii Intencje.pl',
     },
-    canActivate: [AuthService]
+    canActivate: [AuthService],
   },
   {
     path: 'edytuj',
-    loadChildren: () => import('./edit/parishes-edit.module').then( m => m.ParishesEditPageModule),
+    loadChildren: () => import('./edit/parishes-edit.module').then((m) => m.ParishesEditPageModule),
     data: {
       title: 'Parafie / Edytuj',
       description: ' ',
-      roles: [Role.Administrator]
+      roles: [Role.Administrator],
     },
-    canActivate: [AuthService]
+    canActivate: [AuthService],
   },
   {
     path: ':parish_slug',
-    loadChildren: () => import('./details/parish-details.module').then( m => m.ParishDetailsPageModule),
+    loadChildren: () => import('./details/parish-details.module').then((m) => m.ParishDetailsPageModule),
     data: {
-      title: 'Parafie / ',
-      description: ' '
-    }
-  }
+      title: 'Ładowanie...',
+      description: ' ',
+    },
+  },
 ];
 
 @NgModule({

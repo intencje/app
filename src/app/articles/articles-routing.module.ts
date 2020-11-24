@@ -5,11 +5,11 @@ import { ArticlesPage } from './articles.page';
 const routes: Routes = [
   {
     path: '',
-    component: ArticlesPage
+    component: ArticlesPage,
   },
   {
     path: 'dodaj',
-    loadChildren: () => import('./create/article-create.module').then( m => m.ArticleCreatePageModule),
+    loadChildren: () => import('./create/article-create.module').then((m) => m.ArticleCreatePageModule),
     data: {
       title: 'Artykuły / Dodaj',
       description: ' ',
@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'edytuj',
-    loadChildren: () => import('./edit/articles-edit.module').then( m => m.ArticlesEditPageModule),
+    loadChildren: () => import('./edit/articles-edit.module').then((m) => m.ArticlesEditPageModule),
     data: {
       title: 'Artykuły / Edytuj',
       description: ' ',
@@ -29,8 +29,12 @@ const routes: Routes = [
   },
   {
     path: ':article_slug',
-    loadChildren: () => import('./details/article-details.module').then( m => m.ArticleDetailsPageModule)
-  }
+    loadChildren: () => import('./details/article-details.module').then((m) => m.ArticleDetailsPageModule),
+    data: {
+      title: 'Ładowanie ...',
+      description: ' ',
+    },
+  },
 ];
 
 @NgModule({

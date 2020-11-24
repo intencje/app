@@ -1,0 +1,81 @@
+<ng-container *ngIf="type === 'extended'">
+  <mat-card class="mat-elevation-z1">
+    <img mat-card-image [src]="prayer.headerImage" alt="{{ prayer.title }}" />
+    <mat-card-content>
+      <!-- <section
+        style="width: 100%; height: 20vh; background-position: center;background: url({{prayer.headerImage}})"
+      ></section> -->
+      <h1 style="border-bottom: 1px solid whitesmoke">{{ prayer.title }}</h1>
+      <div [innerHTML]="prayer.content"></div>
+      <!-- <mat-chip-list>
+        <mat-chip *ngFor="let tag of prayer.tags">#{{ tag }}</mat-chip>
+      </mat-chip-list> -->
+    </mat-card-content>
+<!--
+    <mat-tab-group (selectedTabChange)="loadTabData($event, prayer.tags)">
+      <mat-tab label="Podobne">
+        <ng-container *ngIf="prayers$ | async as prayers; else noReleated">
+          <div *ngFor="let prayer of prayers">{{ prayer.title }}</div>
+        </ng-container>
+
+        <ng-template #noReleated>
+          <app-no-content message="Brak podobnych" link="/modlitwy" anchor="modlitw"></app-no-content>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Intencje">
+        <ng-container *ngIf="intentions$ | async as intentions; else noIntentions">
+          <mat-list>
+            <mat-list-item matRipple *ngFor="let intention of intentions">
+              <a mat-list-item>
+                <img
+                  matListAvatar
+                  src="https://intencje.pl/wp-content/uploads/avatars/1293/5e5e7ef443848-bpthumb.jpg"
+                  alt="{{ intention.title }}"
+                />
+                <h3 matLine>{{ intention.title }}</h3>
+              </a>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        <ng-template #noIntentions>
+          <app-no-content message="Brak powiązanych" link="/" anchor="intencji"></app-no-content>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Patroni">
+        <ng-container *ngIf="patrons$ | async as patrons; else noPatrons">
+          <mat-list>
+            <mat-list-item matRipple *ngFor="let patron of patrons">
+              <a mat-list-item>
+                <img
+                  matListAvatar
+                  src="https://intencje.pl/wp-content/uploads/avatars/910/5c486cf90d71e-bpthumb.png"
+                  alt="{{ patron.name }}"
+                />
+                <h3 matLine>{{ patron.name }}</h3>
+              </a>
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        <ng-template #noPatrons>
+          <app-no-content message="Brak powiązanych" link="/patroni" anchor="patronów"></app-no-content>
+        </ng-template>
+      </mat-tab>
+      <ng-template #tabLoading>
+        <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
+      </ng-template>
+    </mat-tab-group> -->
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="type === 'timeline'">
+  <a style="text-decoration: none;" routerLink="/modlitwy/{{ prayer.slug }}" [state]="prayer">
+    <mat-card>
+      <img mat-card-image [src]="prayer.coverImage" alt="{{ prayer.title }}" />
+      <mat-card-header>
+        <mat-card-title>{{ prayer.title }}</mat-card-title>
+        <!-- <mat-card-subtitle>{{ prayer.category }}</mat-card-subtitle> -->
+      </mat-card-header>
+    </mat-card>
+  </a>
+</ng-container>

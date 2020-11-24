@@ -7,16 +7,16 @@
         ]
       }
     },
-    "intencje-production": {
+    "intencje-app": {
       "hosting": {
         "app": [
-          "intencje-production"
+          "intencje-app"
         ]
       }
     }
   },
   "projects": {
     "staging": "intencje-staging",
-    "production": "intencje-production"
+    "app": "intencje-app"
   }
 }

@@ -43,7 +43,7 @@ export class SeoService implements OnDestroy {
 
       this.updateLinkTag({
         rel: 'canonical',
-        href: environment.url + url,
+        href: 'https://intencje.pl/' + url,
       });
 
       // Z poziomu serwisu nie można korzystać z ActivatedRoute dlatego obejście.
