@@ -1,6 +1,6 @@
 <ng-container *ngIf="type === 'extended'">
   <mat-card class="mat-elevation-z1">
-    <img mat-card-image [src]="prayer.headerImage" alt="{{ prayer.title }}" />
+    <img *ngIf="prayer.isCoverImageUploaded" mat-card-image [src]="null" alt="{{ prayer.title }}" />
     <mat-card-content>
       <!-- <section
         style="width: 100%; height: 20vh; background-position: center;background: url({{prayer.headerImage}})"
@@ -71,7 +71,7 @@
 <ng-container *ngIf="type === 'timeline'">
   <a style="text-decoration: none;" routerLink="/modlitwy/{{ prayer.slug }}" [state]="prayer">
     <mat-card>
-      <img mat-card-image [src]="prayer.coverImage" alt="{{ prayer.title }}" />
+      <img *ngIf="prayer.isHeaderImageUploaded" mat-card-image [src]="null" alt="{{ prayer.title }}" />
       <mat-card-header>
         <mat-card-title>{{ prayer.title }}</mat-card-title>
         <!-- <mat-card-subtitle>{{ prayer.category }}</mat-card-subtitle> -->

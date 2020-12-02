@@ -55,7 +55,7 @@
         </ng-template>
 
         <ng-template #prayButtonForLoggedOut>
-          <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
+          <button routerLink="/login">Modle sie {{ intention.praying?.length || 0 }}</button>
         </ng-template>
 
         <button [matMenuTriggerFor]="intentionMenu" mat-icon-button aria-label="Menu">
@@ -210,7 +210,7 @@
           <ng-template #prayButtonForLoggedIn><button mat-button (click)="iPrayForThis(user, intention.id)">Modle sie {{ intention.praying?.length || 0 }}</button></ng-template>
         </ng-container>
         <ng-template #prayButtonForLoggedOut>
-          <button routerLink="/logowanie">Modle sie {{ intention.praying?.length || 0 }}</button>
+          <button routerLink="/login">Modle sie {{ intention.praying?.length || 0 }}</button>
         </ng-template>
       </div>
     </div>

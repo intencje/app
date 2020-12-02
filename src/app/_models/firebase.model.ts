@@ -128,8 +128,8 @@ export interface Prayer {
   tags?: string[]; // TODO: podłączyć model Tags
   slug?: string;
   category?: string;
-  coverImage?: string;
-  headerImage?: string;
+  isCoverImageUploaded?: boolean;
+  isHeaderImageUploaded?: boolean;
 }
 
 export interface PrayingData {
