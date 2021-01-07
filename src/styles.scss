@@ -49,11 +49,11 @@ body {
 }
 
 .header {
-  button {
+  .logo {
     color: #fff;
     background-color: #28b0c8;
     border-radius: 50%;
-    margin: 0 15px 0 0;
+    margin: 0 14px;
 
     mat-icon {
       font-size: 30px !important;
@@ -433,3 +433,18 @@ border: none !important;
     }
 
   }
+#search {
+
+  margin-top: 40px;
+}
+
+.searchResults {
+  em {
+    background-color: yellow;
+    font-weight: bold;
+    font-style: normal;
+  }
+  br {
+    display: none;
+  }
+}

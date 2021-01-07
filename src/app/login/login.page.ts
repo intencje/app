@@ -107,7 +107,7 @@ export class LoginPage implements OnInit {
     this.submitted = true;
     const email = this.form.email.value;
     const actionCodeSettings = {
-      url: `${environment.url}/logowanie`,
+      url: `${environment.url}/login`,
       handleCodeInApp: true,
     };
 
@@ -164,7 +164,7 @@ export class LoginPage implements OnInit {
         // Nowy użytkownik
         if (result.additionalUserInfo.isNewUser) {
           this.auth.updateUserData(result.user, this.geoIP);
-          this.router.navigate(['/szczesc-boze']);
+          this.router.navigate(['/aktywacja']);
         } else {
           // Obecny użytkownik
           if (isPlatformBrowser(this.platformId)) this.router.navigate([window.localStorage.getItem('returnURL')]);

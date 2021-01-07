@@ -25,24 +25,13 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { LottieModule } from 'ngx-lottie';
 import { FormsModule } from '@angular/forms';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MAT_TABS_CONFIG } from '@angular/material/tabs';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import * as Sentry from '@sentry/angular';
 import { AppHammerConfig } from './app-hammer-config';
+import { ComponentsModule } from './_components/components.module';
 
 export function playerFactory() {
   return import('lottie-web');
@@ -82,19 +71,9 @@ const shouldUseEmulator = () => false;
     RouterModule,
     BrowserAnimationsModule,
     LoadingBarRouterModule,
-    MatTabsModule,
-    MatToolbarModule,
+    LoadingBarHttpClientModule,
     MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatSlideToggleModule,
-    MatChipsModule,
-    MatBadgeModule,
-    MatInputModule,
-    MatFormFieldModule,
+    ComponentsModule,
   ],
   providers: [
     {

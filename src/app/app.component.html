@@ -2,13 +2,32 @@
 
 <div class="container" [class.is-mobile]="screenService.isMobile">
   <mat-toolbar class="header">
-    <button (click)="leftNav.toggle()" mat-icon-button aria-label="Menu">
-      <mat-icon aria-label="Logo serwisu Intencje.pl" title="Intencje.pl">logo</mat-icon>
-      <!-- TODO: when the menu is closed display additional ico with menu on it ^ -->
+
+    <mat-toolbar-row>
+
+
+    <button (click)="leftNav.toggle()" mat-icon-button aria-label="Menu" style="background-color: inherit; color: #000 !important">
+      <mat-icon aria-label="Ikona symbolizująca boczne menu" title="Menu">
+        <svg focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+      </mat-icon>
     </button>
-    <h2 role="link">{{ title ? title : 'Ładowanie...' }}</h2>
+
+    <a href="https://intencje.pl/" mat-icon-button aria-label="Menu" class="logo">
+      <mat-icon aria-label="Logo serwisu Intencje.pl" title="Intencje.pl">logo</mat-icon>
+    </a>
+
+    <div *ngIf="!screenService.isMobile" >
+      <a aria-label="Link do misji projektu intencje.pl" title="Nasza misja" mat-button href="https://intencje.pl/nasza-misja" routerLinkActive="router-link-active">MISJA</a>
+      <a mat-button href="https://intencje.pl/funkcjonalnosci" title="Funkcjonalności" routerLinkActive="router-link-active">FUNKCJONALNOŚCI</a>
+      <!-- <a mat-button href="https://intencje.pl/pobierz" routerLinkActive="router-link-active">Pobierz</a>
+      <a mat-button href="https://intencje.pl/pomoc" routerLinkActive="router-link-active">Media o nas</a> -->
+      <a mat-button href="https://intencje.pl/o-projekcie" title="Kilka słów o projekcie" routerLinkActive="router-link-active">O PROJEKCIE</a>
+      <a mat-button href="https://intencje.pl/regulamin" title="Regulamin" routerLinkActive="router-link-active">REGULAMIN</a>
+      <a mat-button href="https://intencje.pl/kontakt" title="Informacje pomocne w kontakcie z nami" routerLinkActive="router-link-active">KONTAKT</a>
+    </div>
 
     <span class="fill-remaining-space"></span>
+    <app-search></app-search>
 
     <!-- <form>
       <mat-form-field>
@@ -16,7 +35,7 @@
       </mat-form-field>
     </form> -->
 
-    <!-- <button
+    <button
       *ngIf="auth.user$ | async as user; else guest"
       routerLink="/uzytkownicy/1"
       mat-icon-button
@@ -30,11 +49,11 @@
         width="40"
         style="border-radius: 50%"
       />
-    </button> -->
+    </button>
 
     <ng-template #guest>
       <button
-        routerLink="/logowanie"
+        routerLink="/login"
         mat-icon-button
         aria-label="Link do formularza logowania i rejestracji"
         title="Logowanie / Rejestracja"
@@ -42,6 +61,7 @@
         <mat-icon aria-label="Ikona symbolizująca rejestrację lub logowanie do serwisu">login</mat-icon>
       </button>
     </ng-template>
+    </mat-toolbar-row>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
@@ -61,23 +81,14 @@
       >
         <a
           mat-list-item
-          href="https://intencje.pl/"
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="active"
-          aria-label="Link do strony głównej - listy intencji"
-          title="Intencje"
-        >
-          <mat-icon aria-label="Ikona symbolizująca stronę główną">home</mat-icon>
-          Intencje
-        </a>
-        <a
-          mat-list-item
           routerLink="/modlitwy"
           routerLinkActive="active"
           aria-label="Link do modlitewnika"
           title="Modlitewnik"
         >
-          <mat-icon aria-label="Ikona symbolizująca modlitewnik">prayers</mat-icon>
+          <mat-icon aria-label="Ikona symbolizująca modlitewnik">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path d="M256,160c16-63.16,76.43-95.41,208-96a15.94,15.94,0,0,1,16,16V368a16,16,0,0,1-16,16c-128,0-177.45,25.81-208,64-30.37-38-80-64-208-64-9.88,0-16-8.05-16-17.93V80A15.94,15.94,0,0,1,48,64C179.57,64.59,240,96.84,256,160Z" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><line x1="256" y1="160" x2="256" y2="448" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/></svg></mat-icon>
           Modlitwy
         </a>
         <!-- <a

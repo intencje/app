@@ -84,6 +84,32 @@ export class AddSeoStuffDirective implements OnInit {
         break;
       case 'prayer':
         this.seoService.updateTitleTag(this.seo.data.title);
+        this.seoService.addJSONLD([
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Strona główna',
+                item: 'https://intencje.pl',
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Modlitwy',
+                item: 'https://intencje.pl/modlitwy',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: this.seo.data.title,
+                item: `https://intencje.pl/${this.seo.data.slug}`,
+              },
+            ],
+          },
+        ]);
       default:
     }
   }

@@ -111,9 +111,8 @@ const routes: Routes = [
     },
   },
   {
-    path: 'szczesc-boze',
-    loadChildren: () =>
-      import('./blessedness-of-god/blessedness-of-god.module').then((m) => m.BlessednessOfGodPageModule),
+    path: 'aktywuj',
+    loadChildren: () => import('./activate/activate.module').then((m) => m.ActivatePageModule),
     data: {
       title: 'Szczęść Boże!',
       description: ' ',
@@ -146,7 +145,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'logowanie',
+    path: 'login',
     loadChildren: () => import('./login/login.module').then((m) => m.LoginPageModule),
     data: {
       title: 'Logowanie / Rejestracja',

@@ -1,0 +1,27 @@
+<mat-dialog-content class="mat-typography">
+  <mat-form-field class="example-form-field">
+    <mat-label>Szukaj:</mat-label>
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" [(ngModel)]="value" type="search" matInput />
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>
+        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="M368 368L144 144M368 144L144 368"
+          />
+        </svg>
+      </mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="searchResults" *ngFor="let item of searchResults | async">
+    <h2 [innerHTML]="item._formatted.title"></h2>
+    <div [innerHTML]="item._formatted.content"></div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="start">
+  <button mat-button mat-dialog-close>Zamknij</button>
+</mat-dialog-actions>

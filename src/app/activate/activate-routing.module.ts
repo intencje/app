@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BlessednessOfGodPage } from './blessedness-of-god.page';
+import { ActivatePage } from './activate.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: BlessednessOfGodPage
-  }
+    component: ActivatePage,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class BlessednessOfGodPageRoutingModule {}
+export class ActivatePageRoutingModule {}

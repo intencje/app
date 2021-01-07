@@ -96,7 +96,7 @@ export class PrayerCreatePage implements OnInit {
         [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(40),
+          Validators.maxLength(80),
           CustomValidators.cannotContainSwearwords,
         ],
       ],
@@ -105,7 +105,7 @@ export class PrayerCreatePage implements OnInit {
         [
           Validators.required,
           Validators.minLength(20),
-          Validators.maxLength(500),
+          Validators.maxLength(10000),
           CustomValidators.cannotContainSwearwords,
         ],
       ],
@@ -174,7 +174,7 @@ export class PrayerCreatePage implements OnInit {
       const user: User = await this.auth.getUser();
       const prayer: Prayer = {
         uid: user.uid,
-        status: 'draft',
+        status: 'published',
         title: payload.title,
         content: payload.content,
         date: new Date(),

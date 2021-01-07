@@ -50,6 +50,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { SearchComponent, SearchDialog } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     IntentionSetFulfilledDialog,
     IntentionSetStaleDialog,
     CropperDialog,
+    SearchComponent,
+    SearchDialog,
   ],
   imports: [
     CommonModule,
@@ -159,12 +162,14 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatSelectModule,
     MatStepperModule,
     NgxMatSelectSearchModule,
+    SearchComponent,
   ],
   entryComponents: [
     IntentionDeleteDialog,
     IntentionAddCommentDialog,
     IntentionSetFulfilledDialog,
     IntentionSetStaleDialog,
+    SearchDialog,
     CropperDialog,
   ],
 })
