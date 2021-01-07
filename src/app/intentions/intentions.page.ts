@@ -184,7 +184,7 @@ export class IntentionsPage implements OnInit {
   // Sprzątamy
   ngOnDestroy(): void {
     this.unsubscribe.next();
-    this.seoService.removeJSONLD();
+    //this.seoService.removeJSONLD();
     this.snack?.dismiss();
   }
 }

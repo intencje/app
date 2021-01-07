@@ -1,11 +1,22 @@
 <ng-container *ngIf="type === 'extended'">
+
+
+
+
   <mat-card class="mat-elevation-z1">
-    <img *ngIf="prayer.isCoverImageUploaded" mat-card-image [src]="null" alt="{{ prayer.title }}" />
+
+    <h1>{{ prayer.title }}</h1>
+    <div style="text-transform: capitalize; font-weight: 300; margin: -10px 0 15px 0; color: #999">
+
+      Modlitwy / {{ prayer.category }}
+
+    </div>
+
+    <img *ngIf="prayer.isHeaderImageUploaded" mat-card-image src="assets/img/prayers/{{ prayer.id }}/header.jpg" alt="{{ prayer.title }}" />
     <mat-card-content>
       <!-- <section
         style="width: 100%; height: 20vh; background-position: center;background: url({{prayer.headerImage}})"
       ></section> -->
-      <h1 style="border-bottom: 1px solid whitesmoke">{{ prayer.title }}</h1>
       <div [innerHTML]="prayer.content"></div>
       <!-- <mat-chip-list>
         <mat-chip *ngFor="let tag of prayer.tags">#{{ tag }}</mat-chip>
@@ -71,7 +82,7 @@
 <ng-container *ngIf="type === 'timeline'">
   <a style="text-decoration: none;" routerLink="/modlitwy/{{ prayer.slug }}" [state]="prayer">
     <mat-card>
-      <img *ngIf="prayer.isHeaderImageUploaded" mat-card-image [src]="null" alt="{{ prayer.title }}" />
+      <img *ngIf="prayer.isCoverImageUploaded" mat-card-image src="assets/img/prayers/{{ prayer.id }}/cover.jpg" alt="{{ prayer.title }}" />
       <mat-card-header>
         <mat-card-title>{{ prayer.title }}</mat-card-title>
         <!-- <mat-card-subtitle>{{ prayer.category }}</mat-card-subtitle> -->

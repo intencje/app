@@ -7,10 +7,11 @@ import { SeoService } from '../_services/seo/seo.service';
   templateUrl: './help.page.html',
   styleUrls: ['./help.page.scss'],
 })
-export class HelpPage implements OnInit {
-  constructor(public readonly route: ActivatedRoute, private readonly seoService: SeoService) {}
+export class HelpPage {
+  empty = false;
 
-  ngOnInit() {}
+  countryFilterTooShort = false;
+  constructor(public readonly route: ActivatedRoute, private readonly seoService: SeoService) {}
 
   gestureTest(e) {
     console.log(e);
