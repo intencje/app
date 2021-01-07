@@ -13,5 +13,5 @@ export const environment = {
     appId: '1:1047051146932:web:1ce41d3e15889020a6a9e1',
     measurementId: 'G-H9ZQTFM5XV',
   },
-  url: 'https://app.intencje.pl',
+  url: 'https://intencje.pl',
 };

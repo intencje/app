@@ -58,7 +58,7 @@ export class AuthService implements CanActivate {
       }
       return true;
     }
-    this.router.navigate(['/logowanie'], { queryParams: { returnUrl: state.url } });
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 

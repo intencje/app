@@ -17,13 +17,6 @@ Source code of intencje.pl website and mobile/desktop apps based on Angular, Fir
 - **Material Design** - Design guidance and code from @angular/material
 - **Cypress** - E2E tests
 
-## Demo
-### Staging
-#### https://intencje-staging.web.app
-### Production (PWA enabled)
-#### https://intencje-production.web.app
-
-
 ## Documentation
 ### https://intencje.github.io/app/
 # Quickstart

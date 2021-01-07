@@ -113,28 +113,33 @@ export class PrayersPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.seoService.addJSONLD([
-      {
-        '@context': 'https://schema.org',
-        '@type': 'Organization',
-        name: 'Intencje.pl',
-        url: `${environment.url}`,
-        logo: '',
-        sameAs: ['https://www.facebook.com/intencjepl', 'https://twitter.com/intencjepl'],
-      },
-      {
-        '@context': 'https://schema.org',
-        '@type': 'SoftwareApplication',
-        name: 'Intencje',
-        operatingSystem: 'ANDROID',
-        applicationCategory: 'https://schema.org/GameApplication',
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.6',
-          ratingCount: '8864',
-        },
-      },
-    ]);
+    // this.seoService.addJSONLD([
+    //   {
+    //     '@context': 'https://schema.org',
+    //     '@type': 'Organization',
+    //     name: 'Intencje.pl',
+    //     url: 'https://intenche.pl',
+    //     logo: '',
+    //     sameAs: ['https://www.facebook.com/intencjepl', 'https://twitter.com/intencjepl'],
+    //   },
+    //   {
+    //     '@context': 'https://schema.org',
+    //     '@type': 'SoftwareApplication',
+    //     name: 'Intencje',
+    //     operatingSystem: 'ANDROID',
+    //     applicationCategory: 'CommunicationApplication',
+    //     aggregateRating: {
+    //       '@type': 'AggregateRating',
+    //       ratingValue: '4.7',
+    //       ratingCount: '42',
+    //     },
+    //     offers: {
+    //       '@type': 'Offer',
+    //       price: '0',
+    //       priceCurrency: 'PLN',
+    //     },
+    //   },
+    // ]);
   }
 
   // Pobiera z bazy paczkę danych startując od starszych niż data podana w offset
@@ -179,7 +184,7 @@ export class PrayersPage implements OnInit {
   // Sprzątamy
   ngOnDestroy(): void {
     this.unsubscribe.next();
-    this.seoService.removeJSONLD();
+    //this.seoService.removeJSONLD();
     this.snack?.dismiss();
   }
 }
