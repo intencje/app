@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json; charset=utf-8',
-    'X-Meili-Api-Key': '9e2d1fdfc899eaa5ce120a10fc9e28f7ea69a7e87cbd480f6601b64ca59e21ea',
+    'X-Meili-Api-Key': 'a5ba5447a668cd711921a199d7e3af97cb4a5f00fa1aae1453c455430b0af0cb',
   }),
 };
 
