@@ -17,7 +17,7 @@ import { DbService } from '../_services/db/db.service';
 })
 export class PrayersPage implements OnInit {
   // Ilość modlitw pobierana za jednym odczytem z bazy.
-  batch = 10;
+  batch = 20;
   // Flaga oznaczająca dojechanie do ostatniego elementu listy.
   theEnd = false;
   // Data uruchomienia komponentu. Do porównania z datami przychodzących elementów w celu wyświetlenia powiadomienia o nowych modlitwach.

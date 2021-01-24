@@ -79,12 +79,20 @@
   </mat-card>
 </ng-container>
 
-<ng-container *ngIf="type === 'timeline'">
+<ng-container *ngIf="type === 'list'">
   <a style="text-decoration: none;" routerLink="/modlitwy/{{ prayer.slug }}" [state]="prayer">
-    <mat-card>
-      <img *ngIf="prayer.isCoverImageUploaded" mat-card-image src="assets/img/prayers/{{ prayer.id }}/cover.jpg" alt="{{ prayer.title }}" />
+    <mat-card style="margin-bottom: 4px;" class="mat-elevation-z0">
       <mat-card-header>
-        <mat-card-title>{{ prayer.title }}</mat-card-title>
+
+        <img style="border-radius: 4px; margin-right:16px" *ngIf="prayer.isCoverImageUploaded"
+        mat-card-avatar
+       matListAvatar
+       src="assets/img/prayers/{{ prayer.id }}/cover.jpg"
+       alt="{{prayer.title}}"
+     />
+
+        <mat-card-title style="margin: 0 !important; line-height: 40px;">{{ prayer.title }}</mat-card-title>
+
         <!-- <mat-card-subtitle>{{ prayer.category }}</mat-card-subtitle> -->
       </mat-card-header>
     </mat-card>
