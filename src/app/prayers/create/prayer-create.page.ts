@@ -1,20 +1,18 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { CustomValidators } from '../../_models/custom-validators.model';
-import { DbService } from '../../_services/db/db.service';
-import { Intention, Prayer, User } from '../../_models/firebase.model';
 import { HttpClient } from '@angular/common/http';
-import { ToolsService } from '../../_services/tools/tools.service';
-import { AuthService } from '../../_services/auth/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { SeoService } from 'src/app/_services/seo/seo.service';
-import { ImageService } from 'src/app/_services/image/image.service';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
-import { takeUntil } from 'rxjs/operators';
-
+import { ActivatedRoute } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import * as BalloonEditor from '@ckeditor/ckeditor5-build-balloon';
+import { ReplaySubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ImageService } from 'src/app/_services/image/image.service';
+import { SeoService } from 'src/app/_services/seo/seo.service';
+import { CustomValidators } from '../../_models/custom-validators.model';
+import { Prayer, User } from '../../_models/firebase.model';
+import { AuthService } from '../../_services/auth/auth.service';
+import { DbService } from '../../_services/db/db.service';
+import { ToolsService } from '../../_services/tools/tools.service';
 
 export interface Tag {
   id: string;
@@ -36,6 +34,8 @@ export class PrayerCreatePage implements OnInit {
   contento = new FormControl();
 
   config: any = {
+    // Prevent changing "ó" cgaracter to &oacute;
+    entities_latin: false,
     height: 250,
     theme: 'modern',
     // powerpaste advcode toc tinymcespellchecker a11ychecker mediaembed linkchecker help

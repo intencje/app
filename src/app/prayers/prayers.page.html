@@ -10,22 +10,32 @@
 </mat-chip-list>
  -->
 
+
+
 <ng-container *ngIf="prayersList$ | async as prayers; else loading">
 
-    <div fxLayout="row wrap" fxLayoutGap="16px grid"
+  <div>
+    <div
       infiniteScroll
-      [infiniteScrollDistance]="2"
+      [infiniteScrollDistance]="1"
       [infiniteScrollThrottle]="50"
+      [immediateCheck]="true"
       (scrolled)="nextBatch((prayers[prayers.length -1].date))">
 
 
-      <div fxFlex.xs="50" fxFlex.sm="30" fxFlex.md="20" fxFlex.ls="20" fxFlex.xl="20" fxFlex="20" *ngFor="let prayer of prayers; let i = index; trackBy: trackByIdx">
-        <app-prayer-card type="timeline"
+      <div *ngFor="let prayer of prayers; let i = index; trackBy: trackByIdx">
+        <app-prayer-card type="list"
           *ngIf="prayer.date.seconds * 1000 < startDate"
           [prayer]="prayer"
         ></app-prayer-card>
       </div>
     </div>
+
+  </div>
+
+
+
+
 
 
 </ng-container>
