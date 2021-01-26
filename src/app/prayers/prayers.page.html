@@ -14,13 +14,14 @@
 
 <ng-container *ngIf="prayersList$ | async as prayers; else loading">
 
-  <div>
+  <mat-list>
     <div
       infiniteScroll
       [infiniteScrollDistance]="1"
       [infiniteScrollThrottle]="50"
       [immediateCheck]="true"
       (scrolled)="nextBatch((prayers[prayers.length -1].date))">
+
 
 
       <div *ngFor="let prayer of prayers; let i = index; trackBy: trackByIdx">
@@ -31,7 +32,7 @@
       </div>
     </div>
 
-  </div>
+  </mat-list>
 
 
 
