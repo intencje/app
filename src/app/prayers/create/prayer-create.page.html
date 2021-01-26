@@ -13,7 +13,7 @@
       </mat-form-field>
       <mat-form-field >
           <editor #content formControlName="content"
-            [init]="{ paste_as_text: true, block_formats: 'Paragraf=p;Nagłówek 2=h2;Nagłówek 3=h3;Nagłówek 4=h4;Nagłówek 5=h5; Cytat=blockquote', plugins: 'emoticons, lists, paste', language: 'pl_PL', browser_spellcheck: true, selector: 'textarea', height: '45vh', toolbar_mode: 'sliding', toolbar_sticky: true, menubar: false, inline: false, placeholder: 'Treść modlitwy *'}"
+            [init]="{ entity_encoding : 'raw', paste_as_text: true, block_formats: 'Paragraf=p;Nagłówek 2=h2;Nagłówek 3=h3;Nagłówek 4=h4;Nagłówek 5=h5; Cytat=blockquote', plugins: 'emoticons, lists, paste', language: 'pl_PL', browser_spellcheck: true, selector: 'textarea', height: '45vh', toolbar_mode: 'sliding', toolbar_sticky: true, menubar: false, inline: false, placeholder: 'Treść modlitwy *'}"
             toolbar="undo redo | bold italic underline | formatselect | bullist numlist | alignleft aligncenter alignright alignjustify | emoticons"
             tinyMatFormControl
             required

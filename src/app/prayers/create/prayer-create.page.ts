@@ -33,22 +33,6 @@ export class PrayerCreatePage implements OnInit {
   html = `fff`;
   contento = new FormControl();
 
-  config: any = {
-    // Prevent changing "ó" cgaracter to &oacute;
-    entities_latin: false,
-    height: 250,
-    theme: 'modern',
-    // powerpaste advcode toc tinymcespellchecker a11ychecker mediaembed linkchecker help
-    plugins:
-      'print preview fullpage searchreplace autolink directionality visualblocks visualchars media template codesample charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists textcolor wordcount contextmenu colorpicker textpattern',
-    toolbar:
-      'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-    image_advtab: false,
-    templates: [
-      { title: 'Test template 1', content: 'Test 1' },
-      { title: 'Test template 2', content: 'Test 2' },
-    ],
-  };
   // TODO: do modeli
   prayerCategoriesList: string[] = ['Podstawowe', 'Tematyczne', 'Litanie', 'Nowenny', 'Akty'];
 

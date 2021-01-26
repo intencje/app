@@ -3,7 +3,7 @@
 
 
 
-  <mat-card class="mat-elevation-z1">
+  <mat-card class="mat-elevation-z0">
 
     <h1>{{ prayer.title }}</h1>
     <div style="text-transform: capitalize; font-weight: 300; margin: -10px 0 15px 0; color: #999">
@@ -81,20 +81,20 @@
 
 <ng-container *ngIf="type === 'list'">
   <a style="text-decoration: none;" routerLink="/modlitwy/{{ prayer.slug }}" [state]="prayer">
-    <mat-card style="margin-bottom: 4px;" class="mat-elevation-z0">
+
+
+      <mat-list-item>
+        <!-- <img matListAvatar src="..." alt="..."> -->
+        <h3 matLine> {{ prayer.title }} </h3>
+      </mat-list-item>
+
+
+
+    <!-- <mat-card style="margin-bottom: 4px;" class="mat-elevation-z0">
       <mat-card-header>
-
-        <img style="border-radius: 4px; margin-right:16px" *ngIf="prayer.isCoverImageUploaded"
-        mat-card-avatar
-       matListAvatar
-       src="assets/img/prayers/{{ prayer.id }}/cover.jpg"
-       alt="{{prayer.title}}"
-     />
-
         <mat-card-title style="margin: 0 !important; line-height: 40px;">{{ prayer.title }}</mat-card-title>
 
-        <!-- <mat-card-subtitle>{{ prayer.category }}</mat-card-subtitle> -->
       </mat-card-header>
-    </mat-card>
+    </mat-card> -->
   </a>
 </ng-container>
