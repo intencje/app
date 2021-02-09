@@ -6,8 +6,8 @@ import { PrayerDetailsPage } from './prayer-details.page';
 const routes: Routes = [
   {
     path: '',
-    component: PrayerDetailsPage
-  }
+    component: PrayerDetailsPage,
+  },
 ];
 
 @NgModule({
