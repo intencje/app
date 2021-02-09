@@ -18,8 +18,11 @@
     </button>
   </mat-form-field>
   <div class="searchResults" *ngFor="let item of searchResults | async">
-    <h2 [innerHTML]="item._formatted.title"></h2>
-    <div [innerHTML]="item._formatted.content"></div>
+    <a style="color: inherit; text-decoration: none" *ngIf="item.slug" routerLink="/modlitwy/{{ item.slug }}" [mat-dialog-close]="true">
+      <h2 [innerHTML]="item._formatted.title"></h2>
+      <div [innerHTML]="item._formatted.content"></div>
+    </a>
+    <hr />
   </div>
 </mat-dialog-content>
 <mat-dialog-actions align="start">
