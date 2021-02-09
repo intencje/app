@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { SeoService } from 'src/app/_services/seo/seo.service';
-import { map, takeUntil, switchMap } from 'rxjs/operators';
+import { map, takeUntil, switchMap, filter, take } from 'rxjs/operators';
 import { Subscription, Observable, of, Subject } from 'rxjs';
-import { Intention, Tags, Comment } from './../../_models/firebase.model';
+import { Intention, Tags, Comment, Prayer } from './../../_models/firebase.model';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { DbService } from '../../_services/db/db.service';
 import { ScreenService } from 'src/app/_services/screen/screen.service';
@@ -22,7 +22,7 @@ export class PrayerDetailsPage implements OnInit {
     sameAs: ['https://www.facebook.com/intencjepl', 'https://twitter.com/intencjepl'],
   };
 
-  public prayer$: Observable<Intention>;
+  public prayer$: Observable<Prayer>;
   public intentions$: Observable<Intention[]>;
   public comments$: Observable<Comment[]>;
   public prayers$: Observable<any>;
@@ -30,7 +30,6 @@ export class PrayerDetailsPage implements OnInit {
   public tags = [];
 
   private subscription: Subscription;
-  navigation: any;
   slug: string;
   private unsubscribe = new Subject();
   dataSource: string;
@@ -42,39 +41,44 @@ export class PrayerDetailsPage implements OnInit {
     public db: DbService,
     private router: Router,
     public screenService: ScreenService,
-  ) {
-    this.navigation = this.router.getCurrentNavigation();
-    this.slug = this.route.snapshot.paramMap.get('prayer_slug');
-  }
+  ) {}
   ngOnInit(): void {
     this.getPrayer();
   }
 
   /**
    * Pobiera dane intencji na podstawie sluga z URLa definiowanego w pliku routing'u.
-   * Jeśli widok szczegółów intencji wywoływany jest z listy zbiorczej dane pobierane są z navigation.extras.state
-   * Jeśli nie - wejście z linka lub z miejsca gdzie dane nie zostały wprowadzone do navigation.extras.state'a - dane intencji
-   * pobierane są z bazy wraz z konwersja z tablicy obiektów na pojedyńczy obiekt.
+   * Jeśli widok szczegółów intencji wywoływany jest z listy zbiorczej dane pobierane są z window.history.state
+   * Jeśli nie - wejście z linka lub z miejsca gdzie dane nie zostały wprowadzone do window.history.state
+   * (np. szukajka) - dane intencji pobierane są z bazy wraz z konwersja z tablicy obiektów na pojedyńczy obiekt.
    */
   getPrayer(): void {
-    if (typeof this.navigation !== 'undefined' && typeof this.navigation.extras.state == 'object') {
-      this.prayer$ = of(this.navigation.extras.state);
-      this.dataSource = 'router';
-    } else {
-      this.prayer$ = this.db
-        .collection$('prayers', (ref) => ref.where('slug', '==', this.slug).limit(1))
-        .pipe(
-          // Szukanie po kolekcji zwraca tablicę obiektów. Nam potrzebny jest obiekt
-          map((data) => {
-            if (data[0]) {
-              return data[0];
-            } else {
-              this.router.navigate(['404'], { skipLocationChange: true });
-            }
-          }),
-        );
-      this.dataSource = 'db';
-    }
+    this.route.paramMap
+      .pipe(
+        map(() => window.history.state),
+        takeUntil(this.unsubscribe),
+      )
+      .subscribe((data) => {
+        if (!!data.id) {
+          this.prayer$ = of(data);
+          this.dataSource = 'router';
+        } else {
+          this.slug = this.route.snapshot.paramMap.get('prayer_slug');
+          this.prayer$ = this.db
+            .collection$('prayers', (ref) => ref.where('slug', '==', this.slug).limit(1))
+            .pipe(
+              // Szukanie po kolekcji zwraca tablicę obiektów. Nam potrzebny jest obiekt
+              map((data) => {
+                if (data[0]) {
+                  return data[0];
+                } else {
+                  this.router.navigate(['404'], { skipLocationChange: true });
+                }
+              }),
+            );
+          this.dataSource = 'db';
+        }
+      });
   }
 
   /**
