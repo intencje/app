@@ -4,34 +4,34 @@ on:
     branches:
     - staging
 jobs:
-  firebase-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@master
-        with:
-          node-version: '10.x'
-      - name: Install app
-        run: npm install
-      - name: Build app
-        run: npx ng run intencje:app-shell:staging
-      - name: Deploy to Firebase
-        uses: pizzafox/firebase-action@1.0.7
-        env:
-          PROJECT_ID: "intencje-staging"
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        with:
-          args: deploy --only hosting
-      - name: Create Sentry release
-        uses: getsentry/action-release@v1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        with:
-          environment: staging
+  # firebase-deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node
+  #       uses: actions/setup-node@master
+  #       with:
+  #         node-version: '10.x'
+  #     - name: Install app
+  #       run: npm install
+  #     - name: Build app
+  #       run: npx ng run intencje:app-shell:staging
+  #     - name: Deploy to Firebase
+  #       uses: pizzafox/firebase-action@1.0.7
+  #       env:
+  #         PROJECT_ID: "intencje-staging"
+  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  #       with:
+  #         args: deploy --only hosting
+  #     - name: Create Sentry release
+  #       uses: getsentry/action-release@v1
+  #       env:
+  #         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+  #         SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+  #         SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+  #       with:
+  #         environment: staging
   # cypress-run:
   #   needs: firebase-deploy
   #   runs-on: ubuntu-16.04
