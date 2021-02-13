@@ -1,7 +1,9 @@
 {
-  "name": "intencje",
+  "name": "Intencje",
+  "author": "Sławomir Jakubowski",
+  "homepage": "https://intencje.pl",
+  "license": "MIT",
   "version": "1.0.0",
-  "description": "An Amazing Capacitor App",
   "main": "./build/index.js",
   "scripts": {
     "build": "tsc",
@@ -23,11 +25,10 @@
     "capacitor",
     "electron"
   ],
-  "author": "",
-  "license": "MIT",
+
   "build": {
-    "appId": "com.example.capacitor-app",
-    "productName": "Capacitor App",
+    "appId": "pl.intencje",
+    "productName": "Intencje",
     "files": [
       "assets/*",
       "build/*",

@@ -1,8 +1,9 @@
 {
-  "name": "Intencje.pl",
-  "version": "1.0.0",
+  "name": "Intencje",
   "author": "Sławomir Jakubowski",
   "homepage": "https://intencje.pl",
+  "license": "MIT",
+  "version": "1.0.0",
   "scripts": {
     "compodoc": "npx compodoc -p tsconfig.json",
     "ng": "ng",
@@ -17,7 +18,9 @@
     "build:shell": "ng run intencje:app-shell:production",
     "prerender": "ng run intencje:prerender",
     "cypress": "$(npm bin)/cypress run",
-    "cypress:open": "$(npm bin)/cypress open"
+    "cypress:open": "$(npm bin)/cypress open",
+    "electron": "ng build --prod --base-href=./ && npx cap sync && npx cap open @capacitor-community/electron"
+
   },
   "private": true,
   "dependencies": {
