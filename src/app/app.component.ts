@@ -7,6 +7,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AuthService } from './_services/auth/auth.service';
 import { isPlatformBrowser } from '@angular/common';
 import { SeoService } from './_services/seo/seo.service';
+import { Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
