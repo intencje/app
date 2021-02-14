@@ -27,10 +27,45 @@
     "electron:serve-tsc": "tsc -p tsconfig.serve.json",
     "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && npx electron . --serve",
     "electron:local": "npm run build:prod && npx electron .",
-    "electron:build": "npm run build:prod && electron-builder build --publish=never"
+    "electron:build": "npm run build && electron-builder build --publish=never"
   },
-  "private": true,
-  "main": "main.js",
+
+  "build": {
+    "appId": "pl.intencje",
+		"productName": "Intencje",
+    "files": [
+      "!**/*"
+    ],
+		"mac": {
+			"target": [
+				"dmg"
+			],
+			"category": "public.app-category.social-networking"
+		},
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility"
+    },
+    "win": {
+      "publisherName": "Sławomir Jakubowski",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32",
+            "x64"
+          ]
+        }
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  },
+
   "dependencies": {
     "@angular/animations": "~11.1.0",
     "@angular/cdk": "^11.1.0",
