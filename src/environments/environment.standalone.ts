@@ -1,7 +1,7 @@
 import { version } from '../../package.json';
 
 export const environment = {
-  production: false,
+  production: true,
   serviceWorker: false,
   version: version,
   firebase: {
@@ -14,5 +14,5 @@ export const environment = {
     appId: '1:1047051146932:web:1ce41d3e15889020a6a9e1',
     measurementId: 'G-H9ZQTFM5XV',
   },
-  url: 'http://localhost:4200',
+  url: 'https://intencje.pl',
 };

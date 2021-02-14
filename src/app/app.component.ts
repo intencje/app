@@ -8,6 +8,7 @@ import { AuthService } from './_services/auth/auth.service';
 import { isPlatformBrowser } from '@angular/common';
 import { SeoService } from './_services/seo/seo.service';
 import { Plugins } from '@capacitor/core';
+import { ElectronService } from './_services/electron/electron.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
   title: string;
   public isBrowser = isPlatformBrowser(this.platformId);
   constructor(
+    private electronService: ElectronService,
     private swUpdate: SwUpdate,
     private snackbar: MatSnackBar,
     public screenService: ScreenService,
@@ -30,6 +32,14 @@ export class AppComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId,
   ) {
     this.seoService.startRouteListener();
+    if (electronService.isElectron) {
+      console.log(process.env);
+      console.log('Run in electron');
+      console.log('Electron ipcRenderer', this.electronService.ipcRenderer);
+      console.log('NodeJS childProcess', this.electronService.childProcess);
+    } else {
+      console.log('Run in browser');
+    }
   }
 
   ngOnInit(): void {

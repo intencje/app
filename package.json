@@ -7,13 +7,14 @@
   "homepage": "https://intencje.pl",
   "description": "Platforma Duchowej Łączności",
   "license": "MIT",
-  "version": "1.0.0-alpha.1402",
+  "version": "1.0.0-alpha",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "compodoc": "npx compodoc -p tsconfig.json",
     "ng": "ng",
-    "start": "ng serve",
-    "build": "npm run electron:serve-tsc && ng build --base-href ./",
+    "ng:serve": "ng serve",
+    "start": "npm-run-all -p electron:serve ng:serve",
+    "build": "npm run electron:serve-tsc && ng build --configuration=standalone --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "eslint": "npx eslint -c .eslintrc.js --ext .ts src",
@@ -26,29 +27,44 @@
     "cypress:open": "$(npm bin)/cypress open",
     "electron:serve-tsc": "tsc -p tsconfig.serve.json",
     "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && npx electron . --serve",
-    "electron:local": "npm run build:prod && npx electron .",
+    "electron:local": "npm run build && npx electron .",
     "electron:build": "npm run build && electron-builder build --publish=never"
   },
   "main": "main.js",
   "build": {
     "appId": "pl.intencje",
-		"productName": "Intencje",
+    "productName": "Intencje",
     "files": [
-
+      "**/*",
+      "!**/*.ts",
+      "!*.code-workspace",
+      "!LICENSE.md",
+      "!package.json",
+      "!package-lock.json",
+      "!android/",
+      "!cypress/",
+      "!docs/",
+      "!functions/",
+      "!ios/",
+      "!src/",
+      "!node_modules/**/*"
     ],
-		"mac": {
-			"target": [
-				"dmg"
-			],
-			"category": "public.app-category.social-networking"
-		},
-    "linux": {
+    "mac": {
+      "icon": "dist/browser/assets/icons",
       "target": [
-        "AppImage"
+        "dmg"
+      ],
+      "category": "public.app-category.social-networking"
+    },
+    "linux": {
+      "icon": "dist/browser/assets/icons",
+      "target": [
+        "AppImage", "snap", "deb", "rpm", "pacman"
       ],
       "category": "Utility"
     },
     "win": {
+      "icon": "dist/browser/assets/icons",
       "publisherName": "Sławomir Jakubowski",
       "target": [
         {
@@ -63,9 +79,11 @@
     "publish": {
       "provider": "github",
       "releaseType": "release"
+    },
+    "directories": {
+      "output": "release/"
     }
   },
-
   "dependencies": {
     "@angular/animations": "~11.1.0",
     "@angular/cdk": "^11.1.0",
@@ -81,7 +99,6 @@
     "@angular/platform-server": "~11.1.0",
     "@angular/router": "~11.1.0",
     "@angular/service-worker": "~11.1.0",
-    "@capacitor-community/electron": "^1.3.3",
     "@capacitor/android": "^2.4.6",
     "@capacitor/angular": "^1.0.3",
     "@capacitor/core": "^2.4.6",

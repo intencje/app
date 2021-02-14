@@ -64,7 +64,7 @@ const shouldUseEmulator = () => false;
       useCache: true,
     }),
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: environment.serviceWorker,
       registrationStrategy: 'registerImmediately',
     }),
 
