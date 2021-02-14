@@ -1,4 +1,4 @@
-name: CI
+name: Release
 on:
   push:
     tags:
@@ -32,20 +32,6 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: production
-  # cypress-run:
-  #   needs: firebase-deploy
-  #   runs-on: ubuntu-16.04
-  #   steps:
-  #     - name: Checkout tests
-  #       uses: actions/checkout@v2
-  #     - name: Run Cypress
-  #       uses: cypress-io/github-action@v1
-  #       with:
-  #         browser: chrome
-  #         headless: true
-  #         wait-on: 'https://app.intencje.pl'
-  #         config: baseUrl=https://app.intencje.pl
-  #         env: stage=production
 
   electron-release:
     runs-on: ${{ matrix.os }}
@@ -72,7 +58,4 @@ jobs:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
           github_token: ${{ secrets.github_token }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+          release: ${{ github.event.release.tag_name }}
