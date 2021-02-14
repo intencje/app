@@ -59,7 +59,7 @@
     "linux": {
       "icon": "dist/browser/assets/icons",
       "target": [
-        "AppImage", "snap", "deb", "rpm", "pacman"
+        "AppImage"
       ],
       "category": "Utility"
     },
