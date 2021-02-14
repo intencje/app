@@ -2,6 +2,7 @@ import { version } from '../../package.json';
 
 export const environment = {
   production: false,
+  serviceWorker: false,
   version: version,
   firebase: {
     apiKey: 'AIzaSyCxiDsyOSFOhUcD2Lq_mo5zPPz0oasu-AY',

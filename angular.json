@@ -47,7 +47,7 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {
@@ -77,6 +77,34 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "serviceWorker": false
+            },
+            "standalone": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.standalone.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
               "budgets": [
@@ -90,9 +118,9 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              "serviceWorker": false
             },
+
             "ci": {
               "budgets": [
                 {
@@ -116,6 +144,9 @@
             },
             "staging": {
               "browserTarget": "intencje:build:staging"
+            },
+            "standalone": {
+              "browserTarget": "intencje:build:standalone"
             }
 
           }
@@ -169,6 +200,17 @@
               ],
               "sourceMap": false,
               "optimization": true
+            },
+            "standalone": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.standalone.ts"
+                }
+              ],
+              "sourceMap": false,
+              "optimization": true
             }
 
           }
@@ -188,7 +230,6 @@
               "browserTarget": "intencje:build:staging",
               "serverTarget": "intencje:server:staging"
             }
-
           }
         },
         "prerender": {
@@ -219,7 +260,12 @@
             "staging": {
               "browserTarget": "intencje:build:staging",
               "serverTarget": "intencje:server:staging"
+            },
+            "standalone": {
+              "browserTarget": "intencje:build:standalone",
+              "serverTarget": "intencje:server:standalone"
             }
+
           }
         }
       }
