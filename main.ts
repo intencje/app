@@ -32,13 +32,7 @@ function createWindow(): BrowserWindow {
     });
     win.loadURL('http://localhost:4200');
   } else {
-    win.loadURL(
-      url.format({
-        pathname: path.join(__dirname, 'dist/index.html'),
-        protocol: 'file:',
-        slashes: true,
-      })
-    );
+    win.loadURL(`file://${__dirname}/dist/browser/index.html`);
   }
 
   // Emitted when the window is closed.

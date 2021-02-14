@@ -20,3 +20,8 @@ Thumbs.db
 
 # Cypress
 /cypress/screenshots
+
+# Electron
+main.js
+main.js.map
+release
