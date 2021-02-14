@@ -13,7 +13,7 @@
     "compodoc": "npx compodoc -p tsconfig.json",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href ./",
+    "build": "npm run electron:serve-tsc && ng build --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "eslint": "npx eslint -c .eslintrc.js --ext .ts src",
@@ -29,12 +29,12 @@
     "electron:local": "npm run build:prod && npx electron .",
     "electron:build": "npm run build && electron-builder build --publish=never"
   },
-
+  "main": "main.js",
   "build": {
     "appId": "pl.intencje",
 		"productName": "Intencje",
     "files": [
-      "!**/*"
+
     ],
 		"mac": {
 			"target": [
