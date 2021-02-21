@@ -71,6 +71,12 @@ jobs:
       with:
         xcode-version: latest-stable
 
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -99,7 +105,11 @@ jobs:
     - name: Deploy to firebase App Distribution
       working-directory: ./ios/App
       run: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
         bundle exec fastlane beta
+      env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
   prepare-android-app:
     #needs: cypress-run
@@ -144,6 +154,7 @@ jobs:
         key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
 
     - name: Grant Permission to Execute
+      working-directory: ./android
       run: chmod +x gradlew
 
     - name: Install bundle
