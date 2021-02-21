@@ -70,16 +70,17 @@ jobs:
         bundler-cache: true
 
     - name: Install Pods
+      working-directory: ./ios/App
       run: |
         pod install
 
     - name: Run tests
-      working-directory: ./ios
+      working-directory: ./ios/App
       run: |
         bundle exec fastlane tests
 
     - name: Deploy to firebase App Distribution
-      working-directory: ./ios
+      working-directory: ./ios/App
       run: |
         bundle exec fastlane beta
 
