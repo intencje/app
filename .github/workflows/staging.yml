@@ -116,7 +116,6 @@ jobs:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
-        APPLE_APP_IDENTIFIER: ${{ secrets.APPLE_APP_IDENTIFIER }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
         APPLE_ITC_TEAM_ID: ${{ secrets.APPLE_ITC_TEAM_ID }}
         APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
@@ -210,7 +209,6 @@ jobs:
       env:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
-        GOOGLE_APP_IDENTIFIER: ${{ secrets.GOOGLE_APP_IDENTIFIER }}
 
 #   electron-release:
 #     runs-on: ${{ matrix.os }}
