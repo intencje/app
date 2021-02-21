@@ -57,6 +57,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      
+    - name: Setup Node
+      uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
+        
+    - name: Install packages from package.json
+      run: npm install      
 
     - name: Select Xcode Version
       uses: maxim-lobanov/setup-xcode@v1
@@ -92,6 +100,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Setup Node
+      uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
+        
+    - name: Install packages from package.json
+      run: npm install  
+
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -117,6 +133,7 @@ jobs:
       working-directory: ./android
       run : |
         echo "$GOOGLE_PLAY_CONFIG_JSON" > play_config.json.b64
+        mkdir .secrets
         base64 -d -i play_config.json.b64 > .secrets/google_play_console.json
       env:
         GOOGLE_PLAY_CONFIG_JSON: ${{ secrets.GOOGLE_PLAY_CONFIG_JSON }}
