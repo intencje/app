@@ -4,6 +4,7 @@ platform :ios do
   desc "Push a new beta iOS build to Firebase App Distribution"
   lane :beta do
     setup_ci
+    match(type: "development", readonly: is_ci)
     build_app(workspace: "App.xcworkspace", scheme: "App")
     firebase_app_distribution(
       app: ENV['FIREBASE_IOS_APP_ID'],
