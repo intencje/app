@@ -1,0 +1,12 @@
+{
+  "appId": "pl.intencje",
+  "appName": "Intencje",
+  "bundledWebRuntime": true,
+  "npmClient": "npm",
+  "webDir": "dist/browser",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}

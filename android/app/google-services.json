@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1047051146932",
+    "firebase_url": "https://intencje-app.firebaseio.com",
+    "project_id": "intencje-app",
+    "storage_bucket": "intencje-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047051146932:android:a302927a0f144a88a6a9e1",
+        "android_client_info": {
+          "package_name": "pl.intencje"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047051146932-g8t0pn59ltm35j4aodsna5q6adsth4b7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmvzjbTtXKFMPyfCDhGYk9FQ4lQFNfKBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047051146932-g8t0pn59ltm35j4aodsna5q6adsth4b7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

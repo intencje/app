@@ -106,3 +106,9 @@ gradle-app.setting
 
 # Fastlane
 .secrets
+
+# Locks
+*.lock
+
+# Reports
+report.xml
