@@ -67,7 +67,7 @@ jobs:
       run: npm install
 
     - name: Capacitor sync
-      run: npm run build:standalone
+      run: npm run build:capacitor:ios
 
     - name: Select Xcode Version
       uses: maxim-lobanov/setup-xcode@v1
@@ -100,10 +100,11 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
 
-    - name: Install Pods
-      working-directory: ./ios/App
-      run: |
-        pod install
+    # Capacitor job
+    # - name: Install Pods
+    #   working-directory: ./ios/App
+    #   run: |
+    #     pod install
 
     - name: Deploy to Firebase App Distribution
       working-directory: ./ios/App
@@ -138,7 +139,7 @@ jobs:
       run: npm install
 
     - name: Capacitor sync
-      run: npm run build:standalone
+      run: npm run build:capacitor:android
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
