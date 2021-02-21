@@ -37,12 +37,12 @@ jobs:
   cypress-run:
     needs: firebase-deploy
     name: Run Cyrpess tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
       - name: Checkout tests
         uses: actions/checkout@v2
       - name: Run Cypress
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         with:
           browser: chrome
           headless: true
