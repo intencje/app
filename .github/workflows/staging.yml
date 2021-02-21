@@ -36,7 +36,7 @@ jobs:
 
 #   cypress-run:
 #     #needs: firebase-deploy
-#     name: Run Cyrpess tests
+#     name: Run Cyprpess tests
 #     runs-on: ubuntu-16.04
 #     steps:
 #       - name: Checkout tests
@@ -102,7 +102,7 @@ jobs:
       run: |
         pod install
 
-    - name: Deploy to firebase App Distribution
+    - name: Deploy to Firebase App Distribution
       working-directory: ./ios/App
       run: |
         export LC_ALL=en_US.UTF-8
@@ -110,6 +110,11 @@ jobs:
         bundle exec fastlane beta
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
+        APPLE_APP_IDENTIFIER: ${{ secrets.APPLE_APP_IDENTIFIER }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APPLE_ITC_TEAM_ID: ${{ secrets.APPLE_ITC_TEAM_ID }}
+        APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
 
   prepare-android-app:
     #needs: cypress-run
@@ -190,7 +195,12 @@ jobs:
     - name: Deploy to Firebase App Distribution
       working-directory: ./android
       run: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
         bundle exec fastlane beta
+      env:
+        FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+        GOOGLE_APP_IDENTIFIER: ${{ secrets.GOOGLE_APP_IDENTIFIER }}
 
 #   electron-release:
 #     runs-on: ${{ matrix.os }}
