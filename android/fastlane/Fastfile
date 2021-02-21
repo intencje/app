@@ -18,6 +18,7 @@ platform :android do
     )
     firebase_app_distribution(
       app: ENV['FIREBASE_ANDROID_APP_ID'],
+      groups: "Android"
       release_notes: "Lots of amazing new features to test out!",
   )
   end
