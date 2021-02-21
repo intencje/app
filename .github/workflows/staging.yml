@@ -96,11 +96,6 @@ jobs:
       run: |
         pod install
 
-    - name: Run tests
-      working-directory: ./ios/App
-      run: |
-        bundle exec fastlane tests
-
     - name: Deploy to firebase App Distribution
       working-directory: ./ios/App
       run: |
