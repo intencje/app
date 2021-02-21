@@ -1,3 +1,7 @@
+before_all do
+  update_fastlane
+end
+
 default_platform(:android)
 
 platform :android do
