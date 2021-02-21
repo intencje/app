@@ -12,8 +12,6 @@ ID of an iOS application added in Firebase
 
 `GOOGLE_PLAY_CONFIG_JSON` base64 version of google_play_console.json file
 
-`GOOGLE_APP_IDENTIFIER`
-
 `ANDROID_KEYSTORE_FILE`
 
 `ANDROID_KEYSTORE_KEY_ALIAS`
@@ -23,8 +21,6 @@ ID of an iOS application added in Firebase
 `ANDROID_KEYSTORE_KEY_PASSWORD`
 
 `APPLE_ID` Apple Developer user ID (email)
-
-`APPLE_APP_IDENTIFIER` iOS app ID
 
 `APPLE_ITC_TEAM_ID` App Store Connect Team ID
 
