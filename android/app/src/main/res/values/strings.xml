@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">intencje</string>
-    <string name="title_activity_main">intencje</string>
+    <string name="app_name">Intencje</string>
+    <string name="title_activity_main">Intencje</string>
     <string name="package_name">pl.intencje</string>
     <string name="custom_url_scheme">pl.intencje</string>
 </resources>

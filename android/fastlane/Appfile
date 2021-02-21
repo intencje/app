@@ -1,0 +1,3 @@
+json_key_file(".secrets/google_play_console.json")
+package_name ENV["GOOGLE_APP_IDENTIFIER"]
+
