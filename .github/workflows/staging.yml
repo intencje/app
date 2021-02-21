@@ -57,14 +57,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      
+
     - name: Setup Node
       uses: actions/setup-node@master
       with:
         node-version: '10.x'
-        
+
     - name: Install packages from package.json
-      run: npm install      
+      run: npm install
 
     - name: Select Xcode Version
       uses: maxim-lobanov/setup-xcode@v1
@@ -76,7 +76,7 @@ jobs:
       with:
         ruby-version: 2.7.2
         bundler-cache: true
-        
+
     - name: Cache Ruby - Bundler
       uses: actions/cache@v2
       with:
@@ -84,7 +84,7 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-
-          
+
     - name: Install bundle
       working-directory: ./ios/App
       run: |
@@ -113,16 +113,16 @@ jobs:
       uses: actions/setup-node@master
       with:
         node-version: '10.x'
-        
+
     - name: Install packages from package.json
-      run: npm install  
+      run: npm install
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.2
         bundler-cache: true
-        
+
     - name: Cache Ruby - Bundler
       uses: actions/cache@v2
       with:
@@ -130,9 +130,24 @@ jobs:
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
         restore-keys: |
           ${{ runner.os }}-gems-
-          
+
+    - name: Cache Gradle
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/caches/
+        key: cache-clean-gradle-${{ matrix.os }}-${{ matrix.jdk }}
+
+    - name: Cache Gradle Wrapper
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/wrapper/
+        key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
+
+    - name: Grant Permission to Execute
+      run: chmod +x gradlew
+
     - name: Install bundle
-      working-directory: ./android    
+      working-directory: ./android
       run: |
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
