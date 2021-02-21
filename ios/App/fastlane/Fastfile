@@ -1,0 +1,12 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta iOS build to Firebase App Distribution"
+  lane :beta do
+    build_app(workspace: "App.xcworkspace", scheme: "App", export_xcargs: "-allowProvisioningUpdates")
+    firebase_app_distribution(
+      app: ENV['FIREBASE_IOS_APP_ID'],
+      release_notes: "Lots of amazing new features to test out!",
+  )
+  end
+end
