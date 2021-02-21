@@ -34,24 +34,24 @@ jobs:
 #         with:
 #           environment: staging
 
-  cypress-run:
-    #needs: firebase-deploy
-    name: Run Cyrpess tests
-    runs-on: ubuntu-16.04
-    steps:
-      - name: Checkout tests
-        uses: actions/checkout@v2
-      - name: Run Cypress
-        uses: cypress-io/github-action@v2.8.4
-        with:
-          browser: chrome
-          headless: true
-          wait-on: 'https://intencje-staging.web.app'
-          config: baseUrl=https://intencje-staging.web.app
-          env: stage=staging
+#   cypress-run:
+#     #needs: firebase-deploy
+#     name: Run Cyrpess tests
+#     runs-on: ubuntu-16.04
+#     steps:
+#       - name: Checkout tests
+#         uses: actions/checkout@v2
+#       - name: Run Cypress
+#         uses: cypress-io/github-action@v2.8.4
+#         with:
+#           browser: chrome
+#           headless: true
+#           wait-on: 'https://intencje-staging.web.app'
+#           config: baseUrl=https://intencje-staging.web.app
+#           env: stage=staging
 
   prepare-ios-app:
-    needs: cypress-run
+    #needs: cypress-run
     name: Prepare iOS app
     runs-on: macos-latest
     steps:
@@ -85,7 +85,7 @@ jobs:
         bundle exec fastlane beta
 
   prepare-android-app:
-    needs: cypress-run
+    #needs: cypress-run
     name: Prepare Android app
     runs-on: ubuntu-latest
     steps:
