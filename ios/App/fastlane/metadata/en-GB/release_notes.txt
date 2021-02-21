@@ -1,0 +1,5 @@
+* Nowy moduł "Modlitewnik" podpowiadający treść odpowiednich modlitw pod każdą z intencji.
+* Nowy moduł "Patroni" prezentujący sylwetki świętych i błogosławionych Kościoła Katolickiego.
+* Nowy moduł "Świadectwa" prezentujący świadectwa naszych użytkowników wraz z możliwością podzielenia się własnym.
+* Nowy moduł "Tagi" łączący w tematyczną całość intencje, modlitwy, patronów i artykuły.
+* Ustawienia umożliwiające sterowanie powiadomieniami.
