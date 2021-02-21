@@ -1,0 +1,62 @@
+Intencje.pl to aplikacja, dzięki której:
+
+- dodasz swoją prośbę o modlitwę,
+- pomodlisz się w intencjach osób pragnących Twojej modlitwy,
+- poznasz modlitewnik, leksykon świętych, Pismo Święte i aktualne artykuły katolickie.
+
+Dołącz do stale rosnącej grupy osób rozsianych po całym świecie. Pragniemy towarzyszyć Tobie w drodze do Nieba umacniając się wzajemnie w wierze, nadziei i miłości. Wierzymy słowom Jezusa Chrystusa „(…) gdzie są dwaj albo trzej zebrani w imię moje, tam jestem pośród nich (Mt 18, 19-20)” tworząc wspólnie przestrzeń nazywaną „Platformą Duchowej Łączności”
+
+Dzięki współpracy z Fundacją Małych Stópek ks. Tomasza Kancelarczyka i Modlitewnym Oknem Życia intencje dodane w naszej apce rozsyłamy co tydzień do współpracujących z nami zgromadzeń zakonnych, które wstawiają się za nami przed Najświętszym Sakramentem.
+
+Co nowego w aplikacji:
+
+Modlitewnik
+
+- stale aktualizowany modlitewnik zawierający modlitwy tematyczne, litanie, akty, nowenny
+- pod każdą z modlitw lista dopasowanych tematycznie: intencji, świętych i artykułów
+
+Patroni
+
+- stale aktualizowana lista życiorysów świętych Kościoła Katolickiego
+- obok każdego życiorysu lista intencji, którym wybrany święty patronuje
+
+Czytania
+
+- czytania z Pisma Świętego na każdy dzień wraz z komentarzem
+- szczegółowe informacje o świętach Kościoła Katolickiego przypadających w danym dniu
+
+Artykuły
+
+- wartościowe artykuły i filmy video
+- pod każdym artykułem lista dopasowanych tematycznie: intencji, świętych i modlitw
+
+Aktywność
+
+- informacje o aktywności użytkowników, ich modlitwach, podziękowaniach i zmianach w profilu
+- możliwość filtrowania określonego typu aktywności
+
+Użytkownicy
+
+- lista użytkowników aplikacji
+- możliwość sortowania według alfabetu, aktywności, czasu założenia konta
+
+Tagi
+
+- modlitwy, intencje, artykuły, sylwetki świętych podzielone tematycznie
+- możliwość zapoznania się z wybranymi treściami zgodnie z zainteresowaniami
+
+Powiadomienia
+
+- o modlitwach w Twojej intencji
+- nowych artykułach i świadectwach
+- podziękowaniach za Twoją modlitwę
+- nowych osobach z Twojej parafii
+
+Profile
+
+- profile użytkowników z informacjami o ich aktywności i pozostawionych intencjach
+
+Świadectwa
+
+- świadectwa użytkowników, którzy dostąpili szczególnych łask dzięki modlitwie
+- możliwość podzielenia się własnym świadectwem
