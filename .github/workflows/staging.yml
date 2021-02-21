@@ -76,6 +76,20 @@ jobs:
       with:
         ruby-version: 2.7.2
         bundler-cache: true
+        
+    - name: Cache Ruby - Bundler
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+          
+    - name: Install bundle
+      working-directory: ./ios/App
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
 
     - name: Install Pods
       working-directory: ./ios/App
@@ -113,6 +127,19 @@ jobs:
       with:
         ruby-version: 2.7.2
         bundler-cache: true
+        
+    - name: Cache Ruby - Bundler
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+          
+    - name: Install bundle
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
 
     - name: Configure Keystore
       working-directory: ./android
