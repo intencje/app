@@ -12,7 +12,7 @@ platform :ios do
     build_app(workspace: "App.xcworkspace", scheme: "App")
     firebase_app_distribution(
       app: ENV['FIREBASE_IOS_APP_ID'],
-      groups: "iOS"
+      groups: "iOS",
       release_notes: "Lots of amazing new features to test out!",
   )
   end
