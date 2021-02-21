@@ -15,6 +15,7 @@
     "ng:serve": "ng serve",
     "start": "npm-run-all -p electron:serve ng:serve",
     "build": "npm run electron:serve-tsc && ng build --configuration=standalone --base-href ./",
+    "build:standalone": "ng build --configuration=standalone && npx cap sync",
     "test": "ng test",
     "lint": "ng lint",
     "eslint": "npx eslint -c .eslintrc.js --ext .ts src",
