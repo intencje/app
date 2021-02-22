@@ -9,7 +9,7 @@ platform :ios do
   lane :beta do
     setup_ci
     match(type: "appstore", readonly: is_ci)
-    build_app(workspace: "App.xcworkspace", scheme: "App")
+    build_app(export_xcargs: "-allowProvisioningUpdates", workspace: "App.xcworkspace", scheme: "App")
     firebase_app_distribution(
       app: ENV['FIREBASE_IOS_APP_ID'],
       groups: "iOS",
