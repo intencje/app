@@ -122,7 +122,7 @@ jobs:
 
 
   prepare-android-app:
-    needs: prepare-ios-app
+    needs: cypress-run
     name: Prepare Android app
     runs-on: ubuntu-latest
     steps:
