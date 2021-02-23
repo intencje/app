@@ -35,7 +35,7 @@ jobs:
           environment: staging
 
   cypress-run:
-    #needs: firebase-deploy
+    needs: firebase-deploy
     name: Run Cyprpess tests
     runs-on: ubuntu-16.04
     steps:
