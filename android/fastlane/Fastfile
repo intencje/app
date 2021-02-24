@@ -5,9 +5,20 @@ end
 default_platform(:android)
 
 platform :android do
+
   desc "Runs all the tests"
   lane :test do
     gradle(task: "test")
+  end
+
+  desc "Update app version"
+  lane :update_version do
+    package = load_json(json_path: "./../package.json")
+
+    android_set_version_name(
+      version_name: package["version"]
+    )
+    android_set_version_code()
   end
 
   desc "Push a new beta Android build to Firebase App Distribution"
