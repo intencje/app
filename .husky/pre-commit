@@ -2,3 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm --no-git-tag-version version patch && git add .
+cd android && bundle exec fastlane update_version && git add .
+cd ../ios/App && bundle exec fastlane update_version && git add .
