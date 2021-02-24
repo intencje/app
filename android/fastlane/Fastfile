@@ -24,8 +24,9 @@ platform :android do
   desc "Push a new beta Android build to Firebase App Distribution"
   lane :beta do
     gradle(
-      task: 'assemble',
-      build_type: 'Release',
+      task: "assemble",
+      build_type: "Release",
+      print_command: false,
     )
     firebase_app_distribution(
       app: ENV['FIREBASE_ANDROID_APP_ID'],
