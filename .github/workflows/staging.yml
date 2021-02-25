@@ -176,20 +176,25 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
 
-    - name: Configure Keystore
+    - name: Deploy to Firebase App Distribution
       working-directory: ./android
       run: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
         echo "$ANDROID_KEYSTORE_FILE" > keystore.jks.b64
         base64 -d -i keystore.jks.b64 > app/keystore.jks
         echo "storeFile=keystore.jks" >> keystore.properties
         echo "keyAlias=$ANDROID_KEYSTORE_KEY_ALIAS" >> keystore.properties
         echo "storePassword=$ANDROID_KEYSTORE_STORE_PASSWORD" >> keystore.properties
         echo "keyPassword=$ANDROID_KEYSTORE_KEY_PASSWORD" >> keystore.properties
+        bundle exec fastlane beta
       env:
         ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
         ANDROID_KEYSTORE_KEY_ALIAS: ${{ secrets.ANDROID_KEYSTORE_KEY_ALIAS }}
         ANDROID_KEYSTORE_KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }}
         ANDROID_KEYSTORE_STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_STORE_PASSWORD }}
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
 
     # - name: Create Google Play Config file
     #   working-directory: ./android
@@ -200,15 +205,6 @@ jobs:
     #   env:
     #     GOOGLE_PLAY_CONFIG_JSON: ${{ secrets.GOOGLE_PLAY_CONFIG_JSON }}
 
-    - name: Deploy to Firebase App Distribution
-      working-directory: ./android
-      run: |
-        export LC_ALL=en_US.UTF-8
-        export LANG=en_US.UTF-8
-        bundle exec fastlane beta
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
 
 #   electron-release:
 #     runs-on: ${{ matrix.os }}
