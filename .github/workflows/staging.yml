@@ -182,7 +182,7 @@ jobs:
         export LC_ALL=en_US.UTF-8
         export LANG=en_US.UTF-8
         echo "$ANDROID_KEYSTORE_FILE" > keystore.jks.b64
-        base64 -d -i keystore.jks.b64 > app/keystore.jks
+        base64 -d -i keystore.jks.b64 > keystore.jks
         echo "storeFile=keystore.jks" >> keystore.properties
         echo "keyAlias=$ANDROID_KEYSTORE_KEY_ALIAS" >> keystore.properties
         echo "storePassword=$ANDROID_KEYSTORE_STORE_PASSWORD" >> keystore.properties
