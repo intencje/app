@@ -1,3 +1,5 @@
+[![CI](https://github.com/intencje/app/actions/workflows/staging.yml/badge.svg?branch=staging)](https://github.com/intencje/app/actions/workflows/staging.yml)
+
 # intencje.pl
 
 > "Freely you have received; freely give" (Matthew 10:8)
