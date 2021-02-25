@@ -23,10 +23,21 @@ platform :android do
 
   desc "Push a new beta Android build to Firebase App Distribution"
   lane :beta do
+    sh("echo $ANDROID_KEYSTORE_FILE > keystore.jks.b64")
+    sh("base64 -d -i keystore.jks.b64 > ../app/keystore.jks")
+    sh("pwd")
+    sh("echo \"storeFile=keystore.jks\" >> keystore.properties")
+    sh("echo \"keyAlias=$ANDROID_KEYSTORE_KEY_ALIAS\" >> keystore.properties")
+    sh("echo \"storePassword=$ANDROID_KEYSTORE_STORE_PASSWORD\" >> keystore.properties")
+    sh("echo \"keyPassword=$ANDROID_KEYSTORE_KEY_PASSWORD\" >> keystore.properties")
+
     gradle(
-      task: "clean assembleRelease",
+      task: "assemble",
+      build_type: "Release",
+      gradle_path: "./gradlew",
       print_command: false,
     )
+
     firebase_app_distribution(
       app: ENV['FIREBASE_ANDROID_APP_ID'],
       groups: "Android",
