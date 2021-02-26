@@ -33,7 +33,6 @@ platform :android do
     gradle(
       task: "assemble",
       build_type: "Release",
-      gradle_path: "./gradlew",
       print_command: false,
     )
 
