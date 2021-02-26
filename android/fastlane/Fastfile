@@ -25,7 +25,6 @@ platform :android do
   lane :beta do
     sh("echo $ANDROID_KEYSTORE_FILE > keystore.jks.b64")
     sh("base64 -d -i keystore.jks.b64 > ../app/keystore.jks")
-    sh("pwd")
     sh("echo \"storeFile=keystore.jks\" >> keystore.properties")
     sh("echo \"keyAlias=$ANDROID_KEYSTORE_KEY_ALIAS\" >> keystore.properties")
     sh("echo \"storePassword=$ANDROID_KEYSTORE_STORE_PASSWORD\" >> keystore.properties")
