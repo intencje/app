@@ -25,6 +25,7 @@ Thumbs.db
 main.js
 main.js.map
 release
+electron_release
 
 # Gradle
 .gradle

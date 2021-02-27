@@ -15,13 +15,10 @@ platform :ios do
 
   desc "Push a new beta iOS build to Firebase App Distribution"
   lane :beta do
+    sh("echo $CERTIFICATES_REPO_SSH_KEY > id_rsa_github_actions.rsa")
     setup_ci
-    match(type: "appstore", readonly: is_ci)
+    match(type: "appstore", readonly: is_ci, git_private_key: 'id_rsa_github_actions.rsa')
     build_app(workspace: "App.xcworkspace", scheme: "App")
-    firebase_app_distribution(
-      app: ENV['FIREBASE_IOS_APP_ID'],
-      groups: "iOS",
-      release_notes: "Lots of amazing new features to test out!",
-  )
+    upload_to_testflight(changelog: "Osom stuff!")
   end
 end

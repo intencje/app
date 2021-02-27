@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AuthService } from '../_services/auth/auth.service';
 import { ToolsService } from '../_services/tools/tools.service';
-import { AnimationOptions } from 'ngx-lottie';
 import { CustomValidators } from '../_models/custom-validators.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -23,10 +22,6 @@ export class LoginPage implements OnInit {
   loading = false;
   emailSent = false;
   submitted = false;
-  options: AnimationOptions = {
-    loop: false,
-    path: '/assets/animations/login.json',
-  };
   geoIP: object = {};
   loginRegisterForm: FormGroup;
   showMessage = false;

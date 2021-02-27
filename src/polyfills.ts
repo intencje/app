@@ -56,6 +56,7 @@
  * Zone JS is required by default for Angular itself.
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
+import 'globalthis/auto'; // Old Android version support -> https://github.com/angular/angularfire/issues/2723
 
 
 /***************************************************************************************************
