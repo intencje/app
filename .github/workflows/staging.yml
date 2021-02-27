@@ -4,51 +4,51 @@ on:
     branches:
     - staging
 jobs:
-  firebase-deploy:
-    name: Deploy app to Firebase
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node
-        uses: actions/setup-node@master
-        with:
-          node-version: '10.x'
-      - name: Install app
-        run: npm install
-      - name: Build app
-        run: npx ng run intencje:app-shell:staging
-      - name: Deploy to Firebase
-        uses: pizzafox/firebase-action@1.0.7
-        env:
-          PROJECT_ID: "intencje-staging"
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        with:
-          args: deploy --only hosting
-      - name: Create Sentry release
-        uses: getsentry/action-release@v1
-        env:
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        with:
-          environment: staging
+  # firebase-deploy:
+  #   name: Deploy app to Firebase
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Setup Node
+  #       uses: actions/setup-node@master
+  #       with:
+  #         node-version: '10.x'
+  #     - name: Install app
+  #       run: npm install
+  #     - name: Build app
+  #       run: npx ng run intencje:app-shell:staging
+  #     - name: Deploy to Firebase
+  #       uses: pizzafox/firebase-action@1.0.7
+  #       env:
+  #         PROJECT_ID: "intencje-staging"
+  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  #       with:
+  #         args: deploy --only hosting
+  #     - name: Create Sentry release
+  #       uses: getsentry/action-release@v1
+  #       env:
+  #         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+  #         SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+  #         SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+  #       with:
+  #         environment: staging
 
-  cypress-run:
-    needs: firebase-deploy
-    name: Run Cypress tests
-    runs-on: ubuntu-16.04
-    steps:
-      - name: Checkout tests
-        uses: actions/checkout@v2
-      - name: Run Cypress
-        uses: cypress-io/github-action@v2.8.4
-        with:
-          browser: chrome
-          headless: true
-          wait-on: 'https://intencje-staging.web.app'
-          config: baseUrl=https://intencje-staging.web.app
-          env: stage=staging
+  # cypress-run:
+  #   needs: firebase-deploy
+  #   name: Run Cypress tests
+  #   runs-on: ubuntu-16.04
+  #   steps:
+  #     - name: Checkout tests
+  #       uses: actions/checkout@v2
+  #     - name: Run Cypress
+  #       uses: cypress-io/github-action@v2.8.4
+  #       with:
+  #         browser: chrome
+  #         headless: true
+  #         wait-on: 'https://intencje-staging.web.app'
+  #         config: baseUrl=https://intencje-staging.web.app
+  #         env: stage=staging
 
   prepare-ios-app:
     needs: cypress-run
@@ -106,19 +106,19 @@ jobs:
     #   run: |
     #     pod install
 
-    - name: Deploy to Firebase App Distribution
-      working-directory: ./ios/App
-      run: |
-        export LC_ALL=en_US.UTF-8
-        export LANG=en_US.UTF-8
-        bundle exec fastlane beta
-      env:
-        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
-        APPLE_ID: ${{ secrets.APPLE_ID }}
-        APPLE_ITC_TEAM_ID: ${{ secrets.APPLE_ITC_TEAM_ID }}
-        APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+    # - name: Deploy to Firebase App Distribution
+    #   working-directory: ./ios/App
+    #   run: |
+    #     export LC_ALL=en_US.UTF-8
+    #     export LANG=en_US.UTF-8
+    #     bundle exec fastlane beta
+    #   env:
+    #     MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+    #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+    #     FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
+    #     APPLE_ID: ${{ secrets.APPLE_ID }}
+    #     APPLE_ITC_TEAM_ID: ${{ secrets.APPLE_ITC_TEAM_ID }}
+    #     APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
 
 
   prepare-android-app:
