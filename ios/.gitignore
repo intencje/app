@@ -12,3 +12,6 @@ capacitor-cordova-ios-plugins
 
 # Reports
 report.xml
+
+# Fastlane
+*.rsa

@@ -3,7 +3,6 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ImageService } from 'src/app/_services/image/image.service';
@@ -28,7 +27,6 @@ export class PrayerCreatePage implements OnInit {
   value = 'TinyMCE Material';
   value2 = 'TinyMCE Material';
 
-  public Editor = ClassicEditor;
   //public Balon = BalloonEditor;
   html = `fff`;
   contento = new FormControl();
