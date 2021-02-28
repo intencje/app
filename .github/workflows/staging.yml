@@ -34,6 +34,20 @@ jobs:
         with:
           environment: staging
 
+  lighthouse:
+    needs: firebase-deploy
+    name: Run Lighthouse audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            https://intencje-staging.web.app/
+            https://intencje-staging.web.app/modlitwy
+          uploadArtifacts: true
+
   cypress-run:
     needs: firebase-deploy
     name: Run Cypress tests
@@ -94,7 +108,7 @@ jobs:
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
 
-    - name: Deploy to Firebase App Distribution
+    - name: Deploy to Testflight
       working-directory: ./ios/App
       run: |
         export LC_ALL=en_US.UTF-8
@@ -102,6 +116,7 @@ jobs:
         bundle exec fastlane beta
       env:
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
@@ -177,53 +192,95 @@ jobs:
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
 
-    # - name: Create Google Play Config file
-    #   working-directory: ./android
-    #   run : |
-    #     echo "$GOOGLE_PLAY_CONFIG_JSON" > play_config.json.b64
-    #     mkdir .secrets
-    #     base64 -d -i play_config.json.b64 > .secrets/google_play_console.json
-    #   env:
-    #     GOOGLE_PLAY_CONFIG_JSON: ${{ secrets.GOOGLE_PLAY_CONFIG_JSON }}
-
-
-  prepare-electron-apps:
+  prepare-linux-app:
     needs: cypress-run
-    name: Prepare Electron aps (Mac, Windows, Linux)
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-
+    name: Prepare Linux app
+    runs-on: ubuntu-latest
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+    - name: Check out Git repository
+      uses: actions/checkout@v1
 
-      - name: Install Node.js and NPM
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10
+    - name: Install Node.js and NPM
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
 
-      - name: Install packages from package.json
-        run: npm install
+    - name: Build Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        release: true
 
-      - name: Build Electron app
-        run: npm run electron:build
+    - name: Move Files
+      shell: bash
+      run: |
+        mkdir dist-linux > /dev/null 2>&1
+        mv electron_release/latest-linux.yml electron_release/*.AppImage dist-linux > /dev/null 2>&1
 
-      - name: Cleanup artifacts Mac & Linux
-        if: matrix.os != 'windows-latest'
-        run: |
-          mkdir artifacts
-          mv "electron_release/(*.exe,*.deb,*.AppImage,*.dmg,*.msi)" artifacts || true
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: intencje-linux
+        path: dist-linux
 
-      - name: Cleanup artifacts Win
-        if: matrix.os == 'windows-latest'
-        run: |
-          mkdir artifacts
-          mv electron_release/*.exe artifacts
+  prepare-mac-app:
+    needs: cypress-run
+    name: Prepare macOS app
+    runs-on: macos-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v1
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{matrix.os}}
-          path: artifacts
+    - name: Install Node.js and NPM
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+
+    - name: Build Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        release: true
+
+    - name: Move Files
+      shell: bash
+      run: |
+        mkdir dist-mac > /dev/null 2>&1
+        mv electron_release/latest-mac.yml electron_release/*.dmg dist-mac > /dev/null 2>&1
+
+    - name: Upload srtifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: intencje-mac
+        path: dist-mac
+
+  prepare-windows-app:
+    needs: cypress-run
+    name: Prepare Windows app
+    runs-on: windows-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v1
+
+    - name: Install Node.js and NPM
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+
+    - name: Build Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        release: true
+
+    - name: Move Files
+      shell: bash
+      run: |
+        mkdir dist-win > /dev/null 2>&1
+        mv electron_release/latest.yml electron_release/*.msi dist-win > /dev/null 2>&1
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: intencje-win
+        path: dist-win
