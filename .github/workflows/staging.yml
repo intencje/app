@@ -276,7 +276,7 @@ jobs:
       shell: cmd
       run: |
         mkdir dist-win
-        move electron_release/*.msi dist-win
+        move electron_release/*.exe dist-win
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
