@@ -119,9 +119,10 @@ jobs:
         MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
-        APPLE_ID: ${{ secrets.APPLE_ID }}
-        APPLE_ITC_TEAM_ID: ${{ secrets.APPLE_ITC_TEAM_ID }}
-        APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+        FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
 
   prepare-android-app:
     needs: cypress-run
@@ -276,6 +277,8 @@ jobs:
       shell: cmd
       run: |
         mkdir dist-win
+        cd electron_release
+        dir electron_release
         move electron_release/*.exe dist-win
 
     - name: Upload artifacts
