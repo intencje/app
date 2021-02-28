@@ -19,9 +19,6 @@ platform :ios do
     match(type: "appstore", readonly: is_ci, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
     build_app(workspace: "App.xcworkspace", scheme: "App")
     upload_to_testflight(
-      username: ENV['APPLE_ID'],
-      app_identifier: "pl.intencje",
-      itc_provider: ENV['APPLE_TEAM_ID'],
       skip_waiting_for_build_processing: true
     )
   end

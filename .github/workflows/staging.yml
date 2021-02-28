@@ -209,7 +209,7 @@ jobs:
       uses: samuelmeuli/action-electron-builder@v1
       with:
         github_token: ${{ secrets.github_token }}
-        release: true
+        release: false
 
     - name: Move Files
       shell: bash
@@ -240,7 +240,7 @@ jobs:
       uses: samuelmeuli/action-electron-builder@v1
       with:
         github_token: ${{ secrets.github_token }}
-        release: true
+        release: false
 
     - name: Move Files
       shell: bash
@@ -276,7 +276,7 @@ jobs:
       shell: cmd
       run: |
         mkdir dist-win
-        move electron_release/*.msi dist-win
+        move electron_release/*.exe dist-win
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
