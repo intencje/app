@@ -273,7 +273,7 @@ jobs:
         github_token: ${{ secrets.github_token }}
 
     - name: Move Files
-      shell: bash
+      shell: cmd
       run: |
         mkdir dist-win
         move electron_release/*.msi dist-win

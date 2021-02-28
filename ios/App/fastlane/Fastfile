@@ -18,6 +18,10 @@ platform :ios do
     setup_ci
     match(type: "appstore", readonly: is_ci, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
     build_app(workspace: "App.xcworkspace", scheme: "App")
-    upload_to_testflight(changelog: "Osom stuff!")
+    upload_to_testflight(
+      username: ENV['APPLE_ID'],
+      app_identifier: "pl.intencje",
+      itc_provider: ENV['APPLE_TEAM_ID'],
+      changelog: "Osom stuff!")
   end
 end
