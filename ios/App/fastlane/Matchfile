@@ -1,2 +1,2 @@
-git_url "git@github.com:intencje/certificates.git"
+git_url "https://github.com/intencje/certificates.git"
 type "development" # The default type, can be: appstore, adhoc or development

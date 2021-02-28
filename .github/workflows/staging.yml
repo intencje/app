@@ -215,7 +215,7 @@ jobs:
       shell: bash
       run: |
         mkdir dist-linux > /dev/null 2>&1
-        mv electron_release/latest-linux.yml electron_release/*.AppImage dist-linux > /dev/null 2>&1
+        mv electron_release/*.AppImage dist-linux > /dev/null 2>&1
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
@@ -246,7 +246,7 @@ jobs:
       shell: bash
       run: |
         mkdir dist-mac > /dev/null 2>&1
-        mv electron_release/latest-mac.yml electron_release/*.dmg dist-mac > /dev/null 2>&1
+        mv electron_release/*.dmg dist-mac > /dev/null 2>&1
 
     - name: Upload srtifacts
       uses: actions/upload-artifact@v1
@@ -271,13 +271,12 @@ jobs:
       uses: samuelmeuli/action-electron-builder@v1
       with:
         github_token: ${{ secrets.github_token }}
-        release: true
 
     - name: Move Files
       shell: bash
       run: |
-        mkdir dist-win > /dev/null 2>&1
-        mv electron_release/latest.yml electron_release/*.msi dist-win > /dev/null 2>&1
+        mkdir dist-win
+        move electron_release/*.msi dist-win
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
