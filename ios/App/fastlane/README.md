@@ -25,7 +25,7 @@ Update app version
 ```
 fastlane ios beta
 ```
-Push a new beta iOS build to Firebase App Distribution
+Push a new beta iOS build to Testflight
 
 ----
 
