@@ -15,9 +15,8 @@ platform :ios do
 
   desc "Push a new beta iOS build to Firebase App Distribution"
   lane :beta do
-    sh("echo $CERTIFICATES_REPO_SSH_KEY > id_rsa_github_actions.rsa")
     setup_ci
-    match(type: "appstore", readonly: is_ci, git_private_key: 'id_rsa_github_actions.rsa')
+    match(type: "appstore", readonly: is_ci, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
     build_app(workspace: "App.xcworkspace", scheme: "App")
     upload_to_testflight(changelog: "Osom stuff!")
   end
