@@ -19,7 +19,8 @@ platform :ios do
     match(type: "appstore", readonly: is_ci, git_basic_authorization: ENV['MATCH_GIT_BASIC_AUTHORIZATION'])
     build_app(workspace: "App.xcworkspace", scheme: "App")
     upload_to_testflight(
-      skip_waiting_for_build_processing: true
+      skip_waiting_for_build_processing: true,
+      apple_id: 1346574507
     )
   end
 end
