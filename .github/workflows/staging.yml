@@ -278,8 +278,7 @@ jobs:
       run: |
         mkdir dist-win
         cd electron_release
-        dir electron_release
-        move electron_release/*.exe dist-win
+        move *.exe ../dist-win
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v1
