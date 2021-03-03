@@ -20,7 +20,7 @@ platform :ios do
     build_app(workspace: "App.xcworkspace", scheme: "App")
     upload_to_testflight(
       skip_waiting_for_build_processing: true,
-      apple_id: 1346574507
+      apple_id: "1346574507"
     )
   end
 end
