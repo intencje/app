@@ -5,6 +5,7 @@ on:
     - staging
 jobs:
   firebase-deploy:
+    name: Deploy app to Firebase
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,14 +33,30 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: staging
+
+  lighthouse:
+    needs: firebase-deploy
+    name: Run Lighthouse audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          urls: |
+            https://intencje-staging.web.app/
+            https://intencje-staging.web.app/modlitwy
+          uploadArtifacts: true
+
   cypress-run:
     needs: firebase-deploy
+    name: Run Cypress tests
     runs-on: ubuntu-16.04
     steps:
       - name: Checkout tests
         uses: actions/checkout@v2
       - name: Run Cypress
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2.8.4
         with:
           browser: chrome
           headless: true
@@ -47,32 +64,224 @@ jobs:
           config: baseUrl=https://intencje-staging.web.app
           env: stage=staging
 
-  electron-release:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
-
-    defaults:
-      run:
-        working-directory: ./electron
-
+  prepare-ios-app:
+    needs: cypress-run
+    name: Prepare iOS app
+    runs-on: macos-latest
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v1
-        with:
-          node-version: 10
+    - name: Setup Node
+      uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
 
-      - name: Build/release Electron app
-        uses: samuelmeuli/action-electron-builder@v1
-        with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
-          github_token: ${{ secrets.github_token }}
+    - name: Install packages from package.json
+      run: npm install
 
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-#          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    - name: Capacitor sync
+      run: npm run build:capacitor:ios
+
+    - name: Select Xcode Version
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+        bundler-cache: true
+
+    - name: Cache Ruby - Bundler
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - name: Install bundle
+      working-directory: ./ios/App
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+
+    - name: Deploy to Testflight
+      working-directory: ./ios/App
+      run: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        bundle exec fastlane beta
+      env:
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_BASIC_AUTHORIZATION }}
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_IOS_APP_ID: ${{ secrets.FIREBASE_IOS_APP_ID }}
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+        FASTLANE_SESSION: ${{ secrets.FASTLANE_SESSION }}
+
+  prepare-android-app:
+    needs: cypress-run
+    name: Prepare Android app
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@master
+      with:
+        node-version: '10.x'
+
+    - name: Install packages from package.json
+      run: npm install
+
+    - name: Capacitor sync
+      run: npm run build:capacitor:android
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+        bundler-cache: true
+
+    - name: Cache Ruby - Bundler
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    - name: Cache Gradle
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/caches/
+        key: cache-clean-gradle-${{ matrix.os }}-${{ matrix.jdk }}
+
+    - name: Cache Gradle Wrapper
+      uses: actions/cache@v1
+      with:
+        path: ~/.gradle/wrapper/
+        key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
+
+    - name: Grant Permission to Execute
+      working-directory: ./android
+      run: chmod +x gradlew
+
+    - name: Install bundle
+      working-directory: ./android
+      run: |
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+
+    - name: Deploy to Firebase App Distribution
+      working-directory: ./android
+      run: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        bundle exec fastlane beta
+      env:
+        ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+        ANDROID_KEYSTORE_KEY_ALIAS: ${{ secrets.ANDROID_KEYSTORE_KEY_ALIAS }}
+        ANDROID_KEYSTORE_KEY_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_KEY_PASSWORD }}
+        ANDROID_KEYSTORE_STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_STORE_PASSWORD }}
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_ANDROID_APP_ID: ${{ secrets.FIREBASE_ANDROID_APP_ID }}
+
+  prepare-linux-app:
+    needs: cypress-run
+    name: Prepare Linux app
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v1
+
+    - name: Install Node.js and NPM
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+
+    - name: Build Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        release: false
+
+    - name: Move Files
+      shell: bash
+      run: |
+        mkdir dist-linux > /dev/null 2>&1
+        mv electron_release/*.AppImage dist-linux > /dev/null 2>&1
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: intencje-linux
+        path: dist-linux
+
+  prepare-mac-app:
+    needs: cypress-run
+    name: Prepare macOS app
+    runs-on: macos-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v1
+
+    - name: Install Node.js and NPM
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+
+    - name: Build Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+        release: false
+
+    - name: Move Files
+      shell: bash
+      run: |
+        mkdir dist-mac > /dev/null 2>&1
+        mv electron_release/*.dmg dist-mac > /dev/null 2>&1
+
+    - name: Upload srtifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: intencje-mac
+        path: dist-mac
+
+  prepare-windows-app:
+    needs: cypress-run
+    name: Prepare Windows app
+    runs-on: windows-latest
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v1
+
+    - name: Install Node.js and NPM
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+
+    - name: Build Electron app
+      uses: samuelmeuli/action-electron-builder@v1
+      with:
+        github_token: ${{ secrets.github_token }}
+
+    - name: Move Files
+      shell: cmd
+      run: |
+        mkdir dist-win
+        cd electron_release
+        move *.exe ../dist-win
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: intencje-win
+        path: dist-win

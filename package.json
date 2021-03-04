@@ -7,14 +7,16 @@
   "homepage": "https://intencje.pl",
   "description": "Platforma Duchowej Łączności",
   "license": "MIT",
-  "version": "1.0.0-alpha",
+  "version": "1.0.35",
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
+    "postinstall": "husky install && electron-builder install-app-deps",
     "compodoc": "npx compodoc -p tsconfig.json",
     "ng": "ng",
     "ng:serve": "ng serve",
     "start": "npm-run-all -p electron:serve ng:serve",
     "build": "npm run electron:serve-tsc && ng build --configuration=standalone --base-href ./",
+    "build:capacitor:ios": "ng build --configuration=standalone && npx cap sync ios",
+    "build:capacitor:android": "ng build --configuration=standalone && npx cap sync android",
     "test": "ng test",
     "lint": "ng lint",
     "eslint": "npx eslint -c .eslintrc.js --ext .ts src",
@@ -34,6 +36,7 @@
   "build": {
     "appId": "pl.intencje",
     "productName": "Intencje",
+    "artifactName": "IntencjeSetup.${ext}",
     "files": [
       "**/*",
       "!**/*.ts",
@@ -54,7 +57,8 @@
       "target": [
         "dmg"
       ],
-      "category": "public.app-category.social-networking"
+      "category": "public.app-category.social-networking",
+      "identity": null
     },
     "linux": {
       "icon": "dist/browser/assets/icons",
@@ -81,7 +85,7 @@
       "releaseType": "release"
     },
     "directories": {
-      "output": "release/"
+      "output": "electron_release/"
     }
   },
   "dependencies": {
@@ -115,17 +119,17 @@
     "@sentry/angular": "^6.0.1",
     "@sentry/tracing": "^6.0.1",
     "@tinymce/tinymce-angular": "^4.2.0",
+    "cypress": "^6.5.0",
     "express": "^4.17.1",
     "firebase": "^8.2.4",
+    "globalthis": "^1.0.2",
     "hammerjs": "^2.0.8",
     "howler": "^2.2.1",
-    "lottie-web": "^5.7.6",
     "mat-contenteditable": "^9.1.0",
     "mat-ngx-wig": "^7.1.0",
     "ngx-electron": "^2.2.0",
     "ngx-image-cropper": "^3.3.3",
     "ngx-infinite-scroll": "^10.0.1",
-    "ngx-lottie": "^6.4.0",
     "ngx-mat-select-search": "^3.2.0",
     "ngx-skeleton-loader": "^2.6.2",
     "rxjs": "~6.6.3",
@@ -134,9 +138,6 @@
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "electron": "11.2.0",
-    "electron-builder": "22.9.1",
-    "electron-reload": "1.5.0",
     "@angular-devkit/build-angular": "~0.1101.1",
     "@angular-devkit/schematics": "^11.2.0",
     "@angular/cli": "~11.1.1",
@@ -152,11 +153,15 @@
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
     "codelyzer": "^6.0.1",
+    "electron": "11.2.0",
+    "electron-builder": "22.9.1",
     "electron-packager": "^15.2.0",
+    "electron-reload": "1.5.0",
     "eslint": "^7.18.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "firebase-tools": "^9.2.2",
+    "husky": "^5.1.1",
     "prettier": "^2.2.1",
     "ts-node": "~9.1.1",
     "tslint": "~6.1.3",

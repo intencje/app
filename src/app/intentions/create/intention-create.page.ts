@@ -8,8 +8,6 @@ import { ToolsService } from '../../_services/tools/tools.service';
 import { AuthService } from '../../_services/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/_services/seo/seo.service';
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-intention-create',
@@ -17,12 +15,6 @@ import { AnimationOptions } from 'ngx-lottie';
   styleUrls: ['./intention-create.page.scss'],
 })
 export class IntentionCreatePage implements OnInit {
-  options: AnimationOptions = {
-    loop: true,
-    path: '/assets/animations/intention-created.json',
-  };
-  animationCreated() {}
-
   loading = false;
   submitted = false;
   confirmed = false;

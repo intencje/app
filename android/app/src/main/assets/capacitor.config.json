@@ -1,13 +1,12 @@
 {
   "appId": "pl.intencje",
-  "appName": "intencje",
-  "bundledWebRuntime": false,
-  "npmClient": "yarn",
+  "appName": "Intencje",
+  "bundledWebRuntime": true,
+  "npmClient": "npm",
   "webDir": "dist/browser",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
     }
-  },
-  "cordova": {}
+  }
 }

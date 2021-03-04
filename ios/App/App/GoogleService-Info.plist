@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1047051146932-estgimo0v3uuf32k50kb3aevrlpqkvb6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1047051146932-estgimo0v3uuf32k50kb3aevrlpqkvb6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyADpj3oQbNfgfRDMKZJiA_oB9WJGKcvQBs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1047051146932</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>pl.intencje</string>
+	<key>PROJECT_ID</key>
+	<string>intencje-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>intencje-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1047051146932:ios:40681a893d1c12c8a6a9e1</string>
+	<key>DATABASE_URL</key>
+	<string>https://intencje-app.firebaseio.com</string>
+</dict>
+</plist>

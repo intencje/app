@@ -22,7 +22,6 @@ import { AngularFireFunctionsModule, ORIGIN as FUNCTIONS_ORIGIN } from '@angular
 import { AngularFireRemoteConfigModule, SETTINGS as REMOTE_CONFIG_SETTINGS } from '@angular/fire/remote-config';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { LottieModule } from 'ngx-lottie';
 import { FormsModule } from '@angular/forms';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
@@ -32,10 +31,6 @@ import { Router } from '@angular/router';
 import * as Sentry from '@sentry/angular';
 import { AppHammerConfig } from './app-hammer-config';
 import { ComponentsModule } from './_components/components.module';
-
-export function playerFactory() {
-  return import('lottie-web');
-}
 
 const shouldUseEmulator = () => false;
 
@@ -59,10 +54,6 @@ const shouldUseEmulator = () => false;
     AngularFireAuthGuardModule,
     FormsModule,
     HammerModule,
-    LottieModule.forRoot({
-      player: playerFactory,
-      useCache: true,
-    }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.serviceWorker,
       registrationStrategy: 'registerImmediately',

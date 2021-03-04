@@ -1,0 +1,45 @@
+before_all do
+  update_fastlane
+end
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Update app version"
+  lane :update_version do
+    package = load_json(json_path: "./../package.json")
+
+    android_set_version_name(
+      version_name: package["version"]
+    )
+    android_set_version_code()
+  end
+
+  desc "Push a new beta Android build to Firebase App Distribution"
+  lane :beta do
+    sh("echo $ANDROID_KEYSTORE_FILE > keystore.b64")
+    sh("base64 -d -i keystore.b64 > ../app/intencje.keystore")
+    sh("echo \"storeFile=intencje.keystore\" >> keystore.properties")
+    sh("echo \"keyAlias=$ANDROID_KEYSTORE_KEY_ALIAS\" >> keystore.properties")
+    sh("echo \"storePassword=$ANDROID_KEYSTORE_STORE_PASSWORD\" >> keystore.properties")
+    sh("echo \"keyPassword=$ANDROID_KEYSTORE_KEY_PASSWORD\" >> keystore.properties")
+
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      print_command: false,
+    )
+
+    firebase_app_distribution(
+      app: ENV['FIREBASE_ANDROID_APP_ID'],
+      groups: "Android",
+      release_notes: "Lots of amazing new features to test out!",
+  )
+  end
+end

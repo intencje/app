@@ -1,4 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+def keystorePropertiesFile = rootProject.file("fastlane/keystore.properties");
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -6,13 +11,22 @@ android {
         applicationId "pl.intencje"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 1031
+        versionName "1.0.35"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+  signingConfigs {
+    release {
+      keyAlias keystoreProperties['keyAlias']
+      keyPassword keystoreProperties['keyPassword']
+      storeFile file(keystoreProperties['storeFile'])
+      storePassword keystoreProperties['storePassword']
+    }
+  }
     buildTypes {
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.release
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -32,6 +46,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
     implementation project(':capacitor-cordova-android-plugins')
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
 }
 
 apply from: 'capacitor.build.gradle'
