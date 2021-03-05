@@ -12,16 +12,15 @@
     "node": "12"
   },
   "dependencies": {
-    "firebase-admin": "^8.10.0",
-    "firebase-functions": "^3.6.1",
-    "meilisearch": "^0.13.0",
-    "@google-cloud/vision": "^2.1.2",
+    "firebase-admin": "^9.5.0",
+    "firebase-functions": "^3.13.2",
+    "meilisearch": "^0.18.1",
+    "@google-cloud/vision": "^2.3.1",
     "express": "^4.17.1",
-    "express-handlebars": "^5.2.0",
-    "nodemailer": "^6.4.16",
-    "npm-check-updates": "^10.2.1",
-    "slug": "^4.0.2"
-
+    "express-handlebars": "^5.2.1",
+    "nodemailer": "^6.5.0",
+    "npm-check-updates": "^11.1.10",
+    "slug": "^4.0.3"
   },
   "devDependencies": {
     "@types/express-handlebars": "^3.1.0",
