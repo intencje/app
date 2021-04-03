@@ -1,12 +1,39 @@
-<div>
-  <div>
-    <div slot="start">
-      <div></div>
-    </div>
-    <div data-test="page-title">{{route.snapshot.data['title']}}</div>
-  </div>
-</div>
+<header>
+  <h1 *ngIf="(item | async)?.details.leitmotiv">{{(item | async)?.details.leitmotiv}}</h1>
+  <h2 *ngIf="(item | async)?.details.liturgy_title">{{(item | async)?.details.liturgy_title}}</h2>
+</header>
 
-<div>
+<main>
+  <section *ngFor="let fragment of (item | async)?.fragments">
+    <h2 *ngIf="fragment.title">— {{fragment.title}} {{fragment.code}}</h2>
+    <p *ngIf="fragment.text" [innerHTML]=fragment.text class="{{fragment.type}}"></p>
+  </section>
+</main>
+<main>
 
-</div>
+  <section *ngIf="(item | async)?.commentary.text">
+    <h3>
+      <mat-icon aria-label="Ikona symbolizująca modlitewnik">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path d="M209 96h-65c-26.4 0-48 21.6-48 48v128c0 26.4 21.6 48 48 48h38.7c4.6 0 8.3 3.9 8 8.6-2.3 35.5-18.8 60.2-31.3 74.1-4.7 5.2-1 13.4 5.9 13.4h39.9c2.5 0 4.8-1.1 6.3-3.1 7.4-9.6 28.5-41.6 28.5-93.9v-192c0-17.8-13.3-31.1-31-31.1zM385 96h-65c-26.4 0-48 21.6-48 48v128c0 26.4 21.6 48 48 48h38.7c4.6 0 8.3 3.9 8 8.6-2.3 35.5-18.8 60.2-31.3 74.1-4.7 5.2-1 13.4 5.9 13.4h39.9c2.5 0 4.8-1.1 6.3-3.1 7.4-9.6 28.5-41.6 28.5-93.9v-192c0-17.8-13.3-31.1-31-31.1z"></path>
+        </svg>
+      </mat-icon>
+      <strong *ngIf="(item | async)?.commentary.source">{{(item | async)?.commentary.source}}</strong><br />
+      <div>
+        <span *ngIf="(item | async)?.commentary.author_name">{{(item | async)?.commentary.author_name}}</span><br />
+        <span *ngIf="(item | async)?.commentary.author_description">{{(item | async)?.commentary.author_description}}</span>
+      </div>
+    </h3>
+    <p *ngIf="(item | async)?.commentary.text" [innerHTML]="(item | async)?.commentary.text"></p>
+  </section>
+</main>
+
+<footer *ngIf="item | async">
+  <p>
+    Fragmenty liturgicznego tłumaczenia Biblii Tysiąclecia ©&nbsp;Wydawnictwo Pallottinum.<br />
+    Treści dostarcza Evangelizo.org
+  </p>
+</footer>
+
+
+
