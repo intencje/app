@@ -7,7 +7,7 @@
   "homepage": "https://intencje.pl",
   "description": "Platforma Duchowej Łączności",
   "license": "MIT",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "scripts": {
     "postinstall": "husky install && electron-builder install-app-deps",
     "compodoc": "npx compodoc -p tsconfig.json",
@@ -107,9 +107,6 @@
     "@capacitor/angular": "^1.0.3",
     "@capacitor/core": "^2.4.6",
     "@capacitor/ios": "^2.4.6",
-    "@ckeditor/ckeditor5-angular": "^2.0.1",
-    "@ckeditor/ckeditor5-build-balloon": "^24.0.0",
-    "@ckeditor/ckeditor5-build-classic": "^24.0.0",
     "@finosofica/mat-contenteditable": "^9.1.2",
     "@ionic/pwa-elements": "^3.0.2",
     "@nguniversal/express-engine": "^11.1.0",
