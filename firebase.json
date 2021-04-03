@@ -11,7 +11,7 @@
       "rewrites": [
         {
           "source": "/amp/**",
-          "function": "amp-app"
+          "function": "amp-engine"
         },
         {
           "source": "**",
