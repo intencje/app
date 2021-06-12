@@ -86,9 +86,9 @@ export class AuthService implements CanActivate {
       unreadNotifications: 0,
       uid: user.uid,
       email: user.email,
-      displayName: 'Anonim',
-      avatarURL: '',
+      displayName: '',
       emailVerified: user.emailVerified,
+      accountActivated: user.accountActivated,
       parish: '',
       roles: [],
       settings: {

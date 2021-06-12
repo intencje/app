@@ -27,8 +27,12 @@ export interface User {
   uid: string;
   email: string;
   emailVerified: boolean;
+  accountActivated?: boolean;
+  accountActivationDate?: DocumentData;
   displayName?: string;
   avatarURL?: string;
+  town?: string;
+  bio?: string;
   roles?: Array<string>;
   settings?: Notifications;
   /** @description Ilość nieprzeczytanych powiadomień o wiadomościach */

@@ -35,7 +35,17 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  //background: #f3f1f1
+  background-color: #28b0c8;
+  min-width:100vw;
+  height: 100vh;
+}
+
+app-root {
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {

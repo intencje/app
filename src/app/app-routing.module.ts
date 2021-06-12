@@ -111,15 +111,6 @@ const routes: Routes = [
     },
   },
   {
-    path: 'aktywuj',
-    loadChildren: () => import('./activate/activate.module').then((m) => m.ActivatePageModule),
-    data: {
-      title: 'Szczęść Boże!',
-      description: ' ',
-    },
-    canActivate: [AuthService],
-  },
-  {
     path: 'funkcjonalnosci',
     loadChildren: () => import('./features/features.module').then((m) => m.FeaturesPageModule),
     data: {

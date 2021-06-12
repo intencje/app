@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>Przytnij zdjecię</h2>
-<mat-dialog-content class="mat-typography">
+<app-progress-bar  *ngIf="isImageLoadedForCropper"></app-progress-bar>
+<mat-dialog-content>
   <image-cropper
   [roundCropper]="data.params.type === 'round' ? true : false"
   [imageChangedEvent]="imageChangedEvent"
@@ -17,5 +18,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close (click)="deleteImage()">Anuluj</button>
-  <button mat-button [mat-dialog-close]="this.croppedImage" (click)="image.uploadImage(this.croppedImage, data.params.savePath)" cdkFocusInitial>Gotowe</button>
+  <button mat-button [mat-dialog-close]="this.croppedImage" (click)="imageService.uploadImage(this.croppedImage, data.params.savePath)" cdkFocusInitial>Gotowe</button>
 </mat-dialog-actions>

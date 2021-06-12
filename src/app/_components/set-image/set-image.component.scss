@@ -1,17 +1,23 @@
 :host {
-
   display: flex;
   flex-direction: column;
   justify-content: center;
 
+  section {
+    display: flex;
+    flex-direction: column;
+    height: 170px; }
+
   mat-progress-bar {
-    width: 150px;
+    width: 142px;
     margin: 0 auto;
+    position: relative;
+    top: 13px;
   }
 
   img {
     align-self: center;
-    width: 150px;
+    width: 120px;
     margin: 0 0 10px 0;
     border: 1px solid whitesmoke;
     cursor: pointer;
@@ -44,7 +50,6 @@
   --cropper-outline-color: rgba(0,0,0,0.5);
   --cropper-overlay-color: rgba(255,255,255)
 }
-
 
 
 
