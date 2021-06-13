@@ -94,7 +94,9 @@ export class IntentionsPage implements OnInit {
               // Odrobina polotu i finezji poprzez przescrollowanie listy o ile jest na to przestrzeń
               (function smoothscroll() {
                 const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-                if (currentScroll > 0) {
+                //TODO: isPlatformBrowser!
+                if (currentScroll > 0 && typeof window !== "undefined") {
+
                   window.requestAnimationFrame(smoothscroll); //TODO: isPlatformBrowser!
                   window.scrollTo(0, currentScroll - currentScroll / 8);
                 }

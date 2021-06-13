@@ -5,7 +5,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import 'hammerjs';
+// import 'hammerjs';
 import { ImageService } from '../../_services/image/image.service';
 
 @Component({
