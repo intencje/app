@@ -31,7 +31,7 @@ export class SetImageComponent {
   unsubscribe = new Subject();
   croppedImage = '';
 
-  constructor(public dialog: MatDialog, public image: ImageService) {}
+  constructor(public dialog: MatDialog, public imageService: ImageService) {}
 
   showCropperDialog(event): void {
     const dialogRef = this.dialog.open(CropperDialog, {
@@ -47,7 +47,7 @@ export class SetImageComponent {
   }
   deleteImage(): void {
     this.croppedImage = '';
-    this.image.deleteImage();
+    this.imageService.deleteImage();
   }
 }
 @Component({
@@ -60,19 +60,20 @@ export class CropperDialog {
   croppedImage: string;
 
   unsubscribe = new Subject();
+  isImageLoadedForCropper = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private storage: AngularFireStorage,
     private afs: AngularFirestore,
     public dialog: MatDialog,
-    public image: ImageService,
+    public imageService: ImageService,
   ) {
     this.imageChangedEvent = data.event;
   }
 
   imageCropped(event: ImageCroppedEvent): void {
     this.croppedImage = event.base64;
-    this.image.changeImage(this.croppedImage);
+    this.imageService.changeImage(this.croppedImage);
   }
   loadImageFailed(): void {
     console.log('ladowanie sie nie udalo');
@@ -80,7 +81,11 @@ export class CropperDialog {
   deleteImage(): void {
     // TODO: Wyświetlaj toast w przypadku problemu z uploadem grafiki
     this.croppedImage = '';
-    this.image.deleteImage();
+    this.imageService.deleteImage();
+  }
+
+  imageLoaded(): void {
+    this.isImageLoadedForCropper = true;
   }
 
   ngOnDestroy(): void {

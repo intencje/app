@@ -4,6 +4,7 @@ import { IntentionsHeaderComponent } from './intentions-header/intentions-header
 import { PrayersHeaderComponent } from './prayers-header/prayers-header.component';
 import { UsersHeaderComponent } from './users-header/users-header.component';
 import { NoContentComponent } from './no-content/no-content.component';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import {
   IntentionAddCommentDialog,
   IntentionCardComponent,
@@ -49,6 +50,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { SearchComponent, SearchDialog } from './search/search.component';
 
@@ -58,6 +60,7 @@ import { SearchComponent, SearchDialog } from './search/search.component';
     PrayersHeaderComponent,
     UsersHeaderComponent,
     NoContentComponent,
+    ProgressBarComponent,
     UserCardComponent,
     PatronListItemComponent,
     PrayerListItemComponent,
@@ -112,6 +115,7 @@ import { SearchComponent, SearchDialog } from './search/search.component';
     MatListModule,
     MatSelectModule,
     MatStepperModule,
+    MatProgressBarModule,
     NgxMatSelectSearchModule,
   ],
   exports: [
@@ -119,6 +123,7 @@ import { SearchComponent, SearchDialog } from './search/search.component';
     PrayersHeaderComponent,
     UsersHeaderComponent,
     NoContentComponent,
+    ProgressBarComponent,
     UserCardComponent,
     PatronListItemComponent,
     PrayerListItemComponent,
@@ -161,6 +166,7 @@ import { SearchComponent, SearchDialog } from './search/search.component';
     MatListModule,
     MatSelectModule,
     MatStepperModule,
+    MatProgressBarModule,
     NgxMatSelectSearchModule,
     SearchComponent,
   ],

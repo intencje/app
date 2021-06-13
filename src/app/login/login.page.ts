@@ -143,8 +143,7 @@ export class LoginPage implements OnInit {
 
   /**
    * Wywoływane w ngOnInit jeśli URL zawiera 'signIn' - obsługujemy użytkownika, który kliknął w link
-   * wygenerowany w loginRegister(). Jeśli użytkownik loguje się raz pierwszy ląduje na stronie /szczesc-boze
-   * gdzie prosimy go o uzupełnienie danych. Jeśli ma już konto logujemy go.
+   * wygenerowany w loginRegister(). Jeśli użytkownik loguje się raz pierwszy prosimy go o uzupełnienie danych. Jeśli ma już konto logujemy go.
    */
   async confirmSignIn(url: string): Promise<void> {
     this.showLoggingLoader();
@@ -159,7 +158,6 @@ export class LoginPage implements OnInit {
         // Nowy użytkownik
         if (result.additionalUserInfo.isNewUser) {
           this.auth.updateUserData(result.user, this.geoIP);
-          this.router.navigate(['/aktywacja']);
         } else {
           // Obecny użytkownik
           if (isPlatformBrowser(this.platformId)) this.router.navigate([window.localStorage.getItem('returnURL')]);
