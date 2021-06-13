@@ -79,7 +79,12 @@ const shouldUseEmulator = () => false;
     {
       provide: HAMMER_LOADER,
       useValue: async () => {
-        return import('hammerjs/hammer');
+        if (typeof window !== "undefined") { //TODO isPlatformBrowser
+          return await import(
+            /* webpackPrefetch: true */
+            'hammerjs'
+            );
+        }
       },
     },
     {

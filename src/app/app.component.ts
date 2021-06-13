@@ -83,7 +83,11 @@ export class AppComponent implements OnInit {
         });
 
         snack.onAction().subscribe(() => {
-          window.location.reload();
+          //TODO: isPlatformBrowser!
+          if (typeof window !== "undefined") {
+            window.location.reload();
+          }
+
         });
       });
     }
