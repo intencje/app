@@ -13,7 +13,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@master
         with:
-          node-version: '14.9'
+          node-version: '14.15'
       - name: Install app
         run: npm install
       - name: Build app
@@ -75,7 +75,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@master
       with:
-        node-version: '14.9'
+        node-version: '14.15'
 
     - name: Install packages from package.json
       run: npm install
@@ -135,7 +135,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@master
       with:
-        node-version: '14.9'
+        node-version: '14.15'
 
     - name: Install packages from package.json
       run: npm install
@@ -204,7 +204,7 @@ jobs:
     - name: Install Node.js and NPM
       uses: actions/setup-node@v1
       with:
-        node-version: '14.9'
+        node-version: '14.15'
 
     - name: Build Electron app
       uses: samuelmeuli/action-electron-builder@v1
@@ -235,7 +235,7 @@ jobs:
     - name: Install Node.js and NPM
       uses: actions/setup-node@v1
       with:
-        node-version: '14.9'
+        node-version: '14.15'
 
     - name: Build Electron app
       uses: samuelmeuli/action-electron-builder@v1
@@ -266,7 +266,7 @@ jobs:
     - name: Install Node.js and NPM
       uses: actions/setup-node@v1
       with:
-        node-version: '14.9'
+        node-version: '14.15'
 
     - name: Build Electron app
       uses: samuelmeuli/action-electron-builder@v1
