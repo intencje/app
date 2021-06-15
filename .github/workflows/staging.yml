@@ -51,7 +51,7 @@ jobs:
   cypress-run:
     needs: firebase-deploy
     name: Run Cypress tests
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout tests
         uses: actions/checkout@v2
@@ -91,7 +91,7 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.2
+        ruby-version: 3.0.1
         bundler-cache: true
 
     - name: Cache Ruby - Bundler
@@ -146,7 +146,7 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.2
+        ruby-version: 3.0.1
         bundler-cache: true
 
     - name: Cache Ruby - Bundler
