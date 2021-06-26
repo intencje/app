@@ -11,8 +11,8 @@ android {
         applicationId "pl.intencje"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1045
-        versionName "1.0.64"
+        versionCode 1046
+        versionName "1.0.65"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
   signingConfigs {
