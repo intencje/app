@@ -8,5 +8,4 @@ twitter_username: intencjepl
 github_username:  intencje
 
 # Build settings
-theme: just-the-docs
-#color_scheme: dark
+theme: minima
