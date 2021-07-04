@@ -1,10 +1,22 @@
-<h1>{{title}}</h1>
+<amp-sidebar id="sidebar" layout="nodisplay" side="left">
+  <ul class="sidebar">
+    <li><a href="https://intencje.pl">Intencje</a></li>
+    <li><a href="https://intencje.pl/modlitwy" class="active">Modlitwy</a></li>
+    <li><a href="https://intencje.pl/swiadectwa">Świadectwa</a></li>
+    <li><a href="https://intencje.pl/czytania-na-dzis">Czytania</a></li>
+    <li><a href="https://intencje.pl/tagi">Tagi</a></li>
+  </ul>
+</amp-sidebar>
 
-    <amp-selector class="tabs-with-flex" role="tablist">
+<h1>{{title}}
+  <small><a href="https://intencje.pl/modlitwy">Modlitwy</a> / {{category}}</small>
+</h1>
+{{{content}}}
+    {{!-- <amp-selector class="tabs-with-flex" role="tablist">
       <div id="tab1" role="tab" aria-controls="tabpanel1" option selected>Tab one</div>
       <div id="tabpanel1" role="tabpanel" aria-labelledby="tab1">Tab one content... </div>
-      <div id="tab2" role="tab" aria-controls="tabpanel2" option>Tab two</div>
+      <div id="tab2"  role="tab" aria-controls="tabpanel2" option>Tab two</div>
       <div id="tabpanel2" role="tabpanel" aria-labelledby="tab2">Tab two content... </div>
       <div id="tab3" role="tab" aria-controls="tabpanel3" option>Tab three</div>
       <div id="tabpanel3" role="tabpanel" aria-labelledby="tab3">Tab three content... </div>
-    </amp-selector>
+    </amp-selector> --}}

@@ -113,7 +113,7 @@ export class PrayerDetailsPage implements OnInit {
 
   ngOnDestroy(): void {
     this.unsubscribe.next();
-    //this.seoService.removeLinkTag({ rel: 'amphtml' });
+    this.seoService.removeLinkTag({ rel: 'amphtml' });
     this.seoService.removeJSONLD();
   }
 }

@@ -1,0 +1,11 @@
+title: Intencje.pl
+email: poczta@intencje.pl
+description: >- # this means to ignore newlines until "baseurl:"
+  Technical documentation of the intencje.pl project
+baseurl: "/app"
+url: "https://intencje.github.io"
+twitter_username: intencjepl
+github_username:  intencje
+
+# Build settings
+theme: minima
