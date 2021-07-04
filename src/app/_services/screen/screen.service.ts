@@ -29,7 +29,7 @@ export class ScreenService {
       ])
       .subscribe((result) => {
         result.matches ? (this.isMobile = true) : (this.isMobile = false);
-        //this.isMobile = breakpointObserver.isMatched('(max-width: 768px)');
+        this.isMobile = breakpointObserver.isMatched('(max-width: 768px)');
       });
     // TODO clean up!
     // { width, height }

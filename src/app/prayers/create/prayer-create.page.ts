@@ -147,7 +147,7 @@ export class PrayerCreatePage implements OnInit {
         this.addPrayerCategoryTags(this.addPrayerCategoryTagsForm.value);
         break;
       case 3:
-        this.image.downloadURL ? this.addPrayerCoverPhoto() : false;
+        this.image.downloadUrl ? this.addPrayerCoverPhoto() : false;
         break;
     }
   }
@@ -180,10 +180,10 @@ export class PrayerCreatePage implements OnInit {
   }
 
   addPrayerCoverPhoto(): void {
-    this.db.update(`prayers/${this.prayerID}`, { coverImage: this.image.downloadURL });
+    this.db.update(`prayers/${this.prayerID}`, { coverImage: this.image.downloadUrl });
   }
 
   addPrayerHeaderPhoto(): void {
-    this.db.update(`prayers/${this.prayerID}`, { headerImage: this.image.downloadURL });
+    this.db.update(`prayers/${this.prayerID}`, { headerImage: this.image.downloadUrl });
   }
 }

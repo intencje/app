@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
+import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import {
   AngularFireAnalyticsModule,
   UserTrackingService,
@@ -26,11 +27,13 @@ import { FormsModule } from '@angular/forms';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatBadgeModule } from '@angular/material/badge';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import * as Sentry from '@sentry/angular';
 import { AppHammerConfig } from './app-hammer-config';
 import { ComponentsModule } from './_components/components.module';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 const shouldUseEmulator = () => false;
 
@@ -65,12 +68,23 @@ const shouldUseEmulator = () => false;
     LoadingBarHttpClientModule,
     MatSidenavModule,
     ComponentsModule,
+    MatBadgeModule,
+    EcoFabSpeedDialModule,
   ],
   providers: [
     {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: { horizontalPosition: 'right', verticalPosition: 'top', duration: 10000 },
+    },
+    {
       provide: HAMMER_LOADER,
       useValue: async () => {
-        return import('hammerjs/hammer');
+        if (typeof window !== "undefined") { //TODO isPlatformBrowser
+          return await import(
+            /* webpackPrefetch: true */
+            'hammerjs'
+            );
+        }
       },
     },
     {

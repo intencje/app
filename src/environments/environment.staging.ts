@@ -1,4 +1,4 @@
-import { version } from '../../package.json';
+import { default as version } from '../../package.json';
 
 export const environment = {
   production: false,
