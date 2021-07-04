@@ -20,7 +20,7 @@ export class AddSeoStuffDirective implements OnInit {
       case 'intention':
         this.seoService.updateTitleTag(this.seo.data.title);
         this.seoService.updateMetaTag({ name: 'description', content: this.seo.data.content });
-        this.seoService.updateLinkTag({ rel: 'amphtml', href: this.seo.data.amp_url });
+        this.seoService.updateLinkTag({ rel: 'amphtml', href: this.seo.data.slug });
         this.seoService.addJSONLD([
           {
             '@context': 'https://schema.org',
@@ -84,6 +84,7 @@ export class AddSeoStuffDirective implements OnInit {
         break;
       case 'prayer':
         this.seoService.updateTitleTag(this.seo.data.title);
+        this.seoService.updateLinkTag({ rel: 'amphtml', href: 'https://intencje.pl/amp/modlitwy/'+this.seo.data.slug });
         this.seoService.addJSONLD([
           {
             '@context': 'https://schema.org',
